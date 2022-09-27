@@ -1,7 +1,4 @@
 
-import { SegTypes } from "../../../pages/CarData";
-import usePopup from "../../createPopup";
-import FilterPopup from "./TypesPopup";
 import React, { useState } from 'react';
 import Popup from './Popuptest';
  

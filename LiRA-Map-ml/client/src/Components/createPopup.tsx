@@ -11,7 +11,7 @@ const createPopup = <T,>() => {
         return swal.fire( { 
             ...options, 
             customClass: { 
-                popup: 'sweetalert-popup', 
+                popup: 'sweetalert-pip', //'sweetalert-popup'
                 title: 'sweetalert-title'
             } 
         } )

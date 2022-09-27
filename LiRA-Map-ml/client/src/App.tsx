@@ -13,9 +13,9 @@ import { Nav } from "./models/nav";
 import "./App.css";
 
 const routes: Nav[] = [
-    ['/road_measurements', RoadMeasurements, 'Road Measurements'],
+    ['/road_measurements', RoadMeasurements, 'Measurements'],
     ['/road_conditions', RoadConditions, 'Road Conditions'],
-    ['/cardata', CarData, 'Cardata'],
+    ['/cardata', CarData, 'TestSide'],
     ['/altitude', Altitude, 'Altitude'],
 ]
 

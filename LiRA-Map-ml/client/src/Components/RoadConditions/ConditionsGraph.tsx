@@ -1,5 +1,7 @@
-import { FC, useCallback, useEffect, useMemo, useRef } from "react";
-import { ChartData, Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, ChartOptions, ChartTypeRegistry, Plugin  } from "chart.js";
+import { FC, useEffect, useMemo, useRef } from "react";
+import { ChartData, Chart, CategoryScale, LinearScale, PointElement, 
+    LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, 
+    ChartOptions, ChartTypeRegistry} from "chart.js";
 import { Color, Palette } from "react-leaflet-hotline";
 import { Line } from "react-chartjs-2";
 

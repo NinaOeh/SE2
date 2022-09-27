@@ -16,7 +16,6 @@ interface IPopupWrapper {
 const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
 
     const [state, setState] = useState(defaultOptions);
-
     const { name, dbName, rendererName, color } = state;
 
     const update = (key: keyof ActiveMeasProperties) => (val: any) => {
@@ -28,11 +27,14 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
 
     const inputChange = (key: keyof ActiveMeasProperties) => ({target}: any) => update(key)(target.value)
 
+    //this is the popup that appears when pressing the "+" on the website
+    // Object.keys(RendererName) returns the keys, so an array of [class, property, bounds..]
+    //.map populates the function with new values (like lambda function in python=)
     return (
         <div className="popup-wrapper">    
-            <input className="sweetalert-input" placeholder="Name.." type='text' defaultValue={name} onChange={inputChange('name')}/>
+            <input className="sweetalert-input" placeholder="What is the name?" type='text' defaultValue={name} onChange={inputChange('name')}/>
             
-            <input className="sweetalert-input" placeholder="Tag.." type='text' defaultValue={dbName} onChange={inputChange('dbName')}/>
+            <input className="sweetalert-input" placeholder="Hello Sun" type='text' defaultValue={dbName} onChange={inputChange('dbName')}/>
             
             <div className="sweetalert-checkboxes">
                 { Object.keys(RendererName).map( (rName: string, i: number) => 
@@ -44,7 +46,6 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
                         onClick={() => update('rendererName')(rName)} />
                 ) }
             </div>
-
             { rendererTypes[rendererName].usePalette 
                 ? <Gradient
                     key={`gradient-${rendererName}`}
