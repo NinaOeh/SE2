@@ -12,12 +12,18 @@ import { Nav } from "./models/nav";
 
 import "./App.css";
 
+// it's coded in a circle, instead of "hard-coding" the navigation bar, it is 
+// dependent on the defined Routes: this should be changed and just hard-coded!
 const routes: Nav[] = [
     ['/road_measurements', RoadMeasurements, 'Measurements'],
     ['/road_conditions', RoadConditions, 'Road Conditions'],
     ['/cardata', CarData, 'TestSide'],
     ['/altitude', Altitude, 'Altitude'],
 ]
+
+
+//['/cardata', CarData, 'TestSide'],
+//['/', RoadMeasurements, 'Measurements'],
 
 const App: FC = () => {
     return (

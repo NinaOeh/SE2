@@ -2,7 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { useSegment } from "../../../context/SegmentContext";
 
 import '../../../css/toolbar.css'
-
+import React from "react";
+import { IoAirplane } from "react-icons/io5";
 
 export interface IToolbar {
     Icon: any;

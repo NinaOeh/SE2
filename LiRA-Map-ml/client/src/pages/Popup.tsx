@@ -4,7 +4,7 @@ import Popup from './Popuptest';
  
 function useTypesPopup() {
   const [isOpen, setIsOpen] = useState(true);
-  console.log("Hallo");
+  console.log("Hallihalloo");
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
