@@ -27,8 +27,8 @@ export function get<T>(path: string, callback: (data: T) => void): void
 
 export function getStreetName<T>(latStart: string, latEnd: string, lngStart: string, lngEnd: string): void
 {
-    const infoStart = fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latStart}&lon=${lngStart}&`);
-    const infoEnd = fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latEnd}&lon=${lngEnd}&`);
+    const infoStart = fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latStart}&lon=${lngStart}&format=json`);
+    const infoEnd = fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latEnd}&lon=${lngEnd}&format=json`);
 
     infoStart.then(response => response.text()).then(textResponse => console.log("response start: ", textResponse));
 }
