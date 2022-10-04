@@ -11,7 +11,7 @@
 }
 
 .ride-metadata-list {
-    max-width: 230px;
+    max-width: 50%;
     padding: 0px 20px 100px 20px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -47,11 +47,7 @@
 }
 
 .popup-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-x: hidden;
+    padding: 20px;
 }
 
 .ride-metadata-checkbox {

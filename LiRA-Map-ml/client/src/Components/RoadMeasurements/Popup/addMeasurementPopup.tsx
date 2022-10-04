@@ -9,10 +9,9 @@ import '../../../css/popup.css'
 import { useState } from "react";
 
 
-const useMeasPopup = () => {
+const addMeasPopup = () => {
 
     const popup = createPopup<ActiveMeasProperties>()
-    // const [options, setOptions] = useState<ActiveMeasProperties>()
 
     return ( callback: (measurement: ActiveMeasProperties) => void, defaultOptions: Required<ActiveMeasProperties> ) => {
 
@@ -20,7 +19,7 @@ const useMeasPopup = () => {
         let options = { ...defaultOptions }
 
         popup( {
-            title: <p>Enter the name of your measurement and its tag<br/>(ex: obd.rpm, acc.xyz)</p>,
+            title: <p>Choose the measurement you wish to visualize.</p>,
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Add',
@@ -39,9 +38,9 @@ const useMeasPopup = () => {
             popup( {
                 title: <p>Measurement <b>{options.name}</b> added / modified</p>,
                 footer: `Will be drawn as ${options.rendererName}`,
-                icon: 'success',
-                timer: 1500,
-                timerProgressBar: true,
+                //icon: 'success',
+                //timer: 1500,
+                //timerProgressBar: true,
                 toast: true
             } )
         })
@@ -49,5 +48,7 @@ const useMeasPopup = () => {
     }
 }
 
-export default useMeasPopup;
+export default addMeasPopup;
+
+
 

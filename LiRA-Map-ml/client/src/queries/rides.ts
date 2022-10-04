@@ -5,6 +5,7 @@ import { PopupFunc } from "../models/popup"
 import { ActiveMeasProperties } from "../models/properties"
 import { asyncPost, get, post } from "./fetch"
 
+//implement more error catching here!
 
 export const getRides = ( callback: Dispatch<SetStateAction<RideMeta[]>> ) => {
     get( '/rides', callback )

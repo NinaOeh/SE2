@@ -31,6 +31,9 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
         <div className="nav-wrapper">
             <div className="nav-container">
                 <div className="nav-block">
+                    <NavBtn  to='/' name='Home' />
+                </div>
+                <div className="nav-block">
                     { routes.map( ([path, _, name], i) => 
                         <NavBtn key={`navbtn-${i}`} to={path} name={name} />
                     ) }

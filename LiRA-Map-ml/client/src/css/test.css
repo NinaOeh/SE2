@@ -1,0 +1,9 @@
+.container {
+    width: 400px;
+    height: 240px;
+    margin:  50px auto;
+  }
+  
+  h2 {
+    color: blue;
+  }
