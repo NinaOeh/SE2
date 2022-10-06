@@ -19,11 +19,12 @@ interface CardsProps {
 const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {  
     const renderRow: ListRowRenderer = ( { index, key, style } ): ReactNode => {
         const meta = showMetas[index];
+
         return <div key={key} style={style}>
             <Checkbox 
                 forceState={meta.selected}
                 className="ride-card-container"
-                html={<div><b>{meta.TaskId}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
+                html={<div><b>{meta.wayPointName}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
                 }} />

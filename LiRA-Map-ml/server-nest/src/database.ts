@@ -36,8 +36,8 @@ export const LIRA_DB_CONFIG = {
     connection: {
         host : "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
         port: 5435,
-        user : DB_USER,
-        password : DB_PASSWORD,
+        user : "guest",
+        password : "V2GjxQVn",
         database : "postgres",
     },
 }

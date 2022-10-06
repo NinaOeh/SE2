@@ -3,14 +3,13 @@ import { RideMeta } from "../models/models"
 import { BoundedPath, Metadata } from "../models/path"
 import { PopupFunc } from "../models/popup"
 import { ActiveMeasProperties } from "../models/properties"
-import { asyncPost, get, post, getStreetName } from "./fetch"
+import { asyncPost, get, post } from "./fetch"
 
 //implement more error catching here!
 
 export const getRides = ( callback: Dispatch<SetStateAction<RideMeta[]>> ) => {
-    getStreetName("55.682540", "55.682540", "12.581760", "12.581760")
+    get( '/rides', callback )
 }
-
 
 export const getRide = async (
     measurement: ActiveMeasProperties, 

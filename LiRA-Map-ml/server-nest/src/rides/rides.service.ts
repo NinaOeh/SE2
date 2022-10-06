@@ -16,7 +16,10 @@ export class RidesService
         return await this.knex
             .select( '*' )
             .from( { public: 'Trips' } )
-            .whereNot( 'TaskId', 0 )
+            .where( 'TaskId', 1472 )
+            .limit(1)
+            .innerJoin('Measurements', 'TripId', 'Measurements.FK_Trip')
+            .innerJoin('MapReferences', 'Measurements.MeasurementId', 'MapReferences.FK_MeasurementId')
             .orderBy('TaskId')
     }
 
