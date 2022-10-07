@@ -27,12 +27,6 @@ export const MeasurementsProvider = ({ children }: any) => {
 
 	useEffect( () => getMeasurements(setMeasurements), [] )
 
-	console.log("MeasurementsProvider");
-	console.log(measurements);
-	console.log(setMeasurements);
-	console.log(selectedMeasurements);
-	
-
 	return (
 		<MeasurementsContext.Provider
 			value={{

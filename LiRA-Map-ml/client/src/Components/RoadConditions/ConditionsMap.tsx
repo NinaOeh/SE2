@@ -14,6 +14,8 @@ import { ConditionType } from "../../models/graph";
 import { Condition } from "../../models/path";
 
 import { getConditions } from "../../queries/conditions";
+import { filter } from "d3";
+import createPopup from "../createPopup";
 
 
 interface Props {
@@ -32,25 +34,32 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
     const onClick = useCallback( (way_id: string, way_length: number) => {
         getConditions( way_id, name, (wc: Condition[]) => {
-
             const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
             console.log(max)
             if(max>4){
-            setWayData( {
-                labels: wc.map( p => p.way_dist * way_length ),
-                datasets: [ {
-                    type: 'line' as const,
-                    label: way_id,
-                    borderColor: 'rgb(160,32,240)',
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.1,
-                    data: wc.map( p => p.value ),
-                } ]
-            } )
+
+           
+                setWayData( {
+                    labels: wc.map( p => p.way_dist * way_length ),
+                    datasets: [ {
+                        type: 'line' as const,
+                        label: way_id,
+                        borderColor: 'rgb(160,32,240)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1,
+                        data: wc.map( p => p.value ),
+                    } ]
+                } )
 
             }
             else{
+                const popup=createPopup();
+                popup( {
+                    icon: "warning",
+                    title: `This trip doesn't have any value with the ira wanted   `,
+                    toast: true
+                } );
                 setWayData( {
                     labels: [],
                     datasets: [ {
@@ -69,6 +78,8 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
         } )
     }, [] )
 
+    console.log(filter);
+
     return (
         <div className="road-conditions-map" ref={ref}>
             <PaletteEditor 
@@ -78,7 +89,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                 onChange={setPalette} />
 
             <MapWrapper>
-                <Ways palette={palette} type={name} onClick={onClick}/>
+                <Ways palette={palette} type={name} onClick={onClick}  />
             </MapWrapper>
         </div>
     )

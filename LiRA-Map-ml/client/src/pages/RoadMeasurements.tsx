@@ -9,7 +9,7 @@ import Rides from "../Components/RoadMeasurements/Rides";
 
 
 const RoadMeasurements = () => {
-    console.log("Road Measurement");
+
     return (
         <MeasurementsProvider>
         <MetasProvider>

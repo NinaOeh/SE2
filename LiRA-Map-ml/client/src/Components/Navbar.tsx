@@ -5,9 +5,6 @@ import { Nav } from "../models/nav";
 
 import '../css/navbar.css';
 
-//import {AiFillHome} from "react-icons"
-
-
 interface NavBtnProps {
     to: string;
     name: string;
@@ -33,9 +30,6 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
     return (
         <div className="nav-wrapper">
             <div className="nav-container">
-                <div className="nav-block">
-                    <NavBtn  to='/' name='Home' />
-                </div>
                 <div className="nav-block">
                     { routes.map( ([path, _, name], i) => 
                         <NavBtn key={`navbtn-${i}`} to={path} name={name} />

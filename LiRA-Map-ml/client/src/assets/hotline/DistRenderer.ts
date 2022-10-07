@@ -43,12 +43,22 @@ export default class DistRenderer extends Renderer<DistData> {
         return 0;
     }
 
-    _addWayColorGradient(gradient: CanvasGradient, edge: Edge, dist: number, way_id: string): void {
+    _addWayColorGradient(gradient: CanvasGradient, edge: Edge, dist: number, way_id: string,filter:boolean): void {
         const opacity = this.dotHover !== undefined && this.dotHover.label !== way_id 
             ? 0.3
             : 1
         try{
-            gradient.addColorStop(dist, `rgba(${edge.get().join(',')},${opacity})`);
+            if(filter){
+                gradient.addColorStop(dist, `rgba(218,165,32,${opacity})`);
+                
+
+            }
+            else{
+            const str = `rgba(${edge.get().join(',')},${opacity})`;
+
+            gradient.addColorStop(dist, str);
+            }
+        
         }
         catch
         {
@@ -107,7 +117,7 @@ export default class DistRenderer extends Renderer<DistData> {
         if ( ctx === undefined ) return;
         
         const dataLength = this._data.length
-
+        console.log("the data length:", dataLength);
         for (let i = 0; i < dataLength; i++) 
         {
             const path = this._data[i];
@@ -115,7 +125,10 @@ export default class DistRenderer extends Renderer<DistData> {
 
             const way_id = this.way_ids[i];
             const conditions = this.conditions[i]
-
+            
+            const max=this.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+            const filter=max>4 ? true: false;
+            
             for (let j = 1; j < path.length; j++) 
             {
                 const start = path[j - 1];
@@ -123,8 +136,8 @@ export default class DistRenderer extends Renderer<DistData> {
                 
                 const gradient = this._addGradient(ctx, start, end, conditions, way_id);
                 
-                this._addWayColorGradient(gradient, edges[start.i], 0, way_id)
-                this._addWayColorGradient(gradient, edges[end.i],   1, way_id)
+                this._addWayColorGradient(gradient, edges[start.i], 0, way_id,filter)
+                this._addWayColorGradient(gradient, edges[end.i],   1, way_id,filter)
                 
                 this.drawGradient(ctx, gradient, way_id, start, end)
             }
@@ -165,7 +178,9 @@ export default class DistRenderer extends Renderer<DistData> {
         const end_dist = pointEnd.way_dist
 
         if ( start_dist === end_dist ) return;
-    
+
+        const max=conditions.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+        const filter=max>4 ? true: false;
         for ( let i = 0; i < conditions.length; i++ )
         {
             // const { dist: way_dist, value } = conditions[i] as any 
@@ -177,7 +192,7 @@ export default class DistRenderer extends Renderer<DistData> {
             const rgb = this.getRGBForValue(value);                                                      
             const dist = (way_dist - start_dist) / (end_dist - start_dist)
 
-            this._addWayColorGradient(gradient, new Edge(...rgb), dist, way_id)
+            this._addWayColorGradient(gradient, new Edge(...rgb), dist, way_id,filter)
         }
     }
 }
