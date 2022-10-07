@@ -36,6 +36,16 @@ export interface MeasProperties extends PathProperties {
 	// Needs to be specified if the points have a value attached to them 
 	hasValue?: boolean;
 }
+export interface FilProperties extends PathProperties {
+	
+	dFilter: number;
+
+	hasValue?: boolean;
+}
+
+export interface ActiveFilProperties extends FilProperties{
+	isActive: boolean;
+}
 
 export interface ActiveMeasProperties extends MeasProperties {
 	isActive: boolean; // true if measurement is displayed, false otherwise

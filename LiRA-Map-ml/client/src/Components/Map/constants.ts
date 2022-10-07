@@ -1,7 +1,7 @@
 
 import { LatLng } from 'leaflet'
 import { Palette } from 'react-leaflet-hotline';
-import { ActiveMeasProperties, RendererOptions } from '../../models/properties';
+import { ActiveMeasProperties, ActiveFilProperties, RendererOptions } from '../../models/properties';
 import { RendererName } from '../../models/renderers';
 
 // Map
@@ -41,6 +41,13 @@ export const RENDERER_MEAS_PROPERTIES: Required<ActiveMeasProperties> = {
     ...RENDERER_OPTIONS,
     dbName: '',
     name: '',
+    hasValue: true,
+    isActive: false,
+}
+
+export const RENDERER_FIL_PROPERTIES: Required<ActiveFilProperties> = {
+    ...RENDERER_OPTIONS,
+    dFilter: 0,
     hasValue: true,
     isActive: false,
 }
