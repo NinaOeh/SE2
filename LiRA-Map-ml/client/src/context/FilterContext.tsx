@@ -18,7 +18,7 @@ interface ContextProps {
 
 const FilterContext = createContext({} as ContextProps);
 
-export const MeasurementsProvider = ({ children }: any) => {
+export const FilterProvider = ({ children }: any) => {
 
 	const [ measurements, setMeasurements ] = useState<ActiveFilProperties[]>([])
 	const [ selectedMeasurements, setSelectedMeasurements ] = useState<ActiveFilProperties[]>([])

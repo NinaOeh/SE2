@@ -9,8 +9,13 @@ import ConditionsGraph from "../Components/RoadConditions/ConditionsGraph";
 import { ConditionType } from "../models/graph";
 
 import { GraphProvider } from "../context/GraphContext";
+import { FilterProvider } from "../context/FilterContext";
+import { MetasProvider } from "../context/MetasContext";
+
+import RideDetails from "../Components/RoadMeasurements/RideDetailsFil";
 
 import "../css/road_conditions.css";
+import React from "react";
 
 
 const RoadConditions = () => {
@@ -27,12 +32,21 @@ const RoadConditions = () => {
     }
 
     return (
-        <GraphProvider>
-            <div className="road-conditions-wrapper">
-                <ConditionsMap type={type} palette={palette} setPalette={setPalette} setWayData={setWayData} />
-                <ConditionsGraph type={type} palette={palette} data={wayData} />
-            </div>
-        </GraphProvider> 
+        <React.Fragment>
+            <FilterProvider>
+            <MetasProvider>
+                <div className="road-filter-wrapper">
+                    <RideDetails />
+                </div>
+            </MetasProvider>    
+            </FilterProvider> 
+            <GraphProvider>
+                <div className="road-conditions-wrapper">
+                    <ConditionsMap type={type} palette={palette} setPalette={setPalette} setWayData={setWayData} />
+                    <ConditionsGraph type={type} palette={palette} data={wayData} />
+                </div>
+            </GraphProvider>
+        </React.Fragment>
     );
 }
 
