@@ -139,10 +139,10 @@
   line-height: 3;
   border-radius: 0.25rem;
   cursor: pointer;*/
-  width: 80%;
-    margin-bottom: 5px;
-    font-size: 0.9em !important;
-    padding: 10px 10px !important;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 0.9em !important;
+  padding: 10px 10px !important;
 }
 .dropdownbutton:hover {
   color: #fff;
@@ -154,12 +154,14 @@
 }
 .dropdown {
   position: relative;
-  border: 1px solid rgb(197, 197, 197);
+  border: 10px solid rgb(197, 197, 197);
   background: #fff;
-  padding: 0;
+  padding: 10px;
   color: #0062cc;
   text-align: left;
   border-radius: 0.25rem;
+  height: 15rem;
+  overflow-y:scroll
 }
 .dropdown > p {
   margin: 0;
@@ -173,4 +175,14 @@
 }
 .dropdown > p:last-child {
   border-bottom: 0 none;
+}
+
+.dropdowninputs{
+    width: 90%;
+    height: 100%;
+    border: 0;
+    font-size: 18px;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
 }
