@@ -36,7 +36,7 @@ export interface PathProps {
 // used for queries
 export interface BoundedPath {
 	path: Path;
-	bounds?: Bounds;
+	bounds: Bounds;
 }
 
 // This interface is used as a type for server's response

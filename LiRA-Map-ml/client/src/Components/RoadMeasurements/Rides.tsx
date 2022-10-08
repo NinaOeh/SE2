@@ -14,6 +14,8 @@ import { getRide } from "../../queries/rides";
 import Graph from "../Graph/Graph";
 import RidesMap from "./RidesMap";
 import usePopup from "../createPopup";
+import { Popup } from "Leaflet.MultiOptionsPolyline";
+import { PopupFunc } from "../../models/popup"
 
 const Rides: FC = () => {
     
@@ -26,32 +28,47 @@ const Rides: FC = () => {
 
     useEffect( () => {
 
-        const updatePaths = async () => {
+        const updatePaths = async ( pop: PopupFunc) => {
             const temp = {} as MeasMetaPath;
 
             for ( let meas of selectedMeasurements )
             {
                 const { name } = meas
                 temp[name] = {}
-
                 for ( let meta of selectedMetas )
                 {
                     const { TaskId } = meta;
     
                     if ( Object.hasOwn(paths, name) && Object.hasOwn(paths[name], TaskId) )
-                        temp[name][TaskId] = paths[name][TaskId]
+                        {temp[name][TaskId] = paths[name][TaskId]}
+                        
                     else {
                         const bp = await getRide(meas, meta, popup)
                         if ( bp !== undefined )
+                        {
                             temp[name][TaskId] = bp;
+                        }
                     }
+
+                    if (temp[name][TaskId].bounds.maxX == null 
+                        && temp[name][TaskId].bounds.maxY == null 
+                        && temp[name][TaskId].bounds.minX == null 
+                        && temp[name][TaskId].bounds.minY == null
+                        && meas.rendererName == 'hotline')
+                        {
+                        popup( {
+                            icon: "warning",
+                            title: `Hotline renderer can not be chosen for this measurement.`,
+                            footer: `Choose another type of visualization for ${name} | TaskId: ${TaskId}`,
+                            toast: true
+                        } );
+                        }
                 } 
             }
 
             return temp;
         }
-        
-        updatePaths().then( setPaths )
+        updatePaths(popup).then( setPaths )
 
     }, [selectedMetas, selectedMeasurements] )
 

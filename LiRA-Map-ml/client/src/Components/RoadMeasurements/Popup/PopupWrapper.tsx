@@ -85,6 +85,7 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
             <div className="float-child">
             {/*!--- Start of left column ---*/}
                 <div>
+                    {/*
                     <div className="sweetalert-checkboxes">
                         { Object.keys(MeasurementDatabases).map( (mName: string, i: number) => 
                             <Checkbox 
@@ -101,11 +102,11 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
                         { Object.keys(MeasurementDatabases).map( (mName: string, i: number) => 
                             <RadioMeasurements
                                 key={`sweetalert-checkbox-${i}`}
-                                name= {mName}/*{mName}*/
+                                name= {mName}//{mName}
                                 html={<div style={{textTransform: "capitalize"}}>{mName}</div>}
                                 onChange={() => update('dbName')(Object.values(MeasurementDatabases)[Object.keys(MeasurementDatabases).indexOf(mName)])}/>
                         ) }
-                    </div>
+                    </div>*/}
 
                     <div>
                     <>
@@ -116,8 +117,9 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
                                 :"Measurement:"}
                             </div>
                         </div>
-                        <button
-                            className={showDropDown ? "active" : undefined}
+                        
+                        <button 
+                            className={showDropDown ? "dropdownbutton active" : "dropdownbutton"}
                             onClick={(): void => toggleDropDown()}
                             onBlur={(e: React.FocusEvent<HTMLButtonElement>): void =>
                             dismissHandler(e)
