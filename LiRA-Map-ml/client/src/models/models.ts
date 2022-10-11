@@ -36,6 +36,10 @@ export interface TripsOptions {
     reversed: boolean;
 }
 
+export interface FilteringOptions{
+	search: string;
+}
+
 
 
 

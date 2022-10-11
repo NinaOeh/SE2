@@ -6,7 +6,7 @@ import { Condition, Node, WayId } from "../../models/path";
 import { DotHover } from '../graph/types';
 import { DistData, DistPoint } from "./hotline";
 import Edge from "./Edge";
-
+import Ways from '../../Components/RoadConditions/Ways';
 
 export default class DistRenderer extends Renderer<DistData> {
 
@@ -14,12 +14,15 @@ export default class DistRenderer extends Renderer<DistData> {
     conditions: Condition[][];
     edgess: Edge[][];
     dotHover: DotHover | undefined;
+    filter:number | 0;
 
     constructor( options?: HotlineOptions, ...args: any[] ) 
     {
         super({...options})
         this.way_ids = args[0][0];
         this.conditions = args[0][1];
+        this.filter=args[0][2];
+    
         this.edgess = [];
         this.dotHover = undefined;
     }
@@ -50,7 +53,6 @@ export default class DistRenderer extends Renderer<DistData> {
         try{
             if(filter){
                 gradient.addColorStop(dist, `rgba(218,165,32,${opacity})`);
-                
 
             }
             else{
@@ -179,7 +181,9 @@ export default class DistRenderer extends Renderer<DistData> {
 
         if ( start_dist === end_dist ) return;
 
-        const max=conditions.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+        const max=conditions.reduce((prev, current) => (prev.value > current.value) ? prev : current).value;
+        console.log(this.filter);
+
         const filter=max>4 ? true: false;
         for ( let i = 0; i < conditions.length; i++ )
         {

@@ -1,5 +1,5 @@
 
-import { FC, useCallback, useRef } from "react";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChartData } from "chart.js";
 import { Palette } from "react-leaflet-hotline";
 
@@ -16,7 +16,8 @@ import { Condition } from "../../models/path";
 import { getConditions } from "../../queries/conditions";
 import { filter } from "d3";
 import createPopup from "../createPopup";
-
+import FilteringSelector from "./OptionsFiltering"
+import { FilteringOptions } from "../../models/models";
 
 interface Props {
     type: ConditionType;
@@ -32,11 +33,14 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
     const ref = useRef(null);
     const [width, _] = useSize(ref)
 
-    const onClick = useCallback( (way_id: string, way_length: number) => {
+    
+    const onClick = useCallback((way_id: string, way_length: number,filter:number) => {
+
         getConditions( way_id, name, (wc: Condition[]) => {
             const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
-            console.log(max)
-            if(max>4){
+            console.log("maximum value:",max);
+            console.log("the filter is:",filter);
+            if(max>filter){
 
            
                 setWayData( {
@@ -54,12 +58,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
             }
             else{
-                const popup=createPopup();
-                popup( {
-                    icon: "warning",
-                    title: `This trip doesn't have any value with the ira wanted   `,
-                    toast: true
-                } );
+               
                 setWayData( {
                     labels: [],
                     datasets: [ {
@@ -72,16 +71,22 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                         data: [],
                     } ]
                 } )
+                const popup=createPopup();
+                popup( {
+                    icon: "warning",
+                    title: `This trip doesn't have any value with the ira wanted   `,
+                    toast: true
+                } );
 
             }
            
         } )
-    }, [] )
+    },[])
 
-    console.log(filter);
 
     return (
         <div className="road-conditions-map" ref={ref}>
+
             <PaletteEditor 
                 defaultPalette={RENDERER_PALETTE}
                 width={width}
@@ -90,6 +95,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
             <MapWrapper>
                 <Ways palette={palette} type={name} onClick={onClick}  />
+
             </MapWrapper>
         </div>
     )
