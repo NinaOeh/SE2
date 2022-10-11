@@ -3,12 +3,15 @@ import { List, ListRowRenderer } from "react-virtualized";
 import { RiDeleteBack2Line } from 'react-icons/ri'
 
 import Checkbox from '../Checkbox';
+import SpinLoader from "../../assets/SpinLoader";
 
 import { RideMeta, TripsOptions } from '../../models/models'
 
 import '../../css/ridecard.css'
+import '../../css/spinner.css'
 import { useMetasCtx } from "../../context/MetasContext";
 import OptionsSelector from "./OptionsSelector";
+import { unmountComponentAtNode } from "react-dom";
 
 
 interface CardsProps {
@@ -19,11 +22,12 @@ interface CardsProps {
 const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {  
     const renderRow: ListRowRenderer = ( { index, key, style } ): ReactNode => {
         const meta = showMetas[index];
+
         return <div key={key} style={style}>
             <Checkbox 
                 forceState={meta.selected}
                 className="ride-card-container"
-                html={<div><b>{meta.TaskId}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
+                html={<div><b>{meta.wayPointName}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
                 }} />

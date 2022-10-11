@@ -139,5 +139,5 @@ export interface BoundedCondition {
 	conditions: { [condition_type: string]: Condition[] };
 	length: number;
 	coordinates: LatLonDist[]
-}
+}	
 
