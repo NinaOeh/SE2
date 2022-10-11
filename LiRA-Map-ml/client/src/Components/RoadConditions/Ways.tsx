@@ -79,7 +79,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
                     conditions={ways.conditions}
                     options={options}
                     eventHandlers={handlers}
-                    filter={count} /><Tooltip> xdn </Tooltip></>
+                    filter={count} /></>
 
             : null 
         }
