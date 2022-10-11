@@ -15,7 +15,6 @@ export interface RideMeta {
 	FK_Device: string, //	"d25574dd-e9a4-4296-ae00-7dcef3aa8278"
 	Created_Date: string, //		"2021-07-30T07:52:47.969Z"
 	Updated_Date: string, //		"0001-01-01T00:00:00.000Z"
-	wayPointName: string,
 }
 
 // export interface MeasurementData {
