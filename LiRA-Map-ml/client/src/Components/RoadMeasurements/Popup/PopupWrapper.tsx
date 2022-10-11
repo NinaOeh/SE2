@@ -1,4 +1,3 @@
-
 import React, { FC, useState, useRef } from "react";
 import { TwitterPicker } from "react-color";
 import { Gradient } from "react-gradient-hook";
@@ -7,7 +6,6 @@ import { RendererName, rendererTypes } from "../../../models/renderers";
 
 import Checkbox from "../../Checkbox";
 import { ActiveMeasProperties } from "../../../models/properties";
-
 import { MeasurementDatabases, MeasurementsArray } from "../../../models/measurements";
 import  RadioMeasurements  from "../RadioButtons/RadioButton"
 
@@ -22,13 +20,11 @@ interface IPopupWrapper {
 const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
 
     const [state, setState] = useState(defaultOptions);
-
     const { name, dbName, rendererName, color } = state;
 
     const update = (key: keyof ActiveMeasProperties) => (val: any) => {
         const temp = { ...state } as any;
         temp[key] = val;
-
         if (key == "dbName"){
             console.log("key here :)))", key, Object.keys(MeasurementDatabases)[Object.values(MeasurementDatabases).indexOf(val)])
             temp["name"] = Object.keys(MeasurementDatabases)[Object.values(MeasurementDatabases).indexOf(val)];
@@ -38,7 +34,6 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
     }
 
     const inputChange = (key: keyof ActiveMeasProperties) => ({target}: any) => update(key)(target.value)
-
 
     /*Functions necessary for the RadioItem Menu */
     const [selectRadio, setSelectRadio] = useState<string>("");

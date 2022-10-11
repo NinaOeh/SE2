@@ -5,7 +5,7 @@ import GLine from "../../assets/graph/line"
 
 import { useGraph } from "../../context/GraphContext";
 
-import { Axis, DotHover, GraphAxis, GraphData, SVG } from "../../assets/graph/types"
+import { Axis, DotHover, GraphData, SVG } from "../../assets/graph/types"
 import { Bounds } from "../../models/path";
 
 
@@ -40,7 +40,7 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, bounds, label, i, time } ) 
             ? setDotHover( undefined )
             : setDotHover( { ...d, x: d.x / _bounds.maxX } )
 
-        const line = new GLine(svg, label, i, data, xAxis, yAxis, onHover, time, false)
+        const line = new GLine(svg, label, i, data, xAxis, yAxis, onHover, time)
 
         return () => {
             if ( svg === undefined )

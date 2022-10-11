@@ -15,4 +15,3 @@ export const getBoundedWaysConditions = async ( bounds: MapBounds, type: string,
     console.log(bounds);
     return await asyncPost<WaysConditions>( '/conditions/bounded/ways', { ...bounds, type, zoom } )
 }
-

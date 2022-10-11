@@ -14,6 +14,8 @@ export interface PathProperties {
 	opacity?: number;
 	// The name of the renderer to use - see ./renderers for the list of names
 	rendererName: RendererName;
+	// The name of the possible measurements to use - see ./measurements for the list of names
+	//measurementName: MeasurementChoice;
 	// Weight can be multiplied by the dilatationFactor
 	// 	< 1 -> shrinks ; > 1 -> grows ; == 1 -> stays the same
 	dilatationFactor?: number;
