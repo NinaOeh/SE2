@@ -3,7 +3,9 @@
 
 .sweetalert-popup {
     background: var(--background);
-    width: max(700px, 40vw);
+
+    width: 70%;
+    padding: 20px;
 }
 
 .sweetalert-title {
@@ -15,9 +17,8 @@
     font-size: 1.1em;
     border: none;
     border-radius: 5px;
-    width: 70%;
+    width: 60%;
     padding: 10px 20px;
-    margin-bottom: 20px;
 }
 
 .sweetalert-checkboxes {
@@ -30,7 +31,7 @@
 }
 
 .gradient-wrapper {
-    width: 90%;
+    width: 80%;
     margin: 35px auto 15px auto;
     color: black;
 }

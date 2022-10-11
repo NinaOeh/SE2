@@ -60,11 +60,14 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
     })
 , [eventHandlers] )
 
+
     const { hotline } = useCustomHotline<Node, DistData>( 
         DistRenderer, HoverHotPolyline, 
         { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers}, 
         way_ids, conditions,filter,
     );
+
+    console.log("Now looking at DistRenderer2")
     
     useEffect( () => {
         if ( hotline === undefined ) return;

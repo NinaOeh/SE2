@@ -26,7 +26,7 @@ const RideDetails: FC = () => {
 	
 	const popup = useMeasPopup()
 
-	const editMeasurement = (meas: ActiveMeasProperties, i: number) => (e: React.MouseEvent) => {
+	const edit_Measurement = (meas: ActiveMeasProperties, i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
 		console.log("jhswjhsiu");
@@ -36,9 +36,23 @@ const RideDetails: FC = () => {
 				const temp = [...measurements]
 				temp[i] = newMeas;
 				setMeasurements( temp )
+				editMeasurement(newMeas, i)
 			}, 
 			{ ...RENDERER_MEAS_PROPERTIES, ...meas } 
 		)
+	}
+
+
+	const delete_measurement = ( i: number) => (e: React.MouseEvent) => {
+		e.preventDefault()
+		e.stopPropagation()
+		console.log(i)
+		//removes one element in position i from the state
+		const temp = [...measurements]
+		temp.splice(i,1)
+		setMeasurements(temp)
+		// and add the measurement to the measurements.json file
+		deleteMeasurement(i);
 	}
 
 	const showAddMeasurement = () => {
@@ -68,7 +82,9 @@ const RideDetails: FC = () => {
 					key={`meas-checkbox-${i}`}
 					meas={m}
 					selectMeasurement={selectMeasurement(i)}
-					editMeasurement={editMeasurement(m, i)} />
+
+					editMeasurement={edit_Measurement(m, i)}
+					deleteMeasurement={delete_measurement(i)} />
 			) }
 
 			<Checkbox 

@@ -23,11 +23,25 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements }
         selectedMeasurements.forEach( meas => {
             const { name } = meas;
             return selectedMetas.forEach( meta => {
-                const { TaskId } = meta;
+                const { TaskId } = meta; 
                 if ( Object.hasOwn(paths, name) && Object.hasOwn(paths[name], TaskId) )
-                    temp.push( 
-                        { meas, meta, bp: paths[name][TaskId] }
-                    )
+                {
+                    console.log("bounds: ", paths[name][TaskId].bounds)
+                    console.log(meas.rendererName)
+                    if (paths[name][TaskId].bounds.maxX == null 
+                        && paths[name][TaskId].bounds.maxY == null 
+                        && paths[name][TaskId].bounds.minX == null 
+                        && paths[name][TaskId].bounds.minY == null
+                        && meas.rendererName == 'hotline')
+                        {console.log("Here we now return undefined")
+                        return undefined
+                        }
+
+                    else
+                        temp.push( 
+                            { meas, meta, bp: paths[name][TaskId] }
+                        )
+                }
             } )
         } )
         return temp;

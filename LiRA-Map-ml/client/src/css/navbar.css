@@ -6,7 +6,7 @@
     left: 0;
     width: 100%;
     height: var(--navbar-height);
-    background-color: var(--background);
+    background-color: var(--background-4);
     z-index: var(--navbar-z-index);
     font-family: 'Noto Sans JP', sans-serif;
 }

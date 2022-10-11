@@ -20,7 +20,12 @@ export default function renderers<T>( key: RendererName ): Renderer<T>
         case 'line':
             return Line<T>;
         case 'hotline':
-            return LatLngHotline<T>;
+            try{
+                return LatLngHotline<T>;}
+            catch{
+                console.log("Error catched")
+                return Line<T>
+            }
         case 'hotcircles':
             return Hotcircles<T>;
         case 'heatmap':

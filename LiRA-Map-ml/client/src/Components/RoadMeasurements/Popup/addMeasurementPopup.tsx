@@ -19,10 +19,10 @@ const addMeasPopup = () => {
         let options = { ...defaultOptions }
 
         popup( {
-            title: <p>Choose the measurement you wish to visualize.</p>,
+            title: <h2>Measurement Setup</h2>,
             showCancelButton: true,
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Add',
+            confirmButtonText: 'Add/Change',
             html: <PopupWrapper
                 defaultOptions={defaultOptions}
                 setOptions={opts => {

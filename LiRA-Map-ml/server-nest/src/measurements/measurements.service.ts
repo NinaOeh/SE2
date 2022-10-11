@@ -10,7 +10,7 @@ export class MeasurementsService
     path: string;
 
     constructor() {
-        this.path = './src/measurements/measurements.json'
+        this.path = './data/measurements.json'
     }
 
     async writeFile( data: any ) 
@@ -29,9 +29,7 @@ export class MeasurementsService
     {
         const measurements = await this.getMeasurements() 
         const updatedFile = [...measurements, measurement]
-        this.writeFile(updatedFile)
-        const file = await readFile(this.path, 'utf-8')
-        return JSON.parse(file);
+        return await this.writeFile(updatedFile)
     }
 
     async editMeasurement(index: number, measurement: Measurement) 
@@ -46,7 +44,7 @@ export class MeasurementsService
     {
         const measurements = await this.getMeasurements() 
         const updatedFile = [...measurements]
-        updatedFile[index] = ""
+        updatedFile.splice(index,1)
         return await this.writeFile(updatedFile);
     }
 
