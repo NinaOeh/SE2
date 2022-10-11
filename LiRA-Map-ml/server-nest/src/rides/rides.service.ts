@@ -30,6 +30,10 @@ export class RidesService
             // .distinct()
             // .orderBy('TaskId')
 
+            // .select( '*' )
+            // .from( { public: 'Trips' } )
+            // .whereNot( 'TaskId', 0 )
+            // .orderBy('TaskId')
             .distinct()
             .select('MapReferences.wayPointName', 'Trips.*')
             .from('MapReferences')

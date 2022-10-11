@@ -3,12 +3,15 @@ import { List, ListRowRenderer } from "react-virtualized";
 import { RiDeleteBack2Line } from 'react-icons/ri'
 
 import Checkbox from '../Checkbox';
+import SpinLoader from "../../assets/SpinLoader";
 
 import { RideMeta, TripsOptions } from '../../models/models'
 
 import '../../css/ridecard.css'
+import '../../css/spinner.css'
 import { useMetasCtx } from "../../context/MetasContext";
 import OptionsSelector from "./OptionsSelector";
+import { unmountComponentAtNode } from "react-dom";
 
 
 interface CardsProps {
