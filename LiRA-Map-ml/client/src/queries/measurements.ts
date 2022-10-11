@@ -4,6 +4,7 @@ import { get, put } from "./fetch";
 
 export const getMeasurements = ( callback: React.Dispatch<React.SetStateAction<ActiveMeasProperties[]>> ) => {
     get('/measurements', (data: MeasProperties[]) => {
+        console.log(data);
         callback( data.map( meas => { 
             return { ...meas, isActive: false } 
         } ) )
@@ -15,6 +16,7 @@ export const addMeasurement = (measurement: MeasProperties) => {
 }
 
 export const editMeasurement = (measurement: MeasProperties, index: number) => {
+    console.log("edit measurement")
 	put('/measurements/edit', { measurement, index } )	
 }
 

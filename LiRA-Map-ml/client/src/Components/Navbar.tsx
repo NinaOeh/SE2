@@ -5,20 +5,23 @@ import { Nav } from "../models/nav";
 
 import '../css/navbar.css';
 
-//import {AiFillHome} from "react-icons"
+import {AiFillHome} from "react-icons/ai"
 
 
 interface NavBtnProps {
+    key: string;
     to: string;
-    name: string;
+    name: any;
 }
 
-const NavBtn: FC<NavBtnProps> = ( { to, name } ) => {
+const NavBtn: FC<NavBtnProps> = ( { key, to, name } ) => {
     return (
         <NavLink 
             className='nav-tab' 
             activeClassName="nav-tab-active" 
+            key= {key}
             to={to}
+            exact= {true}
         >
             { name }
         </NavLink>
@@ -34,7 +37,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
         <div className="nav-wrapper">
             <div className="nav-container">
                 <div className="nav-block">
-                    <NavBtn  to='/' name='Home' />
+                    <NavBtn  key={'home'} to='/' name="Home"/> {/*{AiFillHome}*/}
                 </div>
                 <div className="nav-block">
                     { routes.map( ([path, _, name], i) => 
@@ -42,7 +45,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
                     ) }
                 </div>
                 <div className="nav-block">
-                    <NavBtn  to='/login' name='Login' />
+                    <NavBtn  key={'login'} to='/login' name='Login' />
                 </div>
             </div>
         </div>

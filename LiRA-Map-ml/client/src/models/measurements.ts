@@ -8,6 +8,13 @@ export enum MeasurementDatabases {
     "Driver brake torque" = "obd.brk_trq_req_dvr" 
 }
 
-export let available_car_measurements = ['obd.rpm', "acc.xyz", "obd.acc_trans" , "obd.acc_long", "obd.acc_yaw",
-"obd.brk_trq_req_el", "obd.brk_trq_req_dvr"] 
+export const MeasurementsArray = [
+    {label:"Engine rates per minute", value:'obd.rpm'},
+    {label:"Acceleration" , value: "acc.xyz"},
+    {label:"Transversal Acceleration", value: "obd.acc_trans"},
+    {label: "Longitudal Acceleration", value: "obd.acc_long"},
+    {label: "Yaw rate", value: "obd.acc_yaw"},
+    {label: "Electric brake torque", value: "obd.brk_trq_req_el"},
+    {label: "Driver brake torque", value: "obd.brk_trq_req_dvr"}
+]
 
