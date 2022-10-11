@@ -1,4 +1,5 @@
 
+import { LatLng } from 'Leaflet.MultiOptionsPolyline';
 import { Polyline } from 'react-leaflet';
 import { IRenderer } from '../../../models/renderers';
 import { formatEventHandlers } from '../utils';

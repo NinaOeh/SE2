@@ -5,6 +5,7 @@ import { Nav } from "../models/nav";
 
 import '../css/navbar.css';
 
+
 import {AiFillHome} from "react-icons/ai"
 
 
@@ -37,6 +38,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
         <div className="nav-wrapper">
             <div className="nav-container">
                 <div className="nav-block">
+
                     <NavBtn  key={'home'} to='/' name="Home"/> {/*{AiFillHome}*/}
                 </div>
                 <div className="nav-block">

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { FiSettings, FiXSquare } from "react-icons/fi"; //FiSettings
+import { FiSettings } from "react-icons/fi";
 import { MeasProperties } from "../../models/properties";
 import Checkbox from "../Checkbox";
 
@@ -7,10 +7,9 @@ import Checkbox from "../Checkbox";
 interface ICheckboxHTML {
     meas: MeasProperties;
     editMeasurement: (e: React.MouseEvent) => void;
-    deleteMeasurement: (e: React.MouseEvent) => void;
 }
 
-const CheckboxHTML: FC<ICheckboxHTML> = ( { meas, editMeasurement, deleteMeasurement } ) => {
+const CheckboxHTML: FC<ICheckboxHTML> = ( { meas, editMeasurement } ) => {
     const { name, rendererName } = meas;
 
     return (
@@ -20,7 +19,6 @@ const CheckboxHTML: FC<ICheckboxHTML> = ( { meas, editMeasurement, deleteMeasure
                 <p className="checkbox-subtitle">- {rendererName}</p>
             </div>
             <FiSettings className="edit-meas-btn btn" onClick={editMeasurement} strokeWidth={1}/>
-            <FiXSquare className="edit-meas-btn btn" onClick={deleteMeasurement} strokeWidth={1}/>
         </div>
     )
 }
@@ -28,15 +26,14 @@ const CheckboxHTML: FC<ICheckboxHTML> = ( { meas, editMeasurement, deleteMeasure
 interface IMeasCheckbox {
     meas: MeasProperties;
     editMeasurement: (e: React.MouseEvent) => void;
-    deleteMeasurement: (e: React.MouseEvent) => void;
     selectMeasurement: (isChecked: boolean) => void; 
 }
 
-const MeasCheckbox: FC<IMeasCheckbox> = ( { meas, editMeasurement, selectMeasurement, deleteMeasurement } ) => {
+const MeasCheckbox: FC<IMeasCheckbox> = ( { meas, editMeasurement, selectMeasurement } ) => {
     return (
         <Checkbox 
             className='ride-metadata-checkbox'
-            html={<CheckboxHTML meas={meas} editMeasurement={editMeasurement} deleteMeasurement={deleteMeasurement} />}
+            html={<CheckboxHTML meas={meas} editMeasurement={editMeasurement} />}
             onClick={selectMeasurement} />
     )
 }

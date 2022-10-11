@@ -1,7 +1,5 @@
-import { FC, useEffect, useMemo, useRef } from "react";
-import { ChartData, Chart, CategoryScale, LinearScale, PointElement, 
-    LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, 
-    ChartOptions, ChartTypeRegistry} from "chart.js";
+import { FC, useCallback, useEffect, useMemo, useRef } from "react";
+import { ChartData, Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, ChartOptions, ChartTypeRegistry, Plugin  } from "chart.js";
 import { Color, Palette } from "react-leaflet-hotline";
 import { Line } from "react-chartjs-2";
 
@@ -22,7 +20,7 @@ const options = ({name, min, max}: ConditionType): ChartOptions<'line'> => ({
         x: {
             title: { 
                 display: true, 
-                text: 'distance (m)' 
+                text: 'distance  bonne tuds cdskle (m)' 
             },
             ticks: { 
                 maxTicksLimit: 30,
@@ -79,12 +77,16 @@ const ConditionsGraph: FC<Props> = ( { type, data, palette } ) => {
     }, [ref, data, palette])
 
     // attach events to the graph options
+
+
+    // click one point in the graph maybe another extension 
     const graphOptions: ChartOptions<'line'> = useMemo( () => ({
         ...options(type),
         onClick: (event: ChartEvent, elts: ActiveElement[], chart: Chart<keyof ChartTypeRegistry, number[], unknown>) => {
             if ( elts.length === 0 ) return;
             const elt = elts[0] // doesnt work if multiple datasets
             const pointIndex = elt.index
+            console.log("on est ou la ");
             console.log(pointIndex, event, elts);
         }
     }), [] )

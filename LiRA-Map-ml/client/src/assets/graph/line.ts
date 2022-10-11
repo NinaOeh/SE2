@@ -21,13 +21,14 @@ export default class GLine
         xAxis: Axis,
         yAxis: Axis,
         onHover: (d: DotHover | undefined) => void,
-        time: boolean | undefined
+        time: boolean | undefined,
+        filter: boolean
     ) {
         const color = getColor(0, i)
         const hoverColor = "url(#line-gradient)"
 
         const pathOpts: PathOptions = { stroke: color }
-        const hoverPathOpts: PathOptions = { stroke: hoverColor }
+        const hoverPathOpts: PathOptions = { stroke:  hoverColor}
 
         const dotsOpts: DotsOptions = { fill: color, radius: 6 }
         const hoverDotsOpts: DotsOptions = { fill: hoverColor }
@@ -45,8 +46,9 @@ export default class GLine
             path.mouseOver();
             // dots.mouseOver();
         } )
-
+//road conditions
         hitbox.addMouseOut( () => {
+            console.log("im here");
             path.mouseOut();
             // dots.mouseOut();
         } )

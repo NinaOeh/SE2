@@ -10,7 +10,7 @@ import { SegmentProvider } from "../context/SegmentContext"
 
 
 const RoadMeasurements = () => {
-    console.log("Road Measurement");
+
     return (
         <SegmentProvider>
             <div>
