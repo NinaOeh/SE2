@@ -3,7 +3,6 @@
 
 .sweetalert-popup {
     background: var(--background);
-
     width: 70%;
     padding: 20px;
 }
@@ -22,7 +21,7 @@
 }
 
 .sweetalert-checkboxes {
-    width: 110%;
+    width: 100%;
     display: grid;
     grid-template-columns: 25% 25% 25%;
     justify-content: space-evenly;
@@ -35,3 +34,9 @@
     margin: 35px auto 15px auto;
     color: black;
 }
+
+.float-child {
+    width: 45%;
+    float: left;
+    padding: 20px;
+}  

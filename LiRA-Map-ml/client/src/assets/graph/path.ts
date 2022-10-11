@@ -36,7 +36,6 @@ class Path extends Layer<PathOptions>
     }
 
     addMouseOver(callback: any) {
-        console.log("HOVER");
         this.path.on('mouseover', callback);
         return this
     }
@@ -46,9 +45,8 @@ class Path extends Layer<PathOptions>
         return this
     }
 
-    //alors ici road measureemts
     mouseOver() 
-    {   console.log("on y est");
+    {
         return this.path
             .style("stroke-width", this.hoverOptions.strokeWidth )
             .style('stroke', this.hoverOptions.stroke )
