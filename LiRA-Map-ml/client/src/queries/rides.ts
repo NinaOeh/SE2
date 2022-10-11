@@ -10,7 +10,6 @@ export const getRides = ( callback: Dispatch<SetStateAction<RideMeta[]>> ) => {
     get( '/rides', callback )
 }
 
-
 export const getRide = async (
     measurement: ActiveMeasProperties, 
     meta: Metadata, 

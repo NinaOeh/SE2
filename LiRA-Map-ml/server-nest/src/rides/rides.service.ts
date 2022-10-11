@@ -12,12 +12,36 @@ export class RidesService
     constructor(@InjectConnection('lira-main') private readonly knex: Knex) {}
 
     async getRides(): Promise<RideMeta[]>
-    {
+    {   let knex = this.knex;
         return await this.knex
-            .select( '*' )
-            .from( { public: 'Trips' } )
-            .whereNot( 'TaskId', 0 )
-            .orderBy('TaskId')
+            // .select( '*' )
+            // .from( { public: 'Trips' } )
+            // .where( 'TaskId', 1472 )
+            // .innerJoin('Measurements', function() {
+            //     this.on('Measurements.FK_Trip', '=', 'TripId')
+            //     // .andOn('Measurements.Created_Date', '=', knex.raw("(select max(Created_Date) from Measurements where Measurements.FK_Trip = TripId)"))
+            //     }
+            // )
+            // .innerJoin('MapReferences', function() {
+            //     this.on('MapReferences.FK_MeasurementId', '=', 'Measurements.MeasurementId')
+            //     // .andOn('MapReferences.wayPointId', '!=', "")
+            //     }
+            // )
+            // .distinct()
+            // .orderBy('TaskId')
+
+            // .select( '*' )
+            // .from( { public: 'Trips' } )
+            // .whereNot( 'TaskId', 0 )
+            // .orderBy('TaskId')
+            .distinct()
+            .select('MapReferences.wayPointName', 'Trips.*')
+            .from('MapReferences')
+            .whereNot('wayPointName', null)
+            .whereNot('wayPointName', '')
+            .innerJoin('Measurements', 'Measurements.MeasurementId', 'MapReferences.FK_MeasurementId')
+            .innerJoin('Trips', 'Trips.TripId', 'Measurements.FK_Trip')
+            .orderBy('wayPointName', 'asc')
     }
 
     async getRide( tripId: string, dbName: string ): Promise<BoundedPath>
