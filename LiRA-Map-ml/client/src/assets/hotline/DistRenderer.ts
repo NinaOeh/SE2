@@ -7,7 +7,6 @@ import { DotHover } from '../graph/types';
 import { DistData, DistPoint } from "./hotline";
 import Edge from "./Edge";
 
-
 export default class DistRenderer extends Renderer<DistData> {
 
     way_ids: string[];
@@ -17,11 +16,13 @@ export default class DistRenderer extends Renderer<DistData> {
 
     constructor( options?: HotlineOptions, ...args: any[] ) 
     {
+        
         super({...options})
         this.way_ids = args[0][0];
         this.conditions = args[0][1];
         this.edgess = [];
         this.dotHover = undefined;
+      
     }
 
     projectLatLngs(_map: Map, latlngs: LatLng[], result: any, projectedBounds: any) 
@@ -123,7 +124,6 @@ export default class DistRenderer extends Renderer<DistData> {
 
             const way_id = this.way_ids[i];
             const conditions = this.conditions[i]
-
             for (let j = 1; j < path.length; j++) 
             {
                 const start = path[j - 1];
