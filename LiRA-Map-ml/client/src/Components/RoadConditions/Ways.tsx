@@ -40,8 +40,8 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
 
     const options = useMemo<HotlineOptions>( () => ({
-        palette, min: minY, max: maxY
-    } ), [palette, minY, maxY] )
+        palette, min: minY, max: maxY, tolerance:count
+    } ), [palette, minY, maxY,count] )
 
     const handlers = useMemo<HotlineEventHandlers>( () => ({
         click: (_, i) => {
@@ -79,7 +79,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
                     conditions={ways.conditions}
                     options={options}
                     eventHandlers={handlers}
-                    filter={count} /></>
+                    filter={count} /><Tooltip> xdn </Tooltip></>
 
             : null 
         }
