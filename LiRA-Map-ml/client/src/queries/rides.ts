@@ -5,11 +5,11 @@ import { PopupFunc } from "../models/popup"
 import { ActiveMeasProperties } from "../models/properties"
 import { asyncPost, get, post } from "./fetch"
 
+//implement more error catching here!
 
 export const getRides = ( callback: Dispatch<SetStateAction<RideMeta[]>> ) => {
     get( '/rides', callback )
 }
-
 
 export const getRide = async (
     measurement: ActiveMeasProperties, 
@@ -18,6 +18,8 @@ export const getRide = async (
 ) => {
     const { dbName, name, hasValue } = measurement
     const { TripId: tripId, TaskId: taskId } = meta;
+
+    console.log("We got here")
 
     console.log('Querying measurement: ', name, '\nTaskId: ', taskId );
     
@@ -29,6 +31,8 @@ export const getRide = async (
 
     if ( path.length === 0 )
     {
+        console.log("Here now1"); 
+
         popup( {
             icon: "warning",
             title: `This trip doesn't contain data for ${name}`,
@@ -38,6 +42,11 @@ export const getRide = async (
 
         return undefined;
     }
-                
+
+    //if (path.includes(undefined)):
+
+
+
+    console.log("Here now2", data);         
     return data;
 }

@@ -7,6 +7,7 @@ import { DotHover } from '../graph/types';
 import { DistData, DistPoint } from "./hotline";
 import Edge from "./Edge";
 
+
 export default class DistRenderer extends Renderer<DistData> {
 
     way_ids: string[];
@@ -44,24 +45,23 @@ export default class DistRenderer extends Renderer<DistData> {
         return 0;
     }
 
-    _addWayColorGradient(gradient: CanvasGradient, edge: Edge, dist: number, way_id: string,filter:boolean): void {
+    _addWayColorGradient(gradient: CanvasGradient, edge: Edge, dist: number, way_id: string): void {
         const opacity = this.dotHover !== undefined && this.dotHover.label !== way_id 
             ? 0.3
             : 1
+        console.log(`rgba(${edge.get().join(',')},${opacity})`);
+        console.log(dist);
+        console.log(opacity);
         try{
-            if(filter){
-                gradient.addColorStop(dist, `rgba(218,165,32,${opacity})`);
-
-            }
-            else{
-            const str = `rgba(${edge.get().join(',')},${opacity})`;
-
-            gradient.addColorStop(dist, str);
-            }
-        
+            console.log(`rgba(${edge.get().join(',')},${opacity})`);
+            console.log(dist);
+            console.log(opacity);
+            gradient.addColorStop(dist, `rgba(${edge.get().join(',')},${opacity})`);
+            
         }
         catch
         {
+            console.log("Error caught here.")
         }
     }
 
@@ -117,7 +117,7 @@ export default class DistRenderer extends Renderer<DistData> {
         if ( ctx === undefined ) return;
         
         const dataLength = this._data.length
-        console.log("the data length:", dataLength);
+
         for (let i = 0; i < dataLength; i++) 
         {
             const path = this._data[i];
@@ -125,21 +125,22 @@ export default class DistRenderer extends Renderer<DistData> {
 
             const way_id = this.way_ids[i];
             const conditions = this.conditions[i]
-            
-            const max=this.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
-            const filter=max>4  ? false: true;
-            
+
+
             for (let j = 1; j < path.length; j++) 
             {
                 const start = path[j - 1];
                 const end = path[j];
-                
+                console.log("__add.Gradient1")
                 const gradient = this._addGradient(ctx, start, end, conditions, way_id);
                 
+
                 this._addWayColorGradient(gradient, edges[start.i], 0, way_id,false)
+                console.log("__add.addWayColorGradient1")
                 this._addWayColorGradient(gradient, edges[end.i],   1, way_id,false)
-                
+                console.log("__add.addWayColorGradient2")
                 this.drawGradient(ctx, gradient, way_id, start, end)
+                console.log("__add.addWayColorGradient3")
             }
         }
     }
@@ -166,10 +167,16 @@ export default class DistRenderer extends Renderer<DistData> {
 
     _addGradient( ctx: CanvasRenderingContext2D, start: DistPoint, end: DistPoint, conditions: Condition[], way_id: string ): CanvasGradient
     {
+        try{
+            const gradient: CanvasGradient = ctx.createLinearGradient(start.x, start.y, end.x, end.y);
+            this.computeGradient(gradient, start, end, conditions, way_id)
+            return gradient}
+        catch (Error){
+            const gradient: CanvasGradient = ctx.createLinearGradient(1,2,1,2)
+            console.log("here lies an error")
+            return gradient
 
-        const gradient: CanvasGradient = ctx.createLinearGradient(start.x, start.y, end.x, end.y);
-        this.computeGradient(gradient, start, end, conditions, way_id)
-        return gradient
+        }
     }
 
     computeGradient(gradient: CanvasGradient, pointStart: DistPoint, pointEnd: DistPoint, conditions: Condition[], way_id: string )
@@ -179,9 +186,7 @@ export default class DistRenderer extends Renderer<DistData> {
 
         if ( start_dist === end_dist ) return;
 
-        const max=conditions.reduce((prev, current) => (prev.value > current.value) ? prev : current).value;
-        
-        const filter=max>4 ? false: true;
+    
         for ( let i = 0; i < conditions.length; i++ )
         {
             // const { dist: way_dist, value } = conditions[i] as any 
@@ -193,7 +198,9 @@ export default class DistRenderer extends Renderer<DistData> {
             const rgb = this.getRGBForValue(value);                                                      
             const dist = (way_dist - start_dist) / (end_dist - start_dist)
 
+            console.log("__add.addWayColorGradient4")
             this._addWayColorGradient(gradient, new Edge(...rgb), dist, way_id,false)
+            console.log("__add.addWayColorGradient5")
         }
     }
 }

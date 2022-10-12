@@ -3,7 +3,8 @@
 
 .sweetalert-popup {
     background: var(--background);
-    width: max(700px, 40vw);
+    width: 70%;
+    padding: 20px;
 }
 
 .sweetalert-title {
@@ -15,13 +16,12 @@
     font-size: 1.1em;
     border: none;
     border-radius: 5px;
-    width: 70%;
+    width: 60%;
     padding: 10px 20px;
-    margin-bottom: 20px;
 }
 
 .sweetalert-checkboxes {
-    width: 110%;
+    width: 100%;
     display: grid;
     grid-template-columns: 25% 25% 25%;
     justify-content: space-evenly;
@@ -30,7 +30,13 @@
 }
 
 .gradient-wrapper {
-    width: 90%;
+    width: 80%;
     margin: 35px auto 15px auto;
     color: black;
 }
+
+.float-child {
+    width: 45%;
+    float: left;
+    padding: 20px;
+}  

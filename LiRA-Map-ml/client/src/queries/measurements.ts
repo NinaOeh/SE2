@@ -16,5 +16,10 @@ export const addMeasurement = (measurement: MeasProperties) => {
 }
 
 export const editMeasurement = (measurement: MeasProperties, index: number) => {
+    console.log("edit measurement")
 	put('/measurements/edit', { measurement, index } )	
+}
+
+export const deleteMeasurement = (index: number) => {
+	put('/measurements/delete', { index } )	
 }

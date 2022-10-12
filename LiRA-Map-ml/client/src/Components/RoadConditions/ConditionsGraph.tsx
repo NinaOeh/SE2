@@ -1,5 +1,7 @@
-import { FC, useCallback, useEffect, useMemo, useRef } from "react";
-import { ChartData, Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, ChartOptions, ChartTypeRegistry, Plugin  } from "chart.js";
+import { FC, useEffect, useMemo, useRef } from "react";
+import { ChartData, Chart, CategoryScale, LinearScale, PointElement, 
+    LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, 
+    ChartOptions, ChartTypeRegistry} from "chart.js";
 import { Color, Palette } from "react-leaflet-hotline";
 import { Line } from "react-chartjs-2";
 
@@ -20,7 +22,7 @@ const options = ({name, min, max}: ConditionType): ChartOptions<'line'> => ({
         x: {
             title: { 
                 display: true, 
-                text: 'distance  bonne tuds cdskle (m)' 
+                text: 'distance (m)' 
             },
             ticks: { 
                 maxTicksLimit: 30,
@@ -41,9 +43,19 @@ const options = ({name, min, max}: ConditionType): ChartOptions<'line'> => ({
 
 const addPaletteChart = (chart: Chart<keyof ChartTypeRegistry, number[], unknown>, palette: Palette) => {
     const dataset = chart.data.datasets[0];
+    console.log(0, chart.chartArea.bottom, 0, 0);
     const gradient = chart.ctx.createLinearGradient(0, chart.chartArea.bottom, 0, 0);
     palette.forEach( (c: Color) => {
-        gradient.addColorStop(c.t, `rgb(${c.r}, ${c.g}, ${c.b})`);
+        console.log(`rgb(${c.r}, ${c.g}, ${c.b})`)
+        console.log(c.t)
+        gradient.addColorStop(c.t, `rgb(${c.r}, ${c.g}, ${c.b})`)
+        try{
+            console.log(`rgb(${c.r}, ${c.g}, ${c.b})`);
+            console.log(c.t);
+            gradient.addColorStop(c.t, `rgb(${c.r}, ${c.g}, ${c.b})`)}
+        catch{
+            console.log("Error catched here.")
+        };
     })
     dataset.borderColor = gradient;
     dataset.backgroundColor = gradient;
@@ -67,16 +79,12 @@ const ConditionsGraph: FC<Props> = ( { type, data, palette } ) => {
     }, [ref, data, palette])
 
     // attach events to the graph options
-
-
-    // click one point in the graph maybe another extension 
     const graphOptions: ChartOptions<'line'> = useMemo( () => ({
         ...options(type),
         onClick: (event: ChartEvent, elts: ActiveElement[], chart: Chart<keyof ChartTypeRegistry, number[], unknown>) => {
             if ( elts.length === 0 ) return;
             const elt = elts[0] // doesnt work if multiple datasets
             const pointIndex = elt.index
-            console.log("on est ou la ");
             console.log(pointIndex, event, elts);
         }
     }), [] )

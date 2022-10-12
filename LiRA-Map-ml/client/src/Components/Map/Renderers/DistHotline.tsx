@@ -25,8 +25,6 @@ interface IDistHotline {
     conditions: Condition[][];
     options?: HotlineOptions,
     eventHandlers?: HotlineEventHandlers;
-    filter?:number;
-
 }
 
 const handler = (eventHandlers: HotlineEventHandlers | undefined, event: keyof HotlineEventHandlers, opacity: number) => {
@@ -37,7 +35,7 @@ const handler = (eventHandlers: HotlineEventHandlers | undefined, event: keyof H
     }
 }
 
-const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options, eventHandlers,filter } ) => {
+const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options, eventHandlers } ) => {
 
     const { dotHover } = useGraph()
     const zoom = useZoom()
@@ -48,25 +46,19 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
         ...options, weight: getWeight(zoom)
     }), [options, zoom] )
 
-    const handlers: HotlineEventHandlers = useMemo( () => 
-     ({
+    const handlers: HotlineEventHandlers = useMemo( () => ({
         ...eventHandlers,
-
-        mouseover: handler(eventHandlers, 'mouseover', 0.5) ,
-        mouseout:  handler(eventHandlers, 'mouseout', 0),
-            
-        
-           
-        
-        
-    })
-, [eventHandlers] )
-
+        mouseover: handler(eventHandlers, 'mouseover', 0.5),
+        mouseout: handler(eventHandlers, 'mouseout', 0),
+    }), [eventHandlers] )
+    console.log("Now looking at DistRenderer1")
     const { hotline } = useCustomHotline<Node, DistData>( 
         DistRenderer, HoverHotPolyline, 
-        { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers}, 
-        way_ids, conditions,filter,
+        { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
+        way_ids, conditions 
     );
+
+    console.log("Now looking at DistRenderer2")
     
     useEffect( () => {
         if ( hotline === undefined ) return;

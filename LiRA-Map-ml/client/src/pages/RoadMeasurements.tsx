@@ -6,24 +6,29 @@ import { MetasProvider } from "../context/MetasContext";
 import RideDetails from "../Components/RoadMeasurements/RideDetails";
 import RideCards from "../Components/RoadMeasurements/RideCards";
 import Rides from "../Components/RoadMeasurements/Rides";
+import { SegmentProvider } from "../context/SegmentContext"
 
 
 const RoadMeasurements = () => {
-
+    console.log("Road Measurement");
     return (
-        <MeasurementsProvider>
-        <MetasProvider>
-            <div className="rides-wrapper">
-                
-                <RideCards />
-                
-                <RideDetails  />
-                
-                <Rides />
-                
+        <SegmentProvider>
+            <div>
+                <MeasurementsProvider>
+                    <MetasProvider>
+                        <div className="rides-wrapper">
+                            
+                            <RideCards />
+                            
+                            <RideDetails  />
+                            
+                            <Rides />
+                            
+                        </div>
+                    </MetasProvider>
+                </MeasurementsProvider>
             </div>
-        </MetasProvider>
-        </MeasurementsProvider>
+        </SegmentProvider>
   )
 }
 

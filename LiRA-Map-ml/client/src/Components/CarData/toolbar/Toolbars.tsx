@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { CgArrowLongRightC } from "react-icons/cg";
-import { FaFilter } from "react-icons/fa";
+import { FaFilter, FaFingerprint } from "react-icons/fa";
 
 import Toolbar from "./Toolbar";
 
@@ -28,7 +28,7 @@ const Toolbars: FC = () => {
 
     return (
         <div className='toolbar-wrapper'>
-            <Toolbar Icon={FaFilter} isSegment={false}>
+            <Toolbar Icon={FaFingerprint} isSegment={false}>
                 <TypesPopup types={pathTypes} setTypes={setPathTypes} />
                 <DirectionPopup curDir={pathDirection} setDir={setPathDirection} />
             </Toolbar>

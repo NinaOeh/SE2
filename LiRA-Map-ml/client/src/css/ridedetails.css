@@ -11,7 +11,7 @@
 }
 
 .ride-metadata-list {
-    max-width: 230px;
+    max-width: 50%;
     padding: 0px 20px 100px 20px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -47,11 +47,7 @@
 }
 
 .popup-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-x: hidden;
+    padding: 20px;
 }
 
 .ride-metadata-checkbox {
@@ -122,4 +118,71 @@
     font-size: 0.7em;
     margin: 0px 10px;
     text-transform: capitalize;
+}
+
+.announcement {
+  padding: 0 0 0.88rem;
+  margin: 0 0 0.88rem;
+  /*border-bottom: 1px solid rgb(226, 226, 226);*/
+}
+.dropdownbutton {
+  /*position: middle;
+  padding: 0.375rem 0.88rem;
+  color: #333;
+  background-color: #ddd;
+  border-color: #ddd;
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 3;
+  border-radius: 0.25rem;
+  cursor: pointer;*/
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 0.9em !important;
+  padding: 10px 10px !important;
+}
+.dropdownbutton:hover {
+  color: #fff;
+  background-color: #0069d9;
+}
+.dropdownbutton.active {
+  color: #fff;
+  background-color: #0069d9;
+}
+.dropdown {
+  position: relative;
+  border: 10px solid rgb(197, 197, 197);
+  background: #fff;
+  padding: 10px;
+  color: #0062cc;
+  text-align: left;
+  border-radius: 0.25rem;
+  height: 15rem;
+  overflow-y:scroll
+}
+.dropdown > p {
+  margin: 0;
+  padding: 0.375rem 0.88rem;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  min-width: 140px;
+}
+.dropdown > p:hover {
+  color: #fff;
+  background-color: #0062cc;
+}
+.dropdown > p:last-child {
+  border-bottom: 0 none;
+}
+
+.dropdowninputs{
+    width: 90%;
+    height: 100%;
+    border: 0;
+    font-size: 18px;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
 }
