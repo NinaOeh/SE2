@@ -76,7 +76,9 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                 popup( {
                     icon: "warning",
                     title: `This trip doesn't have any value with the ira wanted   `,
-                    toast: true
+                    toast: true,
+                    showLoaderOnConfirm: true
+
                 } );
 
             }
