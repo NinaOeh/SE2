@@ -5,6 +5,7 @@ import { TRGB } from 'react-gradient-hook/lib/types';
 import { Tooltip } from 'react-leaflet';
 import { HotlineOptions } from 'react-leaflet-hotline';
 import { HotlineEventHandlers } from 'react-leaflet-hotline/lib/types';
+import Swal from 'sweetalert2';
 import { useGraph } from '../../context/GraphContext';
 import { FilteringOptions } from '../../models/models';
 import { WaysConditions } from '../../models/path';
@@ -27,22 +28,45 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     const [ways, setWays] = useState<WaysConditions>()
     const [count, setCount] = useState(0);
 
-    const onChange=({search}: FilteringOptions) =>{
-        const number=Number(search)
-       
-        if(!isNaN(number)){
-            setCount(number);
-        }
-     
+    window.addEventListener("keydown",async function (e) {
+    
+        if  (e.ctrlKey && e.key === 'Enter') {
+           
+            const { value: number } = await Swal.fire({
+                title: 'Select filter',
+                input: 'select',
+                inputOptions: {
+                  'Options': {
+                    0: '0',
+                    1: '1',
+                    2: '2',
+                    3: '3',
+                    4: '4',
+                    5:'5',
+                    6:'6',
+                    7:'7',
+                    8:'8',
 
-
-    }
-
+                  },
+                
+                },
+                inputPlaceholder: 'Select filter',
+                showCancelButton: true,
+              
+              })
+              
+              if (number) {
+                Swal.fire(`You selected: ${number}`)
+                setCount(Number(number));
+              }        }
+    })
+    
 
     const options = useMemo<HotlineOptions>( () => ({
         palette, min: minY, max: maxY, tolerance:count
     } ), [palette, minY, maxY,count] )
 
+    
     const handlers = useMemo<HotlineEventHandlers>( () => ({
         click: (_, i) => {
            /**  if(filter){
@@ -53,7 +77,6 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
                     toast: true
                 } );
         }**/
-            console.log("there is a problem");
             if ( ways && onClick )
                 onClick(ways.way_ids[i], ways.way_lengths[i],count)
         },
@@ -83,12 +106,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
             : null 
         }
-
-        <div className='toolbar-wrapper'>
-
-            <FilteringSelector onChange={onChange}/>
-
-        </div>
+    
         </>
 
     )

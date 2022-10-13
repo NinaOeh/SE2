@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import DatePicker from "react-date-picker";
 import { FilteringOptions, TripsOptions } from "../../models/models";
-import Checkbox from "../Checkbox";
 
 const defaultOptions: FilteringOptions = {
     search: '',

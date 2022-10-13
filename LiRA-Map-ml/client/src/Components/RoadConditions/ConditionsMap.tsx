@@ -32,6 +32,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
     const ref = useRef(null);
     const [width, _] = useSize(ref)
+    const onChange=(()=> 1+1);
 
     
     const onClick = useCallback((way_id: string, way_length: number,filter:number) => {
@@ -97,6 +98,8 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                 <Ways palette={palette} type={name} onClick={onClick}  />
 
             </MapWrapper>
+        
+
         </div>
     )
 }
