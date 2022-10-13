@@ -7,6 +7,7 @@ import { FaBars } from 'react-icons/fa';
 import '../css/navbar.css';
 import { IconContext } from "react-icons";
 
+
 interface INavbar {
     routes: Nav[];
 }
@@ -99,7 +100,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
                     </IconContext.Provider>
                 </button>
                 <div className="logo">
-                    <img src={require('/Users/colinhoffmann/Desktop/SE2/LiRA-Map-ml/client/src/LiRA-logo.png')} />
+                    <img src={require( "../LiRA-logo.png")} />
                 </div>
             </div>
         </div>
