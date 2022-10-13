@@ -11,6 +11,7 @@ import { getAltitudes } from "../queries/altitude";
 
 import "../css/altitude.css";
 import { HEATMAP_OPTIONS, RENDERER_OPTIONS } from "../Components/Map/constants";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const Altitude = () => {
@@ -18,11 +19,15 @@ const Altitude = () => {
     const [altitudes, setAltitudes] = useState<WaysConditions>();
     const [showHotline, setShowHotline] = useState<boolean>(true);
     const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect( () => {
+        setLoading(true);
         getAltitudes( (data: WaysConditions) => {
             console.log(data);
             setAltitudes( data )
+                setLoading(false);
+
         } )
     }, [] )
 
@@ -31,6 +36,10 @@ const Altitude = () => {
 
     return (
         <div className="altitude-wrapper">
+            {
+                loading?
+                <ClipLoader color={'#36c3d6b7'} loading={loading} size={150} aria-label="Loading Spinner" />
+            :
             <MapWrapper>
                 <Panel 
                     showHotline={showHotline} 
@@ -59,6 +68,8 @@ const Altitude = () => {
                         }} /> 
                     : null }
             </MapWrapper>
+            }
+            
         </div>
     );
 }
