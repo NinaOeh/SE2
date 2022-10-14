@@ -43,9 +43,19 @@ const options = ({name, min, max}: ConditionType): ChartOptions<'line'> => ({
 
 const addPaletteChart = (chart: Chart<keyof ChartTypeRegistry, number[], unknown>, palette: Palette) => {
     const dataset = chart.data.datasets[0];
+    console.log(0, chart.chartArea.bottom, 0, 0);
     const gradient = chart.ctx.createLinearGradient(0, chart.chartArea.bottom, 0, 0);
     palette.forEach( (c: Color) => {
-        gradient.addColorStop(c.t, `rgb(${c.r}, ${c.g}, ${c.b})`);
+        console.log(`rgb(${c.r}, ${c.g}, ${c.b})`)
+        console.log(c.t)
+        gradient.addColorStop(c.t, `rgb(${c.r}, ${c.g}, ${c.b})`)
+        try{
+            console.log(`rgb(${c.r}, ${c.g}, ${c.b})`);
+            console.log(c.t);
+            gradient.addColorStop(c.t, `rgb(${c.r}, ${c.g}, ${c.b})`)}
+        catch{
+            console.log("Error catched here.")
+        };
     })
     dataset.borderColor = gradient;
     dataset.backgroundColor = gradient;

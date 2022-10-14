@@ -40,6 +40,8 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
     const { dotHover } = useGraph()
     const zoom = useZoom()
 
+    console.log(options?.tolerance);
+
     const opts = useMemo( () => ({ 
         ...options, weight: getWeight(zoom)
     }), [options, zoom] )
@@ -49,12 +51,14 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
         mouseover: handler(eventHandlers, 'mouseover', 0.5),
         mouseout: handler(eventHandlers, 'mouseout', 0),
     }), [eventHandlers] )
-
+    console.log("Now looking at DistRenderer1")
     const { hotline } = useCustomHotline<Node, DistData>( 
         DistRenderer, HoverHotPolyline, 
         { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
         way_ids, conditions 
     );
+
+    console.log("Now looking at DistRenderer2")
     
     useEffect( () => {
         if ( hotline === undefined ) return;

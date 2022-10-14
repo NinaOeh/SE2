@@ -19,7 +19,7 @@ import "./App.css";
 const routes: Nav[] = [
     ['/road_measurements', RoadMeasurements, 'Measurements'],
     ['/road_conditions', RoadConditions, 'Road Conditions'],
-    ['/cardata', CarData, 'TestSide'],
+    ['/cardata', CarData, 'Car Data'],
     ['/altitude', Altitude, 'Altitude'],
 ]
 

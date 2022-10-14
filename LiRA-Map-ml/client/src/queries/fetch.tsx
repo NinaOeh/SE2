@@ -32,4 +32,4 @@ export function post<T>(path: string, obj: object, callback: (data: T) => void):
 
 export const put = ( path: string, obj: object ): void => {
     axios.put( getPath(path), { params: obj } )
-}
+}  

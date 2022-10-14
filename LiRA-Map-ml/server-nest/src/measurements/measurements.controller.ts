@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Query } from '@nestjs/common';
+import { Controller, Get, Put, Query, Body, Post } from '@nestjs/common';
 import { Measurement } from 'src/models';
 
 import { MeasurementsService } from './measurements.service';
@@ -26,16 +26,19 @@ export class MeasurementsController
     }
 
     @Put('/add')
-    addtMeasurement( @Query() query: { measurement: Measurement } ) //: Promise<any> 
+    addMeasurement( @Body() measurement: Measurement ) : Promise<any> 
     {
-        const { measurement } = query
-        return this.service.addMeasurement(measurement);
+        //const { measurement } = query;
+        console.log("Measurement:: ", measurement);
+        return this.service.addMeasurement(measurement["params"]);
     }
 
     @Put('/edit')
-    editMeasurement( @Query() query: { index: number, measurement: Measurement } ): Promise<any> 
-    {
-        const { index, measurement } = query;
+    editMeasurement( @Body() query: { index: number, measurement: Measurement } ): Promise<any> 
+    {   
+        console.log("query ", query)
+        const { index, measurement } = query["params"];
+        console.log("measurement ", measurement)
         return this.service.editMeasurement(index, measurement);
     }
     @Put('/delete')
