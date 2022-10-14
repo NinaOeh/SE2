@@ -32,7 +32,6 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
     const ref = useRef(null);
     const [width, _] = useSize(ref)
-    const onChange=(()=> 1+1);
 
     
     const onClick = useCallback((way_id: string, way_length: number,filter:number) => {
@@ -64,7 +63,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                     labels: [],
                     datasets: [ {
                         type: 'line' as const,
-                        label: way_id,
+                        label: "0",
                         borderColor: 'rgb(160,32,240)',
                         borderWidth: 2,
                         fill: false,
@@ -77,7 +76,6 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                     icon: "warning",
                     title: `This trip doesn't have any value with the ira wanted   `,
                     toast: true,
-                    showLoaderOnConfirm: true
 
                 } );
 

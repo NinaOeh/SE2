@@ -1,6 +1,6 @@
 
 import { latLng, map } from 'Leaflet.MultiOptionsPolyline';
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TRGB } from 'react-gradient-hook/lib/types';
 import { Tooltip } from 'react-leaflet';
 import { HotlineOptions } from 'react-leaflet-hotline';
@@ -27,6 +27,9 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     const [ways, setWays] = useState<WaysConditions>()
     const [count, setCount] = useState(0);
+
+    const stateRef = useRef(0);
+
 
     window.addEventListener("keydown",async function (e) {
     
@@ -58,8 +61,12 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
               if (number) {
                 Swal.fire(`You selected: ${number}`)
                 setCount(Number(number));
+                stateRef.current = Number(number);
+
               }        }
     })
+
+
     
 
     const options = useMemo<HotlineOptions>( () => ({
@@ -69,28 +76,31 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     
     const handlers = useMemo<HotlineEventHandlers>( () => ({
         click: (_, i) => {
-           /**  if(filter){
-                const popup=createPopup();
-                popup( {
-                    icon: "warning",
-                    title: `This trip doesn't have any value with the ira wanted   `,
-                    toast: true
-                } );
-        }**/
+          
+            console.log("im here:",count);
             if ( ways && onClick )
-                onClick(ways.way_ids[i], ways.way_lengths[i],count)
+                if(stateRef.current<10000){
+                    onClick(ways.way_ids[i], ways.way_lengths[i],stateRef.current)
+                }
+                else{
+                    onClick(ways.way_ids[i], ways.way_lengths[i],0)
+
+                }
         },
      
 
 
-    }), [count,ways] )
+    }), [stateRef.current] ) 
 
     useEffect( () => {
         if ( zoom === undefined ) return;
         const z = Math.max(0, zoom - 12)
         getWaysConditions(type, z, (data: WaysConditions) => {
-            setWays( data )
+            setWays( data );
+            stateRef.current = 10000;
+
         } )
+
     }, [zoom] )
 
     return (
