@@ -5,6 +5,7 @@ import { Knex } from 'knex';
 
 import { RideMeta } from './models.rides';
 import { BoundedPath, PointData } from 'src/models';
+const to_knex = require('postgresql-to-knex')
 
 @Injectable()
 export class RidesService 
@@ -12,36 +13,15 @@ export class RidesService
     constructor(@InjectConnection('lira-main') private readonly knex: Knex) {}
 
     async getRides(): Promise<RideMeta[]>
-    {   let knex = this.knex;
-        return await this.knex
-            // .select( '*' )
-            // .from( { public: 'Trips' } )
-            // .where( 'TaskId', 1472 )
-            // .innerJoin('Measurements', function() {
-            //     this.on('Measurements.FK_Trip', '=', 'TripId')
-            //     // .andOn('Measurements.Created_Date', '=', knex.raw("(select max(Created_Date) from Measurements where Measurements.FK_Trip = TripId)"))
-            //     }
-            // )
-            // .innerJoin('MapReferences', function() {
-            //     this.on('MapReferences.FK_MeasurementId', '=', 'Measurements.MeasurementId')
-            //     // .andOn('MapReferences.wayPointId', '!=', "")
-            //     }
-            // )
-            // .distinct()
-            // .orderBy('TaskId')
-
-            // .select( '*' )
-            // .from( { public: 'Trips' } )
-            // .whereNot( 'TaskId', 0 )
-            // .orderBy('TaskId')
-            .distinct()
-            .select('MapReferences.wayPointName', 'Trips.*')
-            .from('MapReferences')
-            .whereNot('wayPointName', null)
-            .whereNot('wayPointName', '')
-            .innerJoin('Measurements', 'Measurements.MeasurementId', 'MapReferences.FK_MeasurementId')
-            .innerJoin('Trips', 'Trips.TripId', 'Measurements.FK_Trip')
-            .orderBy('wayPointName', 'asc')
+    {   
+        return await 
+        this.knex.with('waypoints_alias', this.knex.select('*').from('MapReferences').whereRaw('"wayPointName" IS NOT NULL').andWhereRaw('("wayPointName" <> \'\') IS NOT FALSE'))
+        .with('measurements_alias', this.knex.select('MeasurementId', 'FK_Trip', 'wayPointName').distinctOn('FK_Trip').from('Measurements').join('waypoints_alias', function() {
+            this.on('MeasurementId', '=', 'FK_MeasurementId')
+        }).orderBy('FK_Trip', 'asc'))
+        .select('Trips.*', 'wayPointName').from('Trips').join('measurements_alias', function() {
+            this.on('TripId', '=', 'FK_Trip')
+        });
     }
 
     async getRide( tripId: string, dbName: string ): Promise<BoundedPath>
