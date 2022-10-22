@@ -23,6 +23,9 @@ import { RCService } from './conditions/rc.service';
 import { AltitudeController } from './altitude/alt.controller';
 import { AltitudeService } from './altitude/alt.service';
 
+import { RolesController } from './roles/roles.controller';
+import { RolesService } from './roles/roles.service';
+
 import { LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG } from './database';
 
 
@@ -39,8 +42,10 @@ const database = (config: any, name: string) => {
 		database(VISUAL_DB_CONFIG, 'lira-vis'),
 		database(POSTGIS_DB_CONFIG, 'postgis'),
 	],
-	controllers: [AppController, SegmentsController, TypesController, RidesController, MeasurementsController, RCController, AltitudeController],
-	providers: [AppService, SegmentsService, ConfigService, TypesService, RidesService, MeasurementsService, RCService, AltitudeService],
+	controllers: [AppController, SegmentsController, TypesController, RidesController, 
+		MeasurementsController, RCController, AltitudeController, RolesController],
+	providers: [AppService, SegmentsService, ConfigService, TypesService, RidesService, 
+		MeasurementsService, RCService, AltitudeService, RolesService],
 } )
 
 export class AppModule {}

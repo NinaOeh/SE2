@@ -10,6 +10,8 @@ import {
 import { ActiveMeasProperties } from "../models/properties";
 import { getMeasurements } from "../queries/measurements";
 
+const role = "Paul";
+
 interface ContextProps {
 	measurements: ActiveMeasProperties[];
     setMeasurements: Dispatch<SetStateAction<ActiveMeasProperties[]>>;
@@ -25,7 +27,7 @@ export const MeasurementsProvider = ({ children }: any) => {
 
 	useEffect( () => setSelectedMeasurements( measurements.filter(m => m.isActive)), [measurements] )
 
-	useEffect( () => getMeasurements(setMeasurements), [] )
+	useEffect( () => getMeasurements(role, setMeasurements), [] )
 
 	console.log("MeasurementsProvider");
 	console.log(measurements);

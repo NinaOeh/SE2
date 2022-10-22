@@ -7,6 +7,7 @@ import MetaData from "./MetaData";
 
 import { useMeasurementsCtx } from "../../context/MeasurementsContext";
 import { useMetasCtx } from "../../context/MetasContext";
+import { UseRoleContext } from "../../context/RolesContext";
 
 import { addMeasurement, deleteMeasurement, editMeasurement } from "../../queries/measurements";
 import { MeasProperties, ActiveMeasProperties } from "../../models/properties";
@@ -18,9 +19,12 @@ import MeasCheckbox from "./MeasCheckbox";
 
 import '../../css/ridedetails.css'
 
+
+
 const RideDetails: FC = () => {
 
 	const { selectedMetas } = useMetasCtx()
+	const { selectedRole } = UseRoleContext()
 
 	const { measurements, setMeasurements } = useMeasurementsCtx()
 	const [ addChecked, setAddChecked ] = useState<boolean>(false)
@@ -38,7 +42,7 @@ const RideDetails: FC = () => {
 				temp[i] = newMeas;
 				console.log(temp)
 				setMeasurements( temp )
-				editMeasurement(newMeas, i)
+				editMeasurement(newMeas, i, selectedRole.role)
 			}, 
 			{ ...RENDERER_MEAS_PROPERTIES, ...meas } 
 		)
@@ -53,7 +57,7 @@ const RideDetails: FC = () => {
 		temp.splice(i,1)
 		setMeasurements(temp)
 		// and add the measurement to the measurements.json file
-		deleteMeasurement(i);
+		deleteMeasurement(i, selectedRole.role);
 	}
 
 	const showAddMeasurement = () => {
@@ -64,7 +68,7 @@ const RideDetails: FC = () => {
 				// update the state in RideDetails
 				setMeasurements( prev => [...prev, newMeasurement])
 				// and add the measurement to the measurements.json file
-				addMeasurement(newMeasurement);
+				addMeasurement(newMeasurement, selectedRole.role);
 			},
 			RENDERER_MEAS_PROPERTIES 
 		)

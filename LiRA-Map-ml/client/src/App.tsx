@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom';
+
 //BrowserRouter as Router, Routes, Route
 
 import Navbar from './Components/Navbar'
