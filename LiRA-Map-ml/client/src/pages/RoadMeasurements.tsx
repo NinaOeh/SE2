@@ -33,7 +33,6 @@ const RoadMeasurements = () => {
             :
                 <MeasurementsProvider>
                     <MetasProvider>
-                        <RolesProvider>
                             <div className="rides-wrapper">
                                 
                                 <RideCards />
@@ -43,7 +42,6 @@ const RoadMeasurements = () => {
                                 <Rides />
                                 
                             </div>
-                        </RolesProvider>
                     </MetasProvider>
                 </MeasurementsProvider>
 }

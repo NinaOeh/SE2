@@ -1,10 +1,11 @@
+@import url('bootstrap/dist/css/bootstrap.min.css');
 
 .signup-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    width: 80%;
     min-width: 350px;
     height: 80vh;
     margin: auto;
@@ -15,10 +16,9 @@
 }
 
 .signup-input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     margin: 25px;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
 }
 
 .signup-input-container input {
@@ -26,12 +26,24 @@
     border-radius: 5px;
     padding: 5px 15px;
     font-size: 1.4em;
+    width: 80%;
 }
 
 .signup-btn {
-    width: 30%;
+    border: none;
+    width: 70%;
     padding: 15px 25px !important;
     margin: 40px auto;
+    color: white;
+}
+.signup-btn:hover{
+    border: (--highlight-text);
+    color: (--highlight-text);
+}
+
+.dropdown-btn {
+    width: 100%;
+    height: 100%;
 }
 
 

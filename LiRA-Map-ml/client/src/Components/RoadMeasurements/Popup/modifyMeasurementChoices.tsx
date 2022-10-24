@@ -2,7 +2,6 @@ import { ActiveMeasProperties } from "../../../models/properties";
 
 import PopupWrapper from "./PopupWrapper";
 import createPopup from "../../createPopup";
-import Test from "./test";
 
 import '../../../css/popup.css'
 import { useState } from "react";
@@ -41,7 +40,6 @@ const modifyMeasurementChoices = () => {
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Save Changes',
-            html: <Test/>,
         } )
         .then( (result: any) => {
             if (result.isConfirmed) {

@@ -9,10 +9,7 @@ import { post } from "../queries/fetch";
 const Login = () => { 
 
     return (
-        <RolesProvider>
-            <SelectRole/>
-        </RolesProvider>
-        
+        <SelectRole/>
     )
 }
 

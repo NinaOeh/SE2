@@ -27,9 +27,9 @@ export class MeasurementsService
     async getMeasurements(role: string)
     {
         const file = await readFile(this.path, 'utf-8')
-        //console.log(role)
+        console.log(role)
         //console.log("json parse log1", JSON.parse(file))
-        //console.log("json parse log", JSON.parse(file)[0][role])
+        console.log("json parse log", JSON.parse(file)[0][role])
         return JSON.parse(file)[0][role];
     }
 

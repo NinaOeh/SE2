@@ -21,18 +21,15 @@ const RolesContext = createContext({} as RoleProps);
 
 export const RolesProvider = ({ children }: any) => {
 
-	console.log("RolesProvider1")
-
 	const [ roles, setRoles ] = useState<Role[]>([]);
     const [ selectedRole, setSelectedRole ] = useState<Role>({
         role : "",
     });
-	console.log("RolesProvider2")
 
-    // fetch the metadata of all the rides
+    // fetch the saved roles
     useEffect( () => getRoles(setRoles), [] );
 
-	console.log("RolesProvider3")
+	console.log("We are in RolesContext and the selectedRole is: ", selectedRole)
 
 	return (
 		<RolesContext.Provider

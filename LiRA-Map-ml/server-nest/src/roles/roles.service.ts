@@ -28,26 +28,24 @@ export class RolesService
     async getallRoles() : Promise<Role[]>
     {
         const file = await readFile(this.path, 'utf-8')
-        console.log("allRoles1: ",file)
         const allMeasurements = JSON.parse(file)
-        console.log("allRoles2: ",allMeasurements)
         const allRoles = Object.keys(allMeasurements[0])
-        console.log("allRoles3: ",allRoles)
         return allRoles.map(r => {return <Role> {role: r}});
     }
 
     async addRole(role: string) 
     {
-        var Role = role+"[]"
-        var measurements = await this.getallMeasurements() 
-        const new_measurements = [...measurements, Role]
-        return await this.writeFile(new_measurements)
+        var measurements = await this.getallMeasurements()
+        measurements[0][role] = []
+        return await this.writeFile(measurements)
     }
 
     async deleteRole(role: string) 
     {
         var measurements = await this.getallMeasurements() 
-        delete measurements[role]
+        console.log(measurements)
+        delete measurements[0][role]
+        console.log(measurements)
         return await this.writeFile(measurements);
     }
 }

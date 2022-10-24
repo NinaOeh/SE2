@@ -26,6 +26,8 @@ const RideDetails: FC = () => {
 	const { selectedMetas } = useMetasCtx()
 	const { selectedRole } = UseRoleContext()
 
+	console.log("We are in RideDetails and look for the selectedRole: ", selectedRole)
+
 	const { measurements, setMeasurements } = useMeasurementsCtx()
 	const [ addChecked, setAddChecked ] = useState<boolean>(false)
 	
@@ -40,7 +42,6 @@ const RideDetails: FC = () => {
 			(newMeas: ActiveMeasProperties) => {
 				const temp = [...measurements]
 				temp[i] = newMeas;
-				console.log(temp)
 				setMeasurements( temp )
 				editMeasurement(newMeas, i, selectedRole.role)
 			}, 
@@ -51,7 +52,6 @@ const RideDetails: FC = () => {
 	const delete_measurement = ( i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
-		console.log(i)
 		//removes one element in position i from the state
 		const temp = [...measurements]
 		temp.splice(i,1)
