@@ -31,10 +31,12 @@
 
 .signup-btn {
     border: none;
-    width: 70%;
+    width: 80%;
     padding: 15px 25px !important;
     margin: 40px auto;
     color: white;
+    background: rgba(249, 248, 248, 0.218);
+    font-size: 0.9em;
 }
 .signup-btn:hover{
     border: (--highlight-text);
