@@ -100,8 +100,8 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
     //<input className="sweetalert-input" placeholder="Hello Sun" type='text' defaultValue={dbName} onChange={inputChange('dbName')}/>
     {/*ref={inputRef}*/}
     return (
-        <div className="popup-wrapper">    
-            <div className="float-child">
+        <div className="popup-wrapper" id="popupwrapper">    
+            <div>
             {/*!--- Start of left column ---*/}
                 <div>
                     <div>
@@ -146,7 +146,7 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
                 </div>
             {/*!--- End of left column ---*/}
             </div>
-            <div className="float-child">
+            <div >
             {/*!--- Start of right column ---*/}
                 <div>
                     <div className="sweetalert-checkboxes">

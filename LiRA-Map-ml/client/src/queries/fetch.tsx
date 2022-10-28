@@ -25,6 +25,14 @@ export function get<T>(path: string, callback: (data: T) => void): void
         .then(data => callback(data));
 }
 
+export function getRoleMeas<T>(path: string, role: string, callback: (data: T) => void): void 
+{
+    path = path + "/"+role
+    fetch(getPath(path))
+        .then(res => res.json())
+        .then(data => callback(data));
+}
+
 export function post<T>(path: string, obj: object, callback: (data: T) => void): void
 {
     asyncPost<T>(path, obj).then(res => callback(res.data));

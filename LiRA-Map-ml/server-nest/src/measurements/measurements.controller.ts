@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Query, Body, Post } from '@nestjs/common';
+import { Controller, Get, Put, Query, Body, Param} from '@nestjs/common';
 import { Measurement } from 'src/models';
 
 import { MeasurementsService } from './measurements.service';
@@ -12,10 +12,10 @@ export class MeasurementsController
 {
     constructor(private readonly service: MeasurementsService) {}
     
-    @Get()
-    getMeasurements(): Promise<Measurement[]> 
+    @Get(':role')
+    getMeasurements(@Param() params): Promise<Measurement[]> 
     {
-        return this.service.getMeasurements();
+        return this.service.getMeasurements(params.role);
     }
 
     @Get("/test")
@@ -26,25 +26,23 @@ export class MeasurementsController
     }
 
     @Put('/add')
-    addMeasurement( @Body() measurement: Measurement ) : Promise<any> 
+    addMeasurement( @Body() query: {measurement: Measurement, role: string}) : Promise<any> 
     {
-        //const { measurement } = query;
-        console.log("Measurement:: ", measurement);
-        return this.service.addMeasurement(measurement["params"]);
+        const { measurement, role } = query["params"];
+        return this.service.addMeasurement(measurement, role);
     }
 
     @Put('/edit')
-    editMeasurement( @Body() query: { index: number, measurement: Measurement } ): Promise<any> 
+    editMeasurement( @Body() query: { index: number, measurement: Measurement, role: string } ): Promise<any> 
     {   
         console.log("query ", query)
-        const { index, measurement } = query["params"];
-        console.log("measurement ", measurement)
-        return this.service.editMeasurement(index, measurement);
+        const { index, measurement, role } = query["params"];
+        return this.service.editMeasurement(index, measurement, role);
     }
     @Put('/delete')
-    deleteMeasurement( @Query() query: { index: number } ): Promise<any> 
+    deleteMeasurement( @Body() query: { index: number, role: string } ): Promise<any> 
     {
-        const { index } = query;
-        return this.service.deleteMeasurement(index);
+        const { index, role } = query["params"];
+        return this.service.deleteMeasurement(index, role);
     }
 }

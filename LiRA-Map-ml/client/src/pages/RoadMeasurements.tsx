@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 
 import { MeasurementsProvider } from "../context/MeasurementsContext";
 import { MetasProvider } from "../context/MetasContext";
+import { RolesProvider } from "../context/RolesContext"
 
 import RideDetails from "../Components/RoadMeasurements/RideDetails";
 import RideCards from "../Components/RoadMeasurements/RideCards";
@@ -32,15 +33,15 @@ const RoadMeasurements = () => {
             :
                 <MeasurementsProvider>
                     <MetasProvider>
-                        <div className="rides-wrapper">
-                            
-                            <RideCards />
-                            
-                            <RideDetails  />
-                            
-                            <Rides />
-                            
-                        </div>
+                            <div className="rides-wrapper">
+                                
+                                <RideCards />
+                                
+                                <RideDetails  />
+                                
+                                <Rides />
+                                
+                            </div>
                     </MetasProvider>
                 </MeasurementsProvider>
 }

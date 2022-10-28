@@ -7,6 +7,8 @@ import { FaBars } from 'react-icons/fa';
 import '../css/navbar.css';
 import { IconContext } from "react-icons";
 
+import { UseRoleContext } from "../context/RolesContext"
+
 
 interface INavbar {
     routes: Nav[];
@@ -76,6 +78,19 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
         setFalseMenu();
     }
 
+    const {selectedRole} = UseRoleContext();
+    var Roledescription = "";
+
+    console.log("The selected Role is: ", selectedRole)
+    console.log(Roledescription)
+
+    if (selectedRole.role === ""){
+        Roledescription= "Select Role"
+    }
+    else {
+        Roledescription= "Selected Role : "+selectedRole.role
+    }
+
     return (
         <div className="nav-wrapper">
             <div className={menuActive ? "nav-container" : "nav-container-side"}>
@@ -92,7 +107,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
                     <NavBtn  to='/altitude' name='Altitude' />
                 </div>
                 <div className="nav-block">
-                    <NavBtn  key={'login'} to='/login' name='Login' />
+                    <NavBtn  key={'login'} to='/login' name={Roledescription} />
                 </div>
                 <button className="toggle-button" onClick={toggleMenu} >
                     <IconContext.Provider value={{ color: 'white', size: '40px' }}>

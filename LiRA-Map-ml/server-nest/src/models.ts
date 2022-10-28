@@ -141,3 +141,7 @@ export interface BoundedCondition {
 	coordinates: LatLonDist[]
 }	
 
+export interface Role{
+	role: string
+}
+
