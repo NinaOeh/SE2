@@ -29,6 +29,9 @@ export const RolesProvider = ({ children }: any) => {
     // fetch the saved roles
     useEffect( () => getRoles(setRoles), [] );
 
+	//when some things change to fetch the roles again, add some information in the squared brackets 
+	// put for example roles or selectedRoles into the squared brackets
+
 	console.log("We are in RolesContext and the selectedRole is: ", selectedRole)
 
 	return (

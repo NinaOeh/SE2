@@ -2,11 +2,15 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const { 
-    DB_USER, DB_PASSWORD, 
-    DB_USER_VIS, DB_PASSWORD_VIS, 
-    DB_USER_POSTGIS, DB_PWD_POSTGIS 
+    DB_FRICTION_HOST,
+    DB_FRICTION_PORT,
+    DB_FRICTION_USERNAME,
+    DB_FRICTION_PASSWORD,
+    DB_FRICTION_DATABASE,
+    DB_FRICTION_SSH_HOST,
+    DB_FRICTION_SSH_USER,
+    DB_FRICTION_SSH_PASSWORD
 } = process.env;
-
 
 const BASE_CONFIG = {
     client: 'pg',
@@ -30,57 +34,13 @@ const BASE_CONFIG = {
     }
 }
 
-export const LIRA_FILTERED_DB_CONFIG = {
+export const FRICTION_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host : "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
-        port: 5435,
-        user : "postgres",
-        password : "postgres",
-        database : "FrictionDB",
+        host : DB_FRICTION_HOST,
+        port: DB_FRICTION_PORT,
+        user : DB_FRICTION_USERNAME,
+        password : DB_FRICTION_PASSWORD,
+        database : DB_FRICTION_DATABASE
     },
 }
-
-const mysql = require('mysql2');
-const { Client } = require('ssh2');
-const sshClient = new Client();const dbServer = {
-    host: process.env.DB_FRICTION_HOST,
-    port: process.env.DB_FRICTION_PORT,
-    user: process.env.DB_FRICTION_USERNAME,
-    password: process.env.DB_FRICTION_PASSWORD,
-    database: process.env.DB_FRICTION_DATABASE
-}
-const tunnelConfig = {
-    host: process.env.DB_FRICTION_SSH_HOST,
-    port: 22,
-    username: process.env.DB_FRICTION_SSH_USER,
-    password: process.env.DB_FRICTION_SSH_PASSWORD
-}
-const forwardConfig = {
-    srcHost: '127.0.0.1',
-    srcPort: 5435,
-    dstHost: dbServer.host,
-    dstPort: dbServer.port
-};
-const SSHConnection = new Promise((resolve, reject) => {
-    sshClient.on('ready', () => {
-        sshClient.forwardOut(
-        forwardConfig.srcHost,
-        forwardConfig.srcPort,
-        forwardConfig.dstHost,
-        forwardConfig.dstPort,
-        (err, stream) => {
-             if (err) reject(err);
-             const updatedDbServer = {
-                 ...dbServer,
-                 stream
-            };
-            const connection =  mysql.createConnection(updatedDbServer);
-           connection.connect((error) => {
-            if (error) {
-                reject(error);
-            }
-            resolve(connection);
-            });        });
-    }).connect(tunnelConfig);
-});
