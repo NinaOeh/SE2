@@ -1,11 +1,11 @@
-import { Controller, Get, Put, Query, Body, Param} from '@nestjs/common';
-import { Role } from 'src/models';
-
-import { RolesService } from './roles.service';
+/*Author: Nina Oehlckers (s213535)*/
 
 /**This is overall not ideal! It would be a lot better to save
-these measurements in their own database, that I could add to/
+these roles in their own database, connected to the measurements, that we could add to/
 delete from etc, instead of just accessing this one document.*/
+import { Controller, Get, Put, Query, Body, Param} from '@nestjs/common';
+import { Role } from 'src/models';
+import { RolesService } from './roles.service';
 
 @Controller('roles')
 export class RolesController 

@@ -1,3 +1,4 @@
+#Author: Nina Oehlckers (s213535)
 from typing import List, Tuple
 import geoalchemy2 as ga
 import geoalchemy2.shape as ga_shape

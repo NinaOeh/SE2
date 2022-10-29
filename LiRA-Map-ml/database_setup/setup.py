@@ -1,3 +1,4 @@
+#Author: Nina Oehlckers (s213535)
 from setuptools import setup
 
 setup(

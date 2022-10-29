@@ -1,3 +1,4 @@
+#Author: Nina Oehlckers (s213535)
 import sqlalchemy as sqla
 import sqlalchemy.orm as orm
 from sqlalchemy.ext.declarative import declarative_base

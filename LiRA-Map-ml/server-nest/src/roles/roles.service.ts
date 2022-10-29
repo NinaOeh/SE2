@@ -1,4 +1,4 @@
-
+/*Author: Nina Oehlckers (s213535)*/
 import { Injectable } from '@nestjs/common';
 import { write } from 'fs';
 import { readFile, writeFile } from 'fs/promises';

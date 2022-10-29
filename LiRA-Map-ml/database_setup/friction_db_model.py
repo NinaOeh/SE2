@@ -1,10 +1,10 @@
+#Author: Nina Oehlckers (s213535)
 import sqlalchemy as sqla
 import sqlalchemy.orm as orm
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
 from sqlalchemy.sql.expression import func
 from friction_db_session import Base
-
 
 SRID = 4326
 

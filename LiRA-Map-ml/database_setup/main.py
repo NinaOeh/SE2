@@ -1,3 +1,4 @@
+#Author: Nina Oehlckers (s213535)
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from config import settings

@@ -1,11 +1,10 @@
-import { Controller, Get, Put, Query, Body, Param} from '@nestjs/common';
-import { Measurement } from 'src/models';
-
-import { MeasurementsService } from './measurements.service';
-
+/**Modifications authored by: Nina Oehlckers (s213535) */
 /**This is overall not ideal! It would be a lot better to save
 these measurements in their own database, that I could add to/
 delete from etc, instead of just accessing this one document.*/
+import { Controller, Get, Put, Query, Body, Param} from '@nestjs/common';
+import { Measurement } from 'src/models';
+import { MeasurementsService } from './measurements.service';
 
 @Controller('measurements')
 export class MeasurementsController 
