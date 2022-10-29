@@ -5,7 +5,10 @@ dotenv.config();
 const { 
     DB_USER, DB_PASSWORD, 
     DB_USER_VIS, DB_PASSWORD_VIS, 
-    DB_USER_POSTGIS, DB_PWD_POSTGIS 
+    DB_USER_POSTGIS, DB_PWD_POSTGIS,
+    LIRA_DB_SERVER,
+    LIRA_DB_USER, LIRA_DB_PASSWORD,
+    LIRA_DB_DATABASE
 } = process.env;
 
 
@@ -34,11 +37,11 @@ const BASE_CONFIG = {
 export const LIRA_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host : "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
+        host : LIRA_DB_SERVER,
         port: 5435,
-        user : "guest",
-        password : "V2GjxQVn",
-        database : "postgres",
+        user : LIRA_DB_USER,
+        password : LIRA_DB_PASSWORD,
+        database : LIRA_DB_DATABASE
     },
 }
 

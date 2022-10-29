@@ -1,6 +1,11 @@
 LiRA-Map-ml/client/package-lock.json
 LiRA-Map-ml/server-nest/package-lock.json
 
+environment.env
+LiRA-Map-ml/database_setup/venv/
+LiRA-Map-ml/database_setup/__pycache__/
+.egg-info/
+
 # Logs
 logs
 *.log
