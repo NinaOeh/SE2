@@ -9,7 +9,7 @@ import sqlalchemy.orm as orm
 import pandas as pd
 import sqlalchemy as sqla
 
-from lira_db_model import Measurements
+from lira_db_model import Measurements, MapReferences
 import lira_db_schema
 import lira_db_session
 import lira_db_crud
@@ -32,12 +32,12 @@ def convert_lira_measurements(db: orm.Session = Depends(lira_db_session.get_db))
     '''
     def format_measurements(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
-        print(measurement.MeasurementId)
-        print(measurement.T)
-        print(measurement.message)
         return lira_db_schema.Measurement(
             MeasurementId=measurement.MeasurementId,
             T=measurement.T,
+            TS_or_Distance=measurement.TS_or_Distance,
+            lat=measurement.lat,
+            lon=measurement.lon,
             message=measurement.message
             )
     friction_data = map(format_measurements,
@@ -45,10 +45,88 @@ def convert_lira_measurements(db: orm.Session = Depends(lira_db_session.get_db))
                     db))
     friction_data=list(friction_data)
     friction_data = pd.DataFrame([vars(m) for m in friction_data])
-    return friction_data
+
+    def getrpmrl(measurement: Measurements) -> lira_db_schema.Measurement:
+        #parsing the measurements into the new measurements schema
+        return lira_db_schema.Measurement(
+            MeasurementId=measurement.MeasurementId,
+            T=measurement.T,
+            TS_or_Distance=measurement.TS_or_Distance,
+            lat=measurement.lat,
+            lon=measurement.lon,
+            message=measurement.message
+            )
+    rpmrl_data_1 = map(getrpmrl,
+                lira_db_crud.get_rl(
+                    db))
+    rpmrl_data_1 = list(rpmrl_data_1)
+    rpmrl_data_1 = pd.DataFrame([vars(m) for m in rpmrl_data_1])
+
+    def getrpmrl_ref(measurement: MapReferences) -> lira_db_schema.MapReferences:
+        #parsing the measurements into the new measurements schema
+        return lira_db_schema.MapReferences(
+            MapReferenceId=measurement.MapReferenceId,
+            lat_MapMatched=measurement.lat_MapMatched,
+            lon_MapMatched=measurement.lon_MapMatched,
+            wayPointName=measurement.wayPointName,
+            #lane=measurement.lane,
+            #direction=measurement.direction,
+            WayPoint=measurement.WayPoint,
+            MeasurementId=measurement.FK_MeasurementId
+            )
+    rpmrl_data_2 = map(getrpmrl_ref,
+                lira_db_crud.get_rl_ref(
+                    db))
+    rpmrl_data_2 = list(rpmrl_data_2)
+    rpmrl_data_2 = pd.DataFrame([vars(m) for m in rpmrl_data_2])
+
+    rpmrl_data = pd.merge(rpmrl_data_1, rpmrl_data_2, how='outer', on='MeasurementId')
+    #print(rpmrl_data)
+
+    def getrpmfl(measurement: Measurements) -> lira_db_schema.Measurement:
+        #parsing the measurements into the new measurements schema
+        return lira_db_schema.Measurement(
+            MeasurementId=measurement.MeasurementId,
+            T=measurement.T,
+            TS_or_Distance=measurement.TS_or_Distance,
+            lat=measurement.lat,
+            lon=measurement.lon,
+            message=measurement.message
+            )
+    rpmfl_data_1 = map(getrpmfl,
+                lira_db_crud.get_fl(
+                    db))
+    rpmfl_data_1 = list(rpmfl_data_1)
+    rpmfl_data_1 = pd.DataFrame([vars(m) for m in rpmfl_data_1])
+
+    def getrpmfl_ref(measurement: MapReferences) -> lira_db_schema.MapReferences:
+        #parsing the measurements into the new measurements schema
+        return lira_db_schema.MapReferences(
+            MapReferenceId=measurement.MapReferenceId,
+            lat_MapMatched=measurement.lat_MapMatched,
+            lon_MapMatched=measurement.lon_MapMatched,
+            wayPointName=measurement.wayPointName,
+            #lane=measurement.lane,
+            #direction=measurement.direction,
+            WayPoint=measurement.WayPoint,
+            MeasurementId=measurement.FK_MeasurementId
+            )
+    rpmfl_data_2 = map(getrpmfl_ref,
+                lira_db_crud.get_fl_ref(
+                    db))
+    rpmfl_data_2 = list(rpmfl_data_2)
+    rpmfl_data_2 = pd.DataFrame([vars(m) for m in rpmfl_data_2])
+
+    rpmfl_data = pd.merge(rpmfl_data_1, rpmfl_data_2, how='outer', on='MeasurementId')
+    #print(rpmfl_data)
+
+
+    return friction_data, rpmrl_data, rpmfl_data
 
 def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db), 
-    friction_data = pd.DataFrame) -> None:
+    friction_data=pd.DataFrame,
+    rpm_fl_data=pd.DataFrame,
+    rpm_rl_data=pd.DataFrame) -> None:
     '''
         calculate the friction and upload the relevant data 
         to the new friction database
@@ -61,17 +139,30 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
     '''
     
     print("hi")
-    friction_infos=calculations.get_friction_info(friction_data)
+    friction_infos=calculations.get_friction_info(friction_data) 
+    print(list(friction_infos))
+
+    rpm_fl_infos = calculations.get_rpm_info(rpm_fl_data)
+    rpm_rl_infos = calculations.get_rpm_info(rpm_rl_data)
+
+    print(f"rpm_fl_infos: {list(rpm_fl_infos)}")
+    print(f"rpm_rl_infos: {list(rpm_rl_infos)}")
+
+    rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos])
+    rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos])
+
+    rpm_merged_info = pd.merge(rpm_fl_infos_df, rpm_rl_infos_df, how='outer', on='TS_or_Distance')
+    print(rpm_merged_info)
     
     with db.begin():
         for fric_info in friction_infos:   
             try:
-                    friction_db_crud.insert_friction_data(
-                            session=db, 
-                            MId=fric_info.MeasurementId,
-                            T=fric_info.T,
-                            value=fric_info.friction_value,
-                            message=fric_info.message)
+                friction_db_crud.insert_friction_data(
+                        session=db, 
+                        MId=fric_info.MeasurementId,
+                        T=fric_info.T,
+                        value=fric_info.friction_value,
+                        message=fric_info.message)
                     
             except sqlalchemy.exc.IntegrityError as exc:
                 if 'duplicate key value violates unique constraint' in str(exc):
@@ -91,11 +182,13 @@ def update_database() -> None:
     Expects no input, no output
     """
     with lira_db_session.SessionLocal() as session:
-        measurements = convert_lira_measurements(session)
-        print(measurements)
+        measurements, rpmrl_data, rpmfl_data = convert_lira_measurements(session)
+        #print(measurements)
+        #print(rpmrl_data)
+        #print(rpmfl_data)
     #with friction_db_session.friction_engine.connect() as connection:
     #    connection.execute(sqla.text('CREATE EXTENSION IF NOT EXISTS postgis'))
     #    connection.commit()
     friction_db_model.Base.metadata.create_all(bind=friction_db_session.friction_engine)
     with friction_db_session.create_session(friction_db_session.friction_engine) as session:
-        upload_to_friction_database(session, measurements)
+        upload_to_friction_database(session, measurements, rpmrl_data, rpmfl_data)

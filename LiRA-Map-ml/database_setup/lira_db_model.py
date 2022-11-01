@@ -29,3 +29,20 @@ class MeasumentTypes(Base):
 	MeasumentTypeId = sqla.Column(sqla.String, primary_key=True)
 	type = sqla.Column(sqla.String)
 	Created_Date = sqla.Column(sqla.Date)
+
+class MapReferences(Base):
+	__tablename__ = 'MapReferences'
+
+	MapReferenceId = sqla.Column(sqla.String, primary_key=True)
+	lat_MapMatched = sqla.Column(sqla.Float)
+	lon_MapMatched = sqla.Column(sqla.Float)	
+	wayPointName = sqla.Column(sqla.Text)
+	#legSummary_MapMatched = sqla.Column(sqla.String)
+	#offset = sqla.Column(sqla.Text)	
+	lane = sqla.Column(sqla.Text)	
+	direction = sqla.Column(sqla.Text)	
+	#PossibleMatchingRoutes = sqla.Column(sqla.Date) 
+	WayPoint = sqla.Column(sqla.Text)
+	FK_MeasurementId = sqla.Column(sqla.String, sqla.ForeignKey('Measurements.MeasurementId'))
+	FK_Measurement = orm.relationship("Measurements", foreign_keys=[FK_MeasurementId])
+	#FK_Section
