@@ -8,6 +8,7 @@ from fastapi import Depends, FastAPI
 import sqlalchemy.orm as orm
 import pandas as pd
 import sqlalchemy as sqla
+import numpy as np
 
 from lira_db_model import Measurements, MapReferences
 import lira_db_schema
@@ -61,6 +62,7 @@ def convert_lira_measurements(db: orm.Session = Depends(lira_db_session.get_db))
                     db))
     rpmrl_data_1 = list(rpmrl_data_1)
     rpmrl_data_1 = pd.DataFrame([vars(m) for m in rpmrl_data_1])
+    print(rpmrl_data_1)
 
     def getrpmrl_ref(measurement: MapReferences) -> lira_db_schema.MapReferences:
         #parsing the measurements into the new measurements schema
@@ -81,7 +83,7 @@ def convert_lira_measurements(db: orm.Session = Depends(lira_db_session.get_db))
     rpmrl_data_2 = pd.DataFrame([vars(m) for m in rpmrl_data_2])
 
     rpmrl_data = pd.merge(rpmrl_data_1, rpmrl_data_2, how='outer', on='MeasurementId')
-    #print(rpmrl_data)
+    
 
     def getrpmfl(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
@@ -145,16 +147,20 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
     rpm_fl_infos = calculations.get_rpm_info(rpm_fl_data)
     rpm_rl_infos = calculations.get_rpm_info(rpm_rl_data)
 
-    print(f"rpm_fl_infos: {list(rpm_fl_infos)}")
-    print(f"rpm_rl_infos: {list(rpm_rl_infos)}")
+    #print(f"rpm_fl_infos: {list(rpm_fl_infos)}")
+    #print(f"rpm_rl_infos: {list(rpm_rl_infos)}")
 
-    rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos])
-    rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos])
+    rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos if m is not None])
+    rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos if m is not None])
 
-    rpm_merged_info = pd.merge(rpm_fl_infos_df, rpm_rl_infos_df, how='outer', on='TS_or_Distance')
+    print(rpm_fl_infos_df)
+    print(rpm_rl_infos_df)
+    #print(rpm_fl_infos_df[rpm_fl_infos_df['TS_or_Distance'].intersect(rpm_rl_infos_df['TS_or_Distance'])])
+
+    rpm_merged_info = pd.merge(rpm_fl_infos_df, rpm_rl_infos_df, how='inner', on='TS_or_Distance')
     print(rpm_merged_info)
     
-    with db.begin():
+    '''with db.begin():
         for fric_info in friction_infos:   
             try:
                 friction_db_crud.insert_friction_data(
@@ -172,6 +178,7 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
                     raise 
         db.commit()
         print("Query completed")
+    '''
 
 def update_database() -> None:
     """
@@ -190,5 +197,6 @@ def update_database() -> None:
     #    connection.execute(sqla.text('CREATE EXTENSION IF NOT EXISTS postgis'))
     #    connection.commit()
     friction_db_model.Base.metadata.create_all(bind=friction_db_session.friction_engine)
+    
     with friction_db_session.create_session(friction_db_session.friction_engine) as session:
         upload_to_friction_database(session, measurements, rpmrl_data, rpmfl_data)

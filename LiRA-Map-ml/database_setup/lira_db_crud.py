@@ -14,7 +14,7 @@ def get_measurements(session: orm.Session) -> List[Measurements]:
         .where(Measurements.T == "obd.rpm_fl")
         .where(Measurements.lat != None)
         .where(Measurements.lon != None)
-        .limit(50).all()
+        .limit(5).all()
         )
 
 # obd.rpm_rl
@@ -29,7 +29,7 @@ def get_rl_ref(session: orm.Session) -> List[MapReferences]:
             Measurements.lat != None,
             Measurements.lon != None,
             Measurements.T == "obd.rpm_rl")
-        .order_by(Measurements.MeasurementId).limit(50).all()
+        .order_by(Measurements.MeasurementId).limit(100000).all()
         )
 
 def get_rl(session: orm.Session) -> List[Measurements]:
@@ -40,30 +40,33 @@ def get_rl(session: orm.Session) -> List[Measurements]:
             MapReferences.lon_MapMatched != None,
             Measurements.lat != None,
             Measurements.lon != None,
+            Measurements.message != None,
             Measurements.T == "obd.rpm_rl")
-        .order_by(Measurements.MeasurementId).limit(50).all()
+        .order_by(Measurements.MeasurementId).limit(100000).all()
         )
 
 def get_fl_ref(session: orm.Session) -> List[MapReferences]:
 
     return (session.query(MapReferences)
-        .join(MapReferences.FK_Measurement)
+        .outerjoin(Measurements, Measurements.MeasurementId == MapReferences.FK_MeasurementId)
         .where(MapReferences.lat_MapMatched != None,
             MapReferences.lon_MapMatched != None,
             Measurements.lat != None,
             Measurements.lon != None,
+            Measurements.message != None,
             Measurements.T == "obd.rpm_fl")
-        .order_by(Measurements.MeasurementId).limit(50).all()
+        .order_by(MapReferences.FK_MeasurementId).limit(100000).all()
         )
 
 def get_fl(session: orm.Session) -> List[Measurements]:
     
     return(session.query(Measurements)
-        .join(MapReferences, Measurements.MeasurementId == MapReferences.FK_MeasurementId)
+        .outerjoin(MapReferences, Measurements.MeasurementId == MapReferences.FK_MeasurementId)
         .where(MapReferences.lat_MapMatched != None,
             MapReferences.lon_MapMatched != None,
             Measurements.lat != None,
             Measurements.lon != None,
+            Measurements.message != None,
             Measurements.T == "obd.rpm_fl")
-        .order_by(Measurements.MeasurementId).limit(50).all() #the ordering and limit should be removed when querying all data!!
+        .order_by(Measurements.MeasurementId).limit(100000).all() #the ordering and limit should be removed when querying all data!!
         )

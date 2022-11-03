@@ -23,7 +23,6 @@ def extract_measurement_value(message_string=str) -> float:
     '''
     message_dict = json.loads(message_string)
     message_keys = message_dict.keys()
-    print(message_string)
     if 'obd.rpm_fl.value' in message_keys:
         print("here is a measurement")
         return message_dict['obd.rpm_fl.value']
@@ -45,7 +44,6 @@ def get_friction_info(friction_df: pd.DataFrame) -> List[friction_db_schema.Meas
 
 def get_rpm_info(df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
     def parse(row):
-        print(row)
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
             return friction_db_schema.RPMs(
@@ -53,7 +51,12 @@ def get_rpm_info(df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
                 TS_or_Distance=row['TS_or_Distance'],
                 lat=row['lat'],
                 lon=row['lon'],
-                rpm_value=extract_measurement_value(row['message'])
+                rpm_value=extract_measurement_value(row['message']),
+                MapReferenceId=row['MapReferenceId'],
+                lat_MapMatched=row['lat_MapMatched'],
+                lon_MapMatched=row['lon_MapMatched'],
+                wayPointName=row['wayPointName'],
+                WayPoint=row['WayPoint']
             )
         else:
             pass
