@@ -8,7 +8,6 @@ import { useGraph } from "../../context/GraphContext";
 import { Axis, DotHover, GraphData, SVG } from "../../assets/graph/types"
 import { Bounds } from "../../models/path";
 
-
 interface ILine {
     svg: SVG;
     xAxis: Axis | undefined;
@@ -20,8 +19,17 @@ interface ILine {
 }
 
 const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, bounds, label, i, time } ) => {
+    let firstData = data[0][0];
+
+    for(let i2 = 0; i2<data.length; i2++){
+        data[i2][0]  -= firstData ;
+
+    }
+    
 
     const { addBounds, remBounds, setDotHover } = useGraph()
+
+
 
     useEffect( () => {
 
@@ -34,6 +42,7 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, bounds, label, i, time } ) 
             maxY: Math.max(...data.map( d => d[1] )),
         } )
 
+       
         addBounds(label, _bounds)
 
         const onHover = (d: DotHover | undefined) => d === undefined 
