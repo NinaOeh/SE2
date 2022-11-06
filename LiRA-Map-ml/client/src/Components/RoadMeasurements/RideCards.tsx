@@ -4,8 +4,9 @@ import { RiDeleteBack2Line } from 'react-icons/ri'
 
 import Checkbox from '../Checkbox';
 import SpinLoader from "../../assets/SpinLoader";
+import { parsePositionDisplay } from '../../assets/DataParsers';
 
-import { RideMeta, TripsOptions } from '../../models/models'
+import { RideMeta, TripsOptions, PositionDisplay } from '../../models/models'
 
 import '../../css/ridecard.css'
 import '../../css/spinner.css'
@@ -23,11 +24,13 @@ const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {
     const renderRow: ListRowRenderer = ( { index, key, style } ): ReactNode => {
         const meta = showMetas[index];
 
+        const positionDisplays = parsePositionDisplay(meta.StartPositionDisplay, meta.EndPositionDisplay);
+
         return <div key={key} style={style}>
             <Checkbox 
                 forceState={meta.selected}
                 className="ride-card-container"
-                html={<div><b>{meta.wayPointName}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
+                html={<div><b>{positionDisplays.StartPosition + " -> " + positionDisplays.EndPosition}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
                 }} />
