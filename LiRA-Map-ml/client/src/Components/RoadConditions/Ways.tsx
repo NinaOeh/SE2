@@ -87,20 +87,13 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     }, [zoom] )
 
+
+    
+
     useEffect(()=>{
         if(ways){
-            const tmp=[... ways.geometry]
-            for(let i=0; i<ways.conditions.length; i++){
-                const max=ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value;
-                if(max<filter){
-                    const startIndex = ways.geometry.indexOf(tmp[i]);
-                    console.log("index:",startIndex);
-                    if (startIndex !== -1) {
-                        ways.geometry.splice(startIndex, 1);
-                    }
-                    
-                }
-            }
+            console.log("geometry",ways.geometry);
+
            
         }
     }

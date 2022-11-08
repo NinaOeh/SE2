@@ -15,7 +15,6 @@ export default class DistRenderer extends Renderer<DistData> {
     conditions: Condition[][];
     edgess: Edge[][];
     dotHover: DotHover | undefined;
-    filter:number;
 
 
     constructor( options?: HotlineOptions, ...args: any[] ) 
@@ -24,7 +23,6 @@ export default class DistRenderer extends Renderer<DistData> {
         super({...options})
         this.way_ids = args[0][0];
         this.conditions = args[0][1];
-        this.filter=args[0][1].filter;
         this.edgess = [];
         this.dotHover = undefined;
         console.log("arguments a ver",args);
@@ -56,7 +54,6 @@ export default class DistRenderer extends Renderer<DistData> {
             : 1
        
         try{
-            console.log("filter updated",this.filter);
             gradient.addColorStop(dist, `rgba(${edge.get().join(',')},${opacity})`);
             
         }

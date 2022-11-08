@@ -45,6 +45,10 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
     const opts = useMemo( () => ({ 
         ...options, weight: getWeight(zoom)
     }), [options, zoom] )
+    const geo= useMemo(()=>{
+
+
+    },[geometry]);
     const filter=useGraph();
     const f=useMemo(()=>({
         ...filter}),[filter])
@@ -56,7 +60,7 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
         mouseout: handler(eventHandlers, 'mouseout', 0),
     }), [eventHandlers] )
     const { hotline } = useCustomHotline<Node, DistData>( DistRenderer, HoverHotPolyline, { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
-        way_ids, conditions,f
+        way_ids, conditions
     );
     
     

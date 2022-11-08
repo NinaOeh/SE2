@@ -51,7 +51,6 @@ export interface Node {
     lat: number;
 	lng: number;
 	way_dist: number;
-	value?:number;
 }
 
 export type Ways = { [key: string]: Node[] }
