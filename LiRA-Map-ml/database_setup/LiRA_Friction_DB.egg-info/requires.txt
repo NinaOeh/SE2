@@ -3,4 +3,5 @@ mangum
 pandas
 psycopg2-binary
 pydantic
+python-dotenv
 sqlalchemy

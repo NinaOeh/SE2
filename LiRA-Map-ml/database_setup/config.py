@@ -14,9 +14,9 @@ class Settings:
     LIRA_DB_USER = os.getenv("LIRA_DB_USER")
     LIRA_DB_PASSWORD = os.getenv("LIRA_DB_PASSWORD")
     LIRA_DB_SERVER = os.getenv("LIRA_DB_SERVER","localhost")
-    LIRA_DB_PORT = os.getenv("LIRA_DB_PORT",5435) # default postgres port is 5432
+    LIRA_DB_PORT = os.getenv("LIRA_DB_PORT",5432) # default postgres port is 5432
     LIRA_DB_DATABASE = os.getenv("LIRA_DB_DATABASE","tdd")
-    LIRA_DB_URL = DB_FRICTION_URL = f"postgresql://{LIRA_DB_USER}:{LIRA_DB_PASSWORD}@{LIRA_DB_SERVER}:{LIRA_DB_PORT}/{LIRA_DB_DATABASE}"
+    LIRA_DB_URL = f"postgresql://{LIRA_DB_USER}:{LIRA_DB_PASSWORD}@{LIRA_DB_SERVER}:{LIRA_DB_PORT}/{LIRA_DB_DATABASE}"
 
 
     DB_FRICTION_SERVER = os.getenv("DB_FRICTION_HOST","localhost")
