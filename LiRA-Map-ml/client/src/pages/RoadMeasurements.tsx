@@ -9,7 +9,7 @@ import RideCards from "../Components/RoadMeasurements/RideCards";
 import Rides from "../Components/RoadMeasurements/Rides";
 import { SegmentProvider } from "../context/SegmentContext"
 import ClipLoader from "react-spinners/ClipLoader";
-
+import CollapseButton from "../Components/RoadMeasurements/CollapseButton";
 
 
 const RoadMeasurements = () => {
@@ -24,6 +24,17 @@ const RoadMeasurements = () => {
     useEffect( () => {
         setLoading(false);
     } )
+
+    const [collapseRides, setCollapseRides] = useState(true);
+    const handleCollapseRides = () => {
+        setCollapseRides(!collapseRides);
+    }
+
+    const [collapseDetails, setCollapseDetails] = useState(true);
+    const handleCollapseDetails = () => {
+        setCollapseDetails(!collapseDetails);
+    }
+
     return (
         <SegmentProvider>
             <div>
@@ -35,10 +46,20 @@ const RoadMeasurements = () => {
                     <MetasProvider>
                             <div className="rides-wrapper">
                                 
-                                <RideCards />
+
+                                {collapseRides && <RideCards />}
+                                <input 
+                                    type="checkbox" 
+                                    className="collapse-checkbox"
+                                    checked={collapseRides} 
+                                    onChange={handleCollapseRides} />
                                 
-                                <RideDetails  />
-                                
+                                {collapseDetails && <RideDetails  />}
+                                <input 
+                                    type="checkbox" 
+                                    className="collapse-checkbox"
+                                    checked={collapseDetails} 
+                                    onChange={handleCollapseDetails} />
                                 <Rides />
                                 
                             </div>
