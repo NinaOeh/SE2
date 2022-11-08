@@ -1,7 +1,7 @@
 
 import { FC, useEffect, useMemo, useState } from 'react';
 import { LeafletEvent, Polyline } from 'leaflet'
-import { HotlineOptions, useCustomHotline } from 'react-leaflet-hotline';
+import { Hotline, HotlineOptions, useCustomHotline } from 'react-leaflet-hotline';
 
 import { useGraph } from '../../../context/GraphContext';
 
@@ -12,6 +12,7 @@ import { DistData } from '../../../assets/hotline/hotline';
 import HoverHotPolyline from '../../../assets/hotline/HoverHotPolyline';
 import { HotlineEventFn, HotlineEventHandlers } from 'react-leaflet-hotline/lib/types';
 import useZoom from '../Hooks/useZoom';
+import { geoAlbers } from 'd3';
 
 
 const getLat = (n: Node) => n.lat;
@@ -40,25 +41,26 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
     const { dotHover } = useGraph()
     const zoom = useZoom()
 
-    console.log(options?.tolerance);
 
     const opts = useMemo( () => ({ 
         ...options, weight: getWeight(zoom)
     }), [options, zoom] )
+    const filter=useGraph();
+    const f=useMemo(()=>({
+        ...filter}),[filter])
+
 
     const handlers: HotlineEventHandlers = useMemo( () => ({
         ...eventHandlers,
         mouseover: handler(eventHandlers, 'mouseover', 0.5),
         mouseout: handler(eventHandlers, 'mouseout', 0),
     }), [eventHandlers] )
-    console.log("Now looking at DistRenderer1")
-    const { hotline } = useCustomHotline<Node, DistData>( 
-        DistRenderer, HoverHotPolyline, 
-        { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
-        way_ids, conditions 
+    const { hotline } = useCustomHotline<Node, DistData>( DistRenderer, HoverHotPolyline, { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
+        way_ids, conditions,f
     );
+    
+    
 
-    console.log("Now looking at DistRenderer2")
     
     useEffect( () => {
         if ( hotline === undefined ) return;

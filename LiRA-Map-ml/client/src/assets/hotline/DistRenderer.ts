@@ -6,6 +6,8 @@ import { Condition, Node, WayId } from "../../models/path";
 import { DotHover } from '../graph/types';
 import { DistData, DistPoint } from "./hotline";
 import Edge from "./Edge";
+import { useEffect } from 'react';
+import { useGraph } from '../../context/GraphContext';
 
 export default class DistRenderer extends Renderer<DistData> {
 
@@ -13,6 +15,8 @@ export default class DistRenderer extends Renderer<DistData> {
     conditions: Condition[][];
     edgess: Edge[][];
     dotHover: DotHover | undefined;
+    filter:number;
+
 
     constructor( options?: HotlineOptions, ...args: any[] ) 
     {
@@ -20,8 +24,10 @@ export default class DistRenderer extends Renderer<DistData> {
         super({...options})
         this.way_ids = args[0][0];
         this.conditions = args[0][1];
+        this.filter=args[0][1].filter;
         this.edgess = [];
         this.dotHover = undefined;
+        console.log("arguments a ver",args);
       
     }
 
@@ -50,10 +56,7 @@ export default class DistRenderer extends Renderer<DistData> {
             : 1
        
         try{
-            if(this.options.tolerance!=undefined){
-                console.log("cuidau:",this.options.tolerance);
-
-            }
+            console.log("filter updated",this.filter);
             gradient.addColorStop(dist, `rgba(${edge.get().join(',')},${opacity})`);
             
         }
@@ -135,6 +138,8 @@ export default class DistRenderer extends Renderer<DistData> {
 
             }
         }
+
+     
     }
 
     drawGradient(

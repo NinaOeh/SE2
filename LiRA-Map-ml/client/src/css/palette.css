@@ -23,9 +23,9 @@
 .palette-hover {  
     position: absolute;  
     padding: 10px 15px;
-    font-size: 2em;
-    border-radius: 5px;
-    margin: 20px;
+    font-size: 2em;  /**size of the icon**/
+    border-radius: 10px; /** cest de la merde**/
+    margin: 20px;   /** marge de gauche**/
     background: var(--background);
     cursor: pointer;
 }
