@@ -16,6 +16,7 @@ import RidesMap from "./RidesMap";
 import usePopup from "../createPopup";
 import { Popup } from "Leaflet.MultiOptionsPolyline";
 import { PopupFunc } from "../../models/popup"
+import { RendererName } from "../../models/renderers";
 
 const Rides: FC = () => {
     
@@ -30,6 +31,18 @@ const Rides: FC = () => {
 
         const updatePaths = async ( pop: PopupFunc) => {
             const temp = {} as MeasMetaPath;
+
+            if(selectedMeasurements.length == 0){
+                const activeBaselineMeasurement: ActiveMeasProperties = {
+                    dbName: "track.pos",
+                    name: "baseline reading without measurements",
+                    hasValue: false,
+                    rendererName: RendererName.line,
+                    color: 'black',
+                    isActive: true,
+                };
+                selectedMeasurements.push(activeBaselineMeasurement);
+            }
 
             for ( let meas of selectedMeasurements )
             {

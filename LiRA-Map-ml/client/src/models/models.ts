@@ -18,6 +18,11 @@ export interface RideMeta {
 	wayPointName: string,
 }
 
+export interface PositionDisplay {
+	StartPosition: string,
+	EndPosition: string,
+}
+
 // export interface MeasurementData {
 // 	T: string,
 // 	lat: number,
