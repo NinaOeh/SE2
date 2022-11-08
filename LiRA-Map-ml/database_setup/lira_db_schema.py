@@ -8,8 +8,12 @@ class Measurement(pydantic.BaseModel):
 	T: str	
 	lat: float
 	lon: float
+<<<<<<< HEAD
 	message: str
 	FK_Trip: str	
+=======
+	message: str	
+>>>>>>> d1499c81d2cab486ab1b6aafdd812e0f35c3dfc8
 
 class MapReferences(pydantic.BaseModel):
 	MapReferenceId: int
@@ -22,5 +26,9 @@ class MapReferences(pydantic.BaseModel):
 	#direction: str
 	#PossibleMatchingRoutes = sqla.Column(sqla.Date) 
 	WayPoint: str
+<<<<<<< HEAD
 	MeasurementId: int
 	
+=======
+	MeasurementId: int
+>>>>>>> d1499c81d2cab486ab1b6aafdd812e0f35c3dfc8
