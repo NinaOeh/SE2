@@ -1,6 +1,7 @@
 import {RendererName} from "../models/renderers";
 import { JSONProps, PointData } from "../models/path";
 import { PathProperties } from "../models/properties";
+import { PositionDisplay } from "../models/models";
 
 export const parseSegments = (data: any): JSONProps[] => {
     // EXAMPLE OF ROW
@@ -31,4 +32,27 @@ export const parseSegments = (data: any): JSONProps[] => {
     } )
 }
 
+export function parsePositionDisplay(startPosition: string, endPosition: string): PositionDisplay {
+    let parsedStart = JSON.parse(startPosition);
+    let parsedEnd = JSON.parse(endPosition);
 
+    const positionDisplay: PositionDisplay = {
+        StartPosition: scopePositionOut(parsedStart),
+        EndPosition: scopePositionOut(parsedEnd),
+    }
+
+    return positionDisplay;
+};
+
+function scopePositionOut(position:any) {
+    if (position.road == null) {
+        if(position.city == null) {
+            if(position.county == null) {
+                return "Ukendt";
+            }
+            return position.county;
+        }
+        return position.city;
+    }
+    return position.road;
+}
