@@ -3,10 +3,7 @@ import pydantic
 from typing import List
 import friction_db_schema
 import json
-<<<<<<< HEAD
 import numpy as np
-=======
->>>>>>> d1499c81d2cab486ab1b6aafdd812e0f35c3dfc8
 
 '''
     comments: we have to think of a smart and good way of what data we want to extract from the old
@@ -69,33 +66,21 @@ def get_friction_info(friction_df: pd.DataFrame) -> List[friction_db_schema.Meas
         )
     return (parse(row) for _, row in friction_df.iterrows())
 
-<<<<<<< HEAD
 def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPMs]:
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
             print("Here we are")
-=======
-def get_rpm_info(df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
-    def parse(row):
-        rpm = extract_measurement_value(row['message'])
-        if rpm!=None:
->>>>>>> d1499c81d2cab486ab1b6aafdd812e0f35c3dfc8
             return friction_db_schema.RPMs(
                 MeasurementId=row['MeasurementId'],
                 TS_or_Distance=row['TS_or_Distance'],
                 lat=row['lat'],
                 lon=row['lon'],
-<<<<<<< HEAD
                 rpm_value_rl=extract_measurement_value(row['message']),
-=======
-                rpm_value=extract_measurement_value(row['message']),
->>>>>>> d1499c81d2cab486ab1b6aafdd812e0f35c3dfc8
                 MapReferenceId=row['MapReferenceId'],
                 lat_MapMatched=row['lat_MapMatched'],
                 lon_MapMatched=row['lon_MapMatched'],
                 wayPointName=row['wayPointName'],
-<<<<<<< HEAD
                 WayPoint=row['WayPoint'],
                 FK_Trip=row['FK_Trip']
             )
@@ -148,9 +133,6 @@ def get_rpm_info_fl_2(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
                 lon=row['lon'],
                 rpm_value_fl=extract_measurement_value(row['message']),
                 FK_Trip=row['FK_Trip']
-=======
-                WayPoint=row['WayPoint']
->>>>>>> d1499c81d2cab486ab1b6aafdd812e0f35c3dfc8
             )
         else:
             pass

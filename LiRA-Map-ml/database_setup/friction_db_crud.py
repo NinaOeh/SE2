@@ -14,7 +14,8 @@ def insert_friction_data(
     rpm_rl: float,
     friction_value: float,
     lat: float,
-    lon: float
+    lon: float,
+    FK_Trip: str
 ) -> None:
     friction_row = Friction(
         friction_value=friction_value,
@@ -22,7 +23,8 @@ def insert_friction_data(
         lon=lon,
         rpm_fl_value=rpm_fl,
         rpm_rl_value=rpm_rl,
-        TS_or_Distance=timestamp
+        TS_or_Distance=timestamp,
+        FK_Trip=FK_Trip
         )
     session.add(friction_row)
 
