@@ -8,89 +8,73 @@ import { HotlineEventHandlers } from 'react-leaflet-hotline/lib/types';
 import Swal from 'sweetalert2';
 import { useGraph } from '../../context/GraphContext';
 import { FilteringOptions } from '../../models/models';
-import { WaysConditions } from '../../models/path';
+import { Condition, WaysConditions } from '../../models/path';
 import { getWaysConditions } from '../../queries/conditions';
 import createPopup from '../createPopup';
 import useZoom from '../Map/Hooks/useZoom';
 import DistHotline from '../Map/Renderers/DistHotline';
-import FilteringSelector from './OptionsFiltering';
+import FilteringSelector from './DropDown';
 
 interface IWays {
     palette: TRGB[]
     type: string;
-    onClick?: (way_id: string, way_length: number,filter:number) => void;
+    onClick?: (way_id: string, way_length: number) => void;
 }
 
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     const zoom = useZoom();
-    const { minY, maxY } = useGraph()
+    const { minY, maxY,filter,setfilter } = useGraph()
 
     const [ways, setWays] = useState<WaysConditions>()
-    const [count, setCount] = useState(0);
 
     const stateRef = useRef(0);
 
 
-    window.addEventListener("keydown",async function (e) {
     
-        if  (e.ctrlKey && e.key === 'Enter') {
-           
-            const { value: number } = await Swal.fire({
-                title: 'Select filter',
-                input: 'select',
-                inputOptions: {
-                  'Options': {
-                    0: '0',
-                    1: '1',
-                    2: '2',
-                    3: '3',
-                    4: '4',
-                    5:'5',
-                    6:'6',
-                    7:'7',
-                    8:'8',
 
-                  },
-                
-                },
-                inputPlaceholder: 'Select filter',
-                showCancelButton: true,
-              
-              })
-              
-              if (number) {
-                Swal.fire(`You selected: ${number}`)
-                setCount(Number(number));
-                stateRef.current = Number(number);
+    useEffect(()=>{
 
-              }        }
-    })
-
-
+        console.log("yeye we have a here:",filter);
+        stateRef.current=filter;
+    },[filter]);
     
 
     const options = useMemo<HotlineOptions>( () => ({
-        palette, min: minY, max: maxY, tolerance:count
-    } ), [palette, minY, maxY,count] )
+        palette, min: minY, max: maxY
+    } ), [palette, minY, maxY,] )
 
     
     const handlers = useMemo<HotlineEventHandlers>( () => ({
-        click: (_, i) => {
+        click: (_,  i) => {
           
-            console.log("im here:",count);
+            console.log("im here:",filter);
             if ( ways && onClick )
                 if(stateRef.current<10000){
-                    onClick(ways.way_ids[i], ways.way_lengths[i],stateRef.current)
+                    onClick(ways.way_ids[i], ways.way_lengths[i])
                 }
                 else{
-                    onClick(ways.way_ids[i], ways.way_lengths[i],0)
+                    onClick(ways.way_ids[i], ways.way_lengths[i])
 
                 }
         },
+        
+        mouseover:(e,i,p)=>{
+            if(ways){
+                const max = ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+                if(max<filter){
+                    p.setStyle({opacity: 0,color:"#e6e"})
+                    
+                }
+
+            }
+
+        }
+        
+        ,
      
 
 
-    }), [stateRef.current] ) 
+    }), [ways,filter] ) 
 
     useEffect( () => {
         if ( zoom === undefined ) return;
@@ -103,6 +87,20 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     }, [zoom] )
 
+
+    
+
+    useEffect(()=>{
+        if(ways){
+            console.log("geometry",ways.geometry);
+
+           
+        }
+    }
+    ,[filter])
+ 
+
+  
     return (
         <>
         { ways 

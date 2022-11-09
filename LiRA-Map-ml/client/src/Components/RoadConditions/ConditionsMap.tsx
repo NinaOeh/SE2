@@ -16,8 +16,11 @@ import { Condition } from "../../models/path";
 import { getConditions } from "../../queries/conditions";
 import { filter } from "d3";
 import createPopup from "../createPopup";
-import FilteringSelector from "./OptionsFiltering"
+import FilteringSelector from "./DropDown"
 import { FilteringOptions } from "../../models/models";
+import { useGraph } from "../../context/GraphContext";
+import Menu from "./Menu";
+import Slider from "./Slider";
 
 interface Props {
     type: ConditionType;
@@ -29,19 +32,25 @@ interface Props {
 const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) => {
 
     const { name, max, grid, samples } = type;
-
     const ref = useRef(null);
     const [width, _] = useSize(ref)
+    const c1 = { r: 70,  g: 70, b: 255, t: 0 }
+    const c2 = { r: 255, g: 70, b: 70,  t: 1 } 
 
-    
-    const onClick = useCallback((way_id: string, way_length: number,filter:number) => {
+    useEffect(()=>{
+        console.log(palette);
+
+    },[palette]);
+    const {filter}=useGraph();
+
+    const onClick = useCallback((way_id: string, way_length: number) => {
 
         getConditions( way_id, name, (wc: Condition[]) => {
             const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
             console.log("maximum value:",max);
             console.log("the filter is:",filter);
             if(max>filter){
-
+                
            
                 setWayData( {
                     labels: wc.map( p => p.way_dist * way_length ),
@@ -71,33 +80,46 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                         data: [],
                     } ]
                 } )
-                const popup=createPopup();
+
+                
+               /**  const popup=createPopup();
                 popup( {
                     icon: "warning",
                     title: `This trip doesn't have any value with the ira wanted   `,
                     toast: true,
 
-                } );
+                } ); */
 
             }
            
         } )
-    },[])
+    },[filter])
 
 
     return (
         <div className="road-conditions-map" ref={ref}>
 
-            <PaletteEditor 
-                defaultPalette={RENDERER_PALETTE}
-                width={width}
-                cursorOptions={ { scale: max, grid, samples } }
-                onChange={setPalette} />
+                <PaletteEditor 
+                        defaultPalette={RENDERER_PALETTE}
+                        width={width}
+                        cursorOptions={ { scale: max, grid, samples } }
+                        onChange={setPalette} />
+            <div className="panel-wrapper">
+                <div className="panel-checkboxes">
+                    
+
+                    <Slider/>
+
+                </div>
+            </div>
+            
 
             <MapWrapper>
                 <Ways palette={palette} type={name} onClick={onClick}  />
 
             </MapWrapper>
+
+
         
 
         </div>

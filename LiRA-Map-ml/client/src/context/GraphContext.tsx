@@ -21,6 +21,9 @@ interface ContextProps {
 
 	dotHover: DotHover | undefined;
 	setDotHover: Dispatch<SetStateAction<DotHover | undefined>>;
+
+	filter:number;
+	setfilter:Dispatch<SetStateAction<number>>;
 }
 
 const GraphContext = createContext({} as ContextProps);
@@ -32,6 +35,10 @@ export const GraphProvider = ({ children }: any) => {
 	const { bounds, addBounds, remBounds } = useMinMaxAxis()
 	const [ dotHover, setDotHover ] = useState<DotHover>()
 
+
+	const [filter, setfilter]=useState<number>(0) //ENUMERATION UPGRADE 
+	//have another for FMT 
+
 	const { minX, maxX, minY, maxY } = bounds;
 
 	return (
@@ -39,7 +46,8 @@ export const GraphProvider = ({ children }: any) => {
 			value={{
 				minX, maxX, minY, maxY,
 				addBounds, remBounds,
-				dotHover, setDotHover
+				dotHover, setDotHover,
+				filter, setfilter
 			}}
 		>
 			{children}
