@@ -26,5 +26,10 @@
 }
 
 .collapse-checkbox {
-    
+    display: flex !important;
+    align-items: center !important;
+}
+
+.collapse-checkbox.btn-checked {
+    background-color: var(--background-2);
 }
