@@ -2,10 +2,11 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const { 
-    DB_USER, DB_PASSWORD, 
-    DB_USER_VIS, DB_PASSWORD_VIS, 
-    DB_USER_POSTGIS, DB_PWD_POSTGIS 
+const {
+    DB_USER, DB_PASSWORD,
+    DB_USER_VIS, DB_PASSWORD_VIS,
+    DB_USER_POSTGIS, DB_PWD_POSTGIS,
+    DB_USER_FRICTION, DB_PASSWORD_FRICTION
 } = process.env;
 
 
@@ -34,11 +35,11 @@ const BASE_CONFIG = {
 export const LIRA_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host : "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
+        host: "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
         port: 5435,
-        user : "guest",
-        password : "V2GjxQVn",
-        database : "postgres",
+        user: "guest",
+        password: "V2GjxQVn",
+        database: "postgres",
     },
 }
 
@@ -46,11 +47,11 @@ export const LIRA_DB_CONFIG = {
 export const VISUAL_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host : "liravisualization.postgres.database.azure.com",
+        host: "liravisualization.postgres.database.azure.com",
         port: 5432,
-        user : DB_USER_VIS,
-        password : DB_PASSWORD_VIS,
-        database : "postgres",
+        user: DB_USER_VIS,
+        password: DB_PASSWORD_VIS,
+        database: "postgres",
         ssl: true
     },
 }
@@ -58,11 +59,22 @@ export const VISUAL_DB_CONFIG = {
 export const POSTGIS_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host : "liradb.postgres.database.azure.com",
+        host: "liradb.postgres.database.azure.com",
         port: 5432,
-        user : DB_USER_POSTGIS,
-        password : DB_PWD_POSTGIS,
-        database : "postgis",
+        user: DB_USER_POSTGIS,
+        password: DB_PWD_POSTGIS,
+        database: "postgis",
         ssl: true
     },
+}
+
+export const FRICTION_DB_CONFIG = {
+    ...BASE_CONFIG,
+    connection: {
+        host: "localhost",
+        port: 5432,
+        user: DB_USER_FRICTION,
+        password: DB_PASSWORD_FRICTION,
+        database: "FrictionDB",
+    }
 }
