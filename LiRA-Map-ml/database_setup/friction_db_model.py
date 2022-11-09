@@ -13,12 +13,13 @@ class Friction(Base):
 	__tablename__ = 'Friction'
     
 	FrictionId = sqla.Column(sqla.Integer, primary_key=True)
-	TS_or_Distance = sqla.Column(sqla.Date)
+	TS_or_Distance = sqla.Column(sqla.DateTime)
 	lat = sqla.Column(sqla.Float)
 	lon = sqla.Column(sqla.Float)
 	rpm_fl_value = sqla.Column(sqla.Float)
 	rpm_rl_value = sqla.Column(sqla.Float)
 	friction_value = sqla.Column(sqla.Float)
+	FK_Trip = sqla.Column(sqla.String)
 
 class RPMs(Base):
 	__tablename__ = 'RPMs'
