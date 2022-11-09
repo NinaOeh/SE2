@@ -15,7 +15,6 @@ interface RoleProps{
     selectedRole: Role;
     setSelectedRole: Dispatch<SetStateAction<Role>>;
 	setRoles: Dispatch<SetStateAction<Role[]>>;
-
 }
 
 const RolesContext = createContext({} as RoleProps);
