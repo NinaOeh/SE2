@@ -37,7 +37,7 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements }
                         return undefined
                         }
 
-                    else
+                    else 
                         temp.push( 
                             { meas, meta, bp: paths[name][TaskId] }
                         )
