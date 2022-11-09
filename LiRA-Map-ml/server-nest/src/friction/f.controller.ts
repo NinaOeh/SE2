@@ -8,19 +8,19 @@ export class FrictionController {
     constructor(private readonly service: FrictionService) { }
 
     @Get('ways')
-    getWaysConditions(@Query() query: { type: string, zoom: string }): Promise<WaysConditions> {
+    getWaysFriction(@Query() query: { type: string, zoom: string }): Promise<WaysConditions> {
         const { type, zoom } = query;
         return this.service.getWaysConditions(type, zoom);
     }
 
     @Get('way')
-    getWayConditions(@Query() query: { wayId: string, type: string }): Promise<Condition[]> {
+    getWayFriction(@Query() query: { wayId: string, type: string }): Promise<Condition[]> {
         const { wayId, type } = query;
         return this.service.getWayRoadConditions(wayId, type);
     }
 
     @Get('/bounded/ways')
-    getBoundedWaysConditions(@Query() query: { minLat: string, maxLat: string, minLng: string, maxLng: string, type: string, zoom: string }): Promise<any> {
+    getBoundedWaysFriction(@Query() query: { minLat: string, maxLat: string, minLng: string, maxLng: string, type: string, zoom: string }): Promise<any> {
         const { minLat, maxLat, minLng, maxLng, type, zoom } = query;
         const bounds: MapBounds = {
             minLat: parseFloat(minLat),
