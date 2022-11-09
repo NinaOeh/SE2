@@ -13,7 +13,7 @@ import {getRoles, addRole, deleteRole} from "../queries/roles"
 interface RoleProps{
     roles: Role[];
     selectedRole: Role;
-    setSelectedRole: Dispatch<SetStateAction<Role>>;
+    setSelectedRole: Dispatch<SetStateAction<Role>>
 
 }
 
@@ -39,7 +39,7 @@ export const RolesProvider = ({ children }: any) => {
 			value={{
 				roles,
 				selectedRole,
-				setSelectedRole,
+				setSelectedRole
 			}}
 		>
 			{children}
