@@ -1,3 +1,5 @@
+/* Modified by Colin Hoffmann (s212711) */
+
 import { Module } from '@nestjs/common';
 import { KnexModule } from 'nestjs-knex';
 import { ConfigModule, ConfigService } from '@nestjs/config';

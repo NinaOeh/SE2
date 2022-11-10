@@ -1,3 +1,5 @@
+/* Created by Colin Hoffmann (s212711) */
+
 import { Injectable } from '@nestjs/common';
 import { FrictionMeta } from './f.models';
 import { InjectConnection, Knex } from 'nestjs-knex';
