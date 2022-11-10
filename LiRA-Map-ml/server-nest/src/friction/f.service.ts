@@ -15,6 +15,8 @@ export class FrictionService {
             this.knex
                 .from('Friction')
                 .select('lat', 'lot', 'friction_value')
+                .whereNot('friction_value', 'Infinity')
+                .andWhereNot('friction_value', 'NaN')
 
     }
 
