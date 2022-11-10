@@ -46,16 +46,17 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     
     const handlers = useMemo<HotlineEventHandlers>( () => ({
         click: (_,  i) => {
+            const max = ways? ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value :0;
+
           
             console.log("im here:",filter);
             if ( ways && onClick )
-                if(stateRef.current<10000){
+                if(max>filter){ 
+               
                     onClick(ways.way_ids[i], ways.way_lengths[i])
                 }
-                else{
-                    onClick(ways.way_ids[i], ways.way_lengths[i])
 
-                }
+                
         },
         
         mouseover:(e,i,p)=>{
