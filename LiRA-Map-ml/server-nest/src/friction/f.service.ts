@@ -9,7 +9,7 @@ import { cursorTo } from 'readline';
 @Injectable()
 export class FrictionService {
 
-    constructor(@InjectConnection('FrictionDB') private readonly knex: Knex) { }
+    constructor(@InjectConnection('friction') private readonly knex: Knex) { }
 
     async getFriction(): Promise<FrictionMeta[]> {
 
@@ -17,10 +17,10 @@ export class FrictionService {
         const frictions = await this.knex
         .from('Friction')
         .select('lat', 'lot', 'friction_value')
-        .whereNot('friction_value', 'Infinity')
-        .andWhereNot('friction_value', 'NaN')
+       // .whereNot('friction_value', 'Infinity')
+        //.andWhereNot('friction_value', 'NaN')
 
-   
+        console.log("we are getting");
        return frictions;
         
 

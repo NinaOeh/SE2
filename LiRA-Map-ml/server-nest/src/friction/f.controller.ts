@@ -17,7 +17,7 @@ export class FrictionController {
     }
 
 
-    @Get()
+    @Get('/friction')
     //TODO change name
     getFrictionConditions(): Promise<FrictionConditions> {
         return this.service.getFrictionConditions();

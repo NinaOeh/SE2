@@ -5,7 +5,7 @@ import '../../css/slider.css'
 
 const TypeChanger: React.FC = () => {
 
-    const { filter, setfilter } = useGraph();
+    const { filter, setfilter,setfriction } = useGraph();
     const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
         setfilter(parseFloat(event.target.value));
     }
@@ -21,7 +21,18 @@ const TypeChanger: React.FC = () => {
 
     useEffect(() => {
         setfilter(state ? irimax : frictionmax)
+
+        if(state){
+            setfriction(true)
+
+        }
+        else{
+            setfriction(false);
+        }
     }, [state])
+
+
+
 
     useEffect(() => {
         console.log({ filter })
@@ -34,8 +45,8 @@ const TypeChanger: React.FC = () => {
                     type='range'
                     onChange={changeWidth}
                     min={0}
-                    max={state ? irimax : frictionmax}
-                    step={state ? iristep : frictionstep}
+                    max={state ?  frictionmax: irimax }
+                    step={state ? frictionstep:iristep }
                     value={filter}
                 ></input>
             </div>
