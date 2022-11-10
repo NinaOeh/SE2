@@ -7,9 +7,10 @@ import { HotlineOptions } from 'react-leaflet-hotline';
 import { HotlineEventHandlers } from 'react-leaflet-hotline/lib/types';
 import Swal from 'sweetalert2';
 import { useGraph } from '../../context/GraphContext';
-import { FilteringOptions } from '../../models/models';
+import { FilteringOptions, FrictionMeta } from '../../models/models';
 import { Condition, WaysConditions } from '../../models/path';
 import { getWaysConditions } from '../../queries/conditions';
+import {  getFrictionConditions } from '../../queries/friction';
 import createPopup from '../createPopup';
 import useZoom from '../Map/Hooks/useZoom';
 import DistHotline from '../Map/Renderers/DistHotline';
@@ -23,7 +24,7 @@ interface IWays {
 
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     const zoom = useZoom();
-    const { minY, maxY,filter,setfilter } = useGraph()
+    const { minY, maxY,filter,friction } = useGraph()
 
     const [ways, setWays] = useState<WaysConditions>()
 
@@ -32,11 +33,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     
 
-    useEffect(()=>{
-
-        console.log("yeye we have a here:",filter);
-        stateRef.current=filter;
-    },[filter]);
+ 
     
 
     const options = useMemo<HotlineOptions>( () => ({
@@ -80,15 +77,26 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     useEffect( () => {
         if ( zoom === undefined ) return;
         const z = Math.max(0, zoom - 12)
-        getWaysConditions(type, z, (data: WaysConditions) => {
-            setWays( data );
-            stateRef.current = 10000;
 
-        } )
-
-    }, [zoom] )
+        if(friction){
+            getFrictionConditions((data:WaysConditions)=>{
+                setWays( data );
 
 
+            })
+                
+        }
+        else{
+            getWaysConditions(type, z, (data: WaysConditions) => {
+                setWays( data );
+                stateRef.current = 10000;
+
+            } )
+    }
+
+    }, [zoom,friction] )
+
+    
     
 
     useEffect(()=>{
