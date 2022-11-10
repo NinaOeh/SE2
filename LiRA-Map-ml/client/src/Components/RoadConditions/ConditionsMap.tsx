@@ -20,7 +20,7 @@ import FilteringSelector from "./DropDown"
 import { FilteringOptions } from "../../models/models";
 import { useGraph } from "../../context/GraphContext";
 import Menu from "./Menu";
-import Slider from "./Slider";
+import TypeChanger from "./Slider";
 
 interface Props {
     type: ConditionType;
@@ -29,48 +29,47 @@ interface Props {
     setWayData: React.Dispatch<React.SetStateAction<ChartData<"line", number[], number> | undefined>>;
 }
 
-const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) => {
+const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => {
 
     const { name, max, grid, samples } = type;
     const ref = useRef(null);
     const [width, _] = useSize(ref)
-    const c1 = { r: 70,  g: 70, b: 255, t: 0 }
-    const c2 = { r: 255, g: 70, b: 70,  t: 1 } 
+    const c1 = { r: 70, g: 70, b: 255, t: 0 }
+    const c2 = { r: 255, g: 70, b: 70, t: 1 }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(palette);
 
-    },[palette]);
-    const {filter}=useGraph();
+    }, [palette]);
+    const { filter } = useGraph();
 
     const onClick = useCallback((way_id: string, way_length: number) => {
 
-        getConditions( way_id, name, (wc: Condition[]) => {
+        getConditions(way_id, name, (wc: Condition[]) => {
             const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
-            console.log("maximum value:",max);
-            console.log("the filter is:",filter);
-            if(max>filter){
-                
-           
-                setWayData( {
-                    labels: wc.map( p => p.way_dist * way_length ),
-                    datasets: [ {
+            console.log("maximum value:", max);
+            console.log("the filter is:", filter);
+            if (max > filter) {
+
+                setWayData({
+                    labels: wc.map(p => p.way_dist * way_length),
+                    datasets: [{
                         type: 'line' as const,
                         label: way_id,
                         borderColor: 'rgb(160,32,240)',
                         borderWidth: 2,
                         fill: false,
                         tension: 0.1,
-                        data: wc.map( p => p.value ),
-                    } ]
-                } )
+                        data: wc.map(p => p.value),
+                    }]
+                })
 
             }
-            else{
-               
-                setWayData( {
+            else {
+
+                setWayData({
                     labels: [],
-                    datasets: [ {
+                    datasets: [{
                         type: 'line' as const,
                         label: "0",
                         borderColor: 'rgb(160,32,240)',
@@ -78,49 +77,41 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                         fill: false,
                         tension: 0.1,
                         data: [],
-                    } ]
-                } )
+                    }]
+                })
 
-                
-               /**  const popup=createPopup();
-                popup( {
-                    icon: "warning",
-                    title: `This trip doesn't have any value with the ira wanted   `,
-                    toast: true,
 
-                } ); */
+                /**  const popup=createPopup();
+                 popup( {
+                     icon: "warning",
+                     title: `This trip doesn't have any value with the ira wanted   `,
+                     toast: true,
+ 
+                 } ); */
 
             }
-           
-        } )
-    },[filter])
+
+        })
+    }, [filter])
 
 
     return (
         <div className="road-conditions-map" ref={ref}>
 
-                <PaletteEditor 
-                        defaultPalette={RENDERER_PALETTE}
-                        width={width}
-                        cursorOptions={ { scale: max, grid, samples } }
-                        onChange={setPalette} />
-            <div className="panel-wrapper">
-                <div className="panel-checkboxes">
-                    
-
-                    <Slider/>
-
-                </div>
-            </div>
-            
+            <PaletteEditor
+                defaultPalette={RENDERER_PALETTE}
+                width={width}
+                cursorOptions={{ scale: max, grid, samples }}
+                onChange={setPalette} />
 
             <MapWrapper>
-                <Ways palette={palette} type={name} onClick={onClick}  />
-
+                <Ways palette={palette} type={name} onClick={onClick} />
             </MapWrapper>
 
+            <TypeChanger />
 
-        
+
+
 
         </div>
     )
