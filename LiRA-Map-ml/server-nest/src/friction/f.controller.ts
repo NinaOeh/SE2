@@ -3,7 +3,7 @@ import { FrictionService } from './f.service';
 
 
 @Controller('friction')
-export class RidesController {
+export class FrictionController {
     constructor(private readonly service: FrictionService) { }
 
 
