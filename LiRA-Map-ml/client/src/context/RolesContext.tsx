@@ -14,7 +14,7 @@ interface RoleProps{
     roles: Role[];
     selectedRole: Role;
     setSelectedRole: Dispatch<SetStateAction<Role>>;
-
+	setRoles: Dispatch<SetStateAction<Role[]>>;
 }
 
 const RolesContext = createContext({} as RoleProps);
@@ -40,6 +40,7 @@ export const RolesProvider = ({ children }: any) => {
 				roles,
 				selectedRole,
 				setSelectedRole,
+				setRoles
 			}}
 		>
 			{children}

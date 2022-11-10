@@ -36,11 +36,19 @@ const BASE_CONFIG = {
 export const LIRA_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
+<<<<<<< HEAD
         host: "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
         port: 5435,
         user: "guest",
         password: "V2GjxQVn",
         database: "postgres",
+=======
+        host : "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
+        port: 5435,
+        user : "guest",
+        password : "V2GjxQVn",
+        database : "postgres"
+>>>>>>> 8d0090f0206ccbc1e7f4f6e5f2ccefb74b282031
     },
 }
 
@@ -76,6 +84,12 @@ export const FRICTION_DB_CONFIG = {
         port: 5432,
         user: DB_USER_FRICTION,
         password: DB_PASSWORD_FRICTION,
+<<<<<<< HEAD
         database: "FrictionDB",
     }
 }
+=======
+        database: "postgres",
+    }
+}
+>>>>>>> 8d0090f0206ccbc1e7f4f6e5f2ccefb74b282031

@@ -6,7 +6,8 @@ const Home = () => {
         <SegmentProvider>
             <div className='signup-wrapper'>
                 <div>
-                    <h2>"Hello, this is the Home page of the LiRA project. Welcome!"</h2>
+                    <h2>Hello, this is the Home page of the LiRA project. Welcome!</h2>
+                    <h4>To get started please select or add a new role before you start looking at the available data.</h4>
                 </div>
             </div>
         </SegmentProvider>

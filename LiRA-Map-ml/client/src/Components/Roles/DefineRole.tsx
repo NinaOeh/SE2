@@ -5,18 +5,13 @@ import Button from 'react-bootstrap/Button'
 //import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {UseRoleContext} from "../../context/RolesContext"
-import {FC, useState} from "react"
+import {FC, useState, useRef} from "react"
 import {addRole, deleteRole} from "../../queries/roles"
 
 import createPopup from '../createPopup';
 
-function UpdateRoles(){
-    var{roles} = UseRoleContext()
-    return roles
-}
-
 const SelectRole : FC = ( ) => { 
-    var {roles, selectedRole, setSelectedRole } = UseRoleContext()
+    var {roles, setRoles, selectedRole, setSelectedRole } = UseRoleContext()
     const [roleChosen, setRoleChosen] = useState<boolean>(false);
     
 
@@ -30,8 +25,7 @@ const SelectRole : FC = ( ) => {
         setNewUserName(prevState => ({
             ...prevState,
             [name]: value,
-        }))
-        
+        }));
     }
     const popup=createPopup();
     const newRole = () => {
@@ -45,14 +39,24 @@ const SelectRole : FC = ( ) => {
             setSelectedRole(newUserName)
             setRoleChosen(true)
             addRole(newUserName.role)
-            roles = UpdateRoles()
+            setRoles( prev => [...prev, newUserName])
+            popup( {
+                icon: "info",
+                title: `Role ${newUserName.role} was created.`,
+                toast: true,
+            } );
         }
     }
 
     const delRole = () => {
         if (roles.some(function(r) { return r.role === newUserName.role})){
             deleteRole(newUserName.role)
-            roles = UpdateRoles()
+            setRoles(prev => prev.filter( el => el.role !== newUserName.role ))
+            popup( {
+                icon: "info",
+                title: `Role ${newUserName.role} was deleted.`,
+                toast: true,
+            } );  
         }
         else{
             popup( {

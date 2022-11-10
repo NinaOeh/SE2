@@ -19,6 +19,11 @@ export interface RideMeta {
 	wayPointName: string,
 }
 
+export interface PositionDisplay {
+	StartPosition: string,
+	EndPosition: string,
+}
+
 // export interface MeasurementData {
 // 	T: string,
 // 	lat: number,
@@ -47,4 +52,8 @@ export interface FrictionMeta {
 	lon: number,
 	lat: number,
 	friction_value: number
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8d0090f0206ccbc1e7f4f6e5f2ccefb74b282031

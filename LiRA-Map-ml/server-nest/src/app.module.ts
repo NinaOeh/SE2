@@ -28,7 +28,15 @@ import { AltitudeService } from './altitude/alt.service';
 import { FrictionController } from './friction/f.controller';
 import { FrictionService } from './friction/f.service';
 
+<<<<<<< HEAD
 import { FRICTION_DB_CONFIG, LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG } from './database';
+=======
+import { FrictionController } from ./friction/f.controller';
+import { FrictionService } from ./friction/f.service';
+
+import { LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG } from './database';
+import { FRICTION_DB_CONFIG } from './second_database';
+>>>>>>> 8d0090f0206ccbc1e7f4f6e5f2ccefb74b282031
 
 
 const database = (config: any, name: string) => {
@@ -45,8 +53,16 @@ const database = (config: any, name: string) => {
 		database(POSTGIS_DB_CONFIG, 'postgis'),
 		database(FRICTION_DB_CONFIG, 'FrictionDB')
 	],
+<<<<<<< HEAD
 	controllers: [AppController, SegmentsController, TypesController, RidesController, MeasurementsController, RCController, AltitudeController, FrictionController],
 	providers: [AppService, SegmentsService, ConfigService, TypesService, RidesService, MeasurementsService, RCService, AltitudeService, FrictionService],
 })
+=======
+	controllers: [AppController, SegmentsController, TypesController, RidesController, 
+		MeasurementsController, RCController, AltitudeController, RolesController, FrictionController],
+	providers: [AppService, SegmentsService, ConfigService, TypesService, RidesService, 
+		MeasurementsService, RCService, AltitudeService, RolesService, FrictionService],
+} )
+>>>>>>> 8d0090f0206ccbc1e7f4f6e5f2ccefb74b282031
 
 export class AppModule { }

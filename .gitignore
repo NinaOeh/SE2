@@ -5,6 +5,8 @@ environment.env
 LiRA-Map-ml/database_setup/venv/
 LiRA-Map-ml/database_setup/__pycache__/
 .egg-info/
+LiRA-Map-ml/database_setup/mapmatching/
+LiRA-Map-ml/database_setup/scripts/__pycache__/
 
 # Logs
 logs
