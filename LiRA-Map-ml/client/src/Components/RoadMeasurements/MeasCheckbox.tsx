@@ -30,14 +30,19 @@ interface IMeasCheckbox {
     editMeasurement: (e: React.MouseEvent) => void;
     deleteMeasurement: (e: React.MouseEvent) => void;
     selectMeasurement: (isChecked: boolean) => void; 
+    state: boolean; 
+
 }
 
-const MeasCheckbox: FC<IMeasCheckbox> = ( { meas, editMeasurement, selectMeasurement, deleteMeasurement } ) => {
+const MeasCheckbox: FC<IMeasCheckbox> = ( { meas, editMeasurement, selectMeasurement, deleteMeasurement,state } ) => {
     return (
         <Checkbox 
             className='ride-metadata-checkbox'
             html={<CheckboxHTML meas={meas} editMeasurement={editMeasurement} deleteMeasurement={deleteMeasurement} />}
-            onClick={selectMeasurement} />
+            onClick={selectMeasurement} 
+            forceState = {state}
+            /> 
+        
     )
 }
 
