@@ -21,7 +21,9 @@ export async function asyncPost<T>(path: string, obj: object ): Promise<AxiosRes
 }
 
 export function get<T>(path: string, callback: (data: T) => void): void 
+
 {
+    console.log("developpement:",development);
     fetch(getPath(path))
         .then(res => res.json())
         .then(data => callback(data));

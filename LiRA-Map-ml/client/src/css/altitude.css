@@ -6,7 +6,7 @@
 
 .panel-wrapper {
     position: absolute;
-    top: 20px;
+    top: 150px;
     left: 20px;
     z-index: 999999;
     overflow-y: auto;
@@ -15,8 +15,9 @@
 .panel-checkboxes {
     display: flex;
     flex-direction: column;
-    row-gap: 3px;
+    row-gap: 100px;
     max-height: 45%;
+    background: rgba(50, 50, 50, 0.9)
 }
 
 .panel-checkbox {

@@ -17,7 +17,7 @@ const PaletteEditor: FC<IPaletteEditor> = ( { width, defaultPalette, cursorOptio
     const [show, setShow] = useState<boolean>(false)
 
     const toggleAppear = () => setShow(prev => !prev)
-
+    
     if ( width === undefined || width === 0 ) return null;
 
     return (

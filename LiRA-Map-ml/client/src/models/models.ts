@@ -47,6 +47,15 @@ export interface FilteringOptions{
 	search: string;
 }
 
+export interface FrictionMeta {
+	lon: number,
+	lat: number,
+	friction_value: number
+}
 
+//way dist =1
+// conditions is done
 
-
+// way dist
+// geometry lng lat 1
+// ways ids 

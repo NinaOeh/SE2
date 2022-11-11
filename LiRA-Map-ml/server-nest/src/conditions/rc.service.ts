@@ -26,7 +26,7 @@ export class RCService
             .orderBy( this.knex.raw('id::integer') as any )
 
         return [
-            groupBy<any, LatLngDist>( ways, 'way_id', (cur: any) => ({ lat: cur.pos[1], lng: cur.pos[0], way_dist: cur.way_dist }) ),
+            groupBy<any, LatLngDist>( ways, 'way_id', (cur: any) => ({ lat: cur.pos[1], lng: cur.pos[0], way_dist: cur.way_dist,way_id: cur.way_id }) ),
             ways.reduce( (acc, cur) => { acc[cur.way_id] = cur.length; return acc }, {} )
         ]
     }
