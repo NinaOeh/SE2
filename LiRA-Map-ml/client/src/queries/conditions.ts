@@ -2,8 +2,22 @@ import { MapBounds } from "../models/map"
 import { Condition, WaysConditions } from "../models/path"
 import { asyncPost, post } from "./fetch"
 
+const devURL = 'http://localhost:3002'
+const prodURL = 'http://lirase2.compute.dtu.dk:3002'
+const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+
+const getPath = (p: string) => ( development ? devURL : prodURL ) + p
 
 export const getWaysConditions = ( type: string, zoom: number, setWays: (data: WaysConditions) => void ) => {
+
+    const res =    fetch(getPath('/conditions/ways'))
+    .then(res =>{
+        const a=res.json()
+        console.log("hello",a)
+
+    })
+    .then(data =>console.log( "datat to read",data));
+
     post( '/conditions/ways', { type, zoom }, setWays )
     
 }

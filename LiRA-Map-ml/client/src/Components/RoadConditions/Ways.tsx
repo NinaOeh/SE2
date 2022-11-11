@@ -81,6 +81,9 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         if(friction){
 
             console.log("i am trying to get data from friction")
+
+
+            
             getFrictionConditions((data:WaysConditions)=>{
                 console.log("data that i receive:",data);
                 setWays( data );

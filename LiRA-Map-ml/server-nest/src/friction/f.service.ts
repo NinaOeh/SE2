@@ -5,6 +5,7 @@ import { FrictionConditions, FrictionMeta } from './f.models';
 import { InjectConnection, Knex } from 'nestjs-knex';
 import { Condition, LatLngDist, WaysConditions } from 'src/models';
 import { cursorTo } from 'readline';
+import { Frictions } from 'src/tables';
 
 @Injectable()
 export class FrictionService {
@@ -13,14 +14,15 @@ export class FrictionService {
 
     async getFriction(): Promise<FrictionMeta[]> {
 
-
+        const f=await Frictions(this.knex)
         const frictions = await this.knex
         .from('Friction')
         .select('lat', 'lot', 'friction_value')
        // .whereNot('friction_value', 'Infinity')
         //.andWhereNot('friction_value', 'NaN')
+        const friction=frictions[0]
 
-        console.log("we are getting");
+        console.log("we are getting:",friction);
        return frictions;
         
 
