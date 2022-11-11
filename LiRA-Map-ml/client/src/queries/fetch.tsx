@@ -3,10 +3,12 @@ import axios, { AxiosResponse } from 'axios'
 
 const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-const devURL = 'http://localhost:3002'
-const prodURL = 'se2-A.compute.dtu.dk' //http://lirase2.compute.dtu.dk:3002
+const devURL = 'http://localhost:3002' 
+const prodURL = 'http://lirase2.compute.dtu.dk:3002'
+const VMURL = 'se2-A:3002'
 
 const getPath = (p: string) => ( development ? devURL : prodURL ) + p
+const getMPath = (p: string) => ( development ? devURL : VMURL ) + p
 
 export async function asyncPost<T>(path: string, obj: object ): Promise<AxiosResponse<T, any>>
 {
@@ -28,7 +30,7 @@ export function get<T>(path: string, callback: (data: T) => void): void
 export function getRoleMeas<T>(path: string, role: string, callback: (data: T) => void): void 
 {
     path = path + "/"+role
-    fetch(getPath(path))
+    fetch(getMPath(path))
         .then(res => res.json())
         .then(data => callback(data));
 }
