@@ -77,15 +77,16 @@ const RideDetails: FC = () => {
     const selectMeasurement = (i: number) => (isChecked: boolean) => {        
         const temp = [...measurements]
         temp[i].isActive = isChecked
+
 		if(temp[i].isActive){
 		for(let i2 =0; i2< temp.length;i2++){
 			if(i!=i2){
 				temp[i2].isActive = false;
-			}
-		}
+			}}}
+
+			
 		setMeasurements(temp)
 
-		}
     }
 
 	//shows first all measurements and then the checkbox to add new measurement
@@ -98,7 +99,8 @@ const RideDetails: FC = () => {
 					selectMeasurement={selectMeasurement(i)}
 					editMeasurement={edit_Measurement(m, i)}
 					deleteMeasurement={delete_measurement(i)}
-					state={m.isActive} />
+					state={m.isActive}
+					 />
 			) }
 			{/*+*/}
 			<Checkbox 
