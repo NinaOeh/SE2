@@ -9,6 +9,8 @@ import {
 
 import { Role } from "../models/roles";
 import {getRoles, addRole, deleteRole} from "../queries/roles"
+import { createBrowserHistory } from "history";
+import qs from "qs";
 
 interface RoleProps{
     roles: Role[];
@@ -26,8 +28,17 @@ export const RolesProvider = ({ children }: any) => {
         role : "",
     });
 
+	//save the role also on browser reload
+	const history = createBrowserHistory();
+
     // fetch the saved roles
     useEffect( () => getRoles(setRoles), [] );
+	useEffect(() => {
+		const data = window.localStorage.getItem('Role');
+		if ( data !== null ) setSelectedRole(JSON.parse(data));
+	  }, []);
+	useEffect( () => window.localStorage.setItem('Role', JSON.stringify(selectedRole)), [selectedRole])
+
 
 	//when some things change to fetch the roles again, add some information in the squared brackets 
 	// put for example roles or selectedRoles into the squared brackets
