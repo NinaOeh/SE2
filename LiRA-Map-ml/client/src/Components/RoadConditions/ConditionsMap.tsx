@@ -42,7 +42,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
     },[palette]);
     const {filter,friction}=useGraph();
 
-    const onClick = useCallback((way_id: string, way_length: number) => {
+    const onClick = useCallback((way_id: string, way_length: number,f:number) => {
 
 
 
@@ -53,7 +53,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
             console.log("the filter is:",filter);
             if(!friction){
 
-                if(max>filter){
+                if(max>f){
                     
                         setWayData( {
                             labels: wc.map( p => p.way_dist * way_length ),
@@ -98,7 +98,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
         
            
         } )
-    },[filter])
+    },[])
 
 
     return (

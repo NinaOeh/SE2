@@ -19,7 +19,7 @@ import FilteringSelector from './DropDown';
 interface IWays {
     palette: TRGB[]
     type: string;
-    onClick?: (way_id: string, way_length: number) => void;
+    onClick?: (way_id: string, way_length: number,f:number) => void;
 }
 
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
@@ -48,10 +48,9 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
           
             console.log("im here:",filter);
             if ( ways && onClick )
-                if(max>filter){ 
                
-                    onClick(ways.way_ids[i], ways.way_lengths[i])
-                }
+                    onClick(ways.way_ids[i], ways.way_lengths[i],filter)
+                
 
                 
         },
