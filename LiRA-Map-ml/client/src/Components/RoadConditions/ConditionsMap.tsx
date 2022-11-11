@@ -20,7 +20,7 @@ import FilteringSelector from "./DropDown"
 import { FilteringOptions } from "../../models/models";
 import { useGraph } from "../../context/GraphContext";
 import Menu from "./Menu";
-import Slider from "./Slider";
+import TypeChanger from "./Slider";
 
 interface Props {
     type: ConditionType;
@@ -109,21 +109,13 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                         width={width}
                         cursorOptions={ { scale: max, grid, samples } }
                         onChange={setPalette} />
-            <div className="panel-wrapper">
-                <div className="panel-checkboxes">
-                    
-
-                    <Slider/>
-
-                </div>
-            </div>
-            
-
+    
             <MapWrapper>
                 <Ways palette={palette} type={name} onClick={onClick}  />
 
             </MapWrapper>
-
+            
+            <TypeChanger/>
 
         
 

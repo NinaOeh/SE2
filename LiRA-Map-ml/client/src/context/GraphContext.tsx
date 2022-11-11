@@ -25,6 +25,7 @@ interface ContextProps {
 	filter:number;
 	setfilter:Dispatch<SetStateAction<number>>;
 
+	//todo change when type is ready
 	friction:boolean;
 	setfriction:Dispatch<SetStateAction<boolean>>;
 }
