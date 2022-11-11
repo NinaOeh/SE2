@@ -5,22 +5,24 @@ import { FrictionConditions, FrictionMeta } from './f.models';
 import { InjectConnection, Knex } from 'nestjs-knex';
 import { Condition, LatLngDist, WaysConditions } from 'src/models';
 import { cursorTo } from 'readline';
+import { Frictions } from 'src/tables';
 
 @Injectable()
 export class FrictionService {
 
-    constructor(@InjectConnection('FrictionDB') private readonly knex: Knex) { }
+    constructor(@InjectConnection('friction') private readonly knex: Knex) { }
 
     async getFriction(): Promise<FrictionMeta[]> {
 
-
+        const f=await Frictions(this.knex)
         const frictions = await this.knex
         .from('Friction')
         .select('lat', 'lot', 'friction_value')
-        .whereNot('friction_value', 'Infinity')
-        .andWhereNot('friction_value', 'NaN')
+       // .whereNot('friction_value', 'Infinity')
+        //.andWhereNot('friction_value', 'NaN')
+        const friction=frictions[0]
 
-   
+        console.log("we are getting:",friction);
        return frictions;
         
 

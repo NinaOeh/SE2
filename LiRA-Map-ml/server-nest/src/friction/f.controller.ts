@@ -10,16 +10,13 @@ import { WaysConditions } from 'src/models';
 export class FrictionController {
     constructor(private readonly service: FrictionService) { }
 
-    @Get()
-    getFriction(): Promise<FrictionMeta[]> {
-        console.log('Connection to friction database')
-        return this.service.getFriction()
-    }
+  
 
 
     @Get()
-    //TODO change name
     getFrictionConditions(): Promise<FrictionConditions> {
+        console.log('Connection to friction database')
+
         return this.service.getFrictionConditions();
     }
 

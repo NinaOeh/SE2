@@ -1,4 +1,4 @@
-import { Knex } from "knex"
+import knex, { Knex } from "knex"
 
 interface Way {
     id: string;
@@ -25,3 +25,11 @@ interface ZoomCondition extends RoadCondition {
 }
 
 export const ZoomConditions = (k: Knex) => k.from<ZoomCondition>('zoom_conditions')
+
+interface Friction{
+    lat: number,
+    lon: number,
+    friction_value: number
+};
+
+export const Frictions=(k:Knex)=>k.from<Friction>('friction')
