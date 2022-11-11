@@ -12,6 +12,8 @@ import { GraphProvider } from "../context/GraphContext";
 
 import "../css/road_conditions.css";
 import ClipLoader from "react-spinners/ClipLoader";
+import Menu from "../Components/RoadConditions/Menu";
+import Slider from "../Components/RoadConditions/Slider";
 
 
 const RoadConditions = () => {
@@ -22,6 +24,10 @@ const RoadConditions = () => {
     useEffect( () => {
         setLoading(true);
     } )
+
+
+
+    
     const type: ConditionType = {
         name: 'IRI',
         min: 0,
@@ -41,10 +47,10 @@ const RoadConditions = () => {
                 :
             <div className="road-conditions-wrapper">
                
-             
+                 
                 <ConditionsMap type={type} palette={palette} setPalette={setPalette} setWayData={setWayData} />
                 <ConditionsGraph type={type} palette={palette} data={wayData} />
-                        
+
             </div>
                 }
         </GraphProvider> 
