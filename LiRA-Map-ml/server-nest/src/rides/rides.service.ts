@@ -14,14 +14,18 @@ export class RidesService
 
     async getRides(): Promise<RideMeta[]>
     {   
-        return await 
-        this.knex.with('waypoints_alias', this.knex.select('*').from('MapReferences').whereRaw('"wayPointName" IS NOT NULL').andWhereRaw('("wayPointName" <> \'\') IS NOT FALSE'))
-        .with('measurements_alias', this.knex.select('MeasurementId', 'FK_Trip', 'wayPointName').distinctOn('FK_Trip').from('Measurements').join('waypoints_alias', function() {
-            this.on('MeasurementId', '=', 'FK_MeasurementId')
-        }).orderBy('FK_Trip', 'asc'))
-        .select('Trips.*', 'wayPointName').from('Trips').join('measurements_alias', function() {
-            this.on('TripId', '=', 'FK_Trip')
-        });
+        return await this.knex
+        .select( '*' )
+        .from( { public: 'Trips' } )
+        .whereNot( 'TaskId', 0 )
+        .orderBy('TaskId')
+        // this.knex.with('waypoints_alias', this.knex.select('*').from('MapReferences').whereRaw('"wayPointName" IS NOT NULL').andWhereRaw('("wayPointName" <> \'\') IS NOT FALSE'))
+        // .with('measurements_alias', this.knex.select('MeasurementId', 'FK_Trip', 'wayPointName').distinctOn('FK_Trip').from('Measurements').join('waypoints_alias', function() {
+        //     this.on('MeasurementId', '=', 'FK_MeasurementId')
+        // }).orderBy('FK_Trip', 'asc'))
+        // .select('Trips.*', 'wayPointName').from('Trips').join('measurements_alias', function() {
+        //     this.on('TripId', '=', 'FK_Trip')
+        // });
     }
 
     async getRide( tripId: string, dbName: string ): Promise<BoundedPath>
