@@ -24,19 +24,15 @@ const Checkbox = (props: Props) => {
 				setChecked( update ); 
 			}}
 			onMouseEnter={(e) => {
-				const update = forceState === undefined ? !isChecked : !forceState								
 				var isValid = props.onMouseEnter || null;
 				if(isValid){
 					onMouseEnter!(isChecked, e);
-					setChecked( update );
 				}
 			}}
 			onMouseLeave={(e) => {
-				const update = forceState === undefined ? !isChecked : !forceState								
 				var isValid = props.onMouseLeave || null;
 				if(isValid){
 					onMouseLeave!(isChecked, e);
-					setChecked( update );
 				}
 			}}
 		>

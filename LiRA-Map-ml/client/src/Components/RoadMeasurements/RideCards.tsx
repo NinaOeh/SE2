@@ -88,33 +88,25 @@ const RideCards: FC = ( ) => {
         temp[i].selected = isChecked
         setShowMetas(temp)
 
+        //Could potentially add function if isChecked==true for at skifte farve fra hover-farve til sort.
 
-        if(isChecked) {
-            setSelectedMetas( prev => prev.filter( ({ TripId }) => md.TripId !== TripId ) )
+        if(!isChecked) {
+            return setSelectedMetas( prev => prev.filter( ({ TripId }) => md.TripId !== TripId ) );
         }
-        return isChecked 
-            ? setSelectedMetas( prev => [...prev, md] )
-            : setSelectedMetas( prev => prev.filter( ({ TripId }) => md.TripId !== TripId ) )
+        return
     }
 
     const onMouseEnter = (i: number, isChecked: boolean) => {
-        // if(!isChecked) {
-        //     const temp = [...showMetas][i];
-        //     setSelectedMetas([temp]);
-        // }
         const temp = [...showMetas][i];
         const res = selectedMetas.find(elem => elem.TripId === temp.TripId);
-        console.log("Enter: ", res);
         if(res === undefined){
-            setSelectedMetas([temp]);
+            setSelectedMetas(prev => [...prev, temp]);
         }
     }
 
     const onMouseLeave = (i: number, isChecked: boolean) => {
         const temp = [...showMetas][i];
-        const res = selectedMetas.find(elem => elem.TripId === temp.TripId);
-        console.log("Exit: ", res);
-        if(res !== undefined){
+        if(!isChecked){
             setSelectedMetas(prev => prev.filter( ({ TripId }) => temp.TripId !== TripId ) );
         }
     }
