@@ -15,20 +15,24 @@ import createPopup from '../createPopup';
 import useZoom from '../Map/Hooks/useZoom';
 import DistHotline from '../Map/Renderers/DistHotline';
 import FilteringSelector from './DropDown';
+import {Node} from '../../models/path';
 
 interface IWays {
     palette: TRGB[]
     type: string;
-    onClick?: (way_id: string, way_length: number) => void;
+    onClick?: (way_id: string, way_length: number,filter:number) => void;
 }
 
+
+
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
+    let geo:Node[][]=[]
+
     const zoom = useZoom();
     const { minY, maxY,filter,friction } = useGraph()
 
     const [ways, setWays] = useState<WaysConditions>()
 
-    const stateRef = useRef(0);
 
 
     
@@ -48,27 +52,15 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
           
             console.log("im here:",filter);
             if ( ways && onClick )
-                if(max>filter){ 
                
-                    onClick(ways.way_ids[i], ways.way_lengths[i])
-                }
+                onClick(ways.way_ids[i], ways.way_lengths[i],filter)
+                
 
                 
         },
         
-        mouseover:(e,i,p)=>{
-            if(ways){
-                const max = ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
-                if(max<filter){
-                    p.setStyle({opacity: 0,color:"#e6e"})
-                    
-                }
-
-            }
-
-        }
+       
         
-        ,
      
 
 
@@ -94,28 +86,60 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         }
         else{
             getWaysConditions(type, z, (data: WaysConditions) => {
+
+                const g:Node={lat:0,lng:0,way_dist:0};
+                
+                const s:string[]=[]
+                const l:number[]=[]
+                
+
+                for(let i=data.conditions.length-1;i>=0;i--){
+                    const max=data.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+                    if(max>filter){
+                        geo.push(data.geometry[i]);
+                        s.push(data.way_ids[i]);
+                        l.push(data.way_lengths[i]);
+
+
+                    }
+                }
+                data.geometry=geo;
+                data.way_ids=s;
+                data.way_lengths=l;
+
+                
+                data.conditions.filter(c=>{
+                    const max=c.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+                    return max>filter
+
+                })
+                
+                
                 setWays( data );
-                stateRef.current = 10000;
+             
+
+
+
+
 
             } )
     }
 
-    }, [zoom,friction] )
+    }, [zoom,friction,filter] )
+
+
 
     
-    
-
-    useEffect(()=>{
-        if(ways){
-            console.log("geometry",ways.geometry);
-
-           
+    if(ways){
+        console.log("ways conditions:",ways.conditions)
         }
-    }
-    ,[filter])
+
+    
+    
+
+
  
 
-  
     return (
         <>
         { ways 

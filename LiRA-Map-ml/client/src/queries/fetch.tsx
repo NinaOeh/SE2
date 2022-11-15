@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 
 const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-const devURL = 'http://localhost:3002'
+const devURL = 'http://se2-a:3002'
 const prodURL = 'http://lirase2.compute.dtu.dk:3002'
 
 const getPath = (p: string) => ( development ? devURL : prodURL ) + p
@@ -26,6 +26,18 @@ export function get<T>(path: string, callback: (data: T) => void): void
         .then(res => res.json())
         .then(data => callback(data));
 }
+
+export function getFriction<T>(path: string, callback: (data: T) => void): void 
+{   
+    const p=devURL +path
+    fetch(p)
+    .then(res => res.json())
+    .then(data => callback(data));
+
+}
+
+
+
 
 export function getRoleMeas<T>(path: string, role: string, callback: (data: T) => void): void 
 {

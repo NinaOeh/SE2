@@ -14,7 +14,6 @@ export class FrictionService {
 
     async getFriction(): Promise<FrictionMeta[]> {
 
-        const f=await Frictions(this.knex)
         const frictions = await this.knex
         .from('Friction')
         .select('lat', 'lot', 'friction_value')

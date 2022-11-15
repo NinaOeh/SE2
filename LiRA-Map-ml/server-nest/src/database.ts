@@ -73,9 +73,8 @@ export const POSTGIS_DB_CONFIG = {
 export const FRICTION_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host: "localhost",
+        host: "se2-A.compute.dtu.dk",
         port: 5432,
-        debug:true,
         user: "postgres",
         password: "postgres",
         database: "postgres",

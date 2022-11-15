@@ -25,7 +25,6 @@ export default class DistRenderer extends Renderer<DistData> {
         this.conditions = args[0][1];
         this.edgess = [];
         this.dotHover = undefined;
-        console.log("arguments a ver",args);
       
     }
 
