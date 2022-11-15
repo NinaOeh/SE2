@@ -79,10 +79,10 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                         tension: 0.1,
                         data: [],
                     } ]
-                } )
+                } );
 
-                
-               /**  const popup=createPopup();
+               /*else{ 
+               const popup=createPopup();
                 popup( {
                     icon: "warning",
                     title: `This trip doesn't have any value with the ira wanted   `,

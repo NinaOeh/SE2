@@ -55,6 +55,10 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
                
                     onClick(ways.way_ids[i], ways.way_lengths[i])
                 }
+                else {
+                    console.log("Trying to get way_id of Geometry: ", ways.way_ids[i], " ", ways.way_lengths[i], " ", ways.geometry)
+                }
+                
 
                 
         },
