@@ -74,8 +74,9 @@ export const FRICTION_DB_CONFIG = {
     connection: {
         host: "localhost",
         port: 5432,
-        user: DB_USER_FRICTION,
-        password: DB_PASSWORD_FRICTION,
+        debug:true,
+        user: "postgres",
+        password: "postgres",
         database: "postgres",
     }
 }

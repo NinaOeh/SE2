@@ -15,6 +15,9 @@ export class RCController
         return this.service.getWaysConditions(type, zoom);
     }
 
+
+    
+
     @Get('way')
     getWayConditions( @Query() query: { wayId: string, type: string } ): Promise<Condition[]> {
         const { wayId, type } = query;

@@ -1,4 +1,4 @@
-import { get, put } from "./fetch";
+import { put, getR } from "./fetch";
 import { Dispatch, SetStateAction } from "react"
 import { Role } from "../models/roles"
 
@@ -6,7 +6,7 @@ import { Role } from "../models/roles"
 export const getRoles = ( callback: Dispatch<SetStateAction<Role[]>> ) => {
     console.log("We got here")
     const res = fetch("/roles");
-    get( '/roles', callback )
+    getR( '/roles', callback )
 }
 
 export const addRole = (role: string) => {

@@ -30,7 +30,7 @@ const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {
             <Checkbox 
                 forceState={meta.selected}
                 className="ride-card-container"
-                html={<div><b>{positionDisplays.StartPosition + " -> " + positionDisplays.EndPosition}</b><br></br>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
+                html={<div>{positionDisplays.StartPosition + " -> "}<br/>{positionDisplays.EndPosition}<br/>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
                 }} />
@@ -38,9 +38,9 @@ const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {
     }
 
     return <List
-        width={170}
+        width={190}
         height={2500}
-        rowHeight={61}
+        rowHeight={100}
         rowRenderer={renderRow}
         rowCount={showMetas.length} /> 
 }

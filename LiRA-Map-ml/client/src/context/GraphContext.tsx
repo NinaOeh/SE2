@@ -24,6 +24,10 @@ interface ContextProps {
 
 	filter:number;
 	setfilter:Dispatch<SetStateAction<number>>;
+
+	//todo change when type is ready
+	friction:boolean;
+	setfriction:Dispatch<SetStateAction<boolean>>;
 }
 
 const GraphContext = createContext({} as ContextProps);
@@ -39,6 +43,8 @@ export const GraphProvider = ({ children }: any) => {
 	const [filter, setfilter]=useState<number>(0) //ENUMERATION UPGRADE 
 	//have another for FMT 
 
+	const[friction,setfriction]=useState<boolean>(false);
+
 	const { minX, maxX, minY, maxY } = bounds;
 
 	return (
@@ -47,7 +53,8 @@ export const GraphProvider = ({ children }: any) => {
 				minX, maxX, minY, maxY,
 				addBounds, remBounds,
 				dotHover, setDotHover,
-				filter, setfilter
+				filter, setfilter,
+				friction, setfriction
 			}}
 		>
 			{children}

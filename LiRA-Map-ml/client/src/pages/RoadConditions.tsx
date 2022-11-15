@@ -24,6 +24,10 @@ const RoadConditions = () => {
     useEffect( () => {
         setLoading(true);
     } )
+
+
+
+    
     const type: ConditionType = {
         name: 'IRI',
         min: 0,

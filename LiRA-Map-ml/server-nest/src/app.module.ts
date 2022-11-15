@@ -31,8 +31,7 @@ import { FrictionService } from './friction/f.service';
 import { RolesController } from './roles/roles.controller';
 import { RolesService } from './roles/roles.service';
 
-import { LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG } from './database';
-import { FRICTION_DB_CONFIG } from './second_database';
+import { LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG, FRICTION_DB_CONFIG } from './database';
 
 
 const database = (config: any, name: string) => {

@@ -7,9 +7,10 @@ import { HotlineOptions } from 'react-leaflet-hotline';
 import { HotlineEventHandlers } from 'react-leaflet-hotline/lib/types';
 import Swal from 'sweetalert2';
 import { useGraph } from '../../context/GraphContext';
-import { FilteringOptions } from '../../models/models';
+import { FilteringOptions, FrictionMeta } from '../../models/models';
 import { Condition, WaysConditions } from '../../models/path';
 import { getWaysConditions } from '../../queries/conditions';
+import {  getFrictionConditions } from '../../queries/friction';
 import createPopup from '../createPopup';
 import useZoom from '../Map/Hooks/useZoom';
 import DistHotline from '../Map/Renderers/DistHotline';
@@ -18,12 +19,12 @@ import FilteringSelector from './DropDown';
 interface IWays {
     palette: TRGB[]
     type: string;
-    onClick?: (way_id: string, way_length: number) => void;
+    onClick?: (way_id: string, way_length: number,f:number) => void;
 }
 
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     const zoom = useZoom();
-    const { minY, maxY,filter,setfilter } = useGraph()
+    const { minY, maxY,filter,friction } = useGraph()
 
     const [ways, setWays] = useState<WaysConditions>()
 
@@ -32,11 +33,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     
 
-    useEffect(()=>{
-
-        console.log("yeye we have a here:",filter);
-        stateRef.current=filter;
-    },[filter]);
+ 
     
 
     const options = useMemo<HotlineOptions>( () => ({
@@ -46,16 +43,16 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     
     const handlers = useMemo<HotlineEventHandlers>( () => ({
         click: (_,  i) => {
+            const max = ways? ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value :0;
+
           
             console.log("im here:",filter);
             if ( ways && onClick )
-                if(stateRef.current<10000){
-                    onClick(ways.way_ids[i], ways.way_lengths[i])
-                }
-                else{
-                    onClick(ways.way_ids[i], ways.way_lengths[i])
+               
+                    onClick(ways.way_ids[i], ways.way_lengths[i],filter)
+                
 
-                }
+                
         },
         
         mouseover:(e,i,p)=>{
@@ -79,15 +76,32 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     useEffect( () => {
         if ( zoom === undefined ) return;
         const z = Math.max(0, zoom - 12)
-        getWaysConditions(type, z, (data: WaysConditions) => {
-            setWays( data );
-            stateRef.current = 10000;
 
-        } )
+        if(friction){
 
-    }, [zoom] )
+            console.log("i am trying to get data from friction")
 
 
+            
+            getFrictionConditions((data:WaysConditions)=>{
+                console.log("data that i receive:",data);
+                setWays( data );
+
+
+            })
+                
+        }
+        else{
+            getWaysConditions(type, z, (data: WaysConditions) => {
+                setWays( data );
+                stateRef.current = 10000;
+
+            } )
+    }
+
+    }, [zoom,friction] )
+
+    
     
 
     useEffect(()=>{
