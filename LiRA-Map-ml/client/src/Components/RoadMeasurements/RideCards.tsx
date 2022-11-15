@@ -17,10 +17,12 @@ import { unmountComponentAtNode } from "react-dom";
 
 interface CardsProps {
     showMetas: SelectMeta[]
-    onClick: (meta: SelectMeta, i: number, isChecked: boolean) => void; 
+    onClick: (meta: SelectMeta, i: number, isChecked: boolean) => void;
+    onMouseEnter?: (i: number, isChecked: boolean) => void;
+    onMouseLeave?: (i: number, isChecked: boolean) => void;
 }
 
-const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {  
+const Cards: FC<CardsProps> = ( { showMetas, onClick, onMouseEnter, onMouseLeave } ) => {  
     const renderRow: ListRowRenderer = ( { index, key, style } ): ReactNode => {
         const meta = showMetas[index];
 
@@ -33,7 +35,14 @@ const Cards: FC<CardsProps> = ( { showMetas, onClick } ) => {
                 html={<div>{positionDisplays.StartPosition + " -> "}<br/>{positionDisplays.EndPosition}<br/>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
-                }} />
+                }}
+                onMouseEnter={(isChecked) => {
+                    onMouseEnter!(index, isChecked);
+                }}
+                onMouseLeave={(isChecked) => {
+                    onMouseLeave!(index, isChecked);
+                }}
+                />
         </div>
     }
 
@@ -79,16 +88,41 @@ const RideCards: FC = ( ) => {
         temp[i].selected = isChecked
         setShowMetas(temp)
 
+
+        if(isChecked) {
+            setSelectedMetas( prev => prev.filter( ({ TripId }) => md.TripId !== TripId ) )
+        }
         return isChecked 
             ? setSelectedMetas( prev => [...prev, md] )
             : setSelectedMetas( prev => prev.filter( ({ TripId }) => md.TripId !== TripId ) )
     }
-        
 
+    const onMouseEnter = (i: number, isChecked: boolean) => {
+        // if(!isChecked) {
+        //     const temp = [...showMetas][i];
+        //     setSelectedMetas([temp]);
+        // }
+        const temp = [...showMetas][i];
+        const res = selectedMetas.find(elem => elem.TripId === temp.TripId);
+        console.log("Enter: ", res);
+        if(res === undefined){
+            setSelectedMetas([temp]);
+        }
+    }
+
+    const onMouseLeave = (i: number, isChecked: boolean) => {
+        const temp = [...showMetas][i];
+        const res = selectedMetas.find(elem => elem.TripId === temp.TripId);
+        console.log("Exit: ", res);
+        if(res !== undefined){
+            setSelectedMetas(prev => prev.filter( ({ TripId }) => temp.TripId !== TripId ) );
+        }
+    }
+    
     return (
         <div className="ride-list">
             <OptionsSelector onChange={onChange}/>
-            <Cards showMetas={showMetas} onClick={onClick} />            
+            <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>            
         </div>
     )
 }
