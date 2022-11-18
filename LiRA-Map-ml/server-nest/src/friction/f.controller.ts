@@ -12,18 +12,18 @@ export class FrictionController {
 
   
     @Get()
-    getFriction(): Promise<FrictionMeta[]> {
-        console.log('we are in the friction controller')
-
-        return this.service.getFriction();
-    }
-
-    @Get("\con")
     getFrictionConditions(): Promise<FrictionConditions> {
-        console.log('Connection to friction database')
+        console.log('we are in the friction controller')
 
         return this.service.getFrictionConditions();
     }
+
+    //@Get("\con")
+    //getFrictionConditions(): Promise<FrictionConditions> {
+    //    console.log('Connection to friction database')
+
+    //    return this.service.getFrictionConditions();
+    //}
 
 
 }
