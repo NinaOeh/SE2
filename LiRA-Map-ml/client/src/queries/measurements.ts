@@ -4,6 +4,7 @@ import { getRoleMeas, put } from "./fetch";
 
 export const getMeasurements = ( role: string, callback: React.Dispatch<React.SetStateAction<ActiveMeasProperties[]>> ) => {
     getRoleMeas('/measurements', role, (data: MeasProperties[]) => {
+        console.log("the role is: ", role)
         console.log("the collected measurements: ",data);
         callback( data.map( meas => { 
             return { ...meas, isActive: false } 

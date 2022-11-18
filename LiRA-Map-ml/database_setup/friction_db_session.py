@@ -9,7 +9,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from typing import Generator
 
 FRICTION_DATABASE_URL = settings.DB_FRICTION_URL
-print(FRICTION_DATABASE_URL)
+print(f"Friction Database:{FRICTION_DATABASE_URL}")
 friction_engine = create_engine(FRICTION_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=friction_engine)

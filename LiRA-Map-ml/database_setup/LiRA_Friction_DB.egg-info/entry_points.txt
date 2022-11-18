@@ -1,3 +1,4 @@
 [console_scripts]
+test_query = scripts.test_query:test_query
 update_database = scripts.update_database:update_database
 

@@ -72,7 +72,43 @@
                 "isActive": false
             }
         ],
-        "Hans": [],
+        "Hans": [
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            }
+        ],
         "Hallo": [
             {
                 "rendererName": "hotline",
@@ -110,8 +146,78 @@
                 "isActive": false
             }
         ],
-        "Hallihallo": [],
-        "hickup": [],
+        "Hallihallo": [
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.brk_trq_req_el",
+                "name": "Electric brake torque",
+                "hasValue": true,
+                "isActive": false
+            }
+        ],
         "hihihi": [],
         "": [
             {

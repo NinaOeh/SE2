@@ -13,20 +13,22 @@ export class FrictionService {
     constructor(@InjectConnection('friction') private readonly knex: Knex) { }
 
     async getFriction(): Promise<FrictionMeta[]> {
-
-        const f=await Frictions(this.knex)
+        console.log("We are in the friction service")
         const frictions = await this.knex
-        .from('Friction')
-        .select('lat', 'lot', 'friction_value')
+            .from( { public: 'Friction' } )
+            .select('lat', 'lon', 'friction_value')
+            //.select('*')
+        
        // .whereNot('friction_value', 'Infinity')
         //.andWhereNot('friction_value', 'NaN')
         const friction=frictions[0]
 
         console.log("we are getting:",friction);
-       return frictions;
+        return frictions;
         
 
     }
+
 
     async getFrictionConditions(): Promise<FrictionConditions>
     {

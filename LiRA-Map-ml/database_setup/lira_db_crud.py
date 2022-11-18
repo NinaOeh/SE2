@@ -21,9 +21,10 @@ def get_measurements(session: orm.Session) -> List[Measurements]:
 # obd.rpm_fl
 
 def get_rl_ref(session: orm.Session) -> List[MapReferences]:
-    trip_id = '4f4b5de3-07b4-440e-b66e-b67069538b9e'
+    trip_id = '3decdffe-5c6e-4f3c-a4ea-868ca34a3d22'
+    print(trip_id)
     return (session.query(MapReferences)
-        .join(MapReferences.FK_Measurement)
+        .join(Measurements, Measurements.MeasurementId == MapReferences.FK_MeasurementId, isouter=True)
         .where(MapReferences.lat_MapMatched != None,
             MapReferences.lon_MapMatched != None,
             Measurements.lat != None,
@@ -36,7 +37,7 @@ def get_rl_ref(session: orm.Session) -> List[MapReferences]:
 def get_rl_1(session: orm.Session) -> List[Measurements]:
     trip_id = '3decdffe-5c6e-4f3c-a4ea-868ca34a3d22'
     return(session.query(Measurements)
-        .join(MapReferences, Measurements.MeasurementId == MapReferences.FK_MeasurementId)
+        .join(MapReferences, Measurements.MeasurementId == MapReferences.FK_MeasurementId, isouter=True)
         .where(MapReferences.lat_MapMatched != None,
             MapReferences.lon_MapMatched != None,
             Measurements.lat != None,
@@ -44,7 +45,7 @@ def get_rl_1(session: orm.Session) -> List[Measurements]:
             Measurements.message != None,
             Measurements.T == "obd.rpm_rl",
             Measurements.FK_Trip == trip_id,)
-        .order_by(Measurements.MeasurementId).limit(100000).all()
+        .order_by(Measurements.MeasurementId).limit(100).all()
         )
 
 def get_fl_1(session: orm.Session) -> List[Measurements]:
@@ -58,7 +59,7 @@ def get_fl_1(session: orm.Session) -> List[Measurements]:
             Measurements.message != None,
             Measurements.T == "obd.rpm_rl",
             Measurements.FK_Trip == trip_id,)
-        .order_by(Measurements.MeasurementId).limit(100000).subquery())
+        .order_by(Measurements.MeasurementId).limit(100).subquery())
     return(session.query(Measurements)
         .where(Measurements.T == "obd.rpm_rr")
         .filter(Measurements.TS_or_Distance.in_(subquery)).all()

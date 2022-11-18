@@ -74,14 +74,20 @@ const SelectRole : FC = ( ) => {
         setSelectedRole({role:e});
         setRoleChosen(true)
       };
+    
+    let roletext;
+    if (selectedRole.role == ""){
+        <h3>No role selected. Please choose or add a new role.</h3>
+    }
+    else{
+        roletext = <h3>Selected role: {selectedRole.role} </h3>
+    }
 
     return (
         <>
         <div className='signup-wrapper'>
-        {roleChosen
-                ? <h3>Selected role: {selectedRole.role} </h3>
-                : <h3>No role selected. Please choose or add a new role.</h3>}
-                <p/>
+            {roletext}
+            <p/>
             <div className='signup-input-container'>
                 <div>
                 <h5> Select Role </h5>

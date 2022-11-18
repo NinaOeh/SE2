@@ -16,6 +16,7 @@ setup(
     entry_points={
         'console_scripts': [
             'update_database = scripts.update_database:update_database',
+            'test_query = scripts.test_query:test_query',
         ]
     }
 )
