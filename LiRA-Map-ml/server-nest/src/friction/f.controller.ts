@@ -11,9 +11,14 @@ export class FrictionController {
     constructor(private readonly service: FrictionService) { }
 
   
-
-
     @Get()
+    getFriction(): Promise<FrictionMeta[]> {
+        console.log('we are in the friction controller')
+
+        return this.service.getFriction();
+    }
+
+    @Get("\con")
     getFrictionConditions(): Promise<FrictionConditions> {
         console.log('Connection to friction database')
 
