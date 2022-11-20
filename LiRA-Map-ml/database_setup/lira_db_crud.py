@@ -2,8 +2,7 @@
 from lira_db_model import Base, Measurements, MapReferences
 import sqlalchemy.orm as orm
 from typing import List, Tuple
-import uuid
-import sqlalchemy
+import datetime
 from sqlalchemy import cast
 
 
@@ -20,10 +19,11 @@ def get_measurements(session: orm.Session) -> List[Measurements]:
 # obd.rpm_rl
 # obd.rpm_fl
 
-def get_rl_ref(session: orm.Session) -> List[MapReferences]:
-    trip_id = '3decdffe-5c6e-4f3c-a4ea-868ca34a3d22'
-    print(trip_id)
-    return (session.query(MapReferences)
+def get_rl_mapref(session: orm.Session, 
+                  offset: int,
+                  limit: int,
+                  trip_id: str) -> List[Tuple[MapReferences, Measurements]]:
+    return (session.query(MapReferences, Measurements)
         .join(Measurements, Measurements.MeasurementId == MapReferences.FK_MeasurementId, isouter=True)
         .where(MapReferences.lat_MapMatched != None,
             MapReferences.lon_MapMatched != None,
@@ -31,38 +31,22 @@ def get_rl_ref(session: orm.Session) -> List[MapReferences]:
             Measurements.lon != None,
             Measurements.T == "obd.rpm_rl",
             Measurements.FK_Trip == trip_id,)
-        .order_by(Measurements.MeasurementId).limit(100).all()
+        .order_by(Measurements.TS_or_Distance)
+        .limit(limit).offset(offset).all()
         )
 
-def get_rl_1(session: orm.Session) -> List[Measurements]:
-    trip_id = '3decdffe-5c6e-4f3c-a4ea-868ca34a3d22'
+def get_fl(session: orm.Session, latest_time: datetime.datetime, 
+           earliest_time: datetime.datetime, trip_id: str) -> List[Measurements]:
     return(session.query(Measurements)
-        .join(MapReferences, Measurements.MeasurementId == MapReferences.FK_MeasurementId, isouter=True)
-        .where(MapReferences.lat_MapMatched != None,
-            MapReferences.lon_MapMatched != None,
+        .where(
+            Measurements.T == "obd.rpm_fl",
+            Measurements.FK_Trip == trip_id,
             Measurements.lat != None,
             Measurements.lon != None,
-            Measurements.message != None,
-            Measurements.T == "obd.rpm_rl",
-            Measurements.FK_Trip == trip_id,)
-        .order_by(Measurements.MeasurementId).limit(100).all()
-        )
-
-def get_fl_1(session: orm.Session) -> List[Measurements]:
-    trip_id = '3decdffe-5c6e-4f3c-a4ea-868ca34a3d22'
-    subquery = (session.query(Measurements.TS_or_Distance)
-        .join(MapReferences, Measurements.MeasurementId == MapReferences.FK_MeasurementId)
-        .where(MapReferences.lat_MapMatched != None,
-            MapReferences.lon_MapMatched != None,
-            Measurements.lat != None,
-            Measurements.lon != None,
-            Measurements.message != None,
-            Measurements.T == "obd.rpm_rl",
-            Measurements.FK_Trip == trip_id,)
-        .order_by(Measurements.MeasurementId).limit(100).subquery())
-    return(session.query(Measurements)
-        .where(Measurements.T == "obd.rpm_rr")
-        .filter(Measurements.TS_or_Distance.in_(subquery)).all()
+            Measurements.TS_or_Distance <= latest_time,
+            Measurements.TS_or_Distance >= earliest_time)
+        .order_by(Measurements.TS_or_Distance)
+        .all()
         )
 
 def get_rl_2(session: orm.Session) -> List[Measurements]:

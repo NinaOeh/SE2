@@ -18,7 +18,7 @@ def estimateFrictionCoefficient(rpm_rl: np.ndarray, rpm_fl: np.ndarray) -> np.nd
     r, beta_fl, beta_0 = 0.31, 3, 1
 
     alpha_v = np.multiply(rpm_rl, r)
-    f = np.divide(np.multiply(beta_fl, r),(np.multiply(rpm_fl, r) - alpha_v))
+    f = np.divide(np.multiply(beta_fl, r)*100,(np.multiply(rpm_fl, r) - alpha_v)*100)
     mu = (np.log(f + 1)) ** (1 / beta_0)
     return abs(mu)
 
@@ -41,87 +41,90 @@ def extract_measurement_value(message_string: str) -> float:
     if 'obd.rpm_rl.value' in message_keys:
         return message_dict['obd.rpm_rl.value']
 
-def extract_measurement_value(message_string=str) -> float:
+def extract_waypointindex(message_string: str) -> float:
     '''
-        Extract the measurement value from the message
+        Extract the way point index value from the message
     '''
     message_dict = json.loads(message_string)
     message_keys = message_dict.keys()
-    if 'obd.rpm_fl.value' in message_keys:
-        print("here is a measurement")
-        return message_dict['obd.rpm_fl.value']
-
-    if 'obd.rpm_rl.value' in message_keys:
-        print("here is a measurement")
-        return message_dict['obd.rpm_rl.value']
+    if 'waypoint_index' in message_keys:
+        return message_dict['waypoint_index']
+    else:
+        return 'no waypoint index'
 
 
-def get_friction_info(friction_df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
-    def parse(row):
-        return friction_db_schema.MeasurementInfo(
-            MeasurementId=row['MeasurementId'],
-            T=row['T'],
-            friction_value=calculate_friction(row['message']),
-            message=row['message']
-        )
-    return (parse(row) for _, row in friction_df.iterrows())
+# def get_friction_info(friction_df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
+#     def parse(row):
+#         return friction_db_schema.MeasurementInfo(
+#             MeasurementId=row['MeasurementId'],
+#             T=row['T'],
+#             friction_value=calculate_friction(row['message']),
+#             message=row['message']
+#         )
+#     return (parse(row) for _, row in friction_df.iterrows())
 
-def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPMs]:
-    def parse(row):
-        rpm = extract_measurement_value(row['message'])
-        if rpm!=None:
-            print("Here we are")
-            return friction_db_schema.RPMs(
-                MeasurementId=row['MeasurementId'],
-                TS_or_Distance=row['TS_or_Distance'],
-                lat=row['lat'],
-                lon=row['lon'],
-                rpm_value_rl=extract_measurement_value(row['message']),
-                MapReferenceId=row['MapReferenceId'],
-                lat_MapMatched=row['lat_MapMatched'],
-                lon_MapMatched=row['lon_MapMatched'],
-                wayPointName=row['wayPointName'],
-                WayPoint=row['WayPoint'],
-                FK_Trip=row['FK_Trip']
-            )
-        else:
-            pass
-    return (parse(row) for _, row in df.iterrows())
+# def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPMs]:
+#     def parse(row):
+#         rpm = extract_measurement_value(row['message'])
+#         if rpm!=None:
+#             print("Here we are")
+#             return friction_db_schema.RPMs(
+#                 MeasurementId=row['MeasurementId'],
+#                 TS_or_Distance=row['TS_or_Distance'],
+#                 lat=row['lat'],
+#                 lon=row['lon'],
+#                 rpm_value_rl=extract_measurement_value(row['message']),
+#                 MapReferenceId=row['MapReferenceId'],
+#                 lat_MapMatched=row['lat_MapMatched'],
+#                 lon_MapMatched=row['lon_MapMatched'],
+#                 wayPointName=row['wayPointName'],
+#                 WayPoint=row['WayPoint'],
+#                 FK_Trip=row['FK_Trip']
+#             )
+#         else:
+#             pass
+#     return (parse(row) for _, row in df.iterrows())
 
-def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPMsReduced]:
-    def parse(row):
-        rpm = extract_measurement_value(row['message'])
-        if rpm!=None:
-            return friction_db_schema.RPMsReduced(
-                MeasurementId=row['MeasurementId'],
-                TS_or_Distance=row['TS_or_Distance'],
-                rpm_value_fl=extract_measurement_value(row['message']),
-                FK_Trip=row['FK_Trip']
-            )
-        else:
-            pass
-    return (parse(row) for _, row in df.iterrows())
+# def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPMsReduced]:
+#     def parse(row):
+#         rpm = extract_measurement_value(row['message'])
+#         if rpm!=None:
+#             return friction_db_schema.RPMsReduced(
+#                 MeasurementId=row['MeasurementId'],
+#                 TS_or_Distance=row['TS_or_Distance'],
+#                 rpm_value_fl=extract_measurement_value(row['message']),
+#                 FK_Trip=row['FK_Trip']
+#             )
+#         else:
+#             pass
+#     return (parse(row) for _, row in df.iterrows())
 
 
-def get_rpm_info_rl_2(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl]:
+def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl]:
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
-            print("Here we are")
             return friction_db_schema.RPM_rl(
                 MeasurementId=row['MeasurementId'],
                 TS_or_Distance=row['TS_or_Distance'],
                 T=row['T'],
-                lat=row['lat'],
-                lon=row['lon'],
+                lat_MapMatched=row['lat_MapMatched'],
+                lon_MapMatched=row['lon_MapMatched'],
                 rpm_value_rl=extract_measurement_value(row['message']),
-                FK_Trip=row['FK_Trip']
+                FK_Trip=row['FK_Trip'],
+                WayPoint_index=extract_waypointindex(row['WayPoint']),
+	            wayPoint_Name=row['wayPointName'],
+	            legDistance_MapMatched=row['legDistance_MapMatched'],
+	            Way_id='to be done',
+	            Node_id='to be done',
+                lane=row['lane'],
+                direction=row['direction']
             )
         else:
             pass
     return (parse(row) for _, row in df.iterrows())
 
-def get_rpm_info_fl_2(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
+def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:

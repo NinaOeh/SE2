@@ -15,16 +15,32 @@ def insert_friction_data(
     friction_value: float,
     lat: float,
     lon: float,
-    FK_Trip: str
+    FK_Trip: str,
+    WayPoint_index: str,
+    wayPoint_Name: str,
+    legDistance_MapMatched: float,
+    Way_id: str,
+    Node_id: str,
+    lane: int,
+    direction: str,
+    MeasurementId_rl: str
 ) -> None:
     friction_row = Friction(
         friction_value=friction_value,
-        lat=lat,
-        lon=lon,
+        mapped_lat=lat,
+        mapped_lon=lon,
         rpm_fl_value=rpm_fl,
         rpm_rl_value=rpm_rl,
         TS_or_Distance=timestamp,
-        FK_Trip=FK_Trip
+        FK_Trip=FK_Trip,
+        MeasurementId_rl=MeasurementId_rl,
+        Node_id=Node_id,
+        WayPoint_index=WayPoint_index,
+        wayPoint_Name=wayPoint_Name,
+        legDistance_MapMatched=legDistance_MapMatched,
+        Way_id=Way_id,
+        lane=lane,
+        direction=direction
         )
     session.add(friction_row)
 

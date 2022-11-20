@@ -14,12 +14,21 @@ class Friction(Base):
     
 	FrictionId = sqla.Column(sqla.Integer, primary_key=True)
 	TS_or_Distance = sqla.Column(sqla.DateTime)
-	lat = sqla.Column(sqla.Float)
-	lon = sqla.Column(sqla.Float)
+	mapped_lat = sqla.Column(sqla.Float)
+	mapped_lon = sqla.Column(sqla.Float)
 	rpm_fl_value = sqla.Column(sqla.Float)
 	rpm_rl_value = sqla.Column(sqla.Float)
 	friction_value = sqla.Column(sqla.Float)
 	FK_Trip = sqla.Column(sqla.String)
+	MeasurementId_rl = sqla.Column(sqla.String, unique=True)
+	Node_id = sqla.Column(sqla.Integer)
+	WayPoint_index = sqla.Column(sqla.String)
+	wayPoint_Name = sqla.Column(sqla.String)
+	legDistance_MapMatched = sqla.Column(sqla.Float)
+	Way_id = sqla.Column(sqla.String)
+	Node_id = sqla.Column(sqla.String)
+	lane = sqla.Column(sqla.Integer)
+	direction = sqla.Column(sqla.String)
 
 class RPMs(Base):
 	__tablename__ = 'RPMs'

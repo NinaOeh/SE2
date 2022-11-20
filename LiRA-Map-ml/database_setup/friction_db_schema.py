@@ -38,10 +38,17 @@ class RPM_rl(pydantic.BaseModel):
 	MeasurementId: int
 	TS_or_Distance: datetime.datetime
 	T: str
-	lat: float
-	lon: float
+	lon_MapMatched: float
+	lat_MapMatched: float
 	rpm_value_rl: float
 	FK_Trip: str
+	WayPoint_index: str
+	wayPoint_Name: str
+	legDistance_MapMatched: float
+	Way_id: str
+	Node_id: str
+	lane: int
+	direction: str
 
 
 class RPM_fl(pydantic.BaseModel):    

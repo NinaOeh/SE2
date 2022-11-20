@@ -18,9 +18,11 @@ class MapReferences(pydantic.BaseModel):
 	wayPointName: str
 	#legSummary_MapMatched = sqla.Column(sqla.String)
 	#offset: str
-	#lane: str
-	#direction: str
+	lane: str
+	direction: str
 	#PossibleMatchingRoutes = sqla.Column(sqla.Date) 
-	WayPoint: str
+	legDistance_MapMatched: float
+	WayPoint: str #will tell us the WayPoint
 	MeasurementId: int
+	FK_Section: str
 	
