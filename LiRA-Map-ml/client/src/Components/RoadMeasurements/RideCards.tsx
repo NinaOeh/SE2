@@ -89,8 +89,13 @@ const RideCards: FC = ( ) => {
         setShowMetas(temp)
 
         //Could potentially add function if isChecked==true for at skifte farve fra hover-farve til sort.
-
-        if(!isChecked) {
+        if(isChecked) {
+            const res = selectedMetas.find(elem => elem.TripId === temp[i].TripId);
+            if(res !== undefined){
+                setSelectedMetas(prev => prev.filter( ({ TripId }) => temp[i].TripId !== TripId ) );
+            }
+            setSelectedMetas(prev => [...prev, temp[i]]);
+        } else {
             return setSelectedMetas( prev => prev.filter( ({ TripId }) => md.TripId !== TripId ) );
         }
         return
