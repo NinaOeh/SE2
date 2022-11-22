@@ -52,7 +52,7 @@ def merge_rl_fl(
     print(f"Interpolated_dataframe with droped na {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     #only keep every 30th item
-    merged_data = merged_data.iloc[1::20, :]
+    merged_data = merged_data.iloc[1::50, :]
     print(f"merged dataframe, every 30th row kept {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     return merged_data
@@ -90,7 +90,8 @@ def convert_lira_measurements(offset: int,
             WayPoint=measurement.WayPoint,
             MeasurementId=measurement.FK_MeasurementId,
             legDistance_MapMatched=measurement.legDistance_MapMatched if measurement.legDistance_MapMatched != None else 0,
-            FK_Section=measurement.FK_Section if measurement.FK_Section != None else '0'
+            FK_Section=measurement.FK_Section if measurement.FK_Section != None else '0',
+            PossibleMatchingRoutes=measurement.PossibleMatchingRoutes
             )
     # extracting the rpm_rl measurements
     def getrpmrl_measurement(measurement: Measurements) -> lira_db_schema.Measurement:
@@ -192,7 +193,6 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
                         )
                 db.commit()   
         except sqlalchemy.exc.IntegrityError as exc:
-            print("An unknown error uccured")
             if 'duplicate key value violates unique constraint' in str(exc):
                 print(f'The Friction data for id {fric_info.MeasurementId} is already imported')
                 return

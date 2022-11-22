@@ -25,4 +25,5 @@ class MapReferences(pydantic.BaseModel):
 	WayPoint: str #will tell us the WayPoint
 	MeasurementId: int
 	FK_Section: str
+	PossibleMatchingRoutes: str
 	

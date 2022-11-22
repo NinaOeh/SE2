@@ -56,3 +56,4 @@ class MapReferences(Base):
 	FK_MeasurementId = sqla.Column(sqla.String, sqla.ForeignKey('Measurements.MeasurementId'))
 	FK_Measurement = orm.relationship("Measurements", foreign_keys=[FK_MeasurementId])
 	FK_Section = sqla.Column(sqla.Text)
+	PossibleMatchingRoutes = sqla.Column(sqla.Text)

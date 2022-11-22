@@ -1,9 +1,10 @@
 import pandas as pd
 import pydantic
-from typing import List
+from typing import List, Tuple
 import friction_db_schema
 import json
 import numpy as np
+import scripts.osm_query as osm_query
 
 '''
     comments: we have to think of a smart and good way of what data we want to extract from the old
@@ -51,6 +52,31 @@ def extract_waypointindex(message_string: str) -> float:
         return message_dict['waypoint_index']
     else:
         return 'no waypoint index'
+
+def extract_Wayid(message_string: str) -> Tuple[int,int,str]:
+    message_dict = json.loads(message_string)[0]#['legs']['annotation']['nodes']
+    nodes = message_dict['legs'][0]['annotation']['nodes']
+    Node_id = str(nodes)
+    Ways1 = osm_query.get_ways(nodes[0])
+    Ways2 = osm_query.get_ways(nodes[1])
+    Way_id = list(set(Ways1[0]) & set(Ways2[0]))
+    wayPointName=[]
+    if len(Way_id) == 1:
+        Way_id = str(Way_id[0])
+        for i in Ways2[1]['elements']:
+            if str(i['id']) == str(Way_id):
+                if 'name' in i['tags'].keys():
+                    wayPointName.append(i['tags']['name'])
+                else:
+                    wayPointName.append('0')
+            else:
+                    wayPointName.append('0')
+    else:
+        Way_id = "Several possible ways: "+str(Way_id)
+        wayPointName.append('0')
+    
+    wayPointName = wayPointName[0]
+    return Node_id, Way_id, wayPointName
 
 
 # def get_friction_info(friction_df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
@@ -104,6 +130,7 @@ def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl]:
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
+            node_id, way_id, wayPointName= extract_Wayid(row['PossibleMatchingRoutes'])
             return friction_db_schema.RPM_rl(
                 MeasurementId=row['MeasurementId'],
                 TS_or_Distance=row['TS_or_Distance'],
@@ -113,12 +140,12 @@ def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl]:
                 rpm_value_rl=extract_measurement_value(row['message']),
                 FK_Trip=row['FK_Trip'],
                 WayPoint_index=extract_waypointindex(row['WayPoint']),
-	            wayPoint_Name=row['wayPointName'],
+	            wayPoint_Name=wayPointName if wayPointName != '0' else row['wayPointName'],
 	            legDistance_MapMatched=row['legDistance_MapMatched'],
-	            Way_id='to be done',
-	            Node_id='to be done',
+	            Node_id=node_id,
                 lane=row['lane'],
-                direction=row['direction']
+                direction=row['direction'],
+                Way_id=way_id
             )
         else:
             pass
