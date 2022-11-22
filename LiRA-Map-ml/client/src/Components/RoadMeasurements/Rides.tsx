@@ -102,7 +102,7 @@ const Rides: FC = () => {
                         absolute={true}
                         time={true}
                         palette={palette}
-                        data={Object.entries(paths[name] || {})
+                        mapData={Object.entries(paths[name] || {})
                                 .map( ([TaskId, bp], j) => {
                                     const { path, bounds} = bp;
                                     return path;

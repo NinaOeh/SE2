@@ -1,12 +1,12 @@
 
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 
 import GLine from "../../assets/graph/line"
 
 import { useGraph } from "../../context/GraphContext";
 
 import { Axis, DotHover, GraphData, SVG } from "../../assets/graph/types"
-import { Bounds } from "../../models/path";
+import { Bounds, MeasMetaPath, Path } from "../../models/path";
 
 interface ILine {
     svg: SVG;
@@ -16,9 +16,10 @@ interface ILine {
     bounds?: Bounds;
     label: string; i: number;
     time: boolean | undefined;
+    mapData: Path[];
 }
 
-const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, bounds, label, i, time } ) => {
+const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, mapData, bounds, label, i, time } ) => {
     let firstData = data[0][0];
 
     for(let i2 = 0; i2<data.length; i2++){
@@ -29,6 +30,7 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, bounds, label, i, time } ) 
 
     const { addBounds, remBounds, setDotHover } = useGraph()
 
+    const [ paths, setPaths ] = useState<MeasMetaPath>({})
 
 
     useEffect( () => {
@@ -45,11 +47,20 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, bounds, label, i, time } ) 
        
         addBounds(label, _bounds)
 
-        const onHover = (d: DotHover | undefined) => d === undefined 
-            ? setDotHover( undefined )
-            : setDotHover( { ...d, x: d.x / _bounds.maxX } )
+        // const onHover = (d: DotHover | undefined) => d === undefined 
+        //     ? setDotHover( undefined )
+        //     : setDotHover( { ...d, x: d.x / _bounds.maxX } )
 
-        const line = new GLine(svg, label, i, data, xAxis, yAxis, onHover, time)
+        const onHover = (d: DotHover | undefined) => {
+            if(d != undefined){
+            //Mapdata[0] skal på et tidspunkt blive til hvilken mapdata der er tale om, hvis der er flere grafer oven i hinanden
+            var mapPoint = mapData[0][data.findIndex(elem => elem[0] == d.x)];
+            console.log("Corresponding path element: ", mapPoint);
+            }
+
+        }
+
+        const line = new GLine(svg, label, i, data, mapData[0], xAxis, yAxis, onHover, time)
 
         return () => {
             if ( svg === undefined )

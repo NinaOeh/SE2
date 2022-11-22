@@ -28,13 +28,13 @@ interface IGraph {
     palette?: Palette;
     absolute?: boolean;
     time?: boolean;
-    data?: Path[];
+    mapData?: Path[];
 }
 
 const margin = {top: 20, right: 30, bottom: 70, left: 100};
 const paddingRight = 50
 
-const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, data }  ) => {
+const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, mapData }  ) => {
 
     const wrapperRef = useRef(null)
     const [width, height] = useSize(wrapperRef)
@@ -45,7 +45,6 @@ const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, da
     const [zoom, setZoom] = useState<number>(1)
 
     const { xAxis, yAxis } = useAxis( zoom, w, h );
-    console.log("I am the graph class: ", data);
     return (
         <>
         <Tooltip />
@@ -69,7 +68,7 @@ const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, da
                     <Gradient svg={svg} axis={yAxis} palette={palette} />
                     <XAxis svg={svg} axis={xAxis} width={w} height={h} zoom={zoom} absolute={absolute} time={time} />
                     { plots && plots.map((p: Plot, i: number) => 
-                        <Line key={'line-'+i} svg={svg} xAxis={xAxis} yAxis={yAxis} i={i} time={time} {...p} />) 
+                        <Line key={'line-'+i} svg={svg} xAxis={xAxis} yAxis={yAxis} i={i} mapData={mapData!} time={time} {...p} />) 
                     }               
                     </>
                 ) }
