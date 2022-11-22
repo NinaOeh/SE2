@@ -19,6 +19,8 @@ import useAxis from "./Hooks/useAxis";
 import '../../css/graph.css'
 import Zoom from "./Zoom";
 
+import { MeasMetaPath, Path, PointData } from "../../models/path";
+
 interface IGraph {
     labelX: string;
     labelY: string;
@@ -26,12 +28,13 @@ interface IGraph {
     palette?: Palette;
     absolute?: boolean;
     time?: boolean;
+    data?: Path[];
 }
 
 const margin = {top: 20, right: 30, bottom: 70, left: 100};
 const paddingRight = 50
 
-const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time }  ) => {
+const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, data }  ) => {
 
     const wrapperRef = useRef(null)
     const [width, height] = useSize(wrapperRef)
@@ -42,7 +45,7 @@ const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time }  
     const [zoom, setZoom] = useState<number>(1)
 
     const { xAxis, yAxis } = useAxis( zoom, w, h );
-
+    console.log("I am the graph class: ", data);
     return (
         <>
         <Tooltip />

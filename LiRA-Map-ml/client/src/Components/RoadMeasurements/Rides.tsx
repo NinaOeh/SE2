@@ -5,7 +5,7 @@ import { GraphProvider } from "../../context/GraphContext";
 import { useMetasCtx } from "../../context/MetasContext";
 
 import { ActiveMeasProperties } from "../../models/properties";
-import { MeasMetaPath, PointData } from "../../models/path";
+import { MeasMetaPath, Path, PointData } from "../../models/path";
 
 import { GraphData, GraphPoint } from "../../assets/graph/types";
 
@@ -102,6 +102,12 @@ const Rides: FC = () => {
                         absolute={true}
                         time={true}
                         palette={palette}
+                        data={Object.entries(paths[name] || {})
+                                .map( ([TaskId, bp], j) => {
+                                    const { path, bounds} = bp;
+                                    return path;
+                                })
+                            }
                         plots={ Object.entries(paths[name] || {})
                             .map( ([TaskId, bp], j) => {
                                 const { path, bounds } = bp;
