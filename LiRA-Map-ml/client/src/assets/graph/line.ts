@@ -18,7 +18,7 @@ export default class GLine
         label: string,
         i: number,
         data: GraphData, 
-        mapData: PointData[],
+        mapData: PointData,
         xAxis: Axis,
         yAxis: Axis,
         onHover: (d: DotHover | undefined) => void,
@@ -38,7 +38,7 @@ export default class GLine
         
         const path = new Path(svg, label, data, [xAxis, yAxis], pathOpts, hoverPathOpts )
         const hitbox = new Path(svg, "hitbox", data, [xAxis, yAxis], hitboxOpts, hoverHitboxOpts )
-        const dots = new Dots(svg, label, data, [xAxis, yAxis], dotsOpts, hoverDotsOpts )
+        const dots = new Dots(svg, label, data, mapData, [xAxis, yAxis], dotsOpts, hoverDotsOpts )
 
         const tooltip = new Tooltip(time);
 
@@ -57,7 +57,7 @@ export default class GLine
             path.mouseOver();
             dots.mouseOver();
             tooltip.mouseOver(e, d)
-            onHover( { label, x: d[0] } )
+            onHover( { label, x: d[0], lat: mapData.lat, lng: mapData.lng } )
         } )
 
         dots.addMouseOut( (e, d) => {

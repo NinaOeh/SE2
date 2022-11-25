@@ -8,6 +8,7 @@ import {
 
 import useMinMaxAxis from "../hooks/useMinMaxAxis";
 import { AddMinMaxFunc, DotHover, RemMinMaxFunc } from "../assets/graph/types";
+import { useEffect } from "react";
 
 
 interface ContextProps {
@@ -46,6 +47,10 @@ export const GraphProvider = ({ children }: any) => {
 	const[friction,setfriction]=useState<boolean>(false);
 
 	const { minX, maxX, minY, maxY } = bounds;
+
+	useEffect(() => {
+		console.log("Nu sker der et eller andet i graphcontext", dotHover)
+	}, [dotHover])  
 
 	return (
 		<GraphContext.Provider

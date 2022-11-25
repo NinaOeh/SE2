@@ -3,13 +3,14 @@ import { Selection } from "d3";
 import { defaultDotsOptions, defaultHoverDotsOptions } from "./constants";
 import { Axis, D3Callback, DotsOptions, GraphData, GraphPoint, SVG } from "./types"
 import Layer from "./layer";
+import { PointData } from "../../models/path";
 
 class Dots extends Layer<DotsOptions>
 {
     circles: Selection<SVGCircleElement, GraphPoint, SVGGElement, unknown> 
 
     constructor( 
-        svg: SVG, label: string, data: GraphData, [x, y]: [Axis, Axis], 
+        svg: SVG, label: string, data: GraphData, mapData: PointData, [x, y]: [Axis, Axis],  
         options?: DotsOptions, hoverOptions?: DotsOptions, 
     ) 
     {
