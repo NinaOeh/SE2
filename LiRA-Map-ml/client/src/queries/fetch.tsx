@@ -1,5 +1,6 @@
 
 import axios, { AxiosResponse } from 'axios'
+import { LinearScale } from 'chart.js'
 
 const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
@@ -31,7 +32,7 @@ export function get<T>(path: string, callback: (data: T) => void): void
 
 export function getFriction<T>(path: string, callback: (data: T) => void): void 
 {   
-    const p=devURL +path
+    const p=VMURL +path
     fetch(p)
     .then(res => res.json())
     .then(data => callback(data));
