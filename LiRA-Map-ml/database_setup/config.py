@@ -21,7 +21,7 @@ class Settings:
 
     DB_FRICTION_SERVER = os.getenv("DB_FRICTION_HOST","localhost")
     DB_FRICTION_PORT = os.getenv("DB_FRICTION_PORT",5432)
-    DB_FRICTION_USER = os.getenv("DB_FRICTION_USERNAME")
+    DB_FRICTION_USER = os.getenv("DB_FRICTION_USER")
     DB_FRICTION_PASSWORD = os.getenv("DB_FRICTION_PASSWORD")
     DB_FRICTION_DATABASE = os.getenv("LIRA_DB_DATABASE","tdd")
     DB_FRICTION_SSH_HOST = os.getenv("DB_FRICTION_SSH_HOST")

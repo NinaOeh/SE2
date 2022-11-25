@@ -11,6 +11,8 @@ import { ActiveMeasProperties } from "../models/properties";
 import { getMeasurements } from "../queries/measurements";
 import { UseRoleContext } from "./RolesContext";
 
+import { createBrowserHistory } from "history";
+
 
 interface ContextProps {
 	measurements: ActiveMeasProperties[];
@@ -28,13 +30,12 @@ export const MeasurementsProvider = ({ children }: any) => {
 
 	useEffect( () => setSelectedMeasurements( measurements.filter(m => m.isActive)), [measurements] )
 
-	useEffect( () => getMeasurements(selectedRole.role, setMeasurements), [] )
+	console.log("We are in MeasurementsContext and the selected role is", selectedRole.role)
 
-	console.log("MeasurementsProvider");
-	console.log(measurements);
-	console.log(setMeasurements);
-	console.log(selectedMeasurements);
-	
+	useEffect( () => getMeasurements(selectedRole.role, setMeasurements), [selectedRole] )
+
+	console.log("measurements", measurements)
+
 
 	return (
 		<MeasurementsContext.Provider
