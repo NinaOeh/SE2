@@ -7,7 +7,7 @@ import { useMetasCtx } from "../../context/MetasContext";
 import { ActiveMeasProperties } from "../../models/properties";
 import { MeasMetaPath, Path, PointData } from "../../models/path";
 
-import { GraphData, GraphPoint } from "../../assets/graph/types";
+import { DotHover, GraphData, GraphPoint } from "../../assets/graph/types";
 
 import { getRide } from "../../queries/rides";
 
@@ -24,6 +24,11 @@ const Rides: FC = () => {
     const { selectedMeasurements } = useMeasurementsCtx()
 
     const [ paths, setPaths ] = useState<MeasMetaPath>({})
+    const [ dotHover, setDotHover ] = useState<DotHover>()
+    
+    useEffect(() => {
+		console.log("Nu sker der et eller andet i Rides", dotHover)
+	}, [dotHover])  
 
     const popup = usePopup()
 

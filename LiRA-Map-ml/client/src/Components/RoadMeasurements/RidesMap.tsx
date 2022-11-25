@@ -9,6 +9,9 @@ import PaletteEditor from "../Palette/PaletteEditor";
 import { RENDERER_PALETTE } from "../Map/constants";
 import MetadataPath from "../Map/MetadataPath";
 import MapWrapper from "../Map/MapWrapper";
+import { DotHover } from "../../assets/graph/types";
+import { useState } from "react";
+import { useEffect } from "react";
 
 interface IRidesMap {
     paths: MeasMetaPath;
@@ -17,6 +20,11 @@ interface IRidesMap {
 }
 
 const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements } ) => {
+    const [ dotHover, setDotHover ] = useState<DotHover>();
+    useEffect(() => {
+		console.log("Nu sker der et eller andet i RidesMap", dotHover)
+	}, [dotHover])  
+
 
     const memoPaths = useMemo( () => {
         const temp: { meas: MeasProperties, meta: RideMeta, bp: BoundedPath }[] = []

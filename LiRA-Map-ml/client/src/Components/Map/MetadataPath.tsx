@@ -1,9 +1,12 @@
 
+import { useEffect } from "react";
 import { FC, useState } from "react";
 
-import { Marker, Popup } from "react-leaflet";
+import { CircleMarker, Marker, Popup } from "react-leaflet";
+import { DotHover } from "../../assets/graph/types";
 import { PathProps } from "../../models/path";
 import Path from "./Path";
+import { GraphProvider, useGraph } from "../../context/GraphContext";
 
 
 const parseMD = (mds: any) => {
@@ -36,6 +39,11 @@ const MetadataPath: FC<PathProps> = ( { path, properties, metadata } ) => {
 
     const [markerPos, setMarkerPos] = useState<[number, number]>([0, 0]);
     const [selected, setSelected] = useState<number | undefined>(undefined);
+    // const [ dotHover, setDotHover ] = useState<DotHover>();
+    
+    
+
+    const graphProvider = useGraph();
 
     const onClick = (i: number) => (e: any) => {
         const { lat, lng } = e.latlng
@@ -45,7 +53,6 @@ const MetadataPath: FC<PathProps> = ( { path, properties, metadata } ) => {
     
     const point = path[selected || 0]
     const md = metadata || {}
-
     return ( <> 
         <Path path={path} properties={properties} onClick={onClick}></Path>
         
@@ -58,6 +65,9 @@ const MetadataPath: FC<PathProps> = ( { path, properties, metadata } ) => {
                     { Object.keys(md).map(key => getPopupLine(key, md[key]))}
                 </Popup>
             </Marker> 
+        }
+        { graphProvider.dotHover !== undefined && 
+            <Marker position={[graphProvider.dotHover.lat,graphProvider.dotHover.lng]}></Marker>
         }
     </> )
 }

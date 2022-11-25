@@ -50,11 +50,11 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, mapData, bounds, label, i, 
         //     : setDotHover( { ...d, x: d.x / _bounds.maxX } )
 
         const onHover = (d: DotHover | undefined) => {
-            if(d != undefined){
+            if(d !== undefined){
             //Mapdata[0] skal på et tidspunkt blive til hvilken mapdata der er tale om, hvis der er flere grafer oven i hinanden
-            var mapPoint = mapData[0][data.findIndex(elem => elem[0] == d.x)];
-            console.log("Corresponding path element: ", mapPoint);
             setDotHover(d);
+            } else {
+                setDotHover(undefined);
             }
 
         }
