@@ -12,10 +12,10 @@ export class FrictionController {
 
   
     @Get()
-    getFrictionConditions(): Promise<FrictionConditions> {
+    getFrictionConditions(): Promise<WaysConditions> {
         console.log('we are in the friction controller')
 
-        return this.service.getFrictionConditions();
+        return this.service.getWaysConditions();
     }
 
     //@Get("\con")
