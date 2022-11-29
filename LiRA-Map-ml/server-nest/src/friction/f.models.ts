@@ -22,3 +22,10 @@ export interface FrictionConditions {
 	geometry: LatLngDist[][];
 	conditions: Condition[][];
 }
+
+
+export interface DistLength{
+
+	way_dist:number;
+	way_length:number;
+}

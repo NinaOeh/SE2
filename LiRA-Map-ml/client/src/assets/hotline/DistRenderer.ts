@@ -76,15 +76,19 @@ export default class DistRenderer extends Renderer<DistData> {
         }
 
         const getValue = (d: DistPoint, conditions: Condition[]): number => {
-            if ( d.way_dist <= 0 ) return conditions[0].value
-            else if ( d.way_dist >= 1 || i >= conditions.length ) return conditions[conditions.length - 1].value
-            
-            while ( conditions[i].way_dist <= d.way_dist && ++i < conditions.length ) {}
+            if(conditions){
+                if ( d.way_dist <= 0 ) return conditions[0].value
+                else if ( d.way_dist >= 1 || i >= conditions.length ) return conditions[conditions.length - 1].value
+                
+                while ( conditions[i].way_dist <= d.way_dist && ++i < conditions.length ) {}
 
-            if ( i === 0 ) return conditions[0].value
-            else if ( i >= conditions.length - 1 ) return conditions[conditions.length - 1].value
+                if ( i === 0 ) return conditions[0].value
+                else if ( i >= conditions.length - 1 ) return conditions[conditions.length - 1].value
 
-            return calcValue(conditions[i - 1], conditions[i], d)
+                return calcValue(conditions[i - 1], conditions[i], d)}
+            else{
+                return 0;
+            }
         }
 
         this.edgess = this.projectedData.map( (data, j) => {

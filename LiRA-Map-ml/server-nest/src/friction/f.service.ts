@@ -1,7 +1,7 @@
 /* Created by Colin Hoffmann (s212711) */
 
 import { Injectable } from '@nestjs/common';
-import { FrictionConditions, FrictionDict, FrictionMeta } from './f.models';
+import { DistLength, FrictionConditions, FrictionDict, FrictionMeta } from './f.models';
 import { InjectConnection, Knex } from 'nestjs-knex';
 import { Condition, LatLng, LatLngDist, WayId, WaysConditions } from 'src/models';
 import { cursorTo } from 'readline';
@@ -13,7 +13,7 @@ export class FrictionService {
 
     constructor(@InjectConnection('friction') private readonly knex: Knex) { }
 
-
+/** 
 
    async getGeometry(): Promise<{[key: WayId]: LatLngDist[]}>{
 
@@ -42,7 +42,29 @@ export class FrictionService {
     
     return groupBy( res, 'Way_id', map )
      
-}
+}*/
+
+
+    async  GetDistLength(): Promise<[{[key: WayId]: LatLngDist[]}, {[key: WayId]: number}]>{
+
+        const geom = await this.knex({public:'Geometry'})
+            .select( 
+                'Way_id as Way_id', 
+                this.knex.raw('ST_AsGeoJSON((ST_DumpPoints(geometry)).geom)::json->\'coordinates\' as pos'), 
+                this.knex.raw('ST_LineLocatePoint(geometry, (ST_DumpPoints(geometry)).geom) as way_dist'),
+                this.knex.raw('ST_Length(geometry::geography) as length') 
+            )
+
+
+            return [
+                groupBy<any, LatLngDist>( geom, 'Way_id', (cur: any) => ({ lat: cur.pos[1], lng: cur.pos[0], way_dist: cur.way_dist}) ),
+                geom.reduce( (acc, cur) => { acc[cur.Way_id] = cur.length; return acc }, {} )
+            ]
+
+
+
+        
+    }
 
 
 
@@ -59,7 +81,7 @@ export class FrictionService {
 
         const map=(curr)=>{
             if(curr){
-                return {way_dist:1, value:curr.friction_value}
+                return {way_dist:10, value:curr.friction_value}
             }
             return { way_dist:0,value:0}
         }
@@ -69,11 +91,14 @@ export class FrictionService {
 }
     async getWaysConditions(): Promise<WaysConditions>
     {
-        const geometry = await this.getGeometry()
         console.log("11111")
 
         const conditions = await this.GetWaysFrictions()
         console.log("11111")
+
+
+
+        const [frictions, frictions_lengths]= await this.GetDistLength()
 
 
         const wayIds = Object.keys(conditions)
@@ -83,13 +108,24 @@ export class FrictionService {
             (acc, way_id) => {
                 {
                     acc.way_ids.push(way_id)
-                    acc.way_lengths.push(1)
-                    acc.geometry.push(geometry[way_id])
+                    acc.way_lengths.push(frictions_lengths[way_id])
+                    acc.geometry.push(frictions[way_id])
                     acc.conditions.push(conditions[way_id])
                 }
                 return acc
             }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
         )
+    }
+
+
+    
+    async getWayFrictionConditions(way_id: string): Promise<Condition[]>
+    {
+        const conditions =  this.GetWaysFrictions()
+        return conditions[way_id];
+
+
+
     }
 
 

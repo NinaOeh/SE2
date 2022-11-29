@@ -41,4 +41,4 @@ interface Friction{
 
 export const Frictions=(k:Knex)=>k.from<Friction>('Friction')
 
-export const Geometry=(k:Knex)=>k.from<LatLngDist[]>('geometry')
+export const Geometry=(k:Knex)=>k.from<LatLngDist[]>('Geometry')
