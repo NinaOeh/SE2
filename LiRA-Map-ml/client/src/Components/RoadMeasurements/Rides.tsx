@@ -99,7 +99,7 @@ const Rides: FC = () => {
                     selectedMetas={selectedMetas} 
                     selectedMeasurements={selectedMeasurements}  />
 
-                { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue && 
+                    { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue && 
                     <Graph 
                         key={`graph-${i}`}
                         labelX="Time (h:m:s)" 

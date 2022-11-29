@@ -51,15 +51,14 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, mapData, bounds, label, i, 
 
         const onHover = (d: DotHover | undefined) => {
             if(d !== undefined){
-            //Mapdata[0] skal på et tidspunkt blive til hvilken mapdata der er tale om, hvis der er flere grafer oven i hinanden
-            setDotHover(d);
+                setDotHover(d);
             } else {
                 setDotHover(undefined);
             }
 
         }
 
-        const line = new GLine(svg, label, i, data, mapData[0][0], xAxis, yAxis, onHover, time)
+        const line = new GLine(svg, label, i, data, mapData[i], xAxis, yAxis, onHover, time)
 
         return () => {
             if ( svg === undefined )

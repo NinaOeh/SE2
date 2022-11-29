@@ -4,7 +4,7 @@ import { getColor } from "./color";
 import Dots from "./dots";
 import Path from "./path";
 import Tooltip from "./tooltip";
-import {PointData} from "../../models/path";
+import {Path as MapPath} from "../../models/path";
 import { Axis, DotHover, DotsOptions, GraphData, PathOptions, SVG } from "./types";
 
 export default class GLine 
@@ -18,7 +18,7 @@ export default class GLine
         label: string,
         i: number,
         data: GraphData, 
-        mapData: PointData,
+        mapData: MapPath,
         xAxis: Axis,
         yAxis: Axis,
         onHover: (d: DotHover | undefined) => void,
@@ -57,7 +57,8 @@ export default class GLine
             path.mouseOver();
             dots.mouseOver();
             tooltip.mouseOver(e, d)
-            onHover( { label, x: d[0], lat: mapData.lat, lng: mapData.lng } )
+            const i = data.findIndex(elem => elem[0] == d[0]);
+            onHover( { label, x: d[0], lat: mapData[i].lat, lng: mapData[i].lng } )
         } )
 
         dots.addMouseOut( (e, d) => {
