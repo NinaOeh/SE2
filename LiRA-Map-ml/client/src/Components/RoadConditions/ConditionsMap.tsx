@@ -50,13 +50,13 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
         getConditions( way_id, name, (wc: Condition[]) => {
             const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
             console.log("maximum value:",max);
-            console.log("the filter is:",filter);
+            console.log("the filter is:",f);
             if(!friction){
 
                 if(max>f){
                     
                         setWayData( {
-                            labels: wc.map( p => p.way_dist * way_length ),
+                            labels: wc.map( p => p.way_dist * 1 ),
                             datasets: [ {
                                 type: 'line' as const,
                                 label: way_id,

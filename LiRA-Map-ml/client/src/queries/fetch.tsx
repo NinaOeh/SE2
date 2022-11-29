@@ -29,6 +29,18 @@ export function get<T>(path: string, callback: (data: T) => void): void
         .then(data => callback(data));
 }
 
+export function getFriction<T>(path: string, callback: (data: T) => void): void 
+{   
+    const p=devURL +path
+    fetch(p)
+    .then(res => res.json())
+    .then(data => callback(data));
+
+}
+
+
+
+
 export function getRoleMeas<T>(path: string, role: string, callback: (data: T) => void): void 
 {
     path = path + "/"+role

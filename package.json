@@ -3,7 +3,6 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
-    "postgresql-to-knex": "^1.2.6",
     "react-bootstrap": "^2.5.0",
     "react-popper": "^2.3.0",
     "react-spinners": "^0.13.6",

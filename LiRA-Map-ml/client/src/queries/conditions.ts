@@ -10,14 +10,7 @@ const getPath = (p: string) => ( development ? devURL : prodURL ) + p
 
 export const getWaysConditions = ( type: string, zoom: number, setWays: (data: WaysConditions) => void ) => {
 
-    const res =    fetch(getPath('/conditions/ways'))
-    .then(res =>{
-        const a=res.json()
-        console.log("hello",a)
-
-    })
-    .then(data =>console.log( "datat to read",data));
-
+    console.log("hello");
     post( '/conditions/ways', { type, zoom }, setWays )
     
 }
