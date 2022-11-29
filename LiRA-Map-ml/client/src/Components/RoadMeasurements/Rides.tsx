@@ -24,12 +24,7 @@ const Rides: FC = () => {
     const { selectedMeasurements } = useMeasurementsCtx()
 
     const [ paths, setPaths ] = useState<MeasMetaPath>({})
-    const [ dotHover, setDotHover ] = useState<DotHover>()
     
-    useEffect(() => {
-		console.log("Nu sker der et eller andet i Rides", dotHover)
-	}, [dotHover])  
-
     const popup = usePopup()
 
     useEffect( () => {

@@ -48,10 +48,6 @@ export const GraphProvider = ({ children }: any) => {
 
 	const { minX, maxX, minY, maxY } = bounds;
 
-	useEffect(() => {
-		console.log("Nu sker der et eller andet i graphcontext", dotHover)
-	}, [dotHover])  
-
 	return (
 		<GraphContext.Provider
 			value={{

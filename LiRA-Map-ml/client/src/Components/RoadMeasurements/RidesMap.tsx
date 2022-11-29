@@ -20,11 +20,6 @@ interface IRidesMap {
 }
 
 const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements } ) => {
-    const [ dotHover, setDotHover ] = useState<DotHover>();
-    useEffect(() => {
-		console.log("Nu sker der et eller andet i RidesMap", dotHover)
-	}, [dotHover])  
-
 
     const memoPaths = useMemo( () => {
         const temp: { meas: MeasProperties, meta: RideMeta, bp: BoundedPath }[] = []
