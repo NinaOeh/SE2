@@ -121,9 +121,10 @@ export class FrictionService {
     
     async getWayFrictionConditions(way_id: string): Promise<Condition[]>
     {
-        const conditions =  this.GetWaysFrictions()
+        console.log('im trying');
+        const conditions = await this.GetWaysFrictions()
+        console.log(conditions[way_id])
         return conditions[way_id];
-
 
 
     }

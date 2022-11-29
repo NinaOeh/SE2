@@ -1,7 +1,7 @@
 /* Created by Colin Hoffmann (s212711) */
 
 import { Dispatch, SetStateAction } from "react"
-import { get, getFriction, post } from "./fetch"
+import { get, getFrict, getFriction, post } from "./fetch"
 import { FrictionMeta } from "../models/models"
 import { Condition, WaysConditions } from "../models/path"
 
@@ -15,9 +15,9 @@ export const getFrictionConditions = ( setWays: (data: WaysConditions) => void) 
 }
 
 export const getFrictConditions = ( wayId: string, setConditions: (data: Condition[]) => void ) => {
-
+    console.log("hello1")
     post( '/friction/way', { wayId }, setConditions )
-
+    console.log("hello 2");
 
 }
 
