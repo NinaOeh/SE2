@@ -17,6 +17,7 @@ import usePopup from "../createPopup";
 import { Popup } from "Leaflet.MultiOptionsPolyline";
 import { PopupFunc } from "../../models/popup"
 import { RendererName } from "../../models/renderers";
+import Checkbox from "../Checkbox";
 
 const Rides: FC = () => {
     
@@ -85,6 +86,11 @@ const Rides: FC = () => {
 
     }, [selectedMetas, selectedMeasurements] )
 
+    const [collapseGraph, setCollapseGraph] = useState(true);
+    const handleCollapseGraph = () => {
+        setCollapseGraph(!collapseGraph);
+    }
+
     return (
         <GraphProvider>
             <div className="map-container">
@@ -92,9 +98,23 @@ const Rides: FC = () => {
                 <RidesMap
                     paths={paths} 
                     selectedMetas={selectedMetas} 
-                    selectedMeasurements={selectedMeasurements}  />
+                    selectedMeasurements={selectedMeasurements} />
 
-                { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue && 
+                <Checkbox className="collapse-checkbox horizontal-checkbox" 
+                                html={
+                                    collapseGraph ? 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-double-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                        <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                    </svg> :
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+                                        <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                                    </svg>
+                                } 
+                                forceState={collapseGraph} onClick={handleCollapseGraph}/>
+
+                { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue && collapseGraph &&
                     <Graph 
                         key={`graph-${i}`}
                         labelX="Time (h:m:s)" 
