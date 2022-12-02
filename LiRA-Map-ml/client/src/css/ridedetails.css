@@ -11,6 +11,10 @@
     text-align: left;
 }
 
+.meta-data.hidden{
+    display:none;
+}
+
 .ride-metadata-list {
     max-width: 230px;
     padding: 0px 20px 100px 20px;
