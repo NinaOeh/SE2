@@ -8,12 +8,13 @@ import ConditionsGraph from "../Components/RoadConditions/ConditionsGraph";
 
 import { ConditionType } from "../models/graph";
 
-import { GraphProvider } from "../context/GraphContext";
+import { GraphProvider, useGraph } from "../context/GraphContext";
 
 import "../css/road_conditions.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import Menu from "../Components/RoadConditions/Menu";
 import Slider from "../Components/RoadConditions/Slider";
+import { filter } from "d3";
 
 
 const RoadConditions = () => {
@@ -24,12 +25,13 @@ const RoadConditions = () => {
     useEffect( () => {
         setLoading(true);
     } )
-
-
+    
+    const{friction}=useGraph();
+    
 
     
     const type: ConditionType = {
-        name: 'IRI',
+        name: friction?'Friction':'IRI',
         min: 0,
         max: 10,
         grid: true,
