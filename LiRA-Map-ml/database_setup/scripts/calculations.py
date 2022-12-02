@@ -128,10 +128,11 @@ def extract_only_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]
         Way_id = list(set(Ways1[0]) & set(Ways2[0]))
         if len(Way_id) == 1:
             Way_id = str(Way_id[0])
+            return [Node_id, Way_id]
         else:
-            Way_id = "Several possible ways: "+str(Way_id)
+            raise Exception("No to wayids can be assigned.")
         
-        return [Node_id, Way_id]
+        
     except Exception as exc:
         return [exc]
 
