@@ -72,7 +72,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
         if(friction){
 
-            console.log("i am trying to get data from friction")
+            console.log("i am trying to get data from friction boum")
 
 
             
