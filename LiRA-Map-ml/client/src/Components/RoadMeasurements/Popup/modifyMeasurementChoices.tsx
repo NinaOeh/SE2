@@ -11,7 +11,7 @@ const modifyMeasurementChoices = () => {
 
     const popup = createPopup<ActiveMeasProperties>()
 
-    return ( callback: (measurement: ActiveMeasProperties) => void, defaultOptions: Required<ActiveMeasProperties> ) => {
+    return (callback: (measurement: ActiveMeasProperties) => void, defaultOptions: Required<ActiveMeasProperties>) => {
 
         // setOptions( defaultOptions )
         let options = { ...defaultOptions }
@@ -35,32 +35,32 @@ const modifyMeasurementChoices = () => {
                 setOptions={opts => {
                     options = opts
                 }} />,*/
-        popup( {
-            title: <p>Choose the measurement you wish to visualize.</p>,
+        popup({
+            //title: <p>Choose the measurement you wish to visualize.</p>,
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Save Changes',
-        } )
-        .then( (result: any) => {
-            if (result.isConfirmed) {
-                callback(options)
-                console.log("this should be updated") 
-                popup( {
-                    title: <p>Measurement <b>{options.name}</b> added / modified</p>,
-                    footer: `Will be drawn as ${options.rendererName}`,
-                    icon: 'success',
-                    //timer: 3000,
-                    //timerProgressBar: true,
-                    toast: true
-                } )
-            }
-            else {
-                console.log("this should be cancelled")
-                return
-            }
-
-            
         })
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    callback(options)
+                    console.log("this should be updated")
+                    popup({
+                        //title: <p>Measurement <b>{options.name}</b> added / modified</p>,
+                        footer: `Will be drawn as ${options.rendererName}`,
+                        icon: 'success',
+                        //timer: 3000,
+                        //timerProgressBar: true,
+                        toast: true
+                    })
+                }
+                else {
+                    console.log("this should be cancelled")
+                    return
+                }
+
+
+            })
     }
 }
 

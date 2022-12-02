@@ -4,28 +4,31 @@ import { CursorOptions } from "react-gradient-hook/lib/types";
 import { Palette } from "react-leaflet-hotline";
 
 import '../../css/palette.css'
+import TypeChanger from "../RoadConditions/Slider";
 
 interface IPaletteEditor {
     width: number | undefined;
     defaultPalette?: Palette;
     cursorOptions?: CursorOptions;
-    onChange?: (palette: Palette) => void; 
+    onChange?: (palette: Palette) => void;
 }
 
-const PaletteEditor: FC<IPaletteEditor> = ( { width, defaultPalette, cursorOptions, onChange } ) => {
+const PaletteEditor: FC<IPaletteEditor> = ({ width, defaultPalette, cursorOptions, onChange }) => {
 
     const [show, setShow] = useState<boolean>(false)
 
     const toggleAppear = () => setShow(prev => !prev)
-    
-    if ( width === undefined || width === 0 ) return null;
+
+    if (width === undefined || width === 0) return null;
 
     return (
-        <div className={`palette-wrapper ${show ? 'palette-show' : ''}`} style={{width: `${width}px`}} >
+        <div className={`palette-wrapper ${show ? 'palette-show' : ''}`} style={{ width: `${width}px` }} >
             <div className="palette-container">
-                <Gradient defaultColors={defaultPalette} cursorOptions={cursorOptions} onChange={onChange}/>
+                <Gradient defaultColors={defaultPalette} cursorOptions={cursorOptions} onChange={onChange} />
             </div>
             <div className='palette-hover' onClick={toggleAppear}>🎨</div>
+            <TypeChanger />
+
         </div>
     )
 }

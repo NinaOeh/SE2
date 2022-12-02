@@ -16,11 +16,11 @@ const TypeChanger: React.FC = () => {
 
     const irimax = 10;
     const iristep = 1
-    const frictionmax = 1;
-    const frictionstep = 0.1;
+    const frictionmax = 3;
+    const frictionstep = 0.2;
 
     useEffect(() => {
-        setfilter(state ? irimax : frictionmax)
+        setfilter(0)
 
         if (state) {
             setfriction(true)
@@ -37,7 +37,7 @@ const TypeChanger: React.FC = () => {
 
 
 
- 
+
     return (
         <div className='changer-wrapper'>
             <div className='slider-wrapper'>

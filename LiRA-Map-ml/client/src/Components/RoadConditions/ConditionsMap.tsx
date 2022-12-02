@@ -181,8 +181,6 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
                 <Ways palette={palette} type={name} onClick={onClick} />
             </MapWrapper>
 
-            <TypeChanger />
-
 
         </div>
     )
