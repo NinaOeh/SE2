@@ -1,4 +1,7 @@
 [console_scripts]
-test_query = scripts.test_query:test_query
+remove_wayid_outliers = scripts.remove_wayid_outliers:remove_wayid_outliers
 update_database = scripts.update_database:update_database
+update_friction = scripts.update_friction_table:update_friction
+update_friction_full_workflow = scripts.update_friction_full_workflow:update_friction_full_workflow
+update_geometry = scripts.update_geometry_table:update_geometry
 

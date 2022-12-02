@@ -19,10 +19,14 @@ import friction_db_crud
 import friction_db_model
 from scripts import calculations
 import geoalchemy2.shape as ga_shape
+import logging
+from scripts.update_geometry_table import upload_single_geometries
+
 
 def merge_rl_fl(
     rl_data: pd.DataFrame,
-    fl_data: pd.DataFrame):
+    fl_data: pd.DataFrame,
+    geos: List[str]):
     '''
         merges the two measurements together, 
         calculating a linear interpolation and only keeping those 
@@ -38,6 +42,7 @@ def merge_rl_fl(
     # extract the actual rpm values from the data
     rpm_fl_infos = calculations.get_rpm_info_fl(fl_data)
     rpm_rl_infos = calculations.get_rpm_info_rl(rl_data)
+
 
     rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos if m is not None])
     rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos if m is not None])
@@ -58,16 +63,37 @@ def merge_rl_fl(
     merged_data = merged_data.iloc[1::50, :]
     print(f"merged dataframe, every 30th row kept {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
-    print(merged_data)
-
-    return merged_data
 
 
+    geos_of_df = merged_data['Way_id'].unique()
+    geos_to_add = list(set(geos_of_df) - set(geos))
+
+
+    return merged_data, geos_to_add
+
+def check_existing_geometries(db: orm.Session = Depends(friction_db_session.get_db)):
+    '''
+        queries the eometry database to update if necessary in case geometries of trip are missing
+        
+        input: 
+            db = orm.Session
+
+        output:
+            geometries_df = List[str]
+    '''
+    # extracting the existing wayids in the geometry database
+    def get_geometry(geo: friction_db_model.Geometry) -> str:
+        #extract wayid
+        return geo.Way_id
+
+    geos = list(map(get_geometry,friction_db_crud.get_geometry_data(session=db)))
+    return geos
 
 
 def convert_lira_measurements(offset: int,
             limit: int,
             trip_id: str,
+            geos: List[str],
             db: orm.Session = Depends(lira_db_session.get_db)) -> List[lira_db_schema.Measurement]:
     '''
         queries the necessary data from the LiRA database 
@@ -83,26 +109,23 @@ def convert_lira_measurements(offset: int,
             rpmrl_rpmfl_data = pandas.DataFrame
     '''
     # extracting the rpm_rl mapping information for rpm_rl measurements
-    def getrpmrl_mapref(measurement: MapReferences) -> lira_db_schema.MapReferences:
+    def getrpmrl_mapref(measurement: MapReferences) -> lira_db_schema.MapReferencesFriction:
         #parsing the measurements into the new mapreference schema
-        return lira_db_schema.MapReferences(
+        return lira_db_schema.MapReferencesFriction(
             MapReferenceId=measurement.MapReferenceId,
             lat_MapMatched=measurement.lat_MapMatched,
             lon_MapMatched=measurement.lon_MapMatched,
-            wayPointName=measurement.wayPointName,
-            lane=measurement.lane if measurement.lane != None else '0',
-            direction=measurement.direction if measurement.direction != None else '0',
-            WayPoint=measurement.WayPoint,
-            MeasurementId=measurement.FK_MeasurementId,
+            MeasurementId=str(measurement.FK_MeasurementId),
             legDistance_MapMatched=measurement.legDistance_MapMatched if measurement.legDistance_MapMatched != None else 0,
             FK_Section=measurement.FK_Section if measurement.FK_Section != None else '0',
-            PossibleMatchingRoutes=measurement.PossibleMatchingRoutes
+            PossibleMatchingRoutes=measurement.PossibleMatchingRoutes,
+            WayPoint = measurement.WayPoint,
             )
     # extracting the rpm_rl measurements
     def getrpmrl_measurement(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
         return lira_db_schema.Measurement(
-            MeasurementId=measurement.MeasurementId,
+            MeasurementId=str(measurement.MeasurementId),
             T=measurement.T,
             TS_or_Distance=measurement.TS_or_Distance,
             lat=measurement.lat,
@@ -133,7 +156,7 @@ def convert_lira_measurements(offset: int,
     def getrpmfl(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
         return lira_db_schema.Measurement(
-            MeasurementId=measurement.MeasurementId,
+            MeasurementId=str(measurement.MeasurementId),
             T=measurement.T,
             TS_or_Distance=measurement.TS_or_Distance,
             lat=measurement.lat,
@@ -151,12 +174,12 @@ def convert_lira_measurements(offset: int,
     rpmfl_data = pd.DataFrame([vars(m) for m in rpmfl_data])
 
     # merge two measurements into one dataframe
-    rpmrl_rpmfl_data = merge_rl_fl(rl_data=rpmrl_data, fl_data=rpmfl_data)
+    rpmrl_rpmfl_data, geos_to_add = merge_rl_fl(rl_data=rpmrl_data, fl_data=rpmfl_data, geos=geos)
 
-    return rpmrl_rpmfl_data, rpmrl_data.shape[0]
+    return rpmrl_rpmfl_data, rpmrl_data.shape[0], geos_to_add
 
 def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db), 
-    rpmrl_rpmfl_data=pd.DataFrame) -> None:
+                                rpmrl_rpmfl_data=pd.DataFrame) -> None:
     '''
         calculate the friction and upload the relevant data 
         to the new friction database
@@ -174,11 +197,10 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
     )
     print(f"rpml_rpmfl columns:{rpmrl_rpmfl_data.columns}")
 
-    
     for _,fric_info in rpmrl_rpmfl_data.iterrows():  
         try:
             with db.begin():
-                friction_db_crud.insert_friction_data(
+                friction_db_crud.insert_only_friction_data(
                         session=db, 
                         timestamp=fric_info.TS_or_Distance,
                         friction_value=fric_info.friction,
@@ -188,27 +210,22 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
                         rpm_rl=fric_info.rpm_value_rl,
                         FK_Trip=fric_info.FK_Trip,
                         MeasurementId_rl=fric_info.MeasurementId,
-                        WayPoint_index=fric_info.WayPoint_index,
-                        wayPoint_Name=fric_info.wayPoint_Name,
                         legDistance_MapMatched=fric_info.legDistance_MapMatched,
                         Way_id=fric_info.Way_id,
-                        Node_id=fric_info.Node_id,
-                        lane=fric_info.lane,
-                        direction=fric_info.direction,
-                        geometry=ga_shape.from_shape(fric_info.geometry, srid=friction_db_model.SRID)
+                        Node_id=str(fric_info.Node_id),
                         )
                 db.commit()   
         except sqlalchemy.exc.IntegrityError as exc:
             if 'duplicate key value violates unique constraint' in str(exc):
                 print(f'The Friction data for id {fric_info.MeasurementId} is already imported')
-                return
+
             else:
                 print(exc)
                 raise 
     print("Sub Query completed")
     
 
-def update_database() -> None:
+def update_friction_full_workflow() -> None:
     """
     Queries the desired data from the LiRA database,
     calculates the friction and uploads the data into
@@ -225,20 +242,33 @@ def update_database() -> None:
                         help='The trip-id of the trip that shall be added to the friction database')
     parser.add_argument('--batch_size', type=int, default=5000,
                         help='Optional: number of objects queried from the database at once. When chosen to be too large, program can crash because of Memory contraints.')
-
+    parser.add_argument('--initial_offset', type=int, default=0,
+                        help='Optional: default offset to start querying database from')
     args = parser.parse_args()
 
-    i = 0
+    # setup log file
+    logging.basicConfig(filename=f'geometry_update_{args.trip_id}.log', level=logging.INFO)
+
+    friction_db_model.Base.metadata.create_all(bind=friction_db_session.friction_engine)
+
+    #get existing geometries in Geometry database
+    with friction_db_session.SessionLocal() as session:
+        geos = check_existing_geometries(db=session)
+
+
+    i = args.initial_offset
     rpmrl_size = args.batch_size
     iterator = 1
     while rpmrl_size == args.batch_size:
         print(f"Iteration: {iterator}")
         trip_id = args.trip_id
-        off = i
+        off = i 
+        print(off)
         with lira_db_session.SessionLocal() as session:
-            rpmrl_rpmfl_data, rpmrl_size = convert_lira_measurements(db=session, 
+            rpmrl_rpmfl_data, rpmrl_size, geos_to_add = convert_lira_measurements(db=session, 
                                                          offset=off, 
                                                          limit=args.batch_size,
+                                                         geos=geos,
                                                          trip_id=trip_id)
 
         #with friction_db_session.friction_engine.connect() as connection:
@@ -248,9 +278,14 @@ def update_database() -> None:
         print("Here now")
         
         with friction_db_session.SessionLocal() as session:
+            if len(geos_to_add)>0:
+                upload_single_geometries(db=session, geos=geos_to_add)
+                print("Missing geometries added")
             upload_to_friction_database(
                 db = session, 
                 rpmrl_rpmfl_data=rpmrl_rpmfl_data)
-        i += args.batch_size - 1
+        i += args.batch_size
         iterator += 1
+        logging.info(f'Files from {off} to {i} were uploaded.')
+    logging.info('The uploadhas successfully finished.')
     print(f"Trip {args.trip_id} uploaded to database.")
