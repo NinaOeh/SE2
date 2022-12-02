@@ -74,7 +74,8 @@ const RideCards: FC = ( ) => {
                 const inSearch = search === "" || meta.TaskId.toString().includes(search)
                 const date = new Date(meta.Created_Date).getTime()
                 const inDate = date >= startDate.getTime() && date <= endDate.getTime()
-                return inSearch && inDate
+                const inStartPositionDisplay = meta.StartPositionDisplay.toLowerCase().includes(search.toLowerCase());
+                return (inSearch || inStartPositionDisplay) && inDate
             } )
             .map( (meta: RideMeta) => {
                 const selected = selectedMetas.find( ( { TripId } ) => meta.TripId === TripId ) !== undefined
