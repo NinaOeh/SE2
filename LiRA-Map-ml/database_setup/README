@@ -1,0 +1,6 @@
+These scripts are used to update the friction database that lies on the server se2-A.compute.dtu.dk from the DTU university. 
+The scripts query data from the lira database that includes all data used so far for the LiRA project. Then the data is used to calculate new
+road conditions values such as the friction. These calculations are then uploaded into a new database. 
+
+Input: 
+    update_database <trip_id> <optional: batch_size>

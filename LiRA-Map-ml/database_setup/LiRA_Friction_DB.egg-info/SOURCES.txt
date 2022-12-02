@@ -1,3 +1,4 @@
+README
 setup.py
 LiRA_Friction_DB.egg-info/PKG-INFO
 LiRA_Friction_DB.egg-info/SOURCES.txt
