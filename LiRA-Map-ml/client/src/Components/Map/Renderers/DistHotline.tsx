@@ -40,19 +40,19 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
 
     const { dotHover } = useGraph()
     const zoom = useZoom()
+    let geo:Node[][]=[]
 
+    const g:Node={lat:0,lng:0,way_dist:0};
 
     const opts = useMemo( () => ({ 
         ...options, weight: getWeight(zoom)
-    }), [options, zoom] )
-    const geo= useMemo(()=>{
+    }), [options, zoom] );
+  
+    const {filter}=useGraph();
 
+   
 
-    },[geometry]);
-    const filter=useGraph();
-    const f=useMemo(()=>({
-        ...filter}),[filter])
-
+  
 
     const handlers: HotlineEventHandlers = useMemo( () => ({
         ...eventHandlers,
@@ -62,8 +62,6 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
     const { hotline } = useCustomHotline<Node, DistData>( DistRenderer, HoverHotPolyline, { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
         way_ids, conditions
     );
-    
-    
 
     
     useEffect( () => {
