@@ -15,7 +15,6 @@ export class RolesController
     @Get()
     getRoles(): Promise<Role[]> 
     {
-        console.log("We are here in the server, wuhu")
         return this.service.getallRoles();
     }
 

@@ -35,6 +35,8 @@ export interface Plot {
 export interface DotHover {
     label: string;
     x: number;
+    lat: number;
+    lng: number;
 }
 
 // Options

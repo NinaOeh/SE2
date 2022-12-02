@@ -47,11 +47,10 @@ export interface JSONProps extends BoundedPath {
 }
 
 
-export interface Node {
+export interface Node{
     lat: number;
 	lng: number;
 	way_dist: number;
-	way_id:number;
 }
 
 export type Ways = { [key: string]: Node[] }

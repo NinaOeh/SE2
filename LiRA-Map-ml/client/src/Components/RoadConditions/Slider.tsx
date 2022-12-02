@@ -37,10 +37,7 @@ const TypeChanger: React.FC = () => {
 
 
 
-    useEffect(() => {
-        console.log({ filter })
-    }, [filter])
-
+ 
     return (
         <div className='changer-wrapper'>
             <div className='slider-wrapper'>

@@ -51,7 +51,10 @@ class MapReferences(Base):
 	lane = sqla.Column(sqla.Text)	
 	direction = sqla.Column(sqla.Text)	
 	#PossibleMatchingRoutes = sqla.Column(sqla.Date) 
+	legDistance_MapMatched = sqla.Column(sqla.Float)
 	WayPoint = sqla.Column(sqla.Text)
 	FK_MeasurementId = sqla.Column(sqla.String, sqla.ForeignKey('Measurements.MeasurementId'))
 	FK_Measurement = orm.relationship("Measurements", foreign_keys=[FK_MeasurementId])
-	#FK_Section
+	FK_Section = sqla.Column(sqla.Text)
+	PossibleMatchingRoutes = sqla.Column(sqla.Text)
+	

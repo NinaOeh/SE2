@@ -26,9 +26,10 @@ const Altitude = () => {
         getAltitudes( (data: WaysConditions) => {
             console.log(data);
             setAltitudes( data )
-                setLoading(false);
 
         } )
+        setLoading(false);
+
     }, [] )
 
     const toggleShowHotline = () => setShowHotline(prev => !prev)

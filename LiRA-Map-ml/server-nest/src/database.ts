@@ -72,9 +72,9 @@ export const POSTGIS_DB_CONFIG = {
 export const FRICTION_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host: "localhost",
+        host: "localhost", 
         port: 5432,
-        debug:true,
+        // debug:true,
         user: "postgres",
         password: "postgres",
         database: "postgres",

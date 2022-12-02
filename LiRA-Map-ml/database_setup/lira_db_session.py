@@ -6,7 +6,7 @@ from config import settings
 from sqlalchemy.ext.declarative import declarative_base
 
 LIRA_DATABASE_URL = settings.LIRA_DB_URL
-print(LIRA_DATABASE_URL)
+print(f"Lira Database: {LIRA_DATABASE_URL}")
 lira_engine = create_engine(LIRA_DATABASE_URL)
 
 #DB_FRICTION_URL = settings.DB_FRICTION_URL
