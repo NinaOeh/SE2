@@ -90,7 +90,7 @@ def convert_lira_measurements(offset: int,
             MapReferenceId=measurement.MapReferenceId,
             lat_MapMatched=measurement.lat_MapMatched,
             lon_MapMatched=measurement.lon_MapMatched,
-            MeasurementId=measurement.FK_MeasurementId,
+            MeasurementId=str(measurement.FK_MeasurementId),
             legDistance_MapMatched=measurement.legDistance_MapMatched if measurement.legDistance_MapMatched != None else 0,
             FK_Section=measurement.FK_Section if measurement.FK_Section != None else '0',
             PossibleMatchingRoutes=measurement.PossibleMatchingRoutes,
@@ -100,7 +100,7 @@ def convert_lira_measurements(offset: int,
     def getrpmrl_measurement(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
         return lira_db_schema.Measurement(
-            MeasurementId=measurement.MeasurementId,
+            MeasurementId=str(measurement.MeasurementId),
             T=measurement.T,
             TS_or_Distance=measurement.TS_or_Distance,
             lat=measurement.lat,
@@ -131,7 +131,7 @@ def convert_lira_measurements(offset: int,
     def getrpmfl(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
         return lira_db_schema.Measurement(
-            MeasurementId=measurement.MeasurementId,
+            MeasurementId=str(measurement.MeasurementId),
             T=measurement.T,
             TS_or_Distance=measurement.TS_or_Distance,
             lat=measurement.lat,
