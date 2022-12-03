@@ -126,12 +126,8 @@ def extract_only_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]
         Ways1 = osm_query.get_ways(nodes[0])
         Ways2 = osm_query.get_ways(nodes[1])
         Way_id = list(set(Ways1[0]) & set(Ways2[0]))
-        if len(Way_id) == 1:
-            Way_id = str(Way_id[0])
-            return [Node_id, Way_id]
-        else:
-            raise Exception("No to wayids can be assigned.")
-        
+        Way_id = str(Way_id[0])
+        return [Node_id, Way_id]
         
     except Exception as exc:
         return [exc]
@@ -261,7 +257,7 @@ def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
                 FK_Trip=row['FK_Trip']
             )
         else:
-            pass
+            return
     return (parse(row) for _, row in df.iterrows())
 
 def get_geometry_info(df: pd.DataFrame) -> List[friction_db_schema.Geometry]:
