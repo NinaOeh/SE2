@@ -48,8 +48,8 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         click: (_,  i) => {
             const max = ways? ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value :0;
 
-          
-            console.log("im here:",filter);
+            
+            console.log("im here:",ways?.conditions[i]);
             if ( ways && onClick )
                
                     onClick(ways.way_ids[i], ways.way_lengths[i],filter)
