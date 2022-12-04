@@ -13,37 +13,37 @@ const addMeasPopup = () => {
 
     const popup = createPopup<ActiveMeasProperties>()
 
-    return ( callback: (measurement: ActiveMeasProperties) => void, defaultOptions: Required<ActiveMeasProperties> ) => {
+    return (callback: (measurement: ActiveMeasProperties) => void, defaultOptions: Required<ActiveMeasProperties>) => {
 
         // setOptions( defaultOptions )
         let options = { ...defaultOptions }
 
-        popup( {
-            title: <h2>Measurement Setup</h2>,
+        popup({
+            //title: <h2>Measurement Setup</h2>,
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Add/Change',
-            html: <PopupWrapper
+            /*html: <PopupWrapper
                 defaultOptions={defaultOptions}
                 setOptions={opts => {
                     options = opts
-                }} />,
-        } )
-        .then( (result: any) => {
-            if ( !result.isConfirmed || options === undefined )
-                return
-
-            callback(options)
-    
-            popup( {
-                title: <p>Measurement <b>{options.name}</b> added / modified</p>,
-                footer: `Will be drawn as ${options.rendererName}`,
-                //icon: 'success',
-                //timer: 1500,
-                //timerProgressBar: true,
-                toast: true
-            } )
+                }} />,*/
         })
+            .then((result: any) => {
+                if (!result.isConfirmed || options === undefined)
+                    return
+
+                callback(options)
+
+                popup({
+                    //title: <p>Measurement <b>{options.name}</b> added / modified</p>,
+                    footer: `Will be drawn as ${options.rendererName}`,
+                    //icon: 'success',
+                    //timer: 1500,
+                    //timerProgressBar: true,
+                    toast: true
+                })
+            })
 
     }
 }
