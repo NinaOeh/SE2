@@ -42,7 +42,7 @@ def get_friction_data(trip_id: str,
 
     friction_data = pd.DataFrame([vars(m) for m in friction_data])
 
-    friction_data['averaged_way_id'] = friction_data['Way_id'].rolling(window = 5, center=True, min_periods=1).apply(lambda x: x.mode()[0]).astype(int).astype(str)
+    friction_data['averaged_way_id'] = friction_data['Way_id'].rolling(window = 7, center=True, min_periods=1).apply(lambda x: x.mode()[0]).astype(int).astype(str)
     friction_data['Way_id'] = friction_data['Way_id'].astype(str)
 
     print(friction_data.shape)
