@@ -2,7 +2,7 @@ import { MapBounds } from "../models/map"
 import { Condition, WaysConditions } from "../models/path"
 import { asyncPost, post } from "./fetch"
 
-const devURL = 'http://se2-A.compute.dtu.dk:3002'
+const devURL = 'http://localhost:3002'
 const prodURL = 'http://se2-A.compute.dtu.dk:3002'
 const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
