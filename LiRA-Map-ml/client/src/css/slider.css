@@ -1,59 +1,89 @@
 .changer-wrapper {
+    background-color: white;
+    width: 2cm;
+    height: 9cm;
+    left: 0cm;
     z-index: calc(var(--navbar-z-index) - 3);
-    width: 10cm;
-    height: 2cm;
-    background: var(--background);
-    border-radius: 10px;
-    display: grid;
-    grid-auto-flow: column;
     position: absolute;
-    grid-template-columns: 40% 20% 20% 20%;
-    align-items: center;
-    top: 7cm;
-    left: 2.5cm;
+    font-size: 2em;
+    border-radius: 10px;
     margin: 20px;
+    background: var(--background);
+    cursor: pointer;
+    top: 4.5cm;
 }
 
 .slider-wrapper {
-    margin: auto;
+    transform: rotate(-90deg);
+    position: relative;
+    top: 2cm;
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .value-number {
+    position: relative;
+    top: 3.5cm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 25px;
-    margin: auto;
-    color: white;
 }
 
-.button-iri,
-.button-iri-toggled {
+.button-iri {
     color: white;
     background-color: grey;
     width: 1.5cm;
     height: 1.5cm;
+    position: absolute;
+    top: 5cm;
+    left: 0.25cm;
     border: None;
     text-align: center;
     font-size: 20px;
     border-radius: 5px;
-    margin: auto;
 }
 
 .button-iri-toggled {
+    color: white;
     background-color: var(--highlight-text);
+    width: 1.5cm;
+    height: 1.5cm;
+    position: absolute;
+    top: 5cm;
+    left: 0.25cm;
+    border: None;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 5px;
 }
 
-.button-friction,
-.button-friction-toggled {
+.button-friction {
     color: white;
     background-color: grey;
     width: 1.5cm;
     height: 1.5cm;
+    position: absolute;
+    top: 7cm;
+    left: 0.25cm;
     border: None;
     text-align: center;
     font-size: 20px;
     border-radius: 5px;
-    margin: auto;
 }
 
 .button-friction-toggled {
+    color: white;
     background-color: var(--highlight-text);
+    width: 1.5cm;
+    height: 1.5cm;
+    position: absolute;
+    top: 7cm;
+    left: 0.25cm;
+    border: None;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 5px;
 }

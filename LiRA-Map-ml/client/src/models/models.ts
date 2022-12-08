@@ -1,8 +1,7 @@
-/* Modified by Colin Hoffmann (s212711) */
 
 export interface RideMeta {
 	TripId: string,
-	TaskId: number,
+	TaskId: number, 
 	StartTimeUtc: string,	// "2021-04-27T18:11:02.223Z"
 	EndTimeUtc: string, //	"2021-04-27T18:57:18.551Z"
 	StartPositionLat: string, //	"55.683240"
@@ -37,14 +36,14 @@ export interface LatLng {
 }
 
 export interface TripsOptions {
-	search: string;
-	startDate: Date;
-	endDate: Date;
-	reversed: boolean;
+    search: string;
+    startDate: Date;
+    endDate: Date;
+    reversed: boolean;
 }
 
 
-export interface FilteringOptions {
+export interface FilteringOptions{
 	search: string;
 }
 
