@@ -6,6 +6,7 @@ import { Color, Palette } from "react-leaflet-hotline";
 import { Line } from "react-chartjs-2";
 
 import { ConditionType } from "../../models/graph";
+import { useGraph } from "../../context/GraphContext";
 
 Chart.register( CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend );
 
@@ -33,7 +34,7 @@ const options = ({name, min, max}: ConditionType): ChartOptions<'line'> => ({
         y: {
             title: { 
                 display: true, 
-                text: name
+                text: "Value"
             },
             min: min,
             max: max
@@ -70,6 +71,7 @@ interface Props {
 const ConditionsGraph: FC<Props> = ( { type, data, palette } ) => {
 
     const ref = useRef<Chart<"line", number[], number>>(null)
+   
 
     useEffect( () => {
         if (ref.current === null ) return;

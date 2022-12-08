@@ -44,7 +44,7 @@ export const GraphProvider = ({ children }: any) => {
 	const [filter, setfilter]=useState<number>(0) //ENUMERATION UPGRADE 
 	//have another for FMT 
 
-	const[friction,setfriction]=useState<boolean>(false);
+	const[friction,setfriction]=useState<boolean>(true);
 
 	const { minX, maxX, minY, maxY } = bounds;
 

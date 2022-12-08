@@ -58,7 +58,11 @@ interface SelectMeta extends RideMeta {
     selected: boolean;
 }
 
-const RideCards: FC = ( ) => {   
+interface RideCardProps {
+    isCollapsed: boolean;
+}
+
+const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {   
     
     const { metas, selectedMetas, setSelectedMetas } = useMetasCtx();
 
@@ -118,7 +122,7 @@ const RideCards: FC = ( ) => {
     }
     
     return (
-        <div className="ride-list">
+        <div className={`ride-list${isCollapsed? " hidden" : ""}`}>
             <OptionsSelector onChange={onChange}/>
             <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>            
         </div>

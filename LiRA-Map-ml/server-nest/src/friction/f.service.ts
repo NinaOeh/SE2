@@ -52,13 +52,16 @@ export class FrictionService {
                 'Way_id as Way_id', 
                 this.knex.raw('ST_AsGeoJSON((ST_DumpPoints(geometry)).geom)::json->\'coordinates\' as pos'), 
                 this.knex.raw('ST_LineLocatePoint(geometry, (ST_DumpPoints(geometry)).geom) as way_dist'),
-                this.knex.raw('ST_Length(geometry::geography) as length') 
+                this.knex.raw('ST_Length(geometry::geography) as length'),
+                //this.knex.raw('ST_Intersection(geometry,(ST_DumpPoints(geometry)).geom) as intersec')
             )
 
 
             return [
                 groupBy<any, LatLngDist>( geom, 'Way_id', (cur: any) => ({ lat: cur.pos[1], lng: cur.pos[0], way_dist: cur.way_dist}) ),
-                geom.reduce( (acc, cur) => { acc[cur.Way_id] = cur.length; return acc }, {} )
+                geom.reduce( (acc, cur) => { acc[cur.Way_id] = cur.length; return acc }, {} ),
+                //groupBy<any, any>( geom, 'Way_id', (cur: any) => (cur.intersec) ),
+
             ]
 
 
@@ -81,7 +84,7 @@ export class FrictionService {
 
         const map=(curr)=>{
             if(curr){
-                return {way_dist:10, value:curr.friction_value}
+                return {way_dist:1, value:curr.friction_value}
             }
             return { way_dist:0,value:0}
         }
@@ -99,7 +102,6 @@ export class FrictionService {
 
 
         const [frictions, frictions_lengths]= await this.GetDistLength()
-
 
         const wayIds = Object.keys(conditions)
 

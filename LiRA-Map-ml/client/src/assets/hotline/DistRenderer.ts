@@ -8,6 +8,7 @@ import { DistData, DistPoint } from "./hotline";
 import Edge from "./Edge";
 import { useEffect } from 'react';
 import { useGraph } from '../../context/GraphContext';
+import { start } from '@popperjs/core';
 
 export default class DistRenderer extends Renderer<DistData> {
 
@@ -23,6 +24,9 @@ export default class DistRenderer extends Renderer<DistData> {
         super({...options})
         this.way_ids = args[0][0];
         this.conditions = args[0][1];
+        console.log("come one");
+        console.log(this.conditions)
+        
         this.edgess = [];
         this.dotHover = undefined;
       
@@ -53,11 +57,12 @@ export default class DistRenderer extends Renderer<DistData> {
             : 1
        
         try{
+
             gradient.addColorStop(dist, `rgba(${edge.get().join(',')},${opacity})`);
-            
         }
         catch
         {
+
             console.log("Error caught here.")
         }
     }
@@ -120,12 +125,14 @@ export default class DistRenderer extends Renderer<DistData> {
         const dataLength = this._data.length
 
         for (let i = 0; i < dataLength; i++) 
-        {
+        {   console.log(dataLength)
             const path = this._data[i];
+            console.log(i)
             const edges = this.edgess[i]
 
             const way_id = this.way_ids[i];
             const conditions = this.conditions[i]
+            console.log("conditions",conditions)
             for (let j = 1; j < path.length; j++) 
             {
                 const start = path[j - 1];
@@ -181,19 +188,26 @@ export default class DistRenderer extends Renderer<DistData> {
         const start_dist = pointStart.way_dist
         const end_dist = pointEnd.way_dist
 
+
         if ( start_dist === end_dist ) return;
     
         for ( let i = 0; i < conditions.length; i++ )
         {
             // const { dist: way_dist, value } = conditions[i] as any 
             const { way_dist, value } = conditions[i] 
+
             
             if ( way_dist < start_dist ) continue;
-            else if ( way_dist > end_dist ) return;
+            else if ( way_dist > end_dist ){
+                return;
+            } 
 
-            const rgb = this.getRGBForValue(value);                                                      
+
+            const rgb = this.getRGBForValue(value);    
+                                                  
             const dist = (way_dist - start_dist) / (end_dist - start_dist)
             this._addWayColorGradient(gradient, new Edge(...rgb), dist, way_id)
+            console.log("1")
         }
     }
 }

@@ -26,7 +26,6 @@ interface IWays {
 
 
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
-    let geo:Node[][]=[]
 
     const zoom = useZoom();
     const { minY, maxY,filter,friction } = useGraph()
@@ -49,8 +48,8 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         click: (_,  i) => {
             const max = ways? ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value :0;
 
-          
-            console.log("im here:",filter);
+            
+            console.log("im here:",ways?.conditions[i]);
             if ( ways && onClick )
                
                     onClick(ways.way_ids[i], ways.way_lengths[i],filter)
@@ -78,7 +77,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
             
             getFrictionConditions((data:WaysConditions)=>{
                 console.log("data that i receive:",data);
-                setWays( data );
+                filterWays(data,setWays,filter)
 
 
             })
@@ -87,35 +86,10 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         else{
             getWaysConditions(type, z, (data: WaysConditions) => {
 
-                const g:Node={lat:0,lng:0,way_dist:0};
-                
-                const s:string[]=[]
-                const l:number[]=[]
-                
 
-                for(let i=data.conditions.length-1;i>=0;i--){
-                    const max=data.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
-                    if(max>filter){
-                        geo.push(data.geometry[i]);
-                        s.push(data.way_ids[i]);
-                        l.push(data.way_lengths[i]);
+                filterWays(data,setWays,filter)
 
-
-                    }
-                }
-                data.geometry=geo;
-                data.way_ids=s;
-                data.way_lengths=l;
-
-                
-                data.conditions.filter(c=>{
-                    const max=c.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
-                    return max>filter
-
-                })
-                
-                
-                setWays( data );
+               
              
 
 
@@ -158,5 +132,43 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     )
 }
+
+function filterWays(data:WaysConditions,setWays: React.Dispatch<React.SetStateAction<WaysConditions | undefined>>, filter:number ){
+    const g:Node={lat:0,lng:0,way_dist:0};
+                
+                const s:string[]=[]
+                const l:number[]=[]
+                let geo:Node[][]=[]
+
+
+                for(let i=data.conditions.length-1;i>=0;i--){
+                    const max=data.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+                    if(max>filter){
+                        geo.push(data.geometry[i]);
+                        s.push(data.way_ids[i]);
+                        l.push(data.way_lengths[i]);
+
+
+                    }
+                }
+                data.geometry=geo;
+                data.way_ids=s;
+                data.way_lengths=l;
+
+                
+                data.conditions.filter(c=>{
+                    const max=c.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
+                    return max>filter
+
+                })
+                
+                
+                setWays( data );
+             
+
+
+}
+
+
 
 export default Ways;
