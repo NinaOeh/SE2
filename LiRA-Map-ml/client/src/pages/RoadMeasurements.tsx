@@ -30,6 +30,7 @@ const RoadMeasurements = () => {
     const [collapseRides, setCollapseRides] = useState(true);
     const handleCollapseRides = () => {
         setCollapseRides(!collapseRides);
+        console.log("Collapse rides? ", collapseRides);
     }
 
     const [collapseDetails, setCollapseDetails] = useState(true);
@@ -49,7 +50,7 @@ const RoadMeasurements = () => {
                             <div className="rides-wrapper">
                                 
 
-                                {collapseRides && <RideCards/>}
+                                <RideCards isCollapsed={!collapseRides}/>
                                 <Checkbox className="collapse-checkbox" 
                                 html={
                                     collapseRides ? 
@@ -63,7 +64,7 @@ const RoadMeasurements = () => {
                                     </svg>
                                 } forceState={collapseRides} onClick={handleCollapseRides}/>
                                
-                                {collapseDetails && <RideDetails  />}
+                                <RideDetails isCollapsed={!collapseDetails}/>
                                 <Checkbox className="collapse-checkbox" 
                                 html={
                                     collapseDetails ? 

@@ -114,7 +114,7 @@ const Rides: FC = () => {
                                 } 
                                 forceState={collapseGraph} onClick={handleCollapseGraph}/>
 
-                { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue && collapseGraph &&
+                { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue &&
                     <Graph 
                         key={`graph-${i}`}
                         labelX="Time (h:m:s)" 
@@ -138,6 +138,7 @@ const Rides: FC = () => {
                                 return { data, bounds, label: 'r-' + TaskId, j }
                             } ) 
                         }
+                        isCollapsed={!collapseGraph}
                     />
                 ) }
             </div>

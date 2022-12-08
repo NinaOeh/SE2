@@ -9,6 +9,10 @@
     background-color: rgb(58, 58, 58);
 }
 
+.ride-list.hidden {
+    display: none;
+}
+
 .rides-options {
     display: flex;
     flex-direction: column;

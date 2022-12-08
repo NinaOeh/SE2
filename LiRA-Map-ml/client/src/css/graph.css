@@ -7,6 +7,10 @@
     grid-template-columns: 100px auto;
 }
 
+.graph-wrapper.hidden {
+    display: none;
+}
+
 .zoom-btns {
     position: absolute;
     width: 20px;

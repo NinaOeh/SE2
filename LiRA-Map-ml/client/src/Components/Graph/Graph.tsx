@@ -29,12 +29,13 @@ interface IGraph {
     absolute?: boolean;
     time?: boolean;
     mapData?: Path[];
+    isCollapsed?: boolean;
 }
 
 const margin = {top: 20, right: 30, bottom: 70, left: 100};
 const paddingRight = 50
 
-const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, mapData }  ) => {
+const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, mapData, isCollapsed }  ) => {
 
     const wrapperRef = useRef(null)
     const [width, height] = useSize(wrapperRef)
@@ -48,7 +49,7 @@ const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, ma
     return (
         <>
         <Tooltip />
-        <div className='graph-wrapper' ref={wrapperRef}>
+        <div className={`graph-wrapper${isCollapsed? " hidden" : ""}`} ref={wrapperRef}>
             
             <Zoom setZoom={setZoom}/>
 

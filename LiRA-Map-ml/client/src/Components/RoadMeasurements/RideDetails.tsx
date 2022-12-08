@@ -20,8 +20,11 @@ import MeasCheckbox from "./MeasCheckbox";
 import '../../css/ridedetails.css'
 
 
+interface RideDetailsProps {
+	isCollapsed: boolean;
+}
 
-const RideDetails: FC = () => {
+const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 
 	const { selectedMetas } = useMetasCtx()
 	const { selectedRole } = UseRoleContext()
@@ -91,7 +94,7 @@ const RideDetails: FC = () => {
 
 	//shows first all measurements and then the checkbox to add new measurement
     return (
-		<div className="meta-data">
+		<div className={`meta-data${isCollapsed? " hidden" : ""}`}>
 			{ measurements.map( (m: ActiveMeasProperties, i: number) =>
 				<MeasCheckbox 
 					key={`meas-checkbox-${i}`}
