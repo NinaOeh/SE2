@@ -1,5 +1,3 @@
-/* Modified by Colin Hoffmann (s212711) */
-
 import { Module } from '@nestjs/common';
 import { KnexModule } from 'nestjs-knex';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -25,33 +23,33 @@ import { RCService } from './conditions/rc.service';
 import { AltitudeController } from './altitude/alt.controller';
 import { AltitudeService } from './altitude/alt.service';
 
-import { FrictionController } from './friction/f.controller';
-import { FrictionService } from './friction/f.service';
-
 import { RolesController } from './roles/roles.controller';
 import { RolesService } from './roles/roles.service';
 
-import { LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG, FRICTION_DB_CONFIG } from './database';
+import { FrictionController } from './friction/f.controller';
+import { FrictionService } from './friction/f.service';
+
+import { LIRA_DB_CONFIG, POSTGIS_DB_CONFIG, VISUAL_DB_CONFIG,FRICTION_DB_CONFIG } from './database';
 
 
 const database = (config: any, name: string) => {
-	return KnexModule.forRootAsync({
-		useFactory: () => ({ config })
-	}, name)
+	return KnexModule.forRootAsync( {
+		useFactory: () => ( { config } )
+	}, name )
 }
 
-@Module({
+@Module( {
 	imports: [
-		ConfigModule.forRoot(),
+		ConfigModule.forRoot(), 
 		database(LIRA_DB_CONFIG, 'lira-main'),
 		database(VISUAL_DB_CONFIG, 'lira-vis'),
 		database(POSTGIS_DB_CONFIG, 'postgis'),
-		database(FRICTION_DB_CONFIG, 'FrictionDB')
+		database(FRICTION_DB_CONFIG, 'friction'),
 	],
-	controllers: [AppController, SegmentsController, TypesController, RidesController,
+	controllers: [AppController, SegmentsController, TypesController, RidesController, 
 		MeasurementsController, RCController, AltitudeController, RolesController, FrictionController],
-	providers: [AppService, SegmentsService, ConfigService, TypesService, RidesService,
+	providers: [AppService, SegmentsService, ConfigService, TypesService, RidesService, 
 		MeasurementsService, RCService, AltitudeService, RolesService, FrictionService],
-})
+} )
 
-export class AppModule { }
+export class AppModule {}
