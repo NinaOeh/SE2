@@ -49,7 +49,7 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
 
     const onClick = useCallback((way_id: string, way_length: number, f: number) => {
 
-        if (typeCondition) {
+        if (typeCondition === 'Friction') {
 
             getFrictConditions(way_id, (wc: Condition[]) => {
                 console.log(wc);
@@ -108,7 +108,7 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
             )
 
         }
-        else {
+        else if (typeCondition === 'IRI') {
 
             getConditions(way_id, name, (wc: Condition[]) => {
                 const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
@@ -163,6 +163,12 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
             }
 
             )
+        }
+        else if (typeCondition === 'FrictionOccurence') {
+            console.log('FrictionOccurence')
+        }
+        else {
+            console.log('Invalid type')
         }
     }, [typeCondition])
 
