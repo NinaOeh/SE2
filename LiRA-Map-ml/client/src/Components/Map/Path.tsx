@@ -8,7 +8,7 @@ import { Renderer } from "../../models/renderers";
 import { RENDERER_OPTIONS } from "./constants";
 import renderers from "./renderers";
 
-const Path: FC<PathProps> = ( { path, properties, onClick } ) => {
+const Path: FC<PathProps> = ( { path, properties, metadata, onClick, onMouseover } ) => {
 
     const { minY, maxY } = useGraph();
 
@@ -25,7 +25,8 @@ const Path: FC<PathProps> = ( { path, properties, onClick } ) => {
                 getLng={(t: PointData) => t.lng} 
                 getVal={(t: PointData) => t.value || 0} 
                 options={options} 
-                eventHandlers={{'click': onClick}} />
+                eventHandlers={{'click': onClick,
+                                'mouseover': (i: number) => (e:any) => {return metadata!.TaskId}}} />
             : null
         }
         </>

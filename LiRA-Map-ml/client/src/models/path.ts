@@ -30,7 +30,9 @@ export interface PathProps {
 	bounds?: Bounds;
 	properties: PathProperties;
 	metadata?: Metadata;
-	onClick?: PathEventHandler
+	isHovered?: boolean;
+	onClick?: PathEventHandler;
+	onMouseover?: PathEventHandler;
 }
 
 // used for queries

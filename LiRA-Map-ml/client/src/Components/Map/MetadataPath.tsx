@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 
 import { CircleMarker, Marker, Popup } from "react-leaflet";
 import { DotHover } from "../../assets/graph/types";
-import { PathProps } from "../../models/path";
+import { Metadata, PathProps } from "../../models/path";
 import Path from "./Path";
 import { GraphProvider, useGraph } from "../../context/GraphContext";
 
@@ -35,26 +35,31 @@ const getPopupLine = (key: string, value: any) => {
     return <div key={`popupline-${Math.random()}`}>{key}: {value}</div>
 }
 
-const MetadataPath: FC<PathProps> = ( { path, properties, metadata } ) => {
+const MetadataPath: FC<PathProps> = ( { path, properties, metadata, onMouseover } ) => {
 
     const [markerPos, setMarkerPos] = useState<[number, number]>([0, 0]);
     const [selected, setSelected] = useState<number | undefined>(undefined);
-    // const [ dotHover, setDotHover ] = useState<DotHover>();
+    const [hovered, setHovered ] = useState<number | undefined>(undefined);
     
     
 
     const graphProvider = useGraph();
 
+    // const onMouseover = (i: number) => (e: any) => {
+    //     console.log("in MetadataPath, taskId is: (metadata)", metadata!.TripId);
+    //     isHovered = true;
+    // }
+
     const onClick = (i: number) => (e: any) => {
         const { lat, lng } = e.latlng
         setMarkerPos([lat, lng])
-        setSelected(i)
+        // setSelected(i)
     }
     
     const point = path[selected || 0]
     const md = metadata || {}
     return ( <> 
-        <Path path={path} properties={properties} onClick={onClick}></Path>
+        <Path path={path} properties={properties} metadata={metadata} onClick={onClick} onMouseover={onMouseover}></Path>
         
         { selected !== undefined && 
             <Marker position={markerPos}>
