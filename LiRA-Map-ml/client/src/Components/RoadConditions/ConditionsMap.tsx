@@ -33,7 +33,7 @@ interface Props {
 
 const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => {
 
-    const { filter, friction } = useGraph();
+    const { filter, typeCondition } = useGraph();
 
 
     const { name, max, grid, samples } = type;
@@ -50,7 +50,7 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
     const onClick = useCallback((way_id: string, way_length: number, f: number) => {
 
 
-        if (friction) {
+        if (typeCondition) {
 
             getFrictConditions(way_id, (wc: Condition[]) => {
                 console.log(wc);
@@ -165,7 +165,7 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
 
             )
         }
-    }, [friction])
+    }, [typeCondition])
 
 
     return (

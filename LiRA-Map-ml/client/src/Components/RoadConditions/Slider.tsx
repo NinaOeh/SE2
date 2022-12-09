@@ -2,38 +2,37 @@ import { useEffect, useState } from 'react';
 import { useGraph } from '../../context/GraphContext';
 import React from 'react'
 import '../../css/slider.css'
+import DropdownSlider from './DropdownSlider';
 
 const TypeChanger: React.FC = () => {
 
-    const { filter, setfilter, setfriction } = useGraph();
+    const { filter, setfilter, typeCondition } = useGraph();
     const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
         setfilter(parseFloat(event.target.value));
-    }
-    const [state, setState] = useState(false);
-    const toggle = () => {
-        setState(!state)
     }
 
     const irimax = 10;
     const iristep = 1
     const frictionmax = 3;
     const frictionstep = 0.2;
+    const frictionoccurencemax = 10;
+    const frictionoccurencestep = 1;
 
-    useEffect(() => {
-        setfilter(0)
+    var max
+    var step
 
-        if (state) {
-            setfriction(true)
-
-        }
-        else {
-            setfriction(false);
-        }
-    }, [state])
-
-
-
-
+    if (typeCondition === 'Friction') {
+        max = frictionmax
+        step = frictionstep
+    }
+    if (typeCondition === 'FrictionOccurence') {
+        max = frictionoccurencemax
+        step = frictionoccurencestep
+    }
+    else {
+        max = irimax
+        step = iristep
+    }
 
     return (
         <div className='changer-wrapper'>
@@ -42,14 +41,13 @@ const TypeChanger: React.FC = () => {
                     type='range'
                     onChange={changeWidth}
                     min={0}
-                    max={state ? frictionmax : irimax}
-                    step={state ? frictionstep : iristep}
+                    max={max}
+                    step={step}
                     value={filter}
                 ></input>
             </div>
             <p className='value-number'>{filter}</p>
-            <button className={state ? 'button-iri' : 'button-iri-toggled'} onClick={state ? toggle : undefined}>IRI</button>
-            <button className={state ? 'button-friction-toggled' : 'button-friction'} onClick={state ? undefined : toggle}>FRICTION</button>
+            <DropdownSlider />
         </div>
     )
 }

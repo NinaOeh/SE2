@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from 'nestjs-knex';
-import { Knex } from 'knex';
+import * as Knex from "knex";
 
 
 @Injectable()
 export class TypesService {
-    constructor(@InjectConnection('lira-vis') private readonly knex: Knex){
+    constructor(@InjectConnection('lira-vis') private readonly knex: Knex) {
 
     }
 
-    async getAggregatedValuesTypes():Promise<string[]>{
-        
+    async getAggregatedValuesTypes(): Promise<string[]> {
+
         return await this.knex.raw('SELECT DISTINCT "Type" FROM "AggregatedValues"')
             .then(res => {
                 return res.rows;
             })
     }
 
-    async getAggregationTypes(dataType: string):Promise<string[]>{
-       
+    async getAggregationTypes(dataType: string): Promise<string[]> {
+
         let typeString = "'" + dataType + "'";
 
         return await this.knex.raw('SELECT DISTINCT "Aggregation" FROM "AggregatedValues" WHERE "Type" = ' + typeString)
@@ -27,16 +27,16 @@ export class TypesService {
             })
     }
 
-    async getAggregatedValuesTypesOfSegment(segment_id: number):Promise<string[]>{
-        
+    async getAggregatedValuesTypesOfSegment(segment_id: number): Promise<string[]> {
+
         return await this.knex.raw('SELECT DISTINCT "Type" FROM "AggregatedValues" WHERE "Segment" = ' + segment_id)
             .then(res => {
                 return res.rows;
             })
     }
 
-    async getAggregationTypesOfSegment(dataType: string, segment_id: number):Promise<string[]>{
-       
+    async getAggregationTypesOfSegment(dataType: string, segment_id: number): Promise<string[]> {
+
         let typeString = "'" + dataType + "'";
 
         return await this.knex.raw('SELECT DISTINCT "Aggregation" FROM "AggregatedValues" WHERE "Segment" = ' + segment_id + ' AND "Type" = ' + typeString)

@@ -32,52 +32,52 @@ interface IDistHotline {
 
 const handler = (eventHandlers: HotlineEventHandlers | undefined, event: keyof HotlineEventHandlers, opacity: number) => {
     return (e: LeafletEvent, i: number, p: Polyline<any, any>) => {
-        p.setStyle( { opacity } )
-        if ( eventHandlers && eventHandlers[event] !== undefined )
+        p.setStyle({ opacity })
+        if (eventHandlers && eventHandlers[event] !== undefined)
             (eventHandlers[event] as HotlineEventFn)(e, i, p);
     }
 }
 
-const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options, eventHandlers } ) => {
+const DistHotline: FC<IDistHotline> = ({ way_ids, geometry, conditions, options, eventHandlers }) => {
 
-    const { dotHover,friction } = useGraph()
+    const { dotHover, typeCondition } = useGraph()
     const zoom = useZoom()
- 
-    const opts = useMemo( () => ({ 
+
+    const opts = useMemo(() => ({
         ...options, weight: getWeight(zoom)
-    }), [options, zoom] );
-  
+    }), [options, zoom]);
 
 
-   
-   
 
-  
 
-    const handlers: HotlineEventHandlers = useMemo( () => ({
+
+
+
+
+    const handlers: HotlineEventHandlers = useMemo(() => ({
         ...eventHandlers,
         mouseover: handler(eventHandlers, 'mouseover', 0.5),
         mouseout: handler(eventHandlers, 'mouseout', 0),
-    }), [eventHandlers] )
+    }), [eventHandlers])
 
-    
-    
-    const {renderer,hotline}  = useCustomHotline<Node, DistData>( DistRenderer, HoverHotPolyline, { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
+
+
+    const { renderer, hotline } = useCustomHotline<Node, DistData>(DistRenderer, HoverHotPolyline, { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers },
         way_ids, conditions
     );
-    useEffect(()=>{
-        if ( renderer === undefined ) return;
+    useEffect(() => {
+        if (renderer === undefined) return;
 
         (renderer as DistRenderer).setConditions(conditions);
         (renderer as DistRenderer).setWayIds(way_ids);
 
 
-        },[conditions])
-        
-    
-    useEffect( () => {
-        if ( hotline === undefined ) return;
-        
+    }, [conditions])
+
+
+    useEffect(() => {
+        if (hotline === undefined) return;
+
         (hotline as HoverHotPolyline<Node, DistData>).setHover(dotHover)
     }, [dotHover])
 
