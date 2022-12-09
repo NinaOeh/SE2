@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from 'nestjs-knex';
-import * as Knex from "knex";
+import knex, { Knex } from "knex"
 
 
 @Injectable()

@@ -1,4 +1,4 @@
-import * as Knex from "knex";
+import knex, { Knex } from "knex"
 import { LatLngDist } from "./models";
 
 interface Way {

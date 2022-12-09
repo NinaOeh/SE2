@@ -1,4 +1,4 @@
-import * as Knex from "knex";
+import knex, { Knex } from "knex"
 
 
 interface Altitude {

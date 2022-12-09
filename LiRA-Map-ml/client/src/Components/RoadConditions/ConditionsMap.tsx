@@ -49,7 +49,6 @@ const ConditionsMap: FC<Props> = ({ type, palette, setPalette, setWayData }) => 
 
     const onClick = useCallback((way_id: string, way_length: number, f: number) => {
 
-
         if (typeCondition) {
 
             getFrictConditions(way_id, (wc: Condition[]) => {
