@@ -1,0 +1,52 @@
+.DropdownWrapper {
+    width: 4.5cm;
+    height: 0.8cm;
+    margin: 0.1cm;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.DropdownButton {
+    color: white;
+    background-color: grey;
+    width: 4.5cm;
+    height: 0.8cm;
+    border: None;
+    text-align: left;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: auto;
+}
+
+.DropdownButton:hover {
+    color: var(--highlight-text);
+}
+
+.DropdownOptions,
+.DropdownOptions-toggled {
+    width: 4.5cm;
+    height: 2.4cm;
+    background-color: gray;
+    border-radius: 5px;
+    display: grid;
+}
+
+.DropdownOptions-toggled {
+    display: none;
+}
+
+.DropdownLink {
+    color: white;
+    background-color: grey;
+    width: 4.5cm;
+    height: 0.8cm;
+    border: None;
+    text-align: left;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: auto;
+}
+
+.DropdownLink:hover {
+    color: var(--highlight-text);
+}

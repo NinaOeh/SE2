@@ -19,15 +19,15 @@ const addMeasPopup = () => {
         let options = { ...defaultOptions }
 
         popup( {
-            title: <h2>Measurement Setup</h2>,
+            //title: <h2>Measurement Setup</h2>,
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Add/Change',
-            html: <PopupWrapper
-                defaultOptions={defaultOptions}
-                setOptions={opts => {
-                    options = opts
-                }} />,
+            //html: <PopupWrapper
+            //    defaultOptions={defaultOptions}
+            //    setOptions={opts => {
+            //        options = opts
+            //    }} />,
         } )
         .then( (result: any) => {
             if ( !result.isConfirmed || options === undefined )
@@ -36,7 +36,7 @@ const addMeasPopup = () => {
             callback(options)
     
             popup( {
-                title: <p>Measurement <b>{options.name}</b> added / modified</p>,
+                //title: <p>Measurement <b>{options.name}</b> added / modified</p>,
                 footer: `Will be drawn as ${options.rendererName}`,
                 //icon: 'success',
                 //timer: 1500,

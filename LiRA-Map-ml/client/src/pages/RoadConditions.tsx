@@ -22,16 +22,14 @@ const RoadConditions = () => {
     const [palette, setPalette] = useState<Palette>([])
     const [wayData, setWayData] = useState<ChartData<"line", number[], number>>()
 
-    useEffect( () => {
+    useEffect(() => {
         setLoading(true);
-    } )
-    
-    const{friction}=useGraph();
-    
+    })
 
-    
+    const { typeCondition } = useGraph();
+
     const type: ConditionType = {
-        name: friction?'Friction':'IRI',
+        name: typeCondition,
         min: 0,
         max: 10,
         grid: true,
@@ -39,23 +37,23 @@ const RoadConditions = () => {
     }
 
 
-    useEffect( () => {
+    useEffect(() => {
         setLoading(false);
-    } )
+    })
     return (
         <GraphProvider>
-             {loading?
+            {loading ?
                 <ClipLoader color={'#36c3d6b7'} loading={loading} size={150} aria-label="Loading Spinner" />
                 :
-            <div className="road-conditions-wrapper">
-               
-                 
-                <ConditionsMap type={type} palette={palette} setPalette={setPalette} setWayData={setWayData} />
-                <ConditionsGraph type={type} palette={palette} data={wayData} />
+                <div className="road-conditions-wrapper">
 
-            </div>
-                }
-        </GraphProvider> 
+
+                    <ConditionsMap type={type} palette={palette} setPalette={setPalette} setWayData={setWayData} />
+                    <ConditionsGraph type={type} palette={palette} data={wayData} />
+
+                </div>
+            }
+        </GraphProvider>
     );
 }
 

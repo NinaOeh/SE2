@@ -8,7 +8,7 @@ LiRA-Map-ml/database_setup/__pycache__/
 LiRA-Map-ml/database_setup/mapmatching/
 LiRA-Map-ml/database_setup/scripts/__pycache__/
 
-# Logs
+#  Logs
 logs
 *.log
 npm-debug.log*

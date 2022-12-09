@@ -17,18 +17,18 @@ interface ContextProps {
 	minY: number;
 	maxY: number;
 
-    addBounds: AddMinMaxFunc;
+	addBounds: AddMinMaxFunc;
 	remBounds: RemMinMaxFunc;
 
 	dotHover: DotHover | undefined;
 	setDotHover: Dispatch<SetStateAction<DotHover | undefined>>;
 
-	filter:number;
-	setfilter:Dispatch<SetStateAction<number>>;
+	filter: number;
+	setfilter: Dispatch<SetStateAction<number>>;
 
 	//todo change when type is ready
-	friction:boolean;
-	setfriction:Dispatch<SetStateAction<boolean>>;
+	typeCondition: string;
+	setType: Dispatch<SetStateAction<string>>;
 }
 
 const GraphContext = createContext({} as ContextProps);
@@ -38,13 +38,13 @@ const GraphContext = createContext({} as ContextProps);
 export const GraphProvider = ({ children }: any) => {
 
 	const { bounds, addBounds, remBounds } = useMinMaxAxis()
-	const [ dotHover, setDotHover ] = useState<DotHover>()
+	const [dotHover, setDotHover] = useState<DotHover>()
 
 
-	const [filter, setfilter]=useState<number>(0) //ENUMERATION UPGRADE 
+	const [filter, setfilter] = useState<number>(0) //ENUMERATION UPGRADE 
 	//have another for FMT 
 
-	const[friction,setfriction]=useState<boolean>(true);
+	const [typeCondition, setType] = useState<string>('iri');
 
 	const { minX, maxX, minY, maxY } = bounds;
 
@@ -55,7 +55,7 @@ export const GraphProvider = ({ children }: any) => {
 				addBounds, remBounds,
 				dotHover, setDotHover,
 				filter, setfilter,
-				friction, setfriction
+				typeCondition, setType
 			}}
 		>
 			{children}
