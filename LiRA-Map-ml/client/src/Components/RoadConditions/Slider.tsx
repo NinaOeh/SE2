@@ -34,6 +34,10 @@ const TypeChanger: React.FC = () => {
         step = iristep
     }
 
+    useEffect(() => {
+        setfilter(0);
+    }, [typeCondition]);
+
     return (
         <div className='changer-wrapper'>
             <div className='slider-wrapper'>
