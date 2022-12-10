@@ -29,6 +29,7 @@ export class FrictionController {
     @Get('way')
     getWayConditions( @Query() query: { wayId: string } ): Promise<Condition[]> {
         const { wayId } = query;
+        console.log("HELLO WE ARE HERE")
         return this.service.getWayFrictionConditions(wayId);
     }
 

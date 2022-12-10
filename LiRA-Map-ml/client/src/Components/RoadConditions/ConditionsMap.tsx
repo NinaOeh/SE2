@@ -53,7 +53,6 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
         if(friction){
 
             getFrictConditions( way_id, (wc: Condition[]) => {
-                console.log(wc);
 
                 const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
                 console.log("maximum value:",max);
@@ -110,6 +109,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
         }
         else{
+
 
                 getConditions( way_id, name, (wc: Condition[]) => {
                     const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value

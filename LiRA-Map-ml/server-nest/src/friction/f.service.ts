@@ -73,7 +73,6 @@ export class FrictionService {
 
     async GetWaysFrictions(): Promise<[{[key: WayId]: Condition[]},{[key: WayId]: LatLngDist[]}]>{
 
-        console.log("hello");
 
         const res = await Frictions(this.knex)
         .select( 'Way_id', 'friction_value as friction_value' ,'mapped_lat as lat','mapped_lon as log' )
@@ -81,6 +80,7 @@ export class FrictionService {
         .andWhereNot('friction_value', 'NaN')
         .andWhereNot('mapped_lon','NaN')
         .andWhereNot('mapped_lat','NaN')
+
 
         const map=(curr)=>{
             if(curr){
@@ -91,7 +91,7 @@ export class FrictionService {
 
         const map2=(curr)=>{
             if(curr){
-                return {lat:curr.lat, lng:curr.log, way_dist:1}
+                return {lat:curr.lat, lng:curr.log, way_dist:0}
             }
             return { lat:0,lng:0,way_dist:0}
         }    
@@ -100,27 +100,31 @@ export class FrictionService {
         groupBy( res, 'Way_id', map2 )]
 }
     async getWaysConditions(geometry:boolean): Promise<WaysConditions>
-    {
-        console.log("11111")
+    {   
+        console.log(geometry);
 
         const [conditions,newpoints] = await this.GetWaysFrictions()
-        console.log("11111")
 
 
 
         const [frictions, frictions_lengths]= await this.GetDistLength()
+        
 
-        const wayIds = Object.keys(conditions)
+        const g=geometry===true?frictions:newpoints
+        const wayIds = Object.keys(g)
 
 
         return wayIds.reduce( 
             (acc, way_id) => {
-                {
-                    const g= geometry?frictions[way_id]:newpoints[way_id];
-                    acc.way_ids.push(way_id)
-                    acc.way_lengths.push(frictions_lengths[way_id])
-                    acc.geometry.push(g)
-                    acc.conditions.push(conditions[way_id])
+                {   
+                    
+                        acc.way_ids.push(way_id)
+                        acc.way_lengths.push(frictions_lengths[way_id])
+                        acc.geometry.push(g[way_id])
+                        acc.conditions.push(conditions[way_id])
+                    
+                   
+                  
                 }
                 return acc
             }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
@@ -131,9 +135,8 @@ export class FrictionService {
     
     async getWayFrictionConditions(way_id: string): Promise<Condition[]>
     {
-        console.log('im trying');
-        const conditions = await this.GetWaysFrictions()
-        console.log(conditions[way_id])
+
+        const [conditions,geometry] = await this.GetWaysFrictions()
         return conditions[way_id];
 
 
