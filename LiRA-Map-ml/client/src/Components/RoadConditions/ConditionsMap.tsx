@@ -25,6 +25,7 @@ import { getFrictConditions } from "../../queries/friction";
 
 interface Props {
     type: ConditionType;
+
     palette: Palette;
     setPalette: React.Dispatch<React.SetStateAction<Palette>>;
     setWayData: React.Dispatch<React.SetStateAction<ChartData<"line", number[], number> | undefined>>;
@@ -32,17 +33,11 @@ interface Props {
 
 const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) => {
 
-    const type_fricition: ConditionType = {
-        name: 'FRICTION',
-        min: 0,
-        max: 5,
-        grid: true,
-        samples: 40
-    }
     const {filter,friction}=useGraph();
 
     
-    const { name, max, grid, samples } = friction? type_fricition: type;
+    const { name, max, grid, samples } = type;
+
     const ref = useRef(null);
     const [width, _] = useSize(ref)
     const c1 = { r: 70,  g: 70, b: 255, t: 0 }

@@ -20,7 +20,7 @@ const TypeChanger: React.FC = () => {
     const frictionstep = 0.1;
 
     useEffect(() => {
-        setfilter(state ? irimax : frictionmax)
+        setfilter(state ? 0 : 0)
 
         if(state){
             setfriction(true)

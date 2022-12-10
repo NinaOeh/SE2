@@ -58,7 +58,11 @@ interface SelectMeta extends RideMeta {
     selected: boolean;
 }
 
-const RideCards: FC = ( ) => {   
+interface RideCardProps {
+    isCollapsed: boolean;
+}
+
+const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {   
     
     const { metas, selectedMetas, setSelectedMetas } = useMetasCtx();
 
@@ -74,7 +78,8 @@ const RideCards: FC = ( ) => {
                 const inSearch = search === "" || meta.TaskId.toString().includes(search)
                 const date = new Date(meta.Created_Date).getTime()
                 const inDate = date >= startDate.getTime() && date <= endDate.getTime()
-                return inSearch && inDate
+                const inStartPositionDisplay = meta.StartPositionDisplay.toLowerCase().includes(search.toLowerCase());
+                return (inSearch || inStartPositionDisplay) && inDate
             } )
             .map( (meta: RideMeta) => {
                 const selected = selectedMetas.find( ( { TripId } ) => meta.TripId === TripId ) !== undefined
@@ -117,7 +122,7 @@ const RideCards: FC = ( ) => {
     }
     
     return (
-        <div className="ride-list">
+        <div className={`ride-list${isCollapsed? " hidden" : ""}`}>
             <OptionsSelector onChange={onChange}/>
             <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>            
         </div>
