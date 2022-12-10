@@ -66,6 +66,10 @@
     color: lightgrey;
 }
 
+.ride-card-container.hovered-meta {
+    border: 1px solid white;
+}
+
 .ride-card-container > .jsx-parser > b {
     color: white;
     font-size: 1.1em !important;

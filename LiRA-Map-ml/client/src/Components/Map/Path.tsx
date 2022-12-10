@@ -25,7 +25,11 @@ const Path: FC<PathProps> = ( { path, properties, metadata, onClick, onMouseover
                 getVal={(t: PointData) => t.value || 0} 
                 options={options}
                 eventHandlers={{click: onClick,
-                                mouseover: () => onMouseover!(metadata!.TaskId)}}/>
+                                //Adds border to matching ridecard
+                                mouseover: () => onMouseover!(metadata!.TaskId),
+                                //Removes border to matching ridecard
+                                mouseout: () => onMouseover!(0)
+                            }}/>
             : null
         }
         </>

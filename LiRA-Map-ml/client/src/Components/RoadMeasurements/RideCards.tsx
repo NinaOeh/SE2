@@ -20,18 +20,19 @@ interface CardsProps {
     onClick: (meta: SelectMeta, i: number, isChecked: boolean) => void;
     onMouseEnter?: (i: number, isChecked: boolean) => void;
     onMouseLeave?: (i: number, isChecked: boolean) => void;
+    hoveredMeta?: RideMeta;
 }
 
-const Cards: FC<CardsProps> = ( { showMetas, onClick, onMouseEnter, onMouseLeave } ) => {  
+const Cards: FC<CardsProps> = ( { showMetas, onClick, onMouseEnter, onMouseLeave, hoveredMeta } ) => {  
     const renderRow: ListRowRenderer = ( { index, key, style } ): ReactNode => {
         const meta = showMetas[index];
 
         const positionDisplays = parsePositionDisplay(meta.StartPositionDisplay, meta.EndPositionDisplay);
-
+        const isHoveredMeta = hoveredMeta && hoveredMeta.TaskId == meta.TaskId;
         return <div key={key} style={style}>
             <Checkbox 
                 forceState={meta.selected}
-                className="ride-card-container"
+                className={`ride-card-container${isHoveredMeta? " hovered-meta" : ""}`}
                 html={<div>{positionDisplays.StartPosition + " -> "}<br/>{positionDisplays.EndPosition}<br/>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
@@ -64,13 +65,17 @@ interface RideCardProps {
 
 const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {   
     
-    const { metas, selectedMetas, setSelectedMetas } = useMetasCtx();
+    const { metas, selectedMetas, setSelectedMetas, hoveredMeta, setHoveredMeta } = useMetasCtx();
 
     const [showMetas, setShowMetas] = useState<SelectMeta[]>([])
-
+    
     useEffect( () => {
         setShowMetas( metas.map(m => ({...m, selected: false})) )
     }, [metas])
+    
+    useEffect( () => {
+        console.log("this is triggered from mouseoverevent, hovered meta is: ", hoveredMeta);
+    }, [hoveredMeta]);
 
     const onChange = ( { search, startDate, endDate, reversed }: TripsOptions) => {
         const temp: SelectMeta[] = metas
@@ -124,7 +129,7 @@ const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {
     return (
         <div className={`ride-list${isCollapsed? " hidden" : ""}`}>
             <OptionsSelector onChange={onChange}/>
-            <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>            
+            <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} hoveredMeta={hoveredMeta}/>            
         </div>
     )
 }
