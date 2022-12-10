@@ -36,7 +36,7 @@ const modifyMeasurementChoices = () => {
                     options = opts
                 }} />,*/
         popup( {
-            title: <p>Choose the measurement you wish to visualize.</p>,
+            title: <p>Choose the measurement you wish to visualize.</p> as any,
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Save Changes',
@@ -46,7 +46,7 @@ const modifyMeasurementChoices = () => {
                 callback(options)
                 console.log("this should be updated") 
                 popup( {
-                    title: <p>Measurement <b>{options.name}</b> added / modified</p>,
+                    title: <p>Measurement <b>{options.name}</b> added / modified</p>as any,
                     footer: `Will be drawn as ${options.rendererName}`,
                     icon: 'success',
                     //timer: 3000,

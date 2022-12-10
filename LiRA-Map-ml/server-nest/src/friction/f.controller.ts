@@ -12,10 +12,12 @@ export class FrictionController {
 
   
     @Get('ways')
-    getFrictionConditions(): Promise<WaysConditions> {
+    getFrictionConditions(@Query() query:{geometry:boolean}): Promise<WaysConditions> {
         console.log('we are in the friction controller')
+        const { geometry } = query;
 
-        return this.service.getWaysConditions();
+
+        return this.service.getWaysConditions(geometry);
     }
 
     //@Get("\con")

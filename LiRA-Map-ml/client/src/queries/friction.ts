@@ -5,9 +5,9 @@ import { get, getFrict, getFriction, post } from "./fetch"
 import { FrictionMeta } from "../models/models"
 import { Condition, WaysConditions } from "../models/path"
 
-export const getFrictionConditions = ( setWays: (data: WaysConditions) => void) => {
+export const getFrictionConditions = (geometry:boolean, setWays: (data: WaysConditions) => void) => {
     console.log("WE ARE GOING TO RECIEVE DATA");
-    getFriction('/friction/ways', setWays);
+    post('/friction/ways',{geometry}, setWays);
 
 
     console.log("WE HAVE RECIEVE DATA");

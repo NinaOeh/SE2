@@ -5,7 +5,7 @@ const deletePopup = () => {
     const popup = createPopup<any>()
     return(
         popup( {
-            title: <p>Measurement deleted.</p>,
+            title: <p>Measurement deleted.</p>as any,
             //timer: 3000,
             //timerProgressBar: true,
             toast: true
