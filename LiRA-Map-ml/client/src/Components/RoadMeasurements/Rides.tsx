@@ -18,10 +18,11 @@ import { Popup } from "Leaflet.MultiOptionsPolyline";
 import { PopupFunc } from "../../models/popup"
 import { RendererName } from "../../models/renderers";
 import Checkbox from "../Checkbox";
+import { RideMeta } from "../../models/models";
 
 const Rides: FC = () => {
     
-    const { selectedMetas } = useMetasCtx()
+    const { selectedMetas, setHoveredMeta } = useMetasCtx()
     const { selectedMeasurements } = useMeasurementsCtx()
 
     const [ paths, setPaths ] = useState<MeasMetaPath>({})
@@ -29,7 +30,6 @@ const Rides: FC = () => {
     const popup = usePopup()
 
     useEffect( () => {
-
         const updatePaths = async ( pop: PopupFunc) => {
             const temp = {} as MeasMetaPath;
 
@@ -91,6 +91,13 @@ const Rides: FC = () => {
         setCollapseGraph(!collapseGraph);
     }
 
+    // const [hoveredMeta, setHoveredMeta] = useState<RideMeta>();
+    // const hovMeta = useEffect(() => {
+    //     console.log("Onmouseover registreret i rides, meta is ", hoveredMeta);
+    //     setHoveredMeta(hoveredMeta);
+    //     // selectedMetas.find(meta => meta.TaskId == hoveredMeta?.TaskId)!.isHovered = true;
+    // },[hoveredMeta]);
+
     return (
         <GraphProvider>
             <div className="map-container">
@@ -98,7 +105,8 @@ const Rides: FC = () => {
                 <RidesMap
                     paths={paths} 
                     selectedMetas={selectedMetas} 
-                    selectedMeasurements={selectedMeasurements} />
+                    selectedMeasurements={selectedMeasurements}
+                    setHoveredMeta={setHoveredMeta}/>
 
                 <Checkbox className="collapse-checkbox horizontal-checkbox" 
                                 html={

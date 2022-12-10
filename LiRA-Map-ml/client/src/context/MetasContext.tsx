@@ -14,22 +14,22 @@ interface ContextProps {
 	metas: RideMeta[];
 	selectedMetas: RideMeta[];
     setSelectedMetas: Dispatch<SetStateAction<RideMeta[]>>;
+	hoveredMeta?: RideMeta;
+	setHoveredMeta: Dispatch<SetStateAction<RideMeta | undefined>>;
 }
 
 const MetasContext = createContext({} as ContextProps);
 
 export const MetasProvider = ({ children }: any) => {
 
-	console.log("MetasProvider1")
 
 	const [ metas, setMetas ] = useState<RideMeta[]>([]);
     const [ selectedMetas, setSelectedMetas ] = useState<RideMeta[]>([]);
-	console.log("MetasProvider2")
+	const [ hoveredMeta, setHoveredMeta ] = useState<RideMeta>();
 
     // fetch the metadata of all the rides
     useEffect( () => getRides(setMetas), [] );
 
-	console.log("MetasProvider3")
 
 	return (
 		<MetasContext.Provider
@@ -37,6 +37,8 @@ export const MetasProvider = ({ children }: any) => {
 				metas,
 				selectedMetas,
 				setSelectedMetas,
+				hoveredMeta,
+				setHoveredMeta
 			}}
 		>
 			{children}
