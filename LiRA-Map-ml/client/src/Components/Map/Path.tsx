@@ -11,7 +11,6 @@ import renderers from "./renderers";
 const Path: FC<PathProps> = ( { path, properties, metadata, onClick, onMouseover } ) => {
 
     const { minY, maxY } = useGraph();
-
     const FCRenderer = renderers(properties.rendererName) as Renderer<PointData>
 
     const options: Required<RendererOptions> = { ...RENDERER_OPTIONS, ...properties, min: minY, max: maxY }
@@ -24,9 +23,9 @@ const Path: FC<PathProps> = ( { path, properties, metadata, onClick, onMouseover
                 getLat={(t: PointData) => t.lat} 
                 getLng={(t: PointData) => t.lng} 
                 getVal={(t: PointData) => t.value || 0} 
-                options={options} 
-                eventHandlers={{'click': onClick,
-                                'mouseover': (i: number) => (e:any) => {return metadata!.TaskId}}} />
+                options={options}
+                eventHandlers={{click: onClick,
+                                mouseover: () => onMouseover!(metadata!.TaskId)}}/>
             : null
         }
         </>

@@ -51,12 +51,9 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements }
     }, [paths] )
 
     const onMouseover = (i: number) => (e: any) => {
-        console.log("onMouseover in RidesMap", i, e);
+        console.log("onMouseover in RidesMap", i);
     }
 
-    const measgetsupdated = useEffect( () => {
-        console.log(memoPaths);
-    }, [memoPaths]);
     return (
         <MapWrapper>
             { memoPaths.map( ({bp, meas, meta}) => bp && 
@@ -65,8 +62,7 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements }
                     path={bp.path} 
                     properties={meas} 
                     metadata={meta} 
-                    onMouseover={onMouseover}
-                    isHovered={false}/> 
+                    onMouseover={onMouseover}/> 
             ) }
         </MapWrapper>
     )

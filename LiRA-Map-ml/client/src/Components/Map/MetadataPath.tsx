@@ -53,7 +53,7 @@ const MetadataPath: FC<PathProps> = ( { path, properties, metadata, onMouseover 
     const onClick = (i: number) => (e: any) => {
         const { lat, lng } = e.latlng
         setMarkerPos([lat, lng])
-        // setSelected(i)
+        setSelected(i)
     }
     
     const point = path[selected || 0]

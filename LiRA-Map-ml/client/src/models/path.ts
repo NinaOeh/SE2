@@ -24,13 +24,13 @@ export interface Bounds {
 // measurement name -> trip task id -> bounded path (used in Rides)
 export type MeasMetaPath = { [key: string]: {[key: number]: BoundedPath } }
 
+
 // Props passed to the Path and EventPath components
 export interface PathProps {
 	path: Path;
 	bounds?: Bounds;
 	properties: PathProperties;
 	metadata?: Metadata;
-	isHovered?: boolean;
 	onClick?: PathEventHandler;
 	onMouseover?: PathEventHandler;
 }
