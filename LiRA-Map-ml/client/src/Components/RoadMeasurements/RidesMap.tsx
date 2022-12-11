@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { Palette } from "react-leaflet-hotline";
 
 import { MeasProperties, ActiveMeasProperties } from "../../models/properties";
@@ -17,9 +17,10 @@ interface IRidesMap {
     paths: MeasMetaPath;
     selectedMetas: RideMeta[];
     selectedMeasurements: ActiveMeasProperties[];
+    setHoveredMeta: React.Dispatch<React.SetStateAction<RideMeta | undefined>>;
 }
 
-const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements } ) => {
+const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements, setHoveredMeta} ) => {
 
     const memoPaths = useMemo( () => {
         const temp: { meas: MeasProperties, meta: RideMeta, bp: BoundedPath }[] = []
@@ -50,6 +51,11 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements }
         return temp;
     }, [paths] )
 
+    const onMouseover = (i: number) => (e: any) => {
+        var meta = selectedMetas.find(meta => meta.TaskId == i);
+        setHoveredMeta(meta);
+    }
+
     return (
         <MapWrapper>
             { memoPaths.map( ({bp, meas, meta}) => bp && 
@@ -57,7 +63,8 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements }
                     key={`ride-mp-${meta.TaskId}-${meas.name}`} 
                     path={bp.path} 
                     properties={meas} 
-                    metadata={meta} /> 
+                    metadata={meta} 
+                    onMouseover={onMouseover}/> 
             ) }
         </MapWrapper>
     )
