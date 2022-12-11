@@ -38,6 +38,7 @@ const TypeChanger: React.FC = () => {
 
     useEffect(() => {
         setfilter(0);
+        
     }, [typeCondition]);
 
     return (

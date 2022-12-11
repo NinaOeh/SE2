@@ -6,7 +6,7 @@ const DropdownSlider: React.FC = () => {
 
     const { filter, setfilter, setType,setfriction } = useGraph();
     const [state, setState] = useState(false);
-    const [itemtext, setItemText] = useState('Select condition type');
+    const [itemtext, setItemText] = useState('IRI');
 
     const toggle = () => {
         setState(!state)
@@ -27,7 +27,7 @@ const DropdownSlider: React.FC = () => {
     }
     const setFrictionOccurence = () => {
         setType('FirctionOccurence')
-        setItemText('Friction - Occurence')
+        setItemText('Friction - LatLon')
         setState(false)
         setfriction(true)
     }
