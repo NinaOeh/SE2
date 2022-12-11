@@ -28,7 +28,7 @@ interface IWays {
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     const zoom = useZoom();
-    const { minY, maxY,filter,friction } = useGraph()
+    const { minY, maxY,filter,friction,typeCondition } = useGraph()
 
     const [ways, setWays] = useState<WaysConditions>()
 
@@ -69,9 +69,23 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         if ( zoom === undefined ) return;
         const z = Math.max(0, zoom - 12)
 
-        if(friction){
+        if(typeCondition==="Friction"){
 
             console.log("i am trying to get data from friction boum")
+
+
+            
+            getFrictionConditions(true,(data:WaysConditions)=>{
+                console.log("data that i receive:",data);
+                filterWays(data,setWays,filter)
+
+
+            })
+                
+        }
+        else if(typeCondition==="FirctionOccurence"){
+
+            console.log("i am trying to get data from friction boum2")
 
 
             
@@ -83,6 +97,11 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
             })
                 
         }
+
+        
+        
+
+     
         else{
             getWaysConditions(type, z, (data: WaysConditions) => {
 
@@ -99,7 +118,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
             } )
     }
 
-    }, [zoom,friction,filter] )
+    }, [zoom,typeCondition,filter] )
 
 
 

@@ -101,34 +101,55 @@ export class FrictionService {
 }
     async getWaysConditions(geometry:boolean): Promise<WaysConditions>
     {   
-        console.log(geometry);
 
         const [conditions,newpoints] = await this.GetWaysFrictions()
 
 
 
         const [frictions, frictions_lengths]= await this.GetDistLength()
-        
 
-        const g=geometry===true?frictions:newpoints
-        const wayIds = Object.keys(g)
+        const g=String(geometry)
+        if(g==="true"){
+            const wayIds = Object.keys(conditions)
 
+            return wayIds.reduce( 
+                (acc, way_id) => {
+                    {   
+                        
+                            acc.way_ids.push(way_id)
+                            acc.way_lengths.push(frictions_lengths[way_id])
+                            acc.geometry.push(frictions[way_id])
+                            acc.conditions.push(conditions[way_id])
+                        
+                       
+                      
+                    }
+                    return acc
+                }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
+            )        
+        }
+        else{
 
-        return wayIds.reduce( 
-            (acc, way_id) => {
-                {   
+            console.log("newpoints")
+
+            const wayIds = Object.keys(newpoints)
+
+            return wayIds.reduce( 
+                (acc, way_id) => {
+                    {   
+                        
+                            acc.way_ids.push(way_id)
+                            acc.way_lengths.push(frictions_lengths[way_id])
+                            acc.geometry.push(newpoints[way_id])
+                            acc.conditions.push(conditions[way_id])
+                        
                     
-                        acc.way_ids.push(way_id)
-                        acc.way_lengths.push(frictions_lengths[way_id])
-                        acc.geometry.push(g[way_id])
-                        acc.conditions.push(conditions[way_id])
                     
-                   
-                  
-                }
-                return acc
-            }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
-        )
+                    }
+                    return acc
+                }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
+            )
+        }
     }
 
 

@@ -33,7 +33,7 @@ interface Props {
 
 const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) => {
 
-    const {filter,friction}=useGraph();
+    const {filter,friction,typeCondition}=useGraph();
 
     
     const { name, max, grid, samples } = type;
@@ -165,7 +165,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                 
             )
         }
-    },[friction])
+    },[friction,typeCondition])
 
 
     return (
