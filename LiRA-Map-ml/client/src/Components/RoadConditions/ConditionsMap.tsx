@@ -29,6 +29,7 @@ import 'leaflet-draw/dist/leaflet.draw.css'
 import { EditControl } from "react-leaflet-draw";
 import { FeatureGroup } from "react-leaflet";
 import { circle } from "Leaflet.MultiOptionsPolyline";
+import React from "react";
 
 // const hollywoodStudiosPolygon : [number, number][] = [
 //       [ 28.35390453844, -81.56443119049 ],
