@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
 import createPopup from "../createPopup";
 import addMeasPopup from "./Popup/addMeasurementPopup";
-import modifyMeasurementChoices from "./Popup/modifyMeasurementChoices";
 import Checkbox from "../Checkbox";
 import MetaData from "./MetaData";
 
@@ -73,7 +72,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 				// and add the measurement to the measurements.json file
 				addMeasurement(newMeasurement, selectedRole.role);
 			},
-			RENDERER_MEAS_PROPERTIES 
+			{ ...RENDERER_MEAS_PROPERTIES} 
 		)
 	}
 

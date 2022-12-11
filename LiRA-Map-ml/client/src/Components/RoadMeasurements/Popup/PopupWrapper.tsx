@@ -35,14 +35,6 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
 
     const inputChange = (key: keyof ActiveMeasProperties) => ({target}: any) => update(key)(target.value)
 
-    /*Functions necessary for the RadioItem Menu */
-    const [selectRadio, setSelectRadio] = useState<string>("");
-    const RadioSelection = (measurement: string): void => {
-        setSelectRadio(measurement);
-        update('dbName')(Object.values(MeasurementDatabases)[Object.keys(MeasurementDatabases).indexOf(measurement)])
-        update('name')(measurement)
-    };
-
 
     /*Functions necessary for the dropdown Menu */
     const [showDropDown, setShowDropDown] = useState<boolean>(false);

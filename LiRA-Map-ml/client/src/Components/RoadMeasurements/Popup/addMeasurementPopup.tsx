@@ -34,14 +34,14 @@ const addMeasPopup = () => {
 
             callback(options)
     
-            popup( {
-                title: <p>Measurement <b>{options.name}</b> added / modified</p> as any,
-                footer: `Will be drawn as ${options.rendererName}`,
+            //popup( {
+            //    title: <p>Measurement <b>{options.name}</b> added / modified</p> as any,
+            //    footer: `Will be drawn as ${options.rendererName}`,
                 //icon: 'success',
                 //timer: 1500,
                 //timerProgressBar: true,
-                toast: true
-            } )
+            //    toast: true
+            //} )
         })
 
     }
