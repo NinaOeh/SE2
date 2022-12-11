@@ -1,4 +1,5 @@
 /* Created by Colin Hoffmann (s212711) */
+//ELiot Ullmo
 
 import { Injectable } from '@nestjs/common';
 import { DistLength, FrictionConditions, FrictionDict, FrictionMeta } from './f.models';
@@ -71,16 +72,16 @@ export class FrictionService {
 
 
 
-    async GetWaysFrictions(): Promise<{[key: WayId]: Condition[]}>{
+    async GetWaysFrictions(): Promise<[{[key: WayId]: Condition[]},{[key: WayId]: LatLngDist[]}]>{
 
-        console.log("hello");
 
         const res = await Frictions(this.knex)
-        .select( 'Way_id', 'friction_value as friction_value' )
+        .select( 'Way_id', 'friction_value as friction_value' ,'mapped_lat as lat','mapped_lon as log' )
         .whereNot('friction_value', 'Infinity')
         .andWhereNot('friction_value', 'NaN')
         .andWhereNot('mapped_lon','NaN')
         .andWhereNot('mapped_lat','NaN')
+
 
         const map=(curr)=>{
             if(curr){
@@ -88,44 +89,76 @@ export class FrictionService {
             }
             return { way_dist:0,value:0}
         }
-    
-        
-        return groupBy( res, 'Way_id', map )
-}
-    async getWaysConditions(): Promise<WaysConditions>
-    {
-        console.log("11111")
 
-        const conditions = await this.GetWaysFrictions()
-        console.log("11111")
+        const map2=(curr)=>{
+            if(curr){
+                return {lat:curr.lat, lng:curr.log, way_dist:0}
+            }
+            return { lat:0,lng:0,way_dist:0}
+        }    
+        
+        return [groupBy( res, 'Way_id', map ),
+        groupBy( res, 'Way_id', map2 )]
+}
+    async getWaysConditions(geometry:boolean): Promise<WaysConditions>
+    {   
+
+        const [conditions,newpoints] = await this.GetWaysFrictions()
 
 
 
         const [frictions, frictions_lengths]= await this.GetDistLength()
 
-        const wayIds = Object.keys(conditions)
+        const g=String(geometry)
+        if(g==="true"){
+            const wayIds = Object.keys(conditions)
 
+            return wayIds.reduce( 
+                (acc, way_id) => {
+                    {   
+                        
+                            acc.way_ids.push(way_id)
+                            acc.way_lengths.push(frictions_lengths[way_id])
+                            acc.geometry.push(frictions[way_id])
+                            acc.conditions.push(conditions[way_id])
+                        
+                       
+                      
+                    }
+                    return acc
+                }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
+            )        
+        }
+        else{
 
-        return wayIds.reduce( 
-            (acc, way_id) => {
-                {
-                    acc.way_ids.push(way_id)
-                    acc.way_lengths.push(frictions_lengths[way_id])
-                    acc.geometry.push(frictions[way_id])
-                    acc.conditions.push(conditions[way_id])
-                }
-                return acc
-            }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
-        )
+            console.log("newpoints")
+
+            const wayIds = Object.keys(newpoints)
+
+            return wayIds.reduce( 
+                (acc, way_id) => {
+                    {   
+                        
+                            acc.way_ids.push(way_id)
+                            acc.way_lengths.push(frictions_lengths[way_id])
+                            acc.geometry.push(newpoints[way_id])
+                            acc.conditions.push(conditions[way_id])
+                        
+                    
+                    
+                    }
+                    return acc
+                }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
+            )
+        }
     }
 
 
     
     async getWayFrictionConditions(way_id: string): Promise<Condition[]>
     {
-        console.log('im trying');
-        const conditions = await this.GetWaysFrictions()
-        console.log(conditions[way_id])
+
+        const [conditions,geometry] = await this.GetWaysFrictions()
         return conditions[way_id];
 
 

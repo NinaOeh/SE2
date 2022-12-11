@@ -1,3 +1,4 @@
+//ELiot Ullmo
 
 import { FC, useEffect, useMemo, useState } from 'react';
 import { LeafletEvent, Polyline } from 'leaflet'
@@ -42,7 +43,7 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
 
     const { dotHover,friction } = useGraph()
     const zoom = useZoom()
- 
+    console.log(geometry)
     const opts = useMemo( () => ({ 
         ...options, weight: getWeight(zoom)
     }), [options, zoom] );

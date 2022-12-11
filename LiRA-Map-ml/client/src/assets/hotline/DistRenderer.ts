@@ -24,8 +24,7 @@ export default class DistRenderer extends Renderer<DistData> {
         super({...options})
         this.way_ids = args[0][0];
         this.conditions = args[0][1];
-        console.log("come one");
-        console.log(this.conditions)
+     
         
         this.edgess = [];
         this.dotHover = undefined;
@@ -125,14 +124,12 @@ export default class DistRenderer extends Renderer<DistData> {
         const dataLength = this._data.length
 
         for (let i = 0; i < dataLength; i++) 
-        {   console.log(dataLength)
+        {   
             const path = this._data[i];
-            console.log(i)
             const edges = this.edgess[i]
 
             const way_id = this.way_ids[i];
             const conditions = this.conditions[i]
-            console.log("conditions",conditions)
             for (let j = 1; j < path.length; j++) 
             {
                 const start = path[j - 1];

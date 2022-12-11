@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { json } from 'express';
-import { Knex } from 'knex';
+import knex, {  Knex } from 'knex';
 import { InjectConnection } from 'nestjs-knex';
 import internal from 'stream';
 import {Segment, SegmentWithAggregatedValue } from './interfaces/segment.interface';

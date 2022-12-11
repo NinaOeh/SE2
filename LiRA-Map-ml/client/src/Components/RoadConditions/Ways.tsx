@@ -1,4 +1,5 @@
 
+//ELiot Ullmo
 import { latLng, map } from 'Leaflet.MultiOptionsPolyline';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TRGB } from 'react-gradient-hook/lib/types';
@@ -28,7 +29,7 @@ interface IWays {
 const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     const zoom = useZoom();
-    const { minY, maxY,filter,friction } = useGraph()
+    const { minY, maxY,filter,friction,typeCondition } = useGraph()
 
     const [ways, setWays] = useState<WaysConditions>()
 
@@ -47,7 +48,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
     const handlers = useMemo<HotlineEventHandlers>( () => ({
         click: (_,  i) => {
             const max = ways? ways.conditions[i].reduce((prev, current) => (prev.value > current.value) ? prev : current).value :0;
-
+            
             
             console.log("im here:",ways?.conditions[i]);
             if ( ways && onClick )
@@ -69,13 +70,13 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         if ( zoom === undefined ) return;
         const z = Math.max(0, zoom - 12)
 
-        if(friction){
+        if(typeCondition==="Friction"){
 
             console.log("i am trying to get data from friction boum")
 
 
             
-            getFrictionConditions((data:WaysConditions)=>{
+            getFrictionConditions(true,(data:WaysConditions)=>{
                 console.log("data that i receive:",data);
                 filterWays(data,setWays,filter)
 
@@ -83,7 +84,26 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
             })
                 
         }
-        else{
+        else if(typeCondition==="FirctionOccurence"){
+
+            console.log("i am trying to get data from friction boum2")
+
+
+            
+            getFrictionConditions(false,(data:WaysConditions)=>{
+                console.log("data that i receive:",data);
+                filterWays(data,setWays,filter)
+
+
+            })
+                
+        }
+
+        
+        
+
+     
+        else if(typeCondition==="IRI"){
             getWaysConditions(type, z, (data: WaysConditions) => {
 
 
@@ -99,7 +119,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
             } )
     }
 
-    }, [zoom,friction,filter] )
+    }, [zoom,typeCondition,filter] )
 
 
 

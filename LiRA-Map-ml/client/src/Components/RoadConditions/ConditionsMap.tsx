@@ -1,3 +1,4 @@
+//ELiot Ullmo
 
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChartData } from "chart.js";
@@ -50,7 +51,7 @@ interface Props {
 
 const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) => {
 
-    const {filter,friction}=useGraph();
+    const {filter,friction,typeCondition}=useGraph();
 
     
     const { name, max, grid, samples } = type;
@@ -65,12 +66,11 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
     },[palette]);
 
     const onClick = useCallback((way_id: string, way_length: number,f:number) => {
-
+        console.log("helloonclick")
 
         if(friction){
 
             getFrictConditions( way_id, (wc: Condition[]) => {
-                console.log(wc);
 
                 const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
                 console.log("maximum value:",max);
@@ -128,6 +128,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
         }
         else{
 
+
                 getConditions( way_id, name, (wc: Condition[]) => {
                     const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
                     console.log("maximum value:",max);
@@ -182,11 +183,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                 
             )
         }
-
-        
-
-
-    },[friction])
+    },[friction,typeCondition])
 
     const _onCreate= (e : any) => {
         console.log(e)
@@ -213,9 +210,9 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
             <MapWrapper>
                 <Ways palette={palette} type={name} onClick={onClick}  />
                 {/*<Circle color="magenta" center={epcotCenter} radius={400} />*/}
-                <Polygon color="blue" positions={hollywoodStudiosPolygon} />
+                {/*<Polygon color="blue" positions={hollywoodStudiosPolygon} /> */}  //
 
-                {/* <FeatureGroup>
+               {/* <FeatureGroup>
                     <EditControl   
                         position='topright' 
                         onCreated={_onCreate}  
@@ -229,7 +226,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                             marker:false
                         }}
                     />
-                </FeatureGroup> */}
+                    </FeatureGroup> */}
 
             </MapWrapper>
             

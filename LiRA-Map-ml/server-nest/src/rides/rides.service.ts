@@ -1,7 +1,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from 'nestjs-knex';
-import { Knex } from 'knex';
+import {  Knex } from 'knex';
 
 import { RideMeta } from './models.rides';
 import { BoundedPath, PointData } from 'src/models';

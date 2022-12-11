@@ -31,7 +31,7 @@ const RoadConditions = () => {
 
     
     const type: ConditionType = {
-        name: friction?'Friction':'IRI',
+        name: 'IRI',
         min: 0,
         max: 10,
         grid: true,
