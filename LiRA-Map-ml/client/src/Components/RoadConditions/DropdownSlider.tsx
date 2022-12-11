@@ -38,7 +38,7 @@ const DropdownSlider: React.FC = () => {
             <div className={state ? 'DropdownOptions' : 'DropdownOptions-toggled'}>
                 <button className='DropdownLink' onClick={setIRI}> IRI </button>
                 <button className='DropdownLink' onClick={setFriction}> Friction </button>
-                <button className='DropdownLink' onClick={setFrictionOccurence}> Friction – Occurence </button>
+                <button className='DropdownLink' onClick={setFrictionOccurence}> Friction - LatLon </button>
             </div>
         </div>
     )
