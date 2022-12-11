@@ -1,4 +1,5 @@
 /* Created by Colin Hoffmann (s212711) */
+//ELiot Ullmo
 
 import { Injectable } from '@nestjs/common';
 import { DistLength, FrictionConditions, FrictionDict, FrictionMeta } from './f.models';

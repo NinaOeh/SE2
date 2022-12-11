@@ -1,4 +1,5 @@
 /* Created by Colin Hoffmann (s212711) */
+//ELiot Ullmo
 
 import { WayId, LatLngDist, Condition } from "src/models";
 

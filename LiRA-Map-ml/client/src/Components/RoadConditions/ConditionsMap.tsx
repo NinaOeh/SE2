@@ -1,3 +1,4 @@
+//ELiot Ullmo
 
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChartData } from "chart.js";

@@ -1,4 +1,5 @@
 
+//ELiot Ullmo
 import { latLng, map } from 'Leaflet.MultiOptionsPolyline';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TRGB } from 'react-gradient-hook/lib/types';
@@ -102,7 +103,7 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         
 
      
-        else{
+        else if(typeCondition==="IRI"){
             getWaysConditions(type, z, (data: WaysConditions) => {
 
 
