@@ -26,18 +26,19 @@ import TypeChanger from "./Slider";
 import { getFrictConditions } from "../../queries/friction";
 
 
-//import 'leaflet-draw/dist/leaflet.draw.css'
-//import { EditControl } from "react-leaflet-draw";
-//import { FeatureGroup } from "react-leaflet";
+import 'leaflet-draw/dist/leaflet.draw.css'
+import { EditControl } from "react-leaflet-draw";
+import { FeatureGroup } from "react-leaflet";
 import { circle } from "Leaflet.MultiOptionsPolyline";
+import React from "react";
 
-const hollywoodStudiosPolygon : [number, number][] = [
-      [ 28.35390453844, -81.56443119049 ],
-      [ 28.35390453844, -81.55619144439 ],
-      [ 28.35983376526, -81.55619144439 ],
-      [ 28.35983376526, -81.56443119049 ],
-      [ 28.35390453844, -81.56443119049 ],
-  ];
+// const hollywoodStudiosPolygon : [number, number][] = [
+//       [ 28.35390453844, -81.56443119049 ],
+//       [ 28.35390453844, -81.55619144439 ],
+//       [ 28.35983376526, -81.55619144439 ],
+//       [ 28.35983376526, -81.56443119049 ],
+//       [ 28.35390453844, -81.56443119049 ],
+//   ];
 
 //const epcotCenter :  [number, number][]  = [28.373711392892478, -81.54936790466309];
 
@@ -209,10 +210,10 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
     
             <MapWrapper>
                 <Ways palette={palette} type={name} onClick={onClick}  />
-                {/*<Circle color="magenta" center={epcotCenter} radius={400} />*/}
-                {/*<Polygon color="blue" positions={hollywoodStudiosPolygon} /> */}  //
-
-               {/* <FeatureGroup>
+                {/*<Circle color="magenta" center={epcotCenter} radius={400} />
+                <Polygon color="blue" positions={hollywoodStudiosPolygon} />
+                */}
+                <FeatureGroup>
                     <EditControl   
                         position='topright' 
                         onCreated={_onCreate}  
@@ -226,7 +227,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                             marker:false
                         }}
                     />
-                    </FeatureGroup> */}
+                </FeatureGroup> 
 
             </MapWrapper>
             

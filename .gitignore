@@ -1,5 +1,7 @@
 LiRA-Map-ml/client/package-lock.json
+LiRA-Map-ml/client/package.json
 LiRA-Map-ml/server-nest/package-lock.json
+LiRA-Map-ml/server-nest/package.json
 
 environment.env
 LiRA-Map-ml/database_setup/venv/

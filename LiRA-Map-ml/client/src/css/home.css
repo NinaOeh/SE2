@@ -1,0 +1,14 @@
+.home_container {
+    background-color: white;
+    width: 2cm;
+    height: 9cm;
+    left: 0cm;
+    z-index: calc(var(--navbar-z-index) - 3);
+    position: absolute;
+    font-size: 2em;
+    border-radius: 10px;
+    margin: 20px;
+    background: var(--background);
+    cursor: pointer;
+    top: 4.5cm;
+}

@@ -33,13 +33,6 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
 
     const [ways, setWays] = useState<WaysConditions>()
 
-
-
-    
-
- 
-    
-
     const options = useMemo<HotlineOptions>( () => ({
         palette, min: minY, max: maxY
     } ), [palette, minY, maxY,] )
@@ -106,15 +99,9 @@ const Ways: FC<IWays> = ( { palette, type, onClick } ) => {
         else if(typeCondition==="IRI"){
             getWaysConditions(type, z, (data: WaysConditions) => {
 
-
                 filterWays(data,setWays,filter)
-
-               
-             
-
-
-
-
+                console.log("hi there now")
+                console.log(data)
 
             } )
     }
