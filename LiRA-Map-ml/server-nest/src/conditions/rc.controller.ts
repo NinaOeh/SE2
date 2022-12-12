@@ -1,3 +1,4 @@
+//modified by Nina Oehlckers (s213535)
 import { Controller, Get, Query } from '@nestjs/common';
 
 import { Condition, MapBounds, WaysConditions } from 'src/models';
@@ -34,6 +35,15 @@ export class RCController
             maxLng: parseFloat(maxLng) 
         }
         return this.service.getBoundedWaysConditions(bounds, type, zoom);
+    }
+
+    //Nina Oehlckers (s213535)
+    @Get('download')
+    Download( @Query() query: { maxlat: number, minlat:number, maxlon:number,  minlon:number, type:string} ): Promise<any> {
+        console.log("The query parameters are (if we even get here)")
+        console.log(query)
+        console.log("We want to download condition")
+        return this.service.ConditionDownload(query.maxlat,query.minlat,query.maxlon,query.minlon, query.type);
     }
 
 }

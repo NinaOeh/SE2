@@ -1,6 +1,6 @@
 import { MapBounds } from "../models/map"
 import { Condition, WaysConditions } from "../models/path"
-import { asyncPost, post } from "./fetch"
+import { asyncPost, post, download } from "./fetch"
 
 const devURL = 'http://localhost:3002'
 // const devURL = 'http://se2-A.compute.dtu.dk:3002'
@@ -27,4 +27,11 @@ export const getBoundedWaysConditions = async (bounds: MapBounds, type: string, 
     console.log("/bounded/ways: The Bounds are: ", bounds);
     console.log("/bounded/ways: The Type is: ", type);
     return await asyncPost<WaysConditions>('/conditions/bounded/ways', { ...bounds, type, zoom })
+}
+
+//Nina Oehlckers (s213535)
+export const downloadCondition = async ( maxlat: number, minlat:number, maxlon:number,minlon:number, type:string) => {
+    const data = await download( '/conditions/download', maxlat,minlat,maxlon,minlon,type)
+    console.log("hello download")
+    return data
 }

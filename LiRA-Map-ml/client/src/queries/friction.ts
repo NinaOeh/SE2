@@ -1,8 +1,10 @@
 /* Created by Colin Hoffmann (s212711) */
+//extended by Nina Oehlckers (s213535)
 
 import { Dispatch, SetStateAction } from "react"
-import { get, getFrict, getFriction, post } from "./fetch"
+import { friction_download, get, getFrict, getFriction, post, put } from "./fetch"
 import { FrictionMeta } from "../models/models"
+import { FrictionDownload } from "../models/downloads"
 import { Condition, WaysConditions } from "../models/path"
 
 export const getFrictionConditions = (geometry:boolean, setWays: (data: WaysConditions) => void) => {
@@ -19,5 +21,13 @@ export const getFrictConditions = ( wayId: string, setConditions: (data: Conditi
     post( '/friction/way', { wayId }, setConditions )
     console.log("hello 2");
 
+}
+
+
+//Nina Oehlckers (s213535)
+export const downloadFriction = async ( maxlat: number, minlat:number,  maxlon:number,minlon:number) => {
+    const data = await friction_download( '/friction/friction_download', maxlat,minlat,maxlon,minlon)
+    console.log("hello download")
+    return data
 }
 

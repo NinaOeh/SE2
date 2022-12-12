@@ -56,8 +56,5 @@ export class MeasurementsService
         return await this.writeFile(measurements);
     }
 
-    getHello(i: any): string {
-        return (i);
-      }
 }
 

@@ -1,5 +1,6 @@
 /* Created by Colin Hoffmann (s212711) */
 /* Eliot Ullmo */
+//extended by Nina Oehlckers (s213535)
 import { ConsoleLogger, Controller, Get, Query } from '@nestjs/common';
 import { FrictionService } from './f.service';
 import { FrictionConditions, FrictionMeta } from './f.models';
@@ -31,6 +32,15 @@ export class FrictionController {
         const { wayId } = query;
         console.log("HELLO WE ARE HERE")
         return this.service.getWayFrictionConditions(wayId);
+    }
+
+    //Nina Oehlckers (s213535)
+    @Get('friction_download')
+    FrictionDownload( @Query() query: { maxlat: number, minlat:number, maxlon:number,  minlon:number} ): Promise<any> {
+        console.log("The query parameters are (if we even get here)")
+        console.log(query)
+        console.log("We want to download friction")
+        return this.service.FrictionDownload(query.maxlat,query.minlat,query.maxlon,query.minlon);
     }
 
 }

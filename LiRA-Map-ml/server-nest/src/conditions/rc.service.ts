@@ -1,4 +1,4 @@
-
+//extended by Nina Oehlckers (s213535)
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 
@@ -98,6 +98,17 @@ export class RCService
             }, { way_ids: [], way_lengths: [], geometry: [], conditions: [] } as WaysConditions
         )
     };
+
+    //Nina Oehlckers (s213535)
+    async ConditionDownload(maxlat: number,minlat:number, maxlon: number,minlon:number, type: string): Promise<any>{
+
+        const url = `http://20.93.26.82/rdCondition/getbyframe/minLon/${minlon}/minLat/${minlat}/maxLon/${maxlon}/maxLat/${maxlat}/zoom/5`
+        const { data } = await axios.get<{[key: WayId]: BoundedCondition}>( url, { params : type } )
+        console.log(data)
+
+        const jsonData = JSON.parse(JSON.stringify(data));
+        return jsonData
+    }
 }
 
 

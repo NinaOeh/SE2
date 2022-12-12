@@ -7,7 +7,6 @@ import '../../css/slider.css'
 import DropdownSlider from './DropdownSlider';
 
 const TypeChanger: React.FC = () => {
-
     const { filter, setfilter, typeCondition } = useGraph();
     const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
         setfilter(parseFloat(event.target.value));

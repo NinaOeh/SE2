@@ -1,9 +1,9 @@
-//ELiot Ullmo
+//main: ELiot Ullmo
+//minor: Nina Oehlckers
 
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChartData } from "chart.js";
 import { Palette } from "react-leaflet-hotline";
-import { Polygon, Circle } from "react-leaflet";
 
 import MapWrapper from "../Map/MapWrapper";
 import { RENDERER_PALETTE } from "../Map/constants";
@@ -16,12 +16,7 @@ import { ConditionType } from "../../models/graph";
 import { Condition } from "../../models/path";
 
 import { getConditions } from "../../queries/conditions";
-import { filter } from "d3";
-import createPopup from "../createPopup";
-import FilteringSelector from "./DropDown"
-import { FilteringOptions } from "../../models/models";
 import { useGraph } from "../../context/GraphContext";
-import Menu from "./Menu";
 import TypeChanger from "./Slider";
 import { getFrictConditions } from "../../queries/friction";
 
@@ -29,18 +24,11 @@ import { getFrictConditions } from "../../queries/friction";
 import 'leaflet-draw/dist/leaflet.draw.css'
 import { EditControl } from "react-leaflet-draw";
 import { FeatureGroup } from "react-leaflet";
-import { circle } from "Leaflet.MultiOptionsPolyline";
 import React from "react";
 
-// const hollywoodStudiosPolygon : [number, number][] = [
-//       [ 28.35390453844, -81.56443119049 ],
-//       [ 28.35390453844, -81.55619144439 ],
-//       [ 28.35983376526, -81.55619144439 ],
-//       [ 28.35983376526, -81.56443119049 ],
-//       [ 28.35390453844, -81.56443119049 ],
-//   ];
+import Downloader from './DownloadData'
+import '../../css/downloader.css'
 
-//const epcotCenter :  [number, number][]  = [28.373711392892478, -81.54936790466309];
 
 interface Props {
     type: ConditionType;
@@ -66,7 +54,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
 
     },[palette]);
 
-    const onClick = useCallback((way_id: string, way_length: number,f:number) => {
+    const _onClick = useCallback((way_id: string, way_length: number,f:number) => {
         console.log("helloonclick")
 
         if(friction){
@@ -107,29 +95,12 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                                     data: [],
                                 } ]
                             } )
-
-                        
-                    /**  const popup=createPopup();
-                        popup( {
-                            icon: "warning",
-                            title: `This trip doesn't have any value with the ira wanted   `,
-                            toast: true,
-
-                        } ); */
-
                     }
-                
-                
-            
-            
-            }
-            
+            }  
         )
 
         }
         else{
-
-
                 getConditions( way_id, name, (wc: Condition[]) => {
                     const max = wc.reduce((prev, current) => (prev.value > current.value) ? prev : current).value
                     console.log("maximum value:",max);
@@ -165,43 +136,60 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                                         data: [],
                                     } ]
                                 } )
-
-                            
-                        /**  const popup=createPopup();
-                            popup( {
-                                icon: "warning",
-                                title: `This trip doesn't have any value with the ira wanted   `,
-                                toast: true,
-
-                            } ); */
-
                         }
-                    
-                    
-                
-                
                 }
                 
             )
         }
     },[friction,typeCondition])
 
+    //Implementation of download function
+    //Nina Oehlckers (s213535)
+
+    //setting the bounds for the query
+    const [maxlat, setMaxLat] = useState(0)
+    const [maxlon, setMaxLon] = useState(0)
+    const [minlat, setMinLat] = useState(0)
+    const [minlon, setMinLon] = useState(0)
+    const [recdrawn, setRecDrawn] = useState<Boolean>(false)
+
     const _onCreate= (e : any) => {
-        console.log(e)
+        console.log(e.layer._bounds)
+        setMaxLat(e.layer._bounds._northEast.lat)
+        setMaxLon(e.layer._bounds._northEast.lng)
+        setMinLat(e.layer._bounds._southWest.lat)
+        setMinLon(e.layer._bounds._southWest.lng)
+        setRecDrawn(true)
     }
     const _onEdit= (e : any) => {
-        console.log(e)
+        console.log("Edit shape")
+        setMaxLat(e.layer._bounds._northEast.lat)
+        setMaxLon(e.layer._bounds._northEast.lng)
+        setMinLat(e.layer._bounds._southWest.lat)
+        setMinLon(e.layer._bounds._southWest.lng)
+        setRecDrawn(true)
     }
 
     const _onDelete= (e : any) => {
-        console.log(e)
+        console.log("Delete shape")
+        setMaxLat(0)
+        setMaxLon(0)
+        setMinLat(0)
+        setMinLon(0)
+        setRecDrawn(false)
     }
 
-
+    //only showing the downloader when a rectangle has been drawn
+    let downloader;
+    if (recdrawn == true){
+        downloader = <Downloader maxlat={maxlat} minlat={minlat} maxlon={maxlon} minlon={minlon} type={typeCondition}/>
+    }
+    else{
+        downloader = <h3></h3>
+    }
 
     return (
         <div className="road-conditions-map" ref={ref}>
-
                 <PaletteEditor 
                         defaultPalette={RENDERER_PALETTE}
                         width={width}
@@ -209,10 +197,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                         onChange={setPalette} />
     
             <MapWrapper>
-                <Ways palette={palette} type={name} onClick={onClick}  />
-                {/*<Circle color="magenta" center={epcotCenter} radius={400} />
-                <Polygon color="blue" positions={hollywoodStudiosPolygon} />
-                */}
+                <Ways palette={palette} type={name} onClick={_onClick}  />
                 <FeatureGroup>
                     <EditControl   
                         position='topright' 
@@ -230,13 +215,10 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
                 </FeatureGroup> 
 
             </MapWrapper>
-            
             <TypeChanger/>
-
+            {downloader}
         
-
         </div>
     )
 }
-
 export default ConditionsMap;

@@ -1,8 +1,8 @@
 /* Created by Colin Hoffmann (s212711) */
 //ELiot Ullmo
+//extended by Nina Oehlckers (s213535)
 
 import { Injectable } from '@nestjs/common';
-import { DistLength, FrictionConditions, FrictionDict, FrictionMeta } from './f.models';
 import { InjectConnection, Knex } from 'nestjs-knex';
 import { Condition, LatLng, LatLngDist, WayId, WaysConditions } from 'src/models';
 import { cursorTo } from 'readline';
@@ -13,38 +13,6 @@ import groupBy from 'src/util';
 export class FrictionService {
 
     constructor(@InjectConnection('friction') private readonly knex: Knex) { }
-
-/** 
-
-   async getGeometry(): Promise<{[key: WayId]: LatLngDist[]}>{
-
-    console.log("wwwwww");
-    const res = await this.knex({public:'Friction'})
-    .select( 'Way_id', 'mapped_lon as mapped_lon','mapped_lat as mapped_lat','friction_value')
-    .whereNot('friction_value', 'Infinity')
-    .andWhereNot('friction_value', 'NaN')
-    .andWhereNot('mapped_lon','NaN')
-    .andWhereNot('mapped_lat','NaN')
-
-    console.log(res);
-
-
-
-
-    const map=(curr)=>{
-        if(curr){
-            
-
-
-            return { way_dist:10,lng:curr.mapped_lon,lat:curr.mapped_lat}
-        }
-        return { way_dist:0,lng:0,lat:0}
-    }
-    
-    return groupBy( res, 'Way_id', map )
-     
-}*/
-
 
     async  GetDistLength(): Promise<[{[key: WayId]: LatLngDist[]}, {[key: WayId]: number}]>{
 
@@ -57,20 +25,30 @@ export class FrictionService {
                 //this.knex.raw('ST_Intersection(geometry,(ST_DumpPoints(geometry)).geom) as intersec')
             )
 
-
             return [
                 groupBy<any, LatLngDist>( geom, 'Way_id', (cur: any) => ({ lat: cur.pos[1], lng: cur.pos[0], way_dist: cur.way_dist}) ),
                 geom.reduce( (acc, cur) => { acc[cur.Way_id] = cur.length; return acc }, {} ),
                 //groupBy<any, any>( geom, 'Way_id', (cur: any) => (cur.intersec) ),
-
             ]
-
-
-
-        
     }
 
+    //Nina Oehlckers (s213535)
+    async FrictionDownload(maxlat: number,minlat:number, maxlon: number,minlon:number): Promise<any>{
 
+        const res = await Frictions(this.knex)
+        .select('*')
+        .whereNot('friction_value', 'Infinity')
+        .andWhereNot('friction_value', 'NaN')
+        .andWhereNot('mapped_lon','NaN')
+        .where('mapped_lon','>=',minlon)
+        .andWhere('mapped_lon','<=',maxlon)
+        .andWhereNot('mapped_lat','NaN')
+        .andWhere('mapped_lat','>=',minlat)
+        .andWhere('mapped_lat','<=',maxlat)
+
+        const jsonData = JSON.parse(JSON.stringify(res));
+        return jsonData
+    }
 
     async GetWaysFrictions(): Promise<[{[key: WayId]: Condition[]},{[key: WayId]: LatLngDist[]}]>{
 
