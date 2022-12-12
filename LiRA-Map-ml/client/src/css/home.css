@@ -1,14 +1,15 @@
 .home_container {
-    background-color: white;
-    width: 2cm;
-    height: 9cm;
-    left: 0cm;
     z-index: calc(var(--navbar-z-index) - 3);
+    font-size: 10px;
+    width: 50%;
+    text-align: justify;
+    margin: auto;
+    font-size: larger;
+    top: 2cm;
     position: absolute;
-    font-size: 2em;
-    border-radius: 10px;
-    margin: 20px;
-    background: var(--background);
-    cursor: pointer;
-    top: 4.5cm;
+    left: 25%;
+}
+
+.Heading {
+    text-align: left;
 }
