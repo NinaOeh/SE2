@@ -1,11 +1,9 @@
 // modified and extended by Nina Oehlckers (s213535)
 import axios, { AxiosResponse } from 'axios'
-import { LinearScale } from 'chart.js'
 
 const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 const devURL = 'http://se2-A.compute.dtu.dk:3002'
-// const devURL = 'http://se2-A.compute.dtu.dk:3002' 
 const prodURL = 'http://se2-A.compute.dtu.dk:3002'
 
 const getPath = (p: string) => ( development ? devURL : prodURL ) + p
@@ -46,8 +44,6 @@ export function getFrict<T>(path: string, obj: object, callback: (data: T) => vo
     .then(res=>res.json())
     .then(data=>callback(data));
 }
-
-
 
 
 //Nina Oehlckers (s213535)

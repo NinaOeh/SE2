@@ -2,7 +2,7 @@
 
 import { downloadFriction } from "../../queries/friction";
 import { downloadCondition } from "../../queries/conditions";
-import React, {useState,useRef} from 'react';
+import React from 'react';
 import '../../css/downloader.css'
 
 interface DownloadProps {
@@ -38,7 +38,7 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
     console.log(data)
     
     // Headers for each column
-    let headers = ['FrictionId,TS_or_Distance,mapped_lat,mapped_lon,rpm_fl_value,\
+    const headers = ['FrictionId,TS_or_Distance,mapped_lat,mapped_lon,rpm_fl_value,\
     rpm_rl_value,friction_value,FK_Trip,MeasurementId_rl,Node_id,legDistance_MapMatched,Way_id']
     
     // Convert data to a csv
@@ -57,7 +57,7 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
     const export_ConditionToCsv = (data:any) => {
     
     // Headers for each column
-    let headers = ['pk,way_id,way_dist,value,computed_at,type']
+    const headers = ['pk,way_id,way_dist,value,computed_at,type']
     
     // Convert data to a csv
     const dataRed = data.reduce(

@@ -15,7 +15,7 @@ interface ContextProps {
 	selectedMetas: RideMeta[];
     setSelectedMetas: Dispatch<SetStateAction<RideMeta[]>>;
 	hoveredMeta?: RideMeta;
-	setHoveredMeta: Dispatch<SetStateAction<RideMeta | undefined>>;
+	setHoveredMeta: Dispatch<SetStateAction<RideMeta |undefined>>;
 }
 
 const MetasContext = createContext({} as ContextProps);

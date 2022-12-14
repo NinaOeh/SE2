@@ -2000,7 +2000,7 @@
                 "dbName": "obd.brk_trq_req_dvr",
                 "name": "Driver brake torque",
                 "hasValue": true,
-                "isActive": false
+                "isActive": true
             },
             {
                 "rendererName": "rectangles",

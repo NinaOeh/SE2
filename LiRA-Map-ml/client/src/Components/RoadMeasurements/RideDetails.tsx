@@ -1,5 +1,5 @@
+// modified by Nina Oehlckers (s213535) --> added dropdown, delete measurements, popup modification, enable measurement saving for role
 import React, { FC, useState } from "react";
-import createPopup from "../createPopup";
 import addMeasPopup from "./Popup/addMeasurementPopup";
 import Checkbox from "../Checkbox";
 import MetaData from "./MetaData";
@@ -9,7 +9,7 @@ import { useMetasCtx } from "../../context/MetasContext";
 import { UseRoleContext } from "../../context/RolesContext";
 
 import { addMeasurement, deleteMeasurement, editMeasurement } from "../../queries/measurements";
-import { MeasProperties, ActiveMeasProperties } from "../../models/properties";
+import { ActiveMeasProperties } from "../../models/properties";
 import { RideMeta } from "../../models/models";
 
 import { RENDERER_MEAS_PROPERTIES } from "../Map/constants";
@@ -54,7 +54,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 	const delete_measurement = ( i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
-		//removes one element in position i from the state
+		// removes one element in position i from the state
 		const temp = [...measurements]
 		temp.splice(i,1)
 		setMeasurements(temp)

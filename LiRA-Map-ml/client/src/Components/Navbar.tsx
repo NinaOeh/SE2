@@ -1,6 +1,5 @@
 import { useState, useEffect, FC } from "react";
 import { NavLink } from 'react-router-dom';
-import { Nav } from "../models/nav";
 
 import { FaBars } from 'react-icons/fa';
 
@@ -8,11 +7,6 @@ import '../css/navbar.css';
 import { IconContext } from "react-icons";
 
 import { UseRoleContext } from "../context/RolesContext"
-
-
-interface INavbar {
-    routes: Nav[];
-}
 
 // Get window size
 
@@ -38,7 +32,7 @@ function useWindowDimensions() {
     return windowDimensions;
 }
 
-const Navbar: FC<INavbar> = ( { routes } ) => {
+const Navbar: FC = () => {
 
     interface NavBtnProps {
         to: string;
@@ -79,7 +73,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
     }
 
     const {selectedRole} = UseRoleContext();
-    var Roledescription = "";
+    let Roledescription = "";
 
     console.log("The selected Role is: ", selectedRole)
     console.log(Roledescription)

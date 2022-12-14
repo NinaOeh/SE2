@@ -1,7 +1,7 @@
+// created by Nina Oehlckers (s213535)
 import React, { useEffect, useState } from 'react';
 
 type DropDownProps = {
-  //measurements: DataType[];
   measurements: string[];
   showDropDown: boolean;
   toggleDropDown: Function;

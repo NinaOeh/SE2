@@ -1,7 +1,6 @@
-import { FC, ReactElement, ReactNode } from "react";
-import { Hotline, Palette } from "react-leaflet-hotline";
+import { FC } from "react";
+import { Palette } from "react-leaflet-hotline";
 import { LeafletEvent, LeafletEventHandlerFnMap } from 'leaflet';
-import { LatLng } from "./models";
 import { Path, Bounds } from "./path";
 import { PathProperties, RendererOptions } from "./properties";
 import { HEATMAP_OPTIONS, RENDERER_PALETTE } from "../Components/Map/constants";

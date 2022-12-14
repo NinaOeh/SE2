@@ -24,13 +24,13 @@ const Checkbox = (props: Props) => {
 				setChecked( update ); 
 			}}
 			onMouseEnter={(e) => {
-				var isValid = props.onMouseEnter || null;
+				const isValid = props.onMouseEnter ||null;
 				if(isValid){
 					onMouseEnter!(isChecked, e);
 				}
 			}}
 			onMouseLeave={(e) => {
-				var isValid = props.onMouseLeave || null;
+				const isValid = props.onMouseLeave ||null;
 				if(isValid){
 					onMouseLeave!(isChecked, e);
 				}

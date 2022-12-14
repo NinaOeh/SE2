@@ -11,8 +11,6 @@ import { ActiveMeasProperties } from "../models/properties";
 import { getMeasurements } from "../queries/measurements";
 import { UseRoleContext } from "./RolesContext";
 
-import { createBrowserHistory } from "history";
-
 
 interface ContextProps {
 	measurements: ActiveMeasProperties[];

@@ -1,10 +1,5 @@
-import { RolesProvider } from "../context/RolesContext"
+// created by Nina Oehlckers (s213535)
 import  SelectRole  from "../Components/Roles/DefineRole"
-
-import { post } from "../queries/fetch";
-
-//import '../css/login.css';
-
 
 const Login = () => { 
 
@@ -12,6 +7,5 @@ const Login = () => {
         <SelectRole/>
     )
 }
-
 
 export default Login;

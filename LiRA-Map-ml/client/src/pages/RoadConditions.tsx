@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Palette } from "react-leaflet-hotline";
 import { ChartData } from "chart.js";
@@ -8,14 +7,10 @@ import ConditionsGraph from "../Components/RoadConditions/ConditionsGraph";
 
 import { ConditionType } from "../models/graph";
 
-import { GraphProvider, useGraph } from "../context/GraphContext";
+import { GraphProvider } from "../context/GraphContext";
 
 import "../css/road_conditions.css";
 import ClipLoader from "react-spinners/ClipLoader";
-import Menu from "../Components/RoadConditions/Menu";
-import Slider from "../Components/RoadConditions/Slider";
-import { filter } from "d3";
-
 
 const RoadConditions = () => {
     const [loading, setLoading] = useState(false);
@@ -25,10 +20,6 @@ const RoadConditions = () => {
     useEffect( () => {
         setLoading(true);
     } )
-    
-    const{friction}=useGraph();
-    
-
     
     const type: ConditionType = {
         name: 'IRI',
@@ -48,8 +39,6 @@ const RoadConditions = () => {
                 <ClipLoader color={'#36c3d6b7'} loading={loading} size={150} aria-label="Loading Spinner" />
                 :
             <div className="road-conditions-wrapper">
-               
-                 
                 <ConditionsMap type={type} palette={palette} setPalette={setPalette} setWayData={setWayData} />
                 <ConditionsGraph type={type} palette={palette} data={wayData} />
 

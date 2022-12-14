@@ -41,12 +41,12 @@ export const getRide = async (
     return data;
 }
 
-
+// Nina Oehlckers (s213535)
 export const getRide_Download = async (
     measurement: ActiveMeasProperties, 
     meta: Metadata
 ) => {
-    const { dbName, name, hasValue } = measurement
+    const { dbName, name } = measurement
     const { TripId: tripId, TaskId: taskId } = meta;
 
     console.log("We got here")

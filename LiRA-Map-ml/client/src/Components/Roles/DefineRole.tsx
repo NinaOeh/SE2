@@ -57,6 +57,9 @@ const SelectRole : FC = ( ) => {
                 title: `Role ${newUserName.role} was deleted.`,
                 toast: true,
             } );  
+            setSelectedRole({
+                role : "",
+            })
         }
         else{
             popup( {
@@ -66,9 +69,6 @@ const SelectRole : FC = ( ) => {
             } );
         }
     }
-
-    console.log("roles: ", roles)
-    console.log("selectedRole: ", selectedRole)
 
     function handleSelectRole (e: any) {
         setSelectedRole({role:e});

@@ -1,7 +1,7 @@
 //main: ELiot Ullmo
-//minor: Nina Oehlckers
+//extended by Nina Oehlckers
 
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { ChartData } from "chart.js";
 import { Palette } from "react-leaflet-hotline";
 
@@ -40,15 +40,13 @@ interface Props {
 
 const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) => {
 
-    const {filter,friction,typeCondition}=useGraph();
+    const {friction,typeCondition}=useGraph();
 
     
     const { name, max, grid, samples } = type;
 
     const ref = useRef(null);
     const [width, _] = useSize(ref)
-    const c1 = { r: 70,  g: 70, b: 255, t: 0 }
-    const c2 = { r: 255, g: 70, b: 70,  t: 1 } 
     useEffect(()=>{
         console.log(palette);
 
@@ -151,7 +149,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
     const [maxlon, setMaxLon] = useState(0)
     const [minlat, setMinLat] = useState(0)
     const [minlon, setMinLon] = useState(0)
-    const [recdrawn, setRecDrawn] = useState<Boolean>(false)
+    const [recdrawn, setRecDrawn] = useState<boolean>(false)
 
     const _onCreate= (e : any) => {
         console.log(e.layer._bounds)
@@ -170,7 +168,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
         setRecDrawn(true)
     }
 
-    const _onDelete= (e : any) => {
+    const _onDelete= () => {
         console.log("Delete shape")
         setMaxLat(0)
         setMaxLon(0)

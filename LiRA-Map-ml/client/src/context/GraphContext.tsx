@@ -10,7 +10,6 @@ import {
 
 import useMinMaxAxis from "../hooks/useMinMaxAxis";
 import { AddMinMaxFunc, DotHover, RemMinMaxFunc } from "../assets/graph/types";
-import { useEffect } from "react";
 
 
 interface ContextProps {

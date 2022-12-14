@@ -6,20 +6,18 @@ import { GraphProvider } from "../../context/GraphContext";
 import { useMetasCtx } from "../../context/MetasContext";
 
 import { ActiveMeasProperties } from "../../models/properties";
-import { MeasMetaPath, Path, PointData, DownloadMeta } from "../../models/path";
+import { MeasMetaPath, PointData } from "../../models/path";
 
-import { DotHover, GraphData, GraphPoint } from "../../assets/graph/types";
+import { GraphData, GraphPoint } from "../../assets/graph/types";
 
 import { getRide, getRide_Download } from "../../queries/rides";
 
 import Graph from "../Graph/Graph";
 import RidesMap from "./RidesMap";
 import usePopup from "../createPopup";
-import { Popup } from "Leaflet.MultiOptionsPolyline";
 import { PopupFunc } from "../../models/popup"
 import { RendererName } from "../../models/renderers";
 import Checkbox from "../Checkbox";
-import { RideMeta } from "../../models/models";
 import Downloader from "../RoadMeasurements/DownloadData";
 
 const Rides: FC = () => {
@@ -150,7 +148,7 @@ const Rides: FC = () => {
                     />
                 ) }
             </div>
-            { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue &&
+            { selectedMeasurements.map( ({hasValue, name}: ActiveMeasProperties, i: number) => hasValue &&
                     <Downloader d_data={download} name={name}/>
                 )}
         </GraphProvider>

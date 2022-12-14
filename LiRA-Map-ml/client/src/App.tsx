@@ -35,7 +35,7 @@ const App: FC = () => {
         <div className="App">
             <RolesProvider>
                 <Router>
-                    <Navbar routes={routes} />
+                    <Navbar/>
                     <Switch>
                         <Route exact path='/' component={Home} />
                         { routes.map( ([path, Component, _], i) =>

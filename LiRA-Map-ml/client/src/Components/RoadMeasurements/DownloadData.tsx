@@ -1,10 +1,7 @@
 //created by Nina Oehlckers (s213535)
 
-import { downloadFriction } from "../../queries/friction";
-import { downloadCondition } from "../../queries/conditions";
-import React, {useState,useRef} from 'react';
+import React from 'react';
 import '../../css/downloader.css';
-import { MeasMetaPath } from "../../models/path";
 
 interface DownloadProps {
     d_data: any,
@@ -34,7 +31,7 @@ const Downloader: React.FC<DownloadProps> = ({d_data, name}) => {
     const export_ToCsv = (data:any, name:string, id: string) => {
     
     // Headers for each column
-    let headers = ['MeasurementId,TS_or_Distance,T,lat,lon,message,isComputed,FK_Trip,FK_MeasurementType,Created_Date,Updated_Date,Description']
+    const headers = ['MeasurementId,TS_or_Distance,T,lat,lon,message,isComputed,FK_Trip,FK_MeasurementType,Created_Date,Updated_Date,Description']
     
     // Convert data to a csv
     const dataRed = data.reduce(
@@ -48,9 +45,9 @@ const Downloader: React.FC<DownloadProps> = ({d_data, name}) => {
     }
 
     const getData = () =>{
-        for(var i in d_data){
-            var id = i;
-            var val = d_data[i];
+        for(let i in d_data){
+            let id = i;
+            let val = d_data[i];
             export_ToCsv(val,name,id)
         }
     }
