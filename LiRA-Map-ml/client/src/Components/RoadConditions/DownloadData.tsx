@@ -34,6 +34,8 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
       }
 
     const export_FrictionToCsv = (data:any) => {
+
+    console.log(data)
     
     // Headers for each column
     let headers = ['FrictionId,TS_or_Distance,mapped_lat,mapped_lon,rpm_fl_value,\
@@ -85,9 +87,9 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
     }
 
     return (
-        <div className='Downloader-wrapper'>
-        <div className='DownloadWrapper'>
-            <button className='DownloadButton' onClick = {getData}>Download Data</button>
+        <div className='downloader-wrapper'>
+        <div className='downloadwrapper'>
+            <button className='downloadbutton' onClick = {getData}>Download Data</button>
         </div>
         </div>
     )

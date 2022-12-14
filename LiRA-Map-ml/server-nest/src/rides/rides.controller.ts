@@ -20,4 +20,10 @@ export class RidesController
         const { tripId, dbName } = query
         return this.service.getRide( tripId, dbName );
     }
+
+    @Get('/ride_download')
+    getRideDownload( @Query() query: { tripId: string, dbName: string } ): Promise<any> {
+        const { tripId, dbName } = query
+        return this.service.getRidesDownload( tripId, dbName );
+    }
 }

@@ -24,6 +24,8 @@ export interface Bounds {
 // measurement name -> trip task id -> bounded path (used in Rides)
 export type MeasMetaPath = { [key: string]: {[key: number]: BoundedPath } }
 
+export type DownloadMeta = { [key: string]: {[key:number] : string} }
+
 
 // Props passed to the Path and EventPath components
 export interface PathProps {

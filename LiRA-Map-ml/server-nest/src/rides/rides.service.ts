@@ -62,4 +62,16 @@ export class RidesService
 
         return { path, bounds: { minX, maxX, minY, maxY } }
     }
+
+    async getRidesDownload(tripId: string, dbName: string ): Promise<any>
+    {   
+        const res = await this.knex
+            .select('*')
+            .from( { public: 'Measurements' } )
+            .where( { 'FK_Trip': tripId, 'T': dbName } )
+            .whereNot( { 'lat': null, 'lon': null } )
+
+        const jsonData = JSON.parse(JSON.stringify(res));
+        return jsonData
+    }
 }

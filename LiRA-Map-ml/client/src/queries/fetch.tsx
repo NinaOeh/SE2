@@ -96,3 +96,14 @@ export async function friction_download<T>(path: string, maxlat: number, minlat:
     console.log(data)
     return data
 }
+
+//Nina Oehlckers (s213535)
+export async function ride_download<T>(path: string, tripId: string, dbName: string)
+{   
+    path = path+`?tripId=${tripId}&dbName=${dbName}`
+    console.log(getPath(path))
+    const response = await fetch(getPath(path))
+    const data = await response.json();
+    console.log(data)
+    return data
+}

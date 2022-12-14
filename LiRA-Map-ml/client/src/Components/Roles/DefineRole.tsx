@@ -1,11 +1,11 @@
+// created by Nina Oehlckers (s213535)
 import '../../css/login.css';
 import {Role} from '../../models/roles'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
-//import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {UseRoleContext} from "../../context/RolesContext"
-import {FC, useState, useRef} from "react"
+import {FC, useState} from "react"
 import {addRole, deleteRole} from "../../queries/roles"
 
 import createPopup from '../createPopup';

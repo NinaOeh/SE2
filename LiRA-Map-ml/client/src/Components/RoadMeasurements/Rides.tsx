@@ -1,3 +1,4 @@
+//modified by Nina Oehlckers (s213535) -> download feature added
 import { FC, useEffect, useState } from "react";
 
 import { useMeasurementsCtx } from "../../context/MeasurementsContext";
@@ -5,11 +6,11 @@ import { GraphProvider } from "../../context/GraphContext";
 import { useMetasCtx } from "../../context/MetasContext";
 
 import { ActiveMeasProperties } from "../../models/properties";
-import { MeasMetaPath, Path, PointData } from "../../models/path";
+import { MeasMetaPath, Path, PointData, DownloadMeta } from "../../models/path";
 
 import { DotHover, GraphData, GraphPoint } from "../../assets/graph/types";
 
-import { getRide } from "../../queries/rides";
+import { getRide, getRide_Download } from "../../queries/rides";
 
 import Graph from "../Graph/Graph";
 import RidesMap from "./RidesMap";
@@ -19,6 +20,7 @@ import { PopupFunc } from "../../models/popup"
 import { RendererName } from "../../models/renderers";
 import Checkbox from "../Checkbox";
 import { RideMeta } from "../../models/models";
+import Downloader from "../RoadMeasurements/DownloadData";
 
 const Rides: FC = () => {
     
@@ -26,12 +28,14 @@ const Rides: FC = () => {
     const { selectedMeasurements } = useMeasurementsCtx()
 
     const [ paths, setPaths ] = useState<MeasMetaPath>({})
+    const [ download, setDownload ] = useState<any>({})
     
     const popup = usePopup()
 
     useEffect( () => {
         const updatePaths = async ( pop: PopupFunc) => {
             const temp = {} as MeasMetaPath;
+            const download_ = [] as any;
 
             if(selectedMeasurements.length == 0){
                 const activeBaselineMeasurement: ActiveMeasProperties = {
@@ -77,12 +81,15 @@ const Rides: FC = () => {
                             toast: true
                         } );
                         }
+                    const data = await getRide_Download(meas, meta)
+                    download_[TaskId] = data
                 } 
             }
 
-            return temp;
+            setPaths(temp)
+            setDownload(download_)
         }
-        updatePaths(popup).then( setPaths )
+        updatePaths(popup)
 
     }, [selectedMetas, selectedMeasurements] )
 
@@ -90,13 +97,6 @@ const Rides: FC = () => {
     const handleCollapseGraph = () => {
         setCollapseGraph(!collapseGraph);
     }
-
-    // const [hoveredMeta, setHoveredMeta] = useState<RideMeta>();
-    // const hovMeta = useEffect(() => {
-    //     console.log("Onmouseover registreret i rides, meta is ", hoveredMeta);
-    //     setHoveredMeta(hoveredMeta);
-    //     // selectedMetas.find(meta => meta.TaskId == hoveredMeta?.TaskId)!.isHovered = true;
-    // },[hoveredMeta]);
 
     return (
         <GraphProvider>
@@ -150,6 +150,9 @@ const Rides: FC = () => {
                     />
                 ) }
             </div>
+            { selectedMeasurements.map( ({hasValue, name, palette}: ActiveMeasProperties, i: number) => hasValue &&
+                    <Downloader d_data={download} name={name}/>
+                )}
         </GraphProvider>
   )
 }
