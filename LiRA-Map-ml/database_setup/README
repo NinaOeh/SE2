@@ -12,9 +12,9 @@ way for each measurement. The way geometries are saved in the **Geometry** table
 ### Installation and setup
 The code can be used by following the following steps first:
 1. downloading the repository
-2. setting the required environment variables for the LiRA project 
+2. setting the required environment variables for the LiRA project in a hidden file called "environment.env" in the LiRA-Map-ml directory 
 3. enter the "database_setup" directory through the terminal
-4. activate the virtual environment (source venv/bin/activate)
+4. run "pip install -e ." to install all necessary libaries (as stated in setup.py)
 5. call one of the available four endpoints
 
 ### Available endpoints
@@ -22,7 +22,7 @@ The pipeline has 4 available endpoints, that can be called via the terminal:
 
 **update_geometry** $\rightarrow$ *update_geometry <optional: --batch_size> <optional: --trip_id> <optional: inital_offset>*:
 
-The update_geometry endpoint updates the **Geometry** table in the LiRA database with all available information from the **MapReferences** table of the LiRA database. The user can optionally set the trip_id, and only upload information of a specific trip. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The intial batchsize is set to 5000 items. The endpoint has the following arguments
+The update_geometry endpoint updates the **Geometry** table in the LiRA database with all available information from the **MapReferences** table of the LiRA database. The user can optionally set the trip_id, and only upload information of a specific trip. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The state of the upload is logged in the same directory. The intial batchsize is set to 5000 items. The endpoint has the following arguments
 - --batch_size (the batchsize of the upload, defining how much data is queried from the LiRA database at once)
 - --initial_offset (the offset where to start querying from the LiRA database)
 - --trip_id (the TripId of the a single trip)
@@ -30,14 +30,14 @@ The update_geometry endpoint updates the **Geometry** table in the LiRA database
 
 **update_friction** $\rightarrow$ *update_friction <trip_id> <optional: --batch_size> <optional: inital_offset>*:
 
-The update_friction endpoint updates the **Friction** table in the LiRA database, calculationg the friction value from the available **Measurements** from the LiRA database. It is linked to the **Geometry** table through the WayId key and it must be ensured, that all WayIds are present in the **Geometry** table before the friction information can be uploaded. The user must set the trip_id, so that only the information from one single trip wil be uploaded at once. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The inital batchsize is set to 5000 items. The endpoint has the following arguments
+The update_friction endpoint updates the **Friction** table in the LiRA database, calculationg the friction value from the available **Measurements** from the LiRA database. It is linked to the **Geometry** table through the WayId key and it must be ensured, that all WayIds are present in the **Geometry** table before the friction information can be uploaded. The user must set the trip_id, so that only the information from one single trip wil be uploaded at once. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The inital batchsize is set to 5000 items. The state of the upload is logged in the same directory. The endpoint has the following arguments
 - trip_id (the TripId of the a single trip)
 - --batch_size (the batchsize of the upload, defining how much data is queried from the LiRA database at once)
 - --initial_offset (the offset where to start querying from the LiRA database)
 
 **update_friction_full_workflow** $\rightarrow$ *update_friction_full_workflow <trip_id> <optional: --batch_size> <optional: inital_offset>*:
 
-The update_friction_full_workflow endpoint updates the **Friction** table in the LiRA database, calculationg the friction value from the available **Measurements** from the LiRA database. Furthermore, it checks for missing WayIds in the **Geometry** table and generates and uploads these, if they are still missing in the **Geometry** table. The user must set the trip_id, so that only the information from one single trip wil be uploaded at once. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The inital batchsize is set to 5000 items. The endpoint has the following arguments
+The update_friction_full_workflow endpoint updates the **Friction** table in the LiRA database, calculationg the friction value from the available **Measurements** from the LiRA database. Furthermore, it checks for missing WayIds in the **Geometry** table and generates and uploads these, if they are still missing in the **Geometry** table. The user must set the trip_id, so that only the information from one single trip wil be uploaded at once. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The inital batchsize is set to 5000 items. The state of the upload is logged in the same directory. The endpoint has the following arguments
 - trip_id (the TripId of the a single trip)
 - --batch_size (the batchsize of the upload, defining how much data is queried from the LiRA database at once)
 - --initial_offset (the offset where to start querying from the LiRA database)

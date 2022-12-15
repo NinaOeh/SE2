@@ -36,8 +36,6 @@ class RPM_rl(pydantic.BaseModel):
 	legDistance_MapMatched: float
 	Way_id: str
 	Node_id: str
-	lane: str
-	direction: str
 
 	class Config:
 		arbitrary_types_allowed = True
