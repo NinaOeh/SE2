@@ -1,4 +1,5 @@
-#Author: Nina Oehlckers (s213535)
+# created by Nina Oehlckers (s213535)
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -9,13 +10,9 @@ LIRA_DATABASE_URL = settings.LIRA_DB_URL
 print(f"Lira Database: {LIRA_DATABASE_URL}")
 lira_engine = create_engine(LIRA_DATABASE_URL)
 
-#DB_FRICTION_URL = settings.DB_FRICTION_URL
-#friction_engine = create_engine(DB_FRICTION_URL)
-
 SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=lira_engine)
 Base = declarative_base()
-def get_db():   #new
-    print("I am here")
+def get_db():   
     try:
         db = SessionLocal()
         yield db

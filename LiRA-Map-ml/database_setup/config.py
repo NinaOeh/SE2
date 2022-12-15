@@ -1,4 +1,5 @@
-#Author: Nina Oehlckers (s213535)
+#created by Nina Oehlckers (s213535)
+
 import os
 from dotenv import load_dotenv
 from pathlib import Path

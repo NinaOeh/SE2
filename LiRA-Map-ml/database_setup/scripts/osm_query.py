@@ -1,5 +1,5 @@
+#created by Nina Oehlckers (s213535)
 import requests
-import json
 
 def get_ways(node_id: int):
     # query all ways that pass this node

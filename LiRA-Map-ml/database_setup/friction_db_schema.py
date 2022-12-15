@@ -1,7 +1,7 @@
-#Author: Nina Oehlckers (s213535)
+# created by Nina Oehlckers (s213535)
+
 import pydantic
 import datetime
-from pydantic.datetime_parse import parse_datetime
 import shapely.geometry
 
 
@@ -36,6 +36,8 @@ class RPM_rl(pydantic.BaseModel):
 	legDistance_MapMatched: float
 	Way_id: str
 	Node_id: str
+	lane: str
+	direction: str
 
 	class Config:
 		arbitrary_types_allowed = True

@@ -1,9 +1,9 @@
-#Author: Nina Oehlckers (s213535)
-from lira_db_model import Base, Measurements, MapReferences
+# created by Nina Oehlckers (s213535)
+
+from lira_db_model import Measurements, MapReferences
 import sqlalchemy.orm as orm
 from typing import List, Tuple
 import datetime
-from sqlalchemy import cast
 
 def get_rl_mapref(session: orm.Session, 
                   offset: int,
@@ -35,15 +35,6 @@ def get_fl(session: orm.Session, latest_time: datetime.datetime,
         .all()
         )
 
-def get_map_ref(session: orm.Session,
-                offset: int,
-                limit: int) -> List[MapReferences]:
-    return (session.query(MapReferences)
-        .where(MapReferences.lat_MapMatched != None,
-            MapReferences.lon_MapMatched != None,
-            MapReferences.PossibleMatchingRoutes != None)
-        .limit(limit).offset(offset).all()
-        )
 def get_map_ref_red(session: orm.Session,
                 offset: int,
                 limit: int) -> List[MapReferences]:
