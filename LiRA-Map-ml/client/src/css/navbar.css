@@ -1,3 +1,5 @@
+/* Colin Hoffmann (s212711) */
+
 .nav-wrapper {
     position: sticky;
     top: 0;
@@ -16,7 +18,7 @@
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
 }
 
 .nav-container-side {
@@ -26,11 +28,12 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
     vertical-align: auto;
 }
 
-.nav-tab {
+.nav-tab,
+.nav-tab-side {
     font-size: 1em;
     color: white;
     text-decoration: none;
@@ -42,23 +45,7 @@
     padding: 2;
 }
 
-.nav-tab-side {
-    font-size: 1em;
-    color: white;
-    text-decoration: none;
-    margin: 0px 30px;
-    padding: 6px 11px;
-    border-radius: 6px;
-    width: 100%;
-    justify-content: space-evenly;
-    padding: 0;
-}
-
-.nav-tab:hover {
-    color: var(--highlight-text);
-    text-shadow: 2px 2px 4px black;
-}
-
+.nav-tab:hover,
 .nav-tab-side:hover {
     color: var(--highlight-text);
     text-shadow: 2px 2px 4px black;
@@ -69,14 +56,8 @@
     justify-items: auto;
 }
 
-.nav-tab-active:hover {
-    color: var(--highlight-text);
-}
-
-.nav-tab-side-active {
-    color: var(--highlight-text);
-}
-
+.nav-tab-active:hover,
+.nav-tab-side-active,
 .nav-tab-side-active:hover {
     color: var(--highlight-text);
 }
@@ -114,7 +95,7 @@
         padding-top: 50px;
         background-color: var(--background);
         width: 100%;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
         position: absolute;
     }
 
@@ -143,4 +124,4 @@
 
 img {
     width: 100px;
- }
+}

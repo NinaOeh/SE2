@@ -1,10 +1,12 @@
+// Colin Hoffmann (s212711)
+
 import React, { useState } from 'react'
 import { useGraph } from '../../context/GraphContext';
 import '../../css/dropdownslider.css'
 
 const DropdownSlider: React.FC = () => {
 
-    const { filter, setfilter, setType,setfriction } = useGraph();
+    const { filter, setfilter, setType, setfriction } = useGraph();
     const [state, setState] = useState(false);
     const [itemtext, setItemText] = useState('IRI');
 
