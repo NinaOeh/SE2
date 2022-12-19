@@ -8,6 +8,7 @@ import { Renderer } from "../../models/renderers";
 import { RENDERER_OPTIONS } from "./constants";
 import renderers from "./renderers";
 
+//Author: Caroline (s194570), Andreas (s194614) (onmouseover functionalities)
 const Path: FC<PathProps> = ( { path, properties, metadata, onClick, onMouseover } ) => {
 
     const { minY, maxY } = useGraph();
@@ -25,6 +26,7 @@ const Path: FC<PathProps> = ( { path, properties, metadata, onClick, onMouseover
                 getVal={(t: PointData) => t.value || 0} 
                 options={options}
                 eventHandlers={{click: onClick,
+                                //Author: Caroline (s194570), Andreas (s194614)
                                 //Adds border to matching ridecard
                                 mouseover: () => onMouseover!(metadata!.TaskId),
                                 //Removes border to matching ridecard

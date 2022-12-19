@@ -28,6 +28,7 @@ interface IGraph {
     palette?: Palette;
     absolute?: boolean;
     time?: boolean;
+    //Author: Caroline (s194570), Andreas (s194614)
     mapData?: Path[];
     isCollapsed?: boolean;
 }
@@ -35,6 +36,7 @@ interface IGraph {
 const margin = {top: 20, right: 30, bottom: 70, left: 100};
 const paddingRight = 50
 
+//Author: Caroline (s194570), Andreas (s194614) (mapdata, iscollapsed functions)
 const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, mapData, isCollapsed }  ) => {
 
     const wrapperRef = useRef(null)
@@ -46,6 +48,7 @@ const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, ma
     const [zoom, setZoom] = useState<number>(1)
 
     const { xAxis, yAxis } = useAxis( zoom, w, h );
+    //Author: Caroline (s194570), Andreas (s194614) (collapsing function)
     return (
         <>
         <Tooltip />
@@ -69,6 +72,7 @@ const Graph: FC<IGraph> = ( { labelX, labelY, plots, palette, absolute, time, ma
                     <Gradient svg={svg} axis={yAxis} palette={palette} />
                     <XAxis svg={svg} axis={xAxis} width={w} height={h} zoom={zoom} absolute={absolute} time={time} />
                     { plots && plots.map((p: Plot, i: number) => 
+                        //Author: Caroline (s194570), Andreas (s194614) (mapdata)
                         <Line key={'line-'+i} svg={svg} xAxis={xAxis} yAxis={yAxis} i={i} mapData={mapData!} time={time} {...p} />) 
                     }               
                     </>

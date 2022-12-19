@@ -17,9 +17,11 @@ interface IRidesMap {
     paths: MeasMetaPath;
     selectedMetas: RideMeta[];
     selectedMeasurements: ActiveMeasProperties[];
+    //Author: Caroline (s194570), Andreas (s194614)
     setHoveredMeta: React.Dispatch<React.SetStateAction<RideMeta | undefined>>;
 }
 
+//Author: Caroline (s194570), Andreas (s194614) (setHoveredMeta functionality)
 const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements, setHoveredMeta} ) => {
 
     const memoPaths = useMemo( () => {
@@ -51,6 +53,7 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements, 
         return temp;
     }, [paths] )
 
+    //Author: Caroline (s194570), Andreas (s194614)
     const onMouseover = (i: number) => (e: any) => {
         var meta = selectedMetas.find(meta => meta.TaskId == i);
         setHoveredMeta(meta);
@@ -64,6 +67,7 @@ const RidesMap: FC<IRidesMap> = ( { paths, selectedMetas, selectedMeasurements, 
                     path={bp.path} 
                     properties={meas} 
                     metadata={meta} 
+                    //Author: Caroline (s194570), Andreas (s194614)
                     onMouseover={onMouseover}/> 
             ) }
         </MapWrapper>
