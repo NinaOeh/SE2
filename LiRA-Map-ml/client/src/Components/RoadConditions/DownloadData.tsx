@@ -1,4 +1,4 @@
-//created by Nina Oehlckers (s213535)
+//created by Nina (s213535)
 
 import { downloadFriction } from "../../queries/friction";
 import { downloadCondition } from "../../queries/conditions";
@@ -34,8 +34,6 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
       }
 
     const export_FrictionToCsv = (data:any) => {
-
-    console.log(data)
     
     // Headers for each column
     const headers = ['FrictionId,TS_or_Distance,mapped_lat,mapped_lon,rpm_fl_value,\
@@ -71,17 +69,14 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
     }
 
     const getData = async () =>{
-        console.log("We try to download data now")
         if (type == "Friction" || type == "FrictionLatLgn"){
             const data = await downloadFriction(maxlat,minlat,maxlon,minlon);
             const json = JSON.stringify(data)
-            console.log(json)
             export_FrictionToCsv(data)
         }
         else {
             const data = await downloadCondition(maxlat,minlat,maxlon,minlon,type);
             const json = JSON.stringify(data)
-            console.log(json)
             export_ConditionToCsv(data)
         }
     }

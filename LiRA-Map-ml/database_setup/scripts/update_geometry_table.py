@@ -129,6 +129,14 @@ def upload_geometry_data(geo_data: pd.DataFrame,
 
 def upload_single_geometries(geos: List[str],
                             db: orm.Session = Depends(friction_db_session.get_db)):
+    '''
+        uploads selected geometry informations
+        into the geometry table of the friction database
+
+        input: 
+            geos = List[string]
+            db = orm.Session
+    '''
     geo_infos = calculations.get_geometry_info_by_wayid(geos)
     geo_infos_df = pd.DataFrame([vars(m) for m in geo_infos if m is not None])
     upload_geometry_data(geo_infos_df, db)

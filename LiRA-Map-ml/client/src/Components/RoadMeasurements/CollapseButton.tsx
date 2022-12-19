@@ -1,3 +1,4 @@
+// created by Caroline (s194570), Andreas (s194614)
 import React, { FC } from "react";
 
 //Author: Caroline (s194570), Andreas (s194614)

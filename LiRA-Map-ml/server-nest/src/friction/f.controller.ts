@@ -35,11 +35,9 @@ export class FrictionController {
     }
 
     //Nina Oehlckers (s213535)
+    // returns the friction data in the given boundaries
     @Get('friction_download')
     FrictionDownload( @Query() query: { maxlat: number, minlat:number, maxlon:number,  minlon:number} ): Promise<any> {
-        console.log("The query parameters are (if we even get here)")
-        console.log(query)
-        console.log("We want to download friction")
         return this.service.FrictionDownload(query.maxlat,query.minlat,query.maxlon,query.minlon);
     }
 

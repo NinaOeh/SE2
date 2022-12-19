@@ -1,17 +1,12 @@
+// modified by Caroline (s194570), Andreas (s194614)
 import React, { FC, useMemo } from "react";
-import { Palette } from "react-leaflet-hotline";
 
 import { MeasProperties, ActiveMeasProperties } from "../../models/properties";
 import { BoundedPath, MeasMetaPath } from "../../models/path";
 import { RideMeta } from "../../models/models";
 
-import PaletteEditor from "../Palette/PaletteEditor";
-import { RENDERER_PALETTE } from "../Map/constants";
 import MetadataPath from "../Map/MetadataPath";
 import MapWrapper from "../Map/MapWrapper";
-import { DotHover } from "../../assets/graph/types";
-import { useState } from "react";
-import { useEffect } from "react";
 
 interface IRidesMap {
     paths: MeasMetaPath;

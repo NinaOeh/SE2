@@ -17,8 +17,6 @@ export class RCController
     }
 
 
-    
-
     @Get('way')
     getWayConditions( @Query() query: { wayId: string, type: string } ): Promise<Condition[]> {
         const { wayId, type } = query;
@@ -40,9 +38,6 @@ export class RCController
     //Nina Oehlckers (s213535)
     @Get('download')
     Download( @Query() query: { maxlat: number, minlat:number, maxlon:number,  minlon:number, type:string} ): Promise<any> {
-        console.log("The query parameters are (if we even get here)")
-        console.log(query)
-        console.log("We want to download condition")
         return this.service.ConditionDownload(query.maxlat,query.minlat,query.maxlon,query.minlon, query.type);
     }
 

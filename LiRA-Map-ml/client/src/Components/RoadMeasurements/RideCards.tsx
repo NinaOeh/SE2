@@ -1,3 +1,4 @@
+// modified by Caroline (s194570), Andreas (s194614) --> Code regarding hovered meta
 import { FC, useEffect, useState, ReactNode } from "react";
 import { List, ListRowRenderer } from "react-virtualized";
 

@@ -142,7 +142,7 @@ const ConditionsMap: FC<Props> = ( { type, palette, setPalette, setWayData } ) =
     },[friction,typeCondition])
 
     //Implementation of download function
-    //Nina Oehlckers (s213535)
+    //Author: Nina (s213535)
 
     //setting the bounds for the query
     const [maxlat, setMaxLat] = useState(0)

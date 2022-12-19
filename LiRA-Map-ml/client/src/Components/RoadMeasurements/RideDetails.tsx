@@ -1,4 +1,5 @@
 // modified by Nina Oehlckers (s213535) --> added dropdown, delete measurements, popup modification, enable measurement saving for role
+// modified by Caroline (s194570), Andreas (s194614) --> collapser
 import React, { FC, useState } from "react";
 import addMeasPopup from "./Popup/addMeasurementPopup";
 import Checkbox from "../Checkbox";
@@ -26,15 +27,14 @@ interface RideDetailsProps {
 const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 
 	const { selectedMetas } = useMetasCtx()
+	//Author: Nina (s213535)
 	const { selectedRole } = UseRoleContext()
-
-	console.log("We are in RideDetails and look for the selectedRole: ", selectedRole)
 
 	const { measurements, setMeasurements } = useMeasurementsCtx()
 	const [ addChecked, setAddChecked ] = useState<boolean>(false)
 	
 	const add_measurement_popup = addMeasPopup()
-	const modify_measurements_popup = addMeasPopup() //modifyMeasurementChoices()
+	const modify_measurements_popup = addMeasPopup() 
 
 	const edit_Measurement = (meas: ActiveMeasProperties, i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -51,6 +51,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 		)
 	}
 
+	//Author: Nina (s213535)
 	const delete_measurement = ( i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
@@ -100,6 +101,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 					key={`meas-checkbox-${i}`}
 					meas={m}
 					selectMeasurement={selectMeasurement(i)}
+					//Author: Nina (s213535)
 					editMeasurement={edit_Measurement(m, i)}
 					deleteMeasurement={delete_measurement(i)}
 					state={m.isActive}

@@ -1,4 +1,4 @@
-//modified by Nina Oehlckers (s213535) -> download feature added
+//modified by Caroline (s194570), Andreas (s194614), Nina (s213535)
 import { FC, useEffect, useState } from "react";
 
 import { useMeasurementsCtx } from "../../context/MeasurementsContext";
@@ -26,6 +26,8 @@ const Rides: FC = () => {
     const { selectedMeasurements } = useMeasurementsCtx()
 
     const [ paths, setPaths ] = useState<MeasMetaPath>({})
+
+    //Author: Nina (s213535)
     const [ download, setDownload ] = useState<any>({})
     
     const popup = usePopup()
@@ -66,7 +68,8 @@ const Rides: FC = () => {
                             temp[name][TaskId] = bp;
                         }
                     }
-
+                    
+                    //Author: Nina (s213535)
                     if (temp[name][TaskId].bounds.maxX == null 
                         && temp[name][TaskId].bounds.maxY == null 
                         && temp[name][TaskId].bounds.minX == null 
@@ -80,12 +83,14 @@ const Rides: FC = () => {
                             toast: true
                         } );
                         }
+                    //Author: Nina (s213535)
                     const data = await getRide_Download(meas, meta)
                     download_[TaskId] = data
                 } 
             }
 
             setPaths(temp)
+            //Author: Nina (s213535)
             setDownload(download_)
         }
         updatePaths(popup)
@@ -154,7 +159,8 @@ const Rides: FC = () => {
                     />
                 ) }
             </div>
-            { selectedMeasurements.map( ({hasValue, name}: ActiveMeasProperties, i: number) => hasValue &&
+            { //Author: Nina (s213535)
+            selectedMeasurements.map( ({hasValue, name}: ActiveMeasProperties, i: number) => hasValue &&
                     <Downloader d_data={download} name={name}/>
                 )}
         </GraphProvider>

@@ -46,3 +46,8 @@ The update_friction_full_workflow endpoint updates the **Friction** table in the
 
 The remove_wayid_outliers endpoint smoothens the WayId columsn in the **Friction** table in the LiRA database. This is necessary to ensure that less sideways are mapped along a trip. It is done by taking the rolling most frequent WayId out of 7, going through the whole trip. Therefore, this endpoint should only be called when the upload of one Trip has been finished. The endpoint has the following arguments
 - trip_id (the TripId of the a single trip)
+
+### Next steps and possible extensions
+
+The provided pipeline can be extended by calculating the exact fraction of the different ways that was actually used by the car. Furthermore, the lane and direction can be appended. 
+Finally, the provided database can be used to accumulate data of several trips along a specific way, in order to get an actual measure of the road condition. 

@@ -144,7 +144,7 @@ def extract_only_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]
 
 def get_rpm_info_rl1(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl1]:
     '''
-        get info of rpm (with geometry)
+        get info of rpm rl (with map reference informations)
     '''
     def parse(row):
         rpm = extract_measurement_value(row['message'])
@@ -178,6 +178,9 @@ def get_rpm_info_rl1(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl1]:
 
 
 def get_rpm_info_rl(df: pd.DataFrame) -> List[List[friction_db_schema.RPM_rl]]:
+    '''
+        get info of rpm rl (with map reference informations)
+    '''
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
@@ -205,6 +208,9 @@ def get_rpm_info_rl(df: pd.DataFrame) -> List[List[friction_db_schema.RPM_rl]]:
     return (parse(row) for _, row in df.iterrows())
 
 def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
+    '''
+        get info of rpm fl (without map reference information)
+    '''
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
@@ -222,6 +228,9 @@ def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
     return (parse(row) for _, row in df.iterrows())
 
 def get_geometry_info(df: pd.DataFrame) -> List[friction_db_schema.Geometry]:
+    '''
+        get info for geometry upload from map reference data
+    '''
     def parse(row):
         if 'Expecting value:' in str(extract_Wayid(row['PossibleMatchingRoutes'], row['WayPoint'])):
             return
@@ -241,6 +250,10 @@ def get_geometry_info(df: pd.DataFrame) -> List[friction_db_schema.Geometry]:
     return (parse(row) for _, row in df.iterrows())
 
 def get_geometry_info_by_wayid(geos: List[str]) -> List[friction_db_schema.Geometry]:
+    '''
+        get info for geometry upload from individual way ids
+        can be expended by lane and direction
+    '''
     def parse(way_id):
         try:
             wayPointName, geoList= extract_node_along_way(way_id)

@@ -1,4 +1,4 @@
-// modified by Nina Oehlckers (s213535) -> adding delete option
+// modified by Nina (s213535) -> adding delete option
 import React, { FC } from "react";
 import { FiSettings, FiXSquare } from "react-icons/fi"; 
 import { MeasProperties } from "../../models/properties";

@@ -33,6 +33,7 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
     }
 
     /*Functions necessary for the dropdown Menu */
+    //Author: Nina (s213535)
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectMeasurement, setSelectMeasurement] = useState<string>(name);
     
@@ -54,6 +55,7 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
     };
 
     /*Functions necessary for the search*/
+    //Author: Nina (s213535)
     const [filteredData, setFilteredData] = useState<string[]>(Object.keys(MeasurementDatabases))
     const [wordEntered, setWordEntered] = useState<string>("")
 

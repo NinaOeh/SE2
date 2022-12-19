@@ -42,8 +42,6 @@ def merge_rl_fl(
     rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos if m is not None])
     rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos if m is not None])
 
-    print(f"Dataframe: {rpm_rl_infos_df}")
-
     # concatenate the dataframes, filter by timestamp and interpolate the missing values
     # using pandas included interpolation function
     df_inter = pd.concat([rpm_fl_infos_df, rpm_rl_infos_df], ignore_index = True)
@@ -52,11 +50,9 @@ def merge_rl_fl(
 
     # remove the map matched items
     merged_data = df_inter.dropna(subset = ['rpm_value_rl'])
-    print(f"Interpolated_dataframe with droped na {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     #only keep every 30th item
     merged_data = merged_data.iloc[1::50, :]
-    print(f"merged dataframe, every 30th row kept {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     return merged_data
 

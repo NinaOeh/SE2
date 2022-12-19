@@ -1,4 +1,4 @@
-// created by Nina Oehlckers (s213535)
+// created by Nina (s213535)
 import {
 	createContext,
 	Dispatch,
