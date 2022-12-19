@@ -18,6 +18,7 @@ export interface RideMeta {
 	wayPointName: string,
 }
 
+//Author: Caroline (s194570), Andreas (s194614)
 export interface PositionDisplay {
 	StartPosition: string,
 	EndPosition: string,

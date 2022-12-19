@@ -20,14 +20,15 @@ const RoadMeasurements = () => {
     console.log("Road Measurement");
     useEffect( () => {
         setLoading(false);
-    } )
-
+    } );
+    
+    //Author: Caroline (s194570), Andreas (s194614)
     const [collapseRides, setCollapseRides] = useState(true);
     const handleCollapseRides = () => {
         setCollapseRides(!collapseRides);
         console.log("Collapse rides? ", collapseRides);
     }
-
+    //Author: Caroline (s194570), Andreas (s194614)
     const [collapseDetails, setCollapseDetails] = useState(true);
     const handleCollapseDetails = () => {
         setCollapseDetails(!collapseDetails);
@@ -47,6 +48,7 @@ const RoadMeasurements = () => {
 
                                 <RideCards isCollapsed={!collapseRides}/>
                                 <Checkbox className="collapse-checkbox" 
+                                //Author: Caroline (s194570), Andreas (s194614)
                                 html={
                                     collapseRides ? 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-double-left" viewBox="0 0 16 16">
@@ -61,6 +63,7 @@ const RoadMeasurements = () => {
                                
                                 <RideDetails isCollapsed={!collapseDetails}/>
                                 <Checkbox className="collapse-checkbox" 
+                                //Author: Caroline (s194570), Andreas (s194614)
                                 html={
                                     collapseDetails ? 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-double-left" viewBox="0 0 16 16">

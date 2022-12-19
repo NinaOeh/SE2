@@ -93,6 +93,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 
 	//shows first all measurements and then the checkbox to add new measurement
     return (
+		//Author: Caroline (s194570), Andreas (s194614) (collapsing function)
 		<div className={`meta-data${isCollapsed? " hidden" : ""}`}>
 			{ measurements.map( (m: ActiveMeasProperties, i: number) =>
 				<MeasCheckbox 

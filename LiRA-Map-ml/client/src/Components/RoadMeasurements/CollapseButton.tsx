@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 
+//Author: Caroline (s194570), Andreas (s194614)
 interface Props {
     handleCollapse: (isCollapsed: boolean, e: React.MouseEvent<HTMLDivElement>) => void;
     isCollapsed: boolean;

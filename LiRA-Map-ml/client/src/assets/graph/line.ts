@@ -18,11 +18,13 @@ export default class GLine
         label: string,
         i: number,
         data: GraphData, 
+        //Author: Caroline (s194570), Andreas (s194614)
         mapData: MapPath,
         xAxis: Axis,
         yAxis: Axis,
+        //Author: Caroline (s194570), Andreas (s194614)
         onHover: (d: DotHover | undefined) => void,
-        time: boolean | undefined
+        time: boolean | undefined,
     ) {
         const color = getColor(0, i)
         const hoverColor = "url(#line-gradient)"
@@ -57,6 +59,7 @@ export default class GLine
             path.mouseOver();
             dots.mouseOver();
             tooltip.mouseOver(e, d)
+            //Author: Caroline (s194570), Andreas (s194614)
             const i = data.findIndex(elem => elem[0] == d[0]);
             onHover( { label, x: d[0], lat: mapData[i].lat, lng: mapData[i].lng } )
         } )

@@ -35,6 +35,7 @@ const Rides: FC = () => {
             const temp = {} as MeasMetaPath;
             const download_ = [] as any;
 
+            //Author: Caroline (s194570), Andreas (s194614)
             if(selectedMeasurements.length == 0){
                 const activeBaselineMeasurement: ActiveMeasProperties = {
                     dbName: "track.pos",
@@ -91,6 +92,7 @@ const Rides: FC = () => {
 
     }, [selectedMetas, selectedMeasurements] )
 
+    //Author: Caroline (s194570), Andreas (s194614)
     const [collapseGraph, setCollapseGraph] = useState(true);
     const handleCollapseGraph = () => {
         setCollapseGraph(!collapseGraph);
@@ -104,9 +106,11 @@ const Rides: FC = () => {
                     paths={paths} 
                     selectedMetas={selectedMetas} 
                     selectedMeasurements={selectedMeasurements}
+                    //Author: Caroline (s194570), Andreas (s194614)
                     setHoveredMeta={setHoveredMeta}/>
 
                 <Checkbox className="collapse-checkbox horizontal-checkbox" 
+                                //Author: Caroline (s194570), Andreas (s194614)
                                 html={
                                     collapseGraph ? 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-double-down" viewBox="0 0 16 16">
@@ -128,6 +132,7 @@ const Rides: FC = () => {
                         absolute={true}
                         time={true}
                         palette={palette}
+                        //Author: Caroline (s194570), Andreas (s194614)
                         mapData={Object.entries(paths[name] || {})
                                 .map( ([TaskId, bp], j) => {
                                     const { path, bounds} = bp;
@@ -144,6 +149,7 @@ const Rides: FC = () => {
                                 return { data, bounds, label: 'r-' + TaskId, j }
                             } ) 
                         }
+                        //Author: Caroline (s194570), Andreas (s194614)
                         isCollapsed={!collapseGraph}
                     />
                 ) }

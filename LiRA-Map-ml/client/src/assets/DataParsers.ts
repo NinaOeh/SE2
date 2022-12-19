@@ -31,7 +31,7 @@ export const parseSegments = (data: any): JSONProps[] => {
         };
     } )
 }
-
+//Author: Caroline (s194570), Andreas (s194614)
 export function parsePositionDisplay(startPosition: string, endPosition: string): PositionDisplay {
     let parsedStart = JSON.parse(startPosition);
     let parsedEnd = JSON.parse(endPosition);
@@ -44,6 +44,7 @@ export function parsePositionDisplay(startPosition: string, endPosition: string)
     return positionDisplay;
 };
 
+//Author: Caroline (s194570), Andreas (s194614)
 function scopePositionOut(position:any) {
     if (position.road == null) {
         if(position.city == null) {
