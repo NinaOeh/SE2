@@ -1,6 +1,7 @@
-//ELiot Ullmo
+// Colin Hoffmann (s212711)
+// ELiot Ullmo
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useGraph } from '../../context/GraphContext';
 import React from 'react'
 import '../../css/slider.css'
@@ -37,7 +38,7 @@ const TypeChanger: React.FC = () => {
 
     useEffect(() => {
         setfilter(0);
-        
+
     }, [typeCondition]);
 
     return (
