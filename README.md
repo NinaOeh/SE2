@@ -17,16 +17,16 @@ cd SE2/LiRA-Map-ml
 
 ## 2. Start the Client 
 ```console
-~/LiRA-Map$ cd client
-~/LiRA-Map/client$ npm install
-~/LiRA-Map/client$ npm start
+~/LiRA-Map-ml$ cd client
+~/LiRA-Map-ml/client$ npm install
+~/LiRA-Map-ml/client$ npm start
 ```
 
 ## 3. Set up the Server
 $\rightarrow$ the environment parameters are secret to contributors of the LiRA project. If you are just visiting please use the already build website that is linked in the text above
 ```console
-~/LiRA-Map$ cd server-nest
-~/LiRA-Map/server-nest$ nano .env
+~/LiRA-Map-ml$ cd server-nest
+~/LiRA-Map-ml/server-nest$ nano .env
 ```
 
 ### The .env file must follow the format:
@@ -43,8 +43,8 @@ DB_PWD_FRICTION=<FRICTION-DB-PWD>
 
 ## 4. Start the Server
 ```console
-~/LiRA-Map/server-nest$ npm install
-~/LiRA-Map/server-nest$ npm start
+~/LiRA-Map-ml/server-nest$ npm install
+~/LiRA-Map-ml/server-nest$ npm start
 ```
 
 # Instructions to deploy the application locally in PRODUCTION mode
@@ -59,22 +59,22 @@ npm install -g serve pm2
 ## 2. Clone the LiRA-Map repo
 ```console
 git clone https://github.com/NinaOeh/SE2.git
-cd LiRA-Map
+cd SE2/LiRA-Map-ml
 ```
 
 ## 3. Start the Client 
 ```console
-~/LiRA-Map$ cd client
-~/LiRA-Map/client$ npm install
-~/LiRA-Map/client$ npm run build
-~/LiRA-Map/client$ pm2 serve build 3000 --spa --name client
+~/LiRA-Map-ml$ cd client
+~/LiRA-Map-ml/client$ npm install
+~/LiRA-Map-ml/client$ npm run build
+~/LiRA-Map-ml/client$ pm2 serve build 3000 --spa --name client
 ```
 
 ## 4. Set up the Server
 $\rightarrow$ the environment parameters are secret to contributors of the LiRA project. If you are just visiting please use the already build website that is linked in the text above
 ```console
-~/LiRA-Map$ cd server-nest
-~/LiRA-Map/server-nest$ nano .env
+~/LiRA-Map-ml$ cd server-nest
+~/LiRA-Map-ml/server-nest$ nano .env
 ```
 
 ### The .env file must follow the format:
@@ -91,7 +91,7 @@ DB_PWD_FRICTION=<FRICTION-DB-PWD>
 
 ## 5. Start the Server
 ```console
-~/LiRA-Map/server-nest$ npm install
-~/LiRA-Map/server-nest$ npm run build
-~/LiRA-Map/server-nest$ pm2 start dist/main.js --name server
+~/LiRA-Map-ml/server-nest$ npm install
+~/LiRA-Map-ml/server-nest$ npm run build
+~/LiRA-Map-ml/server-nest$ pm2 start dist/main.js --name server
 ```
