@@ -30,6 +30,7 @@ export class RolesService
         const file = await readFile(this.path, 'utf-8')
         const allMeasurements = JSON.parse(file)
         const allRoles = Object.keys(allMeasurements[0])
+
         return allRoles.map(r => {return <Role> {role: r}});
     }
 

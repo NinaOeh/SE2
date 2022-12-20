@@ -1,3 +1,5 @@
+# created by Nina Oehlckers (s213535)
+
 import argparse
 import os
 import sqlalchemy.exc
@@ -43,11 +45,8 @@ def merge_rl_fl(
     rpm_fl_infos = calculations.get_rpm_info_fl(fl_data)
     rpm_rl_infos = calculations.get_rpm_info_rl(rl_data)
 
-
     rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos if m is not None])
     rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos if m is not None])
-
-    print(f"Dataframe: {rpm_rl_infos_df}")
 
     # concatenate the dataframes, filter by timestamp and interpolate the missing values
     # using pandas included interpolation function
@@ -57,17 +56,12 @@ def merge_rl_fl(
 
     # remove the map matched items
     merged_data = df_inter.dropna(subset = ['rpm_value_rl'])
-    print(f"Interpolated_dataframe with droped na {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     #only keep every 30th item
     merged_data = merged_data.iloc[1::50, :]
-    print(f"merged dataframe, every 30th row kept {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
-
-
 
     geos_of_df = merged_data['Way_id'].unique()
     geos_to_add = list(set(geos_of_df) - set(geos))
-
 
     return merged_data, geos_to_add
 
@@ -119,7 +113,7 @@ def convert_lira_measurements(offset: int,
             legDistance_MapMatched=measurement.legDistance_MapMatched if measurement.legDistance_MapMatched != None else 0,
             FK_Section=measurement.FK_Section if measurement.FK_Section != None else '0',
             PossibleMatchingRoutes=measurement.PossibleMatchingRoutes,
-            WayPoint = measurement.WayPoint,
+            WayPoint = measurement.WayPoint
             )
     # extracting the rpm_rl measurements
     def getrpmrl_measurement(measurement: Measurements) -> lira_db_schema.Measurement:
@@ -147,7 +141,6 @@ def convert_lira_measurements(offset: int,
 
 
     rpmrl_data = pd.merge(rpmrl_df_mapref, rpmrl_df_measurements, how='outer', on='MeasurementId')
-    print(f"RPMRL data shape {rpmrl_data.shape}") 
 
     latest_rl_time = rpmrl_data.sort_values(by='TS_or_Distance')['TS_or_Distance'].iloc[-1] + timedelta(minutes=1)
     earliest_rl_time = rpmrl_data.sort_values(by='TS_or_Distance')['TS_or_Distance'].iloc[0] - timedelta(minutes=1)
@@ -195,7 +188,6 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
         rpm_fl=rpmrl_rpmfl_data['rpm_value_fl'].values, #to_numpy().reshape(len(merge_rl_fl['rpm_value_fl']),1).T
         rpm_rl=rpmrl_rpmfl_data['rpm_value_rl'].values
     )
-    print(f"rpml_rpmfl columns:{rpmrl_rpmfl_data.columns}")
 
     for _,fric_info in rpmrl_rpmfl_data.iterrows():  
         try:
@@ -228,11 +220,9 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
 def update_friction_full_workflow() -> None:
     """
     Queries the desired data from the LiRA database,
+    checks the geometries and generates missing geometries,
     calculates the friction and uploads the data into
     the friction database
-
-    Input:
-
     
     No output
     """
@@ -263,7 +253,7 @@ def update_friction_full_workflow() -> None:
         print(f"Iteration: {iterator}")
         trip_id = args.trip_id
         off = i 
-        print(off)
+
         with lira_db_session.SessionLocal() as session:
             rpmrl_rpmfl_data, rpmrl_size, geos_to_add = convert_lira_measurements(db=session, 
                                                          offset=off, 
@@ -271,11 +261,7 @@ def update_friction_full_workflow() -> None:
                                                          geos=geos,
                                                          trip_id=trip_id)
 
-        #with friction_db_session.friction_engine.connect() as connection:
-        #    connection.execute(sqla.text('CREATE EXTENSION IF NOT EXISTS postgis'))
-        #    connection.commit()
         friction_db_model.Base.metadata.create_all(bind=friction_db_session.friction_engine)
-        print("Here now")
         
         with friction_db_session.SessionLocal() as session:
             if len(geos_to_add)>0:

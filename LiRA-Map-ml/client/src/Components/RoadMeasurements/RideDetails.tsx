@@ -1,7 +1,7 @@
+// modified by Nina Oehlckers (s213535) --> added dropdown, delete measurements, popup modification, enable measurement saving for role
+// modified by Caroline (s194570), Andreas (s194614) --> collapser
 import React, { FC, useState } from "react";
-import createPopup from "../createPopup";
 import addMeasPopup from "./Popup/addMeasurementPopup";
-import modifyMeasurementChoices from "./Popup/modifyMeasurementChoices";
 import Checkbox from "../Checkbox";
 import MetaData from "./MetaData";
 
@@ -10,7 +10,7 @@ import { useMetasCtx } from "../../context/MetasContext";
 import { UseRoleContext } from "../../context/RolesContext";
 
 import { addMeasurement, deleteMeasurement, editMeasurement } from "../../queries/measurements";
-import { MeasProperties, ActiveMeasProperties } from "../../models/properties";
+import { ActiveMeasProperties } from "../../models/properties";
 import { RideMeta } from "../../models/models";
 
 import { RENDERER_MEAS_PROPERTIES } from "../Map/constants";
@@ -27,15 +27,14 @@ interface RideDetailsProps {
 const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 
 	const { selectedMetas } = useMetasCtx()
+	//Author: Nina (s213535)
 	const { selectedRole } = UseRoleContext()
-
-	console.log("We are in RideDetails and look for the selectedRole: ", selectedRole)
 
 	const { measurements, setMeasurements } = useMeasurementsCtx()
 	const [ addChecked, setAddChecked ] = useState<boolean>(false)
 	
 	const add_measurement_popup = addMeasPopup()
-	const modify_measurements_popup = addMeasPopup() //modifyMeasurementChoices()
+	const modify_measurements_popup = addMeasPopup() 
 
 	const edit_Measurement = (meas: ActiveMeasProperties, i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
@@ -52,10 +51,11 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 		)
 	}
 
+	//Author: Nina (s213535)
 	const delete_measurement = ( i: number) => (e: React.MouseEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
-		//removes one element in position i from the state
+		// removes one element in position i from the state
 		const temp = [...measurements]
 		temp.splice(i,1)
 		setMeasurements(temp)
@@ -73,7 +73,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 				// and add the measurement to the measurements.json file
 				addMeasurement(newMeasurement, selectedRole.role);
 			},
-			RENDERER_MEAS_PROPERTIES 
+			{ ...RENDERER_MEAS_PROPERTIES} 
 		)
 	}
 
@@ -94,12 +94,14 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 
 	//shows first all measurements and then the checkbox to add new measurement
     return (
+		//Author: Caroline (s194570), Andreas (s194614) (collapsing function)
 		<div className={`meta-data${isCollapsed? " hidden" : ""}`}>
 			{ measurements.map( (m: ActiveMeasProperties, i: number) =>
 				<MeasCheckbox 
 					key={`meas-checkbox-${i}`}
 					meas={m}
 					selectMeasurement={selectMeasurement(i)}
+					//Author: Nina (s213535)
 					editMeasurement={edit_Measurement(m, i)}
 					deleteMeasurement={delete_measurement(i)}
 					state={m.isActive}

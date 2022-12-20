@@ -1,7 +1,7 @@
-
+//Extended  by: Nina Oehlckers (s213535) -> Download function
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from 'nestjs-knex';
-import { Knex } from 'knex';
+import {  Knex } from 'knex';
 
 import { RideMeta } from './models.rides';
 import { BoundedPath, PointData } from 'src/models';
@@ -61,5 +61,17 @@ export class RidesService
             )
 
         return { path, bounds: { minX, maxX, minY, maxY } }
+    }
+
+    async getRidesDownload(tripId: string, dbName: string ): Promise<any>
+    {   
+        const res = await this.knex
+            .select('*')
+            .from( { public: 'Measurements' } )
+            .where( { 'FK_Trip': tripId, 'T': dbName } )
+            .whereNot( { 'lat': null, 'lon': null } )
+
+        const jsonData = JSON.parse(JSON.stringify(res));
+        return jsonData
     }
 }

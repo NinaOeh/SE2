@@ -1,6 +1,91 @@
-These scripts are used to update the friction database that lies on the server se2-A.compute.dtu.dk from the DTU university. 
-The scripts query data from the lira database that includes all data used so far for the LiRA project. Then the data is used to calculate new
-road conditions values such as the friction. These calculations are then uploaded into a new database. 
+*created by Nina Oehlckers*
+# Friction database Pipeline
 
-Input: 
-    update_database <trip_id> <optional: batch_size>
+These scripts include a stand-alone datapipeline to calculate friction and save friction in an external database.
+These scripts are used to update the friction database that lies on the server se2-A.compute.dtu.dk from the DTU university. 
+The scripts query data from the lira database that includes all data used so far for the LiRA project. Then the data is used to calculate the new
+road conditions values friction. The values are then uploaded into a new database, into the **Friction** table. Furthermore, every
+measurement is mapped to a Way, using the existing **MapReferences* table from the LiRA database and OML quries, to find the corresponding
+way for each measurement. The way geometries are saved in the **Geometry** table of the Friction database. 
+
+
+## Installation and setup
+To use the pipeline, it is assumed that the repository has been downloaded or cloned from git.
+The workflow can then be started after executing the following steps first:
+### 1. Enter the "database_setup" directory through the terminal
+```console
+cd LiRA-Map-ml/database_setup 
+```
+### 2. Setting the required environment variables 
+Setting the required environment variables for the LiRA project in a hidden file called "environment.env" in the database_setup directory. The environment.env file must follow the following format:
+```
+DB_USER=<LIRA-CAR-DB-USER>
+DB_PWD=<LIRA-CAR-DB-PWD>
+DB_USER_VIS=<SERGI-DB-USER>
+DB_PWD_VIS=<SERGI-DB-PWD>
+DB_USER_POSTGIS=<JUN-DB-USER>
+DB_PWD_POSTGIS=<JUN-DB-USER>
+DB_SERVER_LIRA="liradbdev.compute.dtu.dk"
+DB_USER_LIRA=<LIRA-DB-USER>
+DB_PWD_LIRA=<LIRA-DB-USER>
+DB_DATABASE_LIRA="postgres"
+DB_SERVER_FRICTION='localhost'
+DB_PORT_FRICTION='5432'
+DB_USER_FRICTION=<FRICTION-DB-USER>
+DB_PWD_FRICTION=<FRICTION-DB-USER>
+DB_DATABASE_FRICTION='postgres'
+```
+### 3. Install all necessary libraries
+Run "pip install -e ." to install all necessary libaries (as defined in setup.py)
+```console
+pip install -e . 
+```
+
+### 4. Call one of the available four endpoints
+
+## Available endpoints
+The pipeline has 4 available endpoints, that can be called via the terminal:
+
+### update_geometry
+```console
+update_geometry <optional: --batch_size> <optional: --trip_id> <optional: inital_offset>
+```
+
+The update_geometry endpoint updates the **Geometry** table in the LiRA database with all available information from the **MapReferences** table of the LiRA database. The user can optionally set the trip_id, and only upload information of a specific trip. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The state of the upload is logged in the same directory. The intial batchsize is set to 5000 items. The endpoint has the following arguments
+- --batch_size (the batchsize of the upload, defining how much data is queried from the LiRA database at once, must be >=400)
+- --initial_offset (the offset where to start querying from the LiRA database)
+- --trip_id (the TripId of the a single trip)
+
+
+### update_friction
+```console
+update_friction <trip_id> <optional: --batch_size> <optional: inital_offset>
+```
+
+The update_friction endpoint updates the **Friction** table in the LiRA database, calculationg the friction value from the available **Measurements** from the LiRA database. It is linked to the **Geometry** table through the WayId key and it must be ensured, that all WayIds are present in the **Geometry** table before the friction information can be uploaded. The user must set the trip_id, so that only the information from one single trip wil be uploaded at once. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The inital batchsize is set to 5000 items. The state of the upload is logged in the same directory. The endpoint has the following arguments
+- trip_id (the TripId of the a single trip)
+- --batch_size (the batchsize of the upload, defining how much data is queried from the LiRA database at once, must be >=400)
+- --initial_offset (the offset where to start querying from the LiRA database)
+
+### update_friction_full_workflow
+```console
+update_friction_full_workflow <trip_id> <optional: --batch_size> <optional: inital_offset>
+```
+
+The update_friction_full_workflow endpoint updates the **Friction** table in the LiRA database, calculationg the friction value from the available **Measurements** from the LiRA database. Furthermore, it checks for missing WayIds in the **Geometry** table and generates and uploads these, if they are still missing in the **Geometry** table. The user must set the trip_id, so that only the information from one single trip wil be uploaded at once. Also, the batchsize and offset can be manually chosen, in order to improve upload speed and enable to stop the upload at some point and start again from that point at a later time. The inital batchsize is set to 5000 items. The state of the upload is logged in the same directory. The endpoint has the following arguments
+- trip_id (the TripId of the a single trip)
+- --batch_size (the batchsize of the upload, defining how much data is queried from the LiRA database at once, must be >=400)
+- --initial_offset (the offset where to start querying from the LiRA database)
+
+### remove_wayid_outliers
+```console
+remove_wayid_outliers <trip_id>
+```
+
+The remove_wayid_outliers endpoint smoothens the WayId columsn in the **Friction** table in the LiRA database. This is necessary to ensure that less sideways are mapped along a trip. It is done by taking the rolling most frequent WayId out of 7, going through the whole trip. Therefore, this endpoint should only be called when the upload of one Trip has been finished. The endpoint has the following arguments
+- trip_id (the TripId of the a single trip)
+
+## Next steps and possible extensions
+
+The provided pipeline can be extended by calculating the exact fraction of the different ways that was actually used by the car. Furthermore, the lane and direction can be appended. 
+Finally, the provided database can be used to accumulate data of several trips along a specific way, in order to get an actual measure of the road condition. 

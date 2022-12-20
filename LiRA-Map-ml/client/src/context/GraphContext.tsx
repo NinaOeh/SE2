@@ -1,3 +1,5 @@
+//ELiot Ullmo
+
 import {
 	createContext,
 	Dispatch,
@@ -8,7 +10,6 @@ import {
 
 import useMinMaxAxis from "../hooks/useMinMaxAxis";
 import { AddMinMaxFunc, DotHover, RemMinMaxFunc } from "../assets/graph/types";
-import { useEffect } from "react";
 
 
 interface ContextProps {
@@ -29,6 +30,10 @@ interface ContextProps {
 	//todo change when type is ready
 	friction:boolean;
 	setfriction:Dispatch<SetStateAction<boolean>>;
+
+	//todo change when type is ready
+	typeCondition: string;
+	setType: Dispatch<SetStateAction<string>>;
 }
 
 const GraphContext = createContext({} as ContextProps);
@@ -46,6 +51,9 @@ export const GraphProvider = ({ children }: any) => {
 
 	const[friction,setfriction]=useState<boolean>(true);
 
+	const [typeCondition, setType] = useState<string>('IRI');
+
+
 	const { minX, maxX, minY, maxY } = bounds;
 
 	return (
@@ -55,7 +63,8 @@ export const GraphProvider = ({ children }: any) => {
 				addBounds, remBounds,
 				dotHover, setDotHover,
 				filter, setfilter,
-				friction, setfriction
+				friction, setfriction,
+				typeCondition,setType
 			}}
 		>
 			{children}

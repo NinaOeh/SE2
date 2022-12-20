@@ -1,14 +1,15 @@
-#Author: Nina Oehlckers (s213535)
-from lira_db_model import Base, Measurements, MapReferences
+# created by Nina Oehlckers (s213535)
+
+from lira_db_model import Measurements, MapReferences
 import sqlalchemy.orm as orm
 from typing import List, Tuple
 import datetime
-from sqlalchemy import cast
 
 def get_rl_mapref(session: orm.Session, 
                   offset: int,
                   limit: int,
                   trip_id: str) -> List[Tuple[MapReferences, Measurements]]:
+    # Query the MapReference and Measurements data for type obd.rpm_rl from the LiRA database
     return (session.query(MapReferences, Measurements)
         .join(Measurements, Measurements.MeasurementId == MapReferences.FK_MeasurementId, isouter=True)
         .where(MapReferences.lat_MapMatched != None,
@@ -23,6 +24,7 @@ def get_rl_mapref(session: orm.Session,
 
 def get_fl(session: orm.Session, latest_time: datetime.datetime, 
            earliest_time: datetime.datetime, trip_id: str) -> List[Measurements]:
+    # Query the MapReference and Measurements data for type obd.rpm_fl from the LiRA database
     return(session.query(Measurements)
         .where(
             Measurements.T == "obd.rpm_fl",
@@ -35,18 +37,10 @@ def get_fl(session: orm.Session, latest_time: datetime.datetime,
         .all()
         )
 
-def get_map_ref(session: orm.Session,
-                offset: int,
-                limit: int) -> List[MapReferences]:
-    return (session.query(MapReferences)
-        .where(MapReferences.lat_MapMatched != None,
-            MapReferences.lon_MapMatched != None,
-            MapReferences.PossibleMatchingRoutes != None)
-        .limit(limit).offset(offset).all()
-        )
 def get_map_ref_red(session: orm.Session,
                 offset: int,
                 limit: int) -> List[MapReferences]:
+    # Query a selection of MapReference columns from the LiRA database
     return (session.query(MapReferences.PossibleMatchingRoutes, MapReferences.direction, MapReferences.lane)
         .where(MapReferences.lat_MapMatched != None,
             MapReferences.lon_MapMatched != None,
@@ -58,6 +52,7 @@ def get_map_ref_red_pertrip(session: orm.Session,
                 trip_id: str,
                 offset: int,
                 limit: int) -> List[MapReferences]:
+    # Query a selection of MapReference columns for one specified trip from the LiRA database
     return (session.query(MapReferences.PossibleMatchingRoutes, MapReferences.direction, MapReferences.lane)
         .join(Measurements, Measurements.MeasurementId == MapReferences.FK_MeasurementId, isouter=True)
         .where(MapReferences.lat_MapMatched != None,

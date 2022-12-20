@@ -66,6 +66,11 @@
     color: lightgrey;
 }
 
+/*Author: Caroline (s194570), Andreas (s194614)*/
+.ride-card-container.hovered-meta {
+    border: 1px solid white;
+}
+
 .ride-card-container > .jsx-parser > b {
     color: white;
     font-size: 1.1em !important;

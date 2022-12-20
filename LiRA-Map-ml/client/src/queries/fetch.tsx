@@ -1,16 +1,12 @@
-
+// modified and extended by Nina Oehlckers (s213535)
 import axios, { AxiosResponse } from 'axios'
-import { LinearScale } from 'chart.js'
 
 const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-const devURL = 'http://localhost:3002'
-// const devURL = 'http://se2-A.compute.dtu.dk:3002' 
+const devURL = 'http://se2-A.compute.dtu.dk:3002'
 const prodURL = 'http://se2-A.compute.dtu.dk:3002'
-const VMURL = 'http://se2-A.compute.dtu.dk:3002'
 
 const getPath = (p: string) => ( development ? devURL : prodURL ) + p
-const getMPath = (p: string) => ( development ? devURL : VMURL ) + p
 
 export async function asyncPost<T>(path: string, obj: object ): Promise<AxiosResponse<T, any>>
 {
@@ -34,7 +30,7 @@ export function get<T>(path: string, callback: (data: T) => void): void
 export function getFriction<T>(path: string, callback: (data: T) => void): void 
 {   
 
-    const p=VMURL +path
+    const p=prodURL +path
     fetch(p)
     .then(res => res.json())
     .then(data => callback(data));
@@ -43,33 +39,26 @@ export function getFriction<T>(path: string, callback: (data: T) => void): void
 
 export function getFrict<T>(path: string, obj: object, callback: (data: T) => void): void 
 {
-    const p=VMURL +path
+    const p=prodURL +path
     fetch(p)
     .then(res=>res.json())
     .then(data=>callback(data));
-
-
-
-
-
 }
 
 
-
-
-
+//Nina Oehlckers (s213535)
 export function getRoleMeas<T>(path: string, role: string, callback: (data: T) => void): void 
 {
     path = path + "/"+role
-    fetch(getMPath(path))
+    fetch(getPath(path))
         .then(res => res.json())
         .then(data => callback(data));
 }
-
+//Nina Oehlckers (s213535)
 export function getR<T>(path: string, callback: (data: T) => void): void 
 {   
-    console.log(getMPath(path))
-    fetch(getMPath(path))
+    console.log(getPath(path))
+    fetch(getPath(path))
         .then(res => res.json())
         .then(data => callback(data));
 }
@@ -82,3 +71,35 @@ export function post<T>(path: string, obj: object, callback: (data: T) => void):
 export const put = ( path: string, obj: object ): void => {
     axios.put( getPath(path), { params: obj } )
 }  
+
+//Nina Oehlckers (s213535)
+export async function download<T>(path: string, maxlat: number, minlat: number, maxlon: number, minlon: number, type:string)
+{   
+    path = path+`?maxlat=${maxlat}&maxlon=${maxlon}&minlon=${minlon}&minlat=${minlat}&type=${type}`
+    console.log(getPath(path))
+    const response = await fetch(getPath(path))
+    const data = await response.json();
+    console.log(data)
+    return data
+}
+//Nina Oehlckers (s213535)
+export async function friction_download<T>(path: string, maxlat: number, minlat: number, maxlon: number, minlon: number)
+{   
+    path = path+`?maxlat=${maxlat}&maxlon=${maxlon}&minlon=${minlon}&minlat=${minlat}`
+    console.log(getPath(path))
+    const response = await fetch(getPath(path))
+    const data = await response.json();
+    console.log(data)
+    return data
+}
+
+//Nina Oehlckers (s213535)
+export async function ride_download<T>(path: string, tripId: string, dbName: string)
+{   
+    path = path+`?tripId=${tripId}&dbName=${dbName}`
+    console.log(getPath(path))
+    const response = await fetch(getPath(path))
+    const data = await response.json();
+    console.log(data)
+    return data
+}

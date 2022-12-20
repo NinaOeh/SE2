@@ -1,5 +1,7 @@
+# created by Nina Oehlckers (s213535)
+# extended by Colin Hoffmann (s212711)
+
 import pandas as pd
-import pydantic
 from typing import List, Tuple
 import friction_db_schema
 import json
@@ -8,14 +10,10 @@ import scripts.osm_query as osm_query
 from shapely.geometry import LineString
 from datetime import datetime
 
-'''
-    comments: we have to think of a smart and good way of what data we want to extract from the old
-    database and insert into the new database! 
-'''
-
 
 def estimateFrictionCoefficient(rpm_rl: np.ndarray, rpm_fl: np.ndarray) -> np.ndarray:
     '''
+        Authored by Colin Hoffmann (s212711)
         Calculate the estimated friction coefficient
     '''
     r, beta_fl, beta_0 = 0.31, 3, 1
@@ -26,7 +24,9 @@ def estimateFrictionCoefficient(rpm_rl: np.ndarray, rpm_fl: np.ndarray) -> np.nd
     return abs(mu)
 
 def linear_interpolation(df, x, searchsort):
-    #y(x)  =  y1  +  (x – x1)  \frac{(y2 – y1) }{ (x2 – x1)}
+    '''
+        Do a linear interpolation
+    '''
     df_int = []
     for i in range(len(searchsort)-1):
         interpolated_rpm = df["rpm_value_fl"].iloc[searchsort[i]] + (x.iloc[i]-df["TS_or_Distance"].iloc[searchsort[i]])*((df["rpm_value_fl"].iloc[searchsort[i+1]]-df["rpm_value_fl"].iloc[searchsort[i]])/(df["TS_or_Distance"].iloc[searchsort[i+1]]-df["TS_or_Distance"].iloc[searchsort[i]]))
@@ -57,6 +57,9 @@ def extract_waypointindex(message_string: str) -> float:
         return 'no waypoint index'
 
 def extract_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]:
+    '''
+        Map exact wayID with OSM
+    '''
     try:
         way_point_index = extract_waypointindex(way_info)
         if way_point_index == 'no waypoint index':
@@ -104,6 +107,9 @@ def extract_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]:
         return exc
 
 def extract_node_along_way(way_id: str):
+    '''
+        Query all nodes along a way from OSM
+    '''
     try:
         nodes, wayPointName = osm_query.get_nodes_on_single_way(way_id)
         geoList = []
@@ -112,10 +118,12 @@ def extract_node_along_way(way_id: str):
             geoList.append(point)
         return wayPointName, LineString(geoList)
     except Exception as exc:
-        print(way_id)
         return [exc]
 
 def extract_only_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]:
+    '''
+        Only extract node id
+    '''
     way_point_index = extract_waypointindex(way_info)
     if way_point_index == 'no waypoint index':
         way_point_index = 0
@@ -126,73 +134,23 @@ def extract_only_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]
         Ways1 = osm_query.get_ways(nodes[0])
         Ways2 = osm_query.get_ways(nodes[1])
         Way_id = list(set(Ways1[0]) & set(Ways2[0]))
-        if len(Way_id) == 1:
-            Way_id = str(Way_id[0])
-        else:
-            Way_id = "Several possible ways: "+str(Way_id)
-        
+        Way_id = str(Way_id[0])
         return [Node_id, Way_id]
+        
     except Exception as exc:
         return [exc]
 
 
-
-# def get_friction_info(friction_df: pd.DataFrame) -> List[friction_db_schema.MeasurementInfo]:
-#     def parse(row):
-#         return friction_db_schema.MeasurementInfo(
-#             MeasurementId=row['MeasurementId'],
-#             T=row['T'],
-#             friction_value=calculate_friction(row['message']),
-#             message=row['message']
-#         )
-#     return (parse(row) for _, row in friction_df.iterrows())
-
-# def get_rpm_info_rl(df: pd.DataFrame) -> List[friction_db_schema.RPMs]:
-#     def parse(row):
-#         rpm = extract_measurement_value(row['message'])
-#         if rpm!=None:
-#             print("Here we are")
-#             return friction_db_schema.RPMs(
-#                 MeasurementId=row['MeasurementId'],
-#                 TS_or_Distance=row['TS_or_Distance'],
-#                 lat=row['lat'],
-#                 lon=row['lon'],
-#                 rpm_value_rl=extract_measurement_value(row['message']),
-#                 MapReferenceId=row['MapReferenceId'],
-#                 lat_MapMatched=row['lat_MapMatched'],
-#                 lon_MapMatched=row['lon_MapMatched'],
-#                 wayPointName=row['wayPointName'],
-#                 WayPoint=row['WayPoint'],
-#                 FK_Trip=row['FK_Trip']
-#             )
-#         else:
-#             pass
-#     return (parse(row) for _, row in df.iterrows())
-
-# def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPMsReduced]:
-#     def parse(row):
-#         rpm = extract_measurement_value(row['message'])
-#         if rpm!=None:
-#             return friction_db_schema.RPMsReduced(
-#                 MeasurementId=row['MeasurementId'],
-#                 TS_or_Distance=row['TS_or_Distance'],
-#                 rpm_value_fl=extract_measurement_value(row['message']),
-#                 FK_Trip=row['FK_Trip']
-#             )
-#         else:
-#             pass
-#     return (parse(row) for _, row in df.iterrows())
-
-
 def get_rpm_info_rl1(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl1]:
+    '''
+        get info of rpm rl (with map reference informations)
+    '''
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
             if 'Expecting value:' in extract_Wayid(row['PossibleMatchingRoutes']):
-                print(f"Here we had an error. The row will be ignored.")
                 pass
             else:
-                print('Way id found')
                 node_id, way_id, wayPointName, geoList= extract_Wayid(row['PossibleMatchingRoutes'])
             
                 return friction_db_schema.RPM_rl(
@@ -219,6 +177,9 @@ def get_rpm_info_rl1(df: pd.DataFrame) -> List[friction_db_schema.RPM_rl1]:
 
 
 def get_rpm_info_rl(df: pd.DataFrame) -> List[List[friction_db_schema.RPM_rl]]:
+    '''
+        get info of rpm rl (with map reference informations)
+    '''
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
@@ -240,13 +201,15 @@ def get_rpm_info_rl(df: pd.DataFrame) -> List[List[friction_db_schema.RPM_rl]]:
                 )
             
             else:
-                print(f"Here we had an error. The row will be ignored.")
                 return
         else:
-            pass
+            return
     return (parse(row) for _, row in df.iterrows())
 
 def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
+    '''
+        get info of rpm fl (without map reference information)
+    '''
     def parse(row):
         rpm = extract_measurement_value(row['message'])
         if rpm!=None:
@@ -260,13 +223,15 @@ def get_rpm_info_fl(df: pd.DataFrame) -> List[friction_db_schema.RPM_fl]:
                 FK_Trip=row['FK_Trip']
             )
         else:
-            pass
+            return
     return (parse(row) for _, row in df.iterrows())
 
 def get_geometry_info(df: pd.DataFrame) -> List[friction_db_schema.Geometry]:
+    '''
+        get info for geometry upload from map reference data
+    '''
     def parse(row):
         if 'Expecting value:' in str(extract_Wayid(row['PossibleMatchingRoutes'], row['WayPoint'])):
-            print(f"Here we had an error. The row will be ignored.")
             return
         else:
             node_id, way_id, wayPointName, geoList= extract_Wayid(row['PossibleMatchingRoutes'])
@@ -280,10 +245,14 @@ def get_geometry_info(df: pd.DataFrame) -> List[friction_db_schema.Geometry]:
                     dateUploaded=datetime.now()
                 )
             else:
-                pass
+                return
     return (parse(row) for _, row in df.iterrows())
 
 def get_geometry_info_by_wayid(geos: List[str]) -> List[friction_db_schema.Geometry]:
+    '''
+        get info for geometry upload from individual way ids
+        can be expended by lane and direction
+    '''
     def parse(way_id):
         try:
             wayPointName, geoList= extract_node_along_way(way_id)

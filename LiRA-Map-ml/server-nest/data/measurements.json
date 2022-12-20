@@ -1,43 +1,6 @@
 [
     {
-        "Paul": [
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            }
-        ],
-        "Hans": [
+        "": [
             {
                 "rendererName": "hotline",
                 "dilatationFactor": 1,
@@ -75,6 +38,1867 @@
             },
             {
                 "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.acc_long",
+                "name": "Longitudal Acceleration",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "tripId": 0,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "tripId": 0,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "tripId": 0,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false,
+                "isHovered": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            }
+        ],
+        "Road Maintainer": [
+            {
+                "rendererName": "hotline",
+                "dilatationFactor": 1,
+                "arrowHead": 0,
+                "min": 0,
+                "max": 10,
+                "width": 4,
+                "weight": 4,
+                "color": "red",
+                "opacity": 1,
+                "palette": [
+                    {
+                        "r": 0,
+                        "g": 160,
+                        "b": 0,
+                        "t": 0
+                    },
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 0,
+                        "t": 0.5
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0,
+                        "t": 1
+                    }
+                ],
+                "dbName": "obd.rpm",
+                "name": "Engine rates per minute",
+                "hasValue": true,
+                "isActive": false
+            },
+            {
+                "rendererName": "line",
                 "dilatationFactor": 1,
                 "arrowHead": 0,
                 "min": 0,
@@ -107,11 +1931,9 @@
                 "name": "Acceleration",
                 "hasValue": true,
                 "isActive": false
-            }
-        ],
-        "Hallo": [
+            },
             {
-                "rendererName": "hotline",
+                "rendererName": "circles",
                 "dilatationFactor": 1,
                 "arrowHead": 0,
                 "min": 0,
@@ -144,46 +1966,9 @@
                 "name": "Longitudal Acceleration",
                 "hasValue": true,
                 "isActive": false
-            }
-        ],
-        "Hallihallo": [
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
             },
             {
-                "rendererName": "hotline",
+                "rendererName": "rectangles",
                 "dilatationFactor": 1,
                 "arrowHead": 0,
                 "min": 0,
@@ -212,51 +1997,13 @@
                         "t": 1
                     }
                 ],
-                "dbName": "obd.brk_trq_req_el",
-                "name": "Electric brake torque",
-                "hasValue": true,
-                "isActive": false
-            }
-        ],
-        "hihihi": [],
-        "": [
-            {
-                "rendererName": "line",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "#eb144c",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
+                "dbName": "obd.brk_trq_req_dvr",
+                "name": "Driver brake torque",
                 "hasValue": true,
                 "isActive": true
             },
             {
-                "rendererName": "hotline",
+                "rendererName": "rectangles",
                 "dilatationFactor": 1,
                 "arrowHead": 0,
                 "min": 0,
@@ -268,14 +2015,14 @@
                 "palette": [
                     {
                         "r": 0,
-                        "g": 160,
-                        "b": 0,
+                        "g": 0,
+                        "b": 255,
                         "t": 0
                     },
                     {
                         "r": 255,
                         "g": 255,
-                        "b": 0,
+                        "b": 255,
                         "t": 0.5
                     },
                     {
@@ -285,571 +2032,14 @@
                         "t": 1
                     }
                 ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.acc_long",
-                "name": "Longitudal Acceleration",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
-                "hasValue": true,
-                "isActive": false
-            },
-            {
-                "rendererName": "hotline",
-                "dilatationFactor": 1,
-                "arrowHead": 0,
-                "min": 0,
-                "max": 10,
-                "width": 4,
-                "weight": 4,
-                "color": "red",
-                "opacity": 1,
-                "palette": [
-                    {
-                        "r": 0,
-                        "g": 160,
-                        "b": 0,
-                        "t": 0
-                    },
-                    {
-                        "r": 255,
-                        "g": 255,
-                        "b": 0,
-                        "t": 0.5
-                    },
-                    {
-                        "r": 255,
-                        "g": 0,
-                        "b": 0,
-                        "t": 1
-                    }
-                ],
-                "dbName": "obd.rpm",
-                "name": "Engine rates per minute",
+                "dbName": "obd.strg_acc",
+                "name": "Steering Acceleration",
                 "hasValue": true,
                 "isActive": false
             }
-        ]
+        ],
+        "Road Worker": [],
+        "Project Manager XY": [],
+        "Director": []
     }
 ]

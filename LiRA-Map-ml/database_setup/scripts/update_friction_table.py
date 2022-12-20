@@ -1,13 +1,13 @@
+# created by Nina Oehlckers (s213535)
+
 import argparse
-import os
 import sqlalchemy.exc
 import os
 from typing import List
 from fastapi import Depends
 import sqlalchemy.orm as orm
 import pandas as pd
-from datetime import datetime, timedelta
-import psycopg2
+from datetime import timedelta
 
 
 from lira_db_model import Measurements, MapReferences
@@ -18,7 +18,6 @@ import friction_db_session
 import friction_db_crud
 import friction_db_model
 from scripts import calculations
-import geoalchemy2.shape as ga_shape
 import logging
 
 def merge_rl_fl(
@@ -43,8 +42,6 @@ def merge_rl_fl(
     rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos if m is not None])
     rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos if m is not None])
 
-    print(f"Dataframe: {rpm_rl_infos_df}")
-
     # concatenate the dataframes, filter by timestamp and interpolate the missing values
     # using pandas included interpolation function
     df_inter = pd.concat([rpm_fl_infos_df, rpm_rl_infos_df], ignore_index = True)
@@ -53,13 +50,9 @@ def merge_rl_fl(
 
     # remove the map matched items
     merged_data = df_inter.dropna(subset = ['rpm_value_rl'])
-    print(f"Interpolated_dataframe with droped na {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     #only keep every 30th item
     merged_data = merged_data.iloc[1::50, :]
-    print(f"merged dataframe, every 30th row kept {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
-
-    print(merged_data)
 
     return merged_data
 
@@ -90,17 +83,19 @@ def convert_lira_measurements(offset: int,
             MapReferenceId=measurement.MapReferenceId,
             lat_MapMatched=measurement.lat_MapMatched,
             lon_MapMatched=measurement.lon_MapMatched,
-            MeasurementId=measurement.FK_MeasurementId,
+            MeasurementId=str(measurement.FK_MeasurementId),
             legDistance_MapMatched=measurement.legDistance_MapMatched if measurement.legDistance_MapMatched != None else 0,
             FK_Section=measurement.FK_Section if measurement.FK_Section != None else '0',
             PossibleMatchingRoutes=measurement.PossibleMatchingRoutes,
             WayPoint = measurement.WayPoint,
+            lane=measurement.lane if measurement.lane != None else '0',
+            direction=measurement.direction if measurement.direction != None else '0'
             )
     # extracting the rpm_rl measurements
     def getrpmrl_measurement(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
         return lira_db_schema.Measurement(
-            MeasurementId=measurement.MeasurementId,
+            MeasurementId=str(measurement.MeasurementId),
             T=measurement.T,
             TS_or_Distance=measurement.TS_or_Distance,
             lat=measurement.lat,
@@ -122,7 +117,6 @@ def convert_lira_measurements(offset: int,
 
 
     rpmrl_data = pd.merge(rpmrl_df_mapref, rpmrl_df_measurements, how='outer', on='MeasurementId')
-    print(f"RPMRL data shape {rpmrl_data.shape}") 
 
     latest_rl_time = rpmrl_data.sort_values(by='TS_or_Distance')['TS_or_Distance'].iloc[-1] + timedelta(minutes=1)
     earliest_rl_time = rpmrl_data.sort_values(by='TS_or_Distance')['TS_or_Distance'].iloc[0] - timedelta(minutes=1)
@@ -131,7 +125,7 @@ def convert_lira_measurements(offset: int,
     def getrpmfl(measurement: Measurements) -> lira_db_schema.Measurement:
         #parsing the measurements into the new measurements schema
         return lira_db_schema.Measurement(
-            MeasurementId=measurement.MeasurementId,
+            MeasurementId=str(measurement.MeasurementId),
             T=measurement.T,
             TS_or_Distance=measurement.TS_or_Distance,
             lat=measurement.lat,
@@ -167,10 +161,9 @@ def upload_to_friction_database(db: orm.Session = Depends(lira_db_session.get_db
     '''
 
     rpmrl_rpmfl_data['friction'] = calculations.estimateFrictionCoefficient(
-        rpm_fl=rpmrl_rpmfl_data['rpm_value_fl'].values, #to_numpy().reshape(len(merge_rl_fl['rpm_value_fl']),1).T
+        rpm_fl=rpmrl_rpmfl_data['rpm_value_fl'].values, 
         rpm_rl=rpmrl_rpmfl_data['rpm_value_rl'].values
     )
-    print(f"rpml_rpmfl columns:{rpmrl_rpmfl_data.columns}")
 
     
     for _,fric_info in rpmrl_rpmfl_data.iterrows():  
@@ -207,8 +200,6 @@ def update_friction() -> None:
     calculates the friction and uploads the data into
     the friction database
 
-    Input:
-
     
     No output
     """
@@ -234,18 +225,14 @@ def update_friction() -> None:
         print(f"Iteration: {iterator}")
         trip_id = args.trip_id
         off = i 
-        print(off)
+
         with lira_db_session.SessionLocal() as session:
             rpmrl_rpmfl_data, rpmrl_size = convert_lira_measurements(db=session, 
                                                          offset=off, 
                                                          limit=args.batch_size,
                                                          trip_id=trip_id)
 
-        #with friction_db_session.friction_engine.connect() as connection:
-        #    connection.execute(sqla.text('CREATE EXTENSION IF NOT EXISTS postgis'))
-        #    connection.commit()
         friction_db_model.Base.metadata.create_all(bind=friction_db_session.friction_engine)
-        print("Here now")
         
         with friction_db_session.SessionLocal() as session:
             upload_to_friction_database(

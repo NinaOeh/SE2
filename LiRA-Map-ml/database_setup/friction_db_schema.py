@@ -1,7 +1,7 @@
-#Author: Nina Oehlckers (s213535)
+# created by Nina Oehlckers (s213535)
+
 import pydantic
 import datetime
-from pydantic.datetime_parse import parse_datetime
 import shapely.geometry
 
 

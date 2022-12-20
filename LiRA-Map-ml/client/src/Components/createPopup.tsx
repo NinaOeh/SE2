@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Swal, { SweetAlertOptions, SweetAlertResult } from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -11,7 +10,7 @@ const createPopup = <T,>() => {
         return swal.fire( { 
             ...options, 
             customClass: { 
-                popup: 'sweetalert-popup', //'sweetalert-popup'
+                popup: 'sweetalert-popup', 
                 title: 'sweetalert-title'
             } 
         } )

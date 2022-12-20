@@ -1,41 +1,45 @@
-import { FC, useEffect, useState, ReactNode, useCallback } from "react";
+// modified by Caroline (s194570), Andreas (s194614) --> Code regarding hovered meta
+import { FC, useEffect, useState, ReactNode } from "react";
 import { List, ListRowRenderer } from "react-virtualized";
-import { RiDeleteBack2Line } from 'react-icons/ri'
 
 import Checkbox from '../Checkbox';
-import SpinLoader from "../../assets/SpinLoader";
 import { parsePositionDisplay } from '../../assets/DataParsers';
 
-import { RideMeta, TripsOptions, PositionDisplay } from '../../models/models'
+import { RideMeta, TripsOptions } from '../../models/models'
 
 import '../../css/ridecard.css'
 import '../../css/spinner.css'
 import { useMetasCtx } from "../../context/MetasContext";
 import OptionsSelector from "./OptionsSelector";
-import { unmountComponentAtNode } from "react-dom";
 
+//Code regarding hovered meta
 
 interface CardsProps {
     showMetas: SelectMeta[]
     onClick: (meta: SelectMeta, i: number, isChecked: boolean) => void;
     onMouseEnter?: (i: number, isChecked: boolean) => void;
     onMouseLeave?: (i: number, isChecked: boolean) => void;
+    //Author: Caroline (s194570), Andreas (s194614)
+    hoveredMeta?: RideMeta;
 }
 
-const Cards: FC<CardsProps> = ( { showMetas, onClick, onMouseEnter, onMouseLeave } ) => {  
+const Cards: FC<CardsProps> = ( { showMetas, onClick, onMouseEnter, onMouseLeave, hoveredMeta } ) => {  
     const renderRow: ListRowRenderer = ( { index, key, style } ): ReactNode => {
         const meta = showMetas[index];
 
+        //Author: Caroline (s194570), Andreas (s194614)
         const positionDisplays = parsePositionDisplay(meta.StartPositionDisplay, meta.EndPositionDisplay);
-
+        const isHoveredMeta = hoveredMeta && hoveredMeta.TaskId == meta.TaskId;
         return <div key={key} style={style}>
             <Checkbox 
                 forceState={meta.selected}
-                className="ride-card-container"
+                //Author: Caroline (s194570), Andreas (s194614)
+                className={`ride-card-container${isHoveredMeta? " hovered-meta" : ""}`}
                 html={<div>{positionDisplays.StartPosition + " -> "}<br/>{positionDisplays.EndPosition}<br/>{new Date(meta.Created_Date).toLocaleDateString()}</div>}
                 onClick={(isChecked) => {
                     onClick(meta, index, isChecked) 
                 }}
+                //Author: Caroline (s194570), Andreas (s194614)
                 onMouseEnter={(isChecked) => {
                     onMouseEnter!(index, isChecked);
                 }}
@@ -54,6 +58,7 @@ const Cards: FC<CardsProps> = ( { showMetas, onClick, onMouseEnter, onMouseLeave
         rowCount={showMetas.length} /> 
 }
 
+//Author: Caroline (s194570), Andreas (s194614)
 interface SelectMeta extends RideMeta {
     selected: boolean;
 }
@@ -64,13 +69,17 @@ interface RideCardProps {
 
 const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {   
     
-    const { metas, selectedMetas, setSelectedMetas } = useMetasCtx();
+    const { metas, selectedMetas, setSelectedMetas, hoveredMeta, setHoveredMeta } = useMetasCtx();
 
     const [showMetas, setShowMetas] = useState<SelectMeta[]>([])
-
+    
     useEffect( () => {
         setShowMetas( metas.map(m => ({...m, selected: false})) )
     }, [metas])
+    
+    useEffect( () => {
+        console.log("this is triggered from mouseoverevent, hovered meta is: ", hoveredMeta);
+    }, [hoveredMeta]);
 
     const onChange = ( { search, startDate, endDate, reversed }: TripsOptions) => {
         const temp: SelectMeta[] = metas
@@ -78,6 +87,7 @@ const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {
                 const inSearch = search === "" || meta.TaskId.toString().includes(search)
                 const date = new Date(meta.Created_Date).getTime()
                 const inDate = date >= startDate.getTime() && date <= endDate.getTime()
+                //Author: Caroline (s194570), Andreas (s194614)
                 const inStartPositionDisplay = meta.StartPositionDisplay.toLowerCase().includes(search.toLowerCase());
                 return (inSearch || inStartPositionDisplay) && inDate
             } )
@@ -93,7 +103,7 @@ const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {
         temp[i].selected = isChecked
         setShowMetas(temp)
 
-        //Could potentially add function if isChecked==true for at skifte farve fra hover-farve til sort.
+        //Author: Caroline (s194570), Andreas (s194614)
         if(isChecked) {
             const res = selectedMetas.find(elem => elem.TripId === temp[i].TripId);
             if(res !== undefined){
@@ -106,6 +116,7 @@ const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {
         return
     }
 
+    //Author: Caroline (s194570), Andreas (s194614)
     const onMouseEnter = (i: number, isChecked: boolean) => {
         const temp = [...showMetas][i];
         const res = selectedMetas.find(elem => elem.TripId === temp.TripId);
@@ -114,6 +125,7 @@ const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {
         }
     }
 
+    //Author: Caroline (s194570), Andreas (s194614)
     const onMouseLeave = (i: number, isChecked: boolean) => {
         const temp = [...showMetas][i];
         if(!isChecked){
@@ -122,9 +134,10 @@ const RideCards: FC<RideCardProps> = ( {isCollapsed} ) => {
     }
     
     return (
+        //Author: Caroline (s194570), Andreas (s194614) (collapsing function)
         <div className={`ride-list${isCollapsed? " hidden" : ""}`}>
             <OptionsSelector onChange={onChange}/>
-            <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>            
+            <Cards showMetas={showMetas} onClick={onClick} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} hoveredMeta={hoveredMeta}/>            
         </div>
     )
 }

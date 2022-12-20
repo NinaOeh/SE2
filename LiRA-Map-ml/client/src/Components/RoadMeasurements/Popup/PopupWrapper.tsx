@@ -1,3 +1,4 @@
+// Modified by Nina Oehlckers (s213535) -> multiple changes of setup, inclusing of dropdown to search measurements
 import React, { FC, useState, useRef } from "react";
 import { TwitterPicker } from "react-color";
 import { Gradient } from "react-gradient-hook";
@@ -6,10 +7,9 @@ import { RendererName, rendererTypes } from "../../../models/renderers";
 
 import Checkbox from "../../Checkbox";
 import { ActiveMeasProperties } from "../../../models/properties";
-import { MeasurementDatabases, MeasurementsArray } from "../../../models/measurements";
-import  RadioMeasurements  from "../RadioButtons/RadioButton"
+import { MeasurementDatabases } from "../../../models/measurements";
 
-import Dropdown from "../Dropdown/Dropdown";
+import Dropdown from "./Dropdown";
 
 
 interface IPopupWrapper {
@@ -26,25 +26,14 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
         const temp = { ...state } as any;
         temp[key] = val;
         if (key == "dbName"){
-            console.log("key here :)))", key, Object.keys(MeasurementDatabases)[Object.values(MeasurementDatabases).indexOf(val)])
             temp["name"] = Object.keys(MeasurementDatabases)[Object.values(MeasurementDatabases).indexOf(val)];
         }
         setState(temp)
         setOptions(temp)
     }
 
-    const inputChange = (key: keyof ActiveMeasProperties) => ({target}: any) => update(key)(target.value)
-
-    /*Functions necessary for the RadioItem Menu */
-    const [selectRadio, setSelectRadio] = useState<string>("");
-    const RadioSelection = (measurement: string): void => {
-        setSelectRadio(measurement);
-        update('dbName')(Object.values(MeasurementDatabases)[Object.keys(MeasurementDatabases).indexOf(measurement)])
-        update('name')(measurement)
-    };
-
-
     /*Functions necessary for the dropdown Menu */
+    //Author: Nina (s213535)
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectMeasurement, setSelectMeasurement] = useState<string>(name);
     
@@ -65,12 +54,11 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
       clearInput();
     };
 
-    /*Functions necessray for the search*/
+    /*Functions necessary for the search*/
+    //Author: Nina (s213535)
     const [filteredData, setFilteredData] = useState<string[]>(Object.keys(MeasurementDatabases))
     const [wordEntered, setWordEntered] = useState<string>("")
-    //const inputRef: React.RefObject<HTMLInputElement> =
-    //    useRef<HTMLInputElement>(null)
-    //window.addEventListener("load", () => inputRef.current?.focus())
+
     const handleFilter = ({
         target,
       }: React.ChangeEvent<HTMLInputElement>): void => {
@@ -88,7 +76,6 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
     const clearInput = (): void => {
         setFilteredData(Object.keys(MeasurementDatabases))
         setWordEntered("")
-        //inputRef.current?.focus()
     }
     
 
@@ -97,8 +84,6 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
     //.map populates the function with new values (like lambda function in python=)
     //div classes defined in popup.css
     /**onClick now updates the dbName based on the value in the enum that lists the possible measurements. **/
-    //<input className="sweetalert-input" placeholder="Hello Sun" type='text' defaultValue={dbName} onChange={inputChange('dbName')}/>
-    {/*ref={inputRef}*/}
     return (
         <div className="popup-wrapper" id="popupwrapper">    
             <div>
@@ -132,7 +117,7 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
                         
                             {showDropDown && (
                             <Dropdown
-                                measurements={filteredData} //cities
+                                measurements={filteredData} 
                                 showDropDown={false}
                                 toggleDropDown={(): void => toggleDropDown()}
                                 measurementSelection={measurementSelection}
@@ -141,8 +126,6 @@ const PopupWrapper: FC<IPopupWrapper> = ( { defaultOptions, setOptions } ) => {
                     </button>
                     </>
                     </div>
-                    
-                    {/*<input className="sweetalert-input" placeholder="Name" type='text' defaultValue={name} onChange={inputChange('name')}/>*/}
                 </div>
             {/*!--- End of left column ---*/}
             </div>

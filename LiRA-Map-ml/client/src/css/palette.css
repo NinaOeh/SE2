@@ -24,16 +24,17 @@
     /**size of the icon**/
     border-radius: 10px;
     /** cest de la merde**/
-    margin: 20px;
+    margin: 10px;
     /** marge de gauche**/
     background: var(--background);
     cursor: pointer;
-    width: 2cm;
-    height: 2cm;
-    top: 9cm;
-    display: flex;
+    width: 1cm;
+    height: 1cm;
+    /*top: 10cm;
+    display: flex;*/
     align-items: center;
     justify-content: center;
+    font-size: 25px;
 }
 
 .palette-hover:hover {

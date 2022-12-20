@@ -1,3 +1,4 @@
+//modified by Caroline (s194570), Andreas (s194614), Nina (s213535)
 import { FC, useEffect, useState } from "react";
 
 import { useMeasurementsCtx } from "../../context/MeasurementsContext";
@@ -5,34 +6,38 @@ import { GraphProvider } from "../../context/GraphContext";
 import { useMetasCtx } from "../../context/MetasContext";
 
 import { ActiveMeasProperties } from "../../models/properties";
-import { MeasMetaPath, Path, PointData } from "../../models/path";
+import { MeasMetaPath, PointData } from "../../models/path";
 
-import { DotHover, GraphData, GraphPoint } from "../../assets/graph/types";
+import { GraphData, GraphPoint } from "../../assets/graph/types";
 
-import { getRide } from "../../queries/rides";
+import { getRide, getRide_Download } from "../../queries/rides";
 
 import Graph from "../Graph/Graph";
 import RidesMap from "./RidesMap";
 import usePopup from "../createPopup";
-import { Popup } from "Leaflet.MultiOptionsPolyline";
 import { PopupFunc } from "../../models/popup"
 import { RendererName } from "../../models/renderers";
 import Checkbox from "../Checkbox";
+import Downloader from "../RoadMeasurements/DownloadData";
 
 const Rides: FC = () => {
     
-    const { selectedMetas } = useMetasCtx()
+    const { selectedMetas, setHoveredMeta } = useMetasCtx()
     const { selectedMeasurements } = useMeasurementsCtx()
 
     const [ paths, setPaths ] = useState<MeasMetaPath>({})
+
+    //Author: Nina (s213535)
+    const [ download, setDownload ] = useState<any>({})
     
     const popup = usePopup()
 
     useEffect( () => {
-
         const updatePaths = async ( pop: PopupFunc) => {
             const temp = {} as MeasMetaPath;
+            const download_ = [] as any;
 
+            //Author: Caroline (s194570), Andreas (s194614)
             if(selectedMeasurements.length == 0){
                 const activeBaselineMeasurement: ActiveMeasProperties = {
                     dbName: "track.pos",
@@ -63,7 +68,8 @@ const Rides: FC = () => {
                             temp[name][TaskId] = bp;
                         }
                     }
-
+                    
+                    //Author: Nina (s213535)
                     if (temp[name][TaskId].bounds.maxX == null 
                         && temp[name][TaskId].bounds.maxY == null 
                         && temp[name][TaskId].bounds.minX == null 
@@ -77,15 +83,21 @@ const Rides: FC = () => {
                             toast: true
                         } );
                         }
+                    //Author: Nina (s213535)
+                    const data = await getRide_Download(meas, meta)
+                    download_[TaskId] = data
                 } 
             }
 
-            return temp;
+            setPaths(temp)
+            //Author: Nina (s213535)
+            setDownload(download_)
         }
-        updatePaths(popup).then( setPaths )
+        updatePaths(popup)
 
     }, [selectedMetas, selectedMeasurements] )
 
+    //Author: Caroline (s194570), Andreas (s194614)
     const [collapseGraph, setCollapseGraph] = useState(true);
     const handleCollapseGraph = () => {
         setCollapseGraph(!collapseGraph);
@@ -98,9 +110,12 @@ const Rides: FC = () => {
                 <RidesMap
                     paths={paths} 
                     selectedMetas={selectedMetas} 
-                    selectedMeasurements={selectedMeasurements} />
+                    selectedMeasurements={selectedMeasurements}
+                    //Author: Caroline (s194570), Andreas (s194614)
+                    setHoveredMeta={setHoveredMeta}/>
 
                 <Checkbox className="collapse-checkbox horizontal-checkbox" 
+                                //Author: Caroline (s194570), Andreas (s194614)
                                 html={
                                     collapseGraph ? 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-double-down" viewBox="0 0 16 16">
@@ -122,6 +137,7 @@ const Rides: FC = () => {
                         absolute={true}
                         time={true}
                         palette={palette}
+                        //Author: Caroline (s194570), Andreas (s194614)
                         mapData={Object.entries(paths[name] || {})
                                 .map( ([TaskId, bp], j) => {
                                     const { path, bounds} = bp;
@@ -138,10 +154,15 @@ const Rides: FC = () => {
                                 return { data, bounds, label: 'r-' + TaskId, j }
                             } ) 
                         }
+                        //Author: Caroline (s194570), Andreas (s194614)
                         isCollapsed={!collapseGraph}
                     />
                 ) }
             </div>
+            { //Author: Nina (s213535)
+            selectedMeasurements.map( ({hasValue, name}: ActiveMeasProperties, i: number) => hasValue &&
+                    <Downloader d_data={download} name={name}/>
+                )}
         </GraphProvider>
   )
 }

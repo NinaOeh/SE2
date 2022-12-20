@@ -1,33 +1,34 @@
-/* Created by Colin Hoffmann (s212711) */
-/* Eliot Ullmo */
-import { ConsoleLogger, Controller, Get, Query } from '@nestjs/common';
+// Colin Hoffmann (s212711)
+// Eliot Ullmo (s221646)
+//extended by Nina Oehlckers (s213535)
+import { Controller, Get, Query } from '@nestjs/common';
 import { FrictionService } from './f.service';
-import { FrictionConditions, FrictionMeta } from './f.models';
 import { Condition, WaysConditions } from 'src/models';
-
 
 @Controller('friction')
 export class FrictionController {
     constructor(private readonly service: FrictionService) { }
 
-  
     @Get('ways')
-    getFrictionConditions(): Promise<WaysConditions> {
+    getFrictionConditions(@Query() query: { geometry: boolean }): Promise<WaysConditions> {
         console.log('we are in the friction controller')
+        const { geometry } = query;
 
-        return this.service.getWaysConditions();
+        return this.service.getWaysConditions(geometry);
     }
 
-    //@Get("\con")
-    //getFrictionConditions(): Promise<FrictionConditions> {
-    //    console.log('Connection to friction database')
-
-    //    return this.service.getFrictionConditions();
-    //}
     @Get('way')
-    getWayConditions( @Query() query: { wayId: string } ): Promise<Condition[]> {
+    getWayConditions(@Query() query: { wayId: string }): Promise<Condition[]> {
         const { wayId } = query;
+        console.log("HELLO WE ARE HERE")
         return this.service.getWayFrictionConditions(wayId);
+    }
+
+    //Nina Oehlckers (s213535)
+    // returns the friction data in the given boundaries
+    @Get('friction_download')
+    FrictionDownload(@Query() query: { maxlat: number, minlat: number, maxlon: number, minlon: number }): Promise<any> {
+        return this.service.FrictionDownload(query.maxlat, query.minlat, query.maxlon, query.minlon);
     }
 
 }

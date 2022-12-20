@@ -1,11 +1,10 @@
+//created by Nina Oehlckers (s213535)
 import { put, getR } from "./fetch";
 import { Dispatch, SetStateAction } from "react"
 import { Role } from "../models/roles"
 
 
 export const getRoles = ( callback: Dispatch<SetStateAction<Role[]>> ) => {
-    console.log("We got here")
-    const res = fetch("/roles");
     getR( '/roles', callback )
 }
 

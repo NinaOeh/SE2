@@ -1,13 +1,11 @@
-import { ActiveMeasProperties } from "../../../models/properties";
+// created by Nina Oehlckers (s213535)
 import createPopup from "../../createPopup";
 
 const deletePopup = () => {
     const popup = createPopup<any>()
     return(
         popup( {
-            title: <p>Measurement deleted.</p>,
-            //timer: 3000,
-            //timerProgressBar: true,
+            title: <p>Measurement deleted.</p>as any,
             toast: true
         } )
     )

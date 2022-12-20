@@ -2,6 +2,7 @@
 /**This is overall not ideal! It would be a lot better to save
 these measurements in their own database, that I could add to/
 delete from etc, instead of just accessing this one document.*/
+
 import { Controller, Get, Put, Query, Body, Param} from '@nestjs/common';
 import { Measurement } from 'src/models';
 import { MeasurementsService } from './measurements.service';
@@ -17,12 +18,6 @@ export class MeasurementsController
         return this.service.getMeasurements(params.role);
     }
 
-    @Get("/test")
-    test(@Query() query: { input: string }): string //: Promise<any>  @Query() query: { input: string } 
-    {
-            return this.service.getHello(query.input);
-        //return this.service.addMeasurement(measurement);
-    }
 
     @Put('/add')
     addMeasurement( @Body() query: {measurement: Measurement, role: string}) : Promise<any> 

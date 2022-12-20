@@ -16,9 +16,11 @@ interface ILine {
     bounds?: Bounds;
     label: string; i: number;
     time: boolean | undefined;
+    //Author: Caroline (s194570), Andreas (s194614)
     mapData: Path[];
 }
 
+//Author: Caroline (s194570), Andreas (s194614) (mapData)
 const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, mapData, bounds, label, i, time } ) => {
     let firstData = data[0][0];
 
@@ -49,6 +51,7 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, mapData, bounds, label, i, 
         //     ? setDotHover( undefined )
         //     : setDotHover( { ...d, x: d.x / _bounds.maxX } )
 
+        ////Author: Caroline (s194570), Andreas (s194614) (uncommented existing code)
         const onHover = (d: DotHover | undefined) => {
             if(d !== undefined){
                 setDotHover(d);
@@ -58,6 +61,7 @@ const Line: FC<ILine> = ( { svg, xAxis, yAxis, data, mapData, bounds, label, i, 
 
         }
 
+        //Author: Caroline (s194570), Andreas (s194614) (mapData)
         const line = new GLine(svg, label, i, data, mapData[i], xAxis, yAxis, onHover, time)
 
         return () => {

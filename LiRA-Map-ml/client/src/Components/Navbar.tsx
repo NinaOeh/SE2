@@ -1,20 +1,11 @@
+// Colin Hoffmann (s212711)
+
 import { useState, useEffect, FC } from "react";
 import { NavLink } from 'react-router-dom';
-import { Nav } from "../models/nav";
-
 import { FaBars } from 'react-icons/fa';
-
 import '../css/navbar.css';
 import { IconContext } from "react-icons";
-
 import { UseRoleContext } from "../context/RolesContext"
-
-
-interface INavbar {
-    routes: Nav[];
-}
-
-// Get window size
 
 function getWindowDimensions() {
     const width = window.innerWidth
@@ -38,27 +29,25 @@ function useWindowDimensions() {
     return windowDimensions;
 }
 
-const Navbar: FC<INavbar> = ( { routes } ) => {
+const Navbar: FC = () => {
 
     interface NavBtnProps {
         to: string;
         name: string;
     }
 
-    const NavBtn: FC<NavBtnProps> = ( { to, name } ) => {
+    const NavBtn: FC<NavBtnProps> = ({ to, name }) => {
         return (
-            <NavLink 
-                className= {menuActive ?'nav-tab' : 'nav-tab-side'}
+            <NavLink
+                className={menuActive ? 'nav-tab' : 'nav-tab-side'}
                 activeClassName={menuActive ? "nav-tab-active" : "nav-tab-side-active"}
                 to={to}
-                onClick = {setFalseMenu}
+                onClick={setFalseMenu}
             >
-                { name }
+                {name}
             </NavLink>
         )
     }
-
-    // Toggle Menu
 
     const [menuActive, setMenuActive] = useState(false);
 
@@ -70,44 +59,39 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
         setMenuActive(true);
     }
 
-    // Toggle Navbar
-
     useWindowDimensions();
 
-    if(window.innerWidth > 800 && !menuActive) {
+    if (window.innerWidth > 800 && !menuActive) {
         setFalseMenu();
     }
 
-    const {selectedRole} = UseRoleContext();
-    var Roledescription = "";
+    const { selectedRole } = UseRoleContext();
+    let Roledescription = "";
 
     console.log("The selected Role is: ", selectedRole)
     console.log(Roledescription)
 
-    if (selectedRole.role === ""){
-        Roledescription= "Select Role"
+    if (selectedRole.role === "") {
+        Roledescription = "Select Role"
     }
     else {
-        Roledescription= "Selected Role : "+selectedRole.role
+        Roledescription = "Selected Role : " + selectedRole.role
     }
 
     return (
         <div className="nav-wrapper">
             <div className={menuActive ? "nav-container" : "nav-container-side"}>
                 <div className="nav-block">
-                    <NavBtn  to='/road_measurements' name='Road Measurements' />
+                    <NavBtn to='/road_measurements' name='Road Measurements' />
                 </div>
                 <div className="nav-block">
-                    <NavBtn  to='/road_conditions' name='Road Conditions' />
-                </div>
-                {/* <div className="nav-block">
-                    <NavBtn  to='/cardata' name='Cardata' />
-                </div> */}
-                <div className="nav-block">
-                    <NavBtn  to='/altitude' name='Altitude' />
+                    <NavBtn to='/road_conditions' name='Road Conditions' />
                 </div>
                 <div className="nav-block">
-                    <NavBtn  key={'login'} to='/login' name={Roledescription} />
+                    <NavBtn to='/altitude' name='Altitude' />
+                </div>
+                <div className="nav-block">
+                    <NavBtn key={'login'} to='/login' name={Roledescription} />
                 </div>
                 <button className="toggle-button" onClick={toggleMenu} >
                     <IconContext.Provider value={{ color: 'white', size: '40px' }}>
@@ -115,7 +99,7 @@ const Navbar: FC<INavbar> = ( { routes } ) => {
                     </IconContext.Provider>
                 </button>
                 <div className="logo">
-                    <img src={require( "../LiRA-logo.png")} />
+                    <img src={require("../LiRA-logo.png")} />
                 </div>
             </div>
         </div>

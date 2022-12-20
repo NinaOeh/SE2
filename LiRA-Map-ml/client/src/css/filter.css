@@ -1,24 +1,24 @@
-
-
+/* Elliot Ullmo (s2) */
 
 .slider-wrapper {
-  top: var(--navbar-z-index) -1000 ;
-  z-index: calc( var(--navbar-z-index) - 3 );
+  top: var(--navbar-z-index) -1000;
+  z-index: calc(var(--navbar-z-index) - 3);
 
   transform: translateY(-100%);
   transition: transform 200ms ease;
-  color:black;
-  
+  color: black;
+
 }
-.slider-hover{  
+
+.slider-hover {
   padding: 5px 10px;
-  font-size: 1em;  /**size of the icon**/
-  border-radius: 10px; /** cest de la merde**/
-  margin: 20px;   /** marge de gauche**/
+  font-size: 1em;
+  border-radius: 10px;
+  margin: 20px;
   background: var(--background);
   cursor: pointer;
   z-index: 0;
-  color:black;
+  color: black;
 
 }
 

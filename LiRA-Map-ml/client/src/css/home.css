@@ -1,0 +1,15 @@
+.home_container {
+    z-index: calc(var(--navbar-z-index) - 3);
+    font-size: 10px;
+    width: 50%;
+    text-align: justify;
+    margin: auto;
+    font-size: larger;
+    top: 2cm;
+    position: absolute;
+    left: 25%;
+}
+
+.Heading {
+    text-align: left;
+}

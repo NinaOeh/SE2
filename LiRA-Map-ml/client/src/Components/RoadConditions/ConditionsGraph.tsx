@@ -1,3 +1,5 @@
+//ELiot Ullmo
+
 import { FC, useEffect, useMemo, useRef } from "react";
 import { ChartData, Chart, CategoryScale, LinearScale, PointElement, 
     LineElement, Title, Tooltip, Legend, ActiveElement, ChartEvent, 

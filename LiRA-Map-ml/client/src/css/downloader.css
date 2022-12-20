@@ -1,0 +1,47 @@
+.downloadwrapper {
+    width: 4.5cm;
+    height: 0.8cm;
+    margin: 0.1cm;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.downloadnutton {
+    color: white;
+    background-color: grey;
+    width: 4.5cm;
+    height: 0.8cm;
+    border: None;
+    text-align: left;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.downloadbutton:hover {
+    color: var(--highlight-text);
+}
+
+.downloader-wrapper {
+    background: var(--background);
+    width: 10cm;
+    height: 1cm;
+    z-index: calc(var(--navbar-z-index) - 3);
+    border-radius: 10px;
+    margin: 10px;
+    position: absolute;
+    left: 450px;
+    display: flex;
+}
+
+
+.downloader-measurement-wrapper {
+    background: var(--background);
+    width: 5cm;
+    height: 1cm;
+    z-index: calc(var(--navbar-z-index) - 3);
+    border-radius: 10px;
+    margin: 10px;
+    position: absolute;
+    left: 35%;
+    display: flex;
+}

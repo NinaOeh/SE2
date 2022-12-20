@@ -1,3 +1,4 @@
+// modified by Nina (s213535) --> add roles
 import {
 	createContext,
 	Dispatch,
@@ -10,8 +11,6 @@ import {
 import { ActiveMeasProperties } from "../models/properties";
 import { getMeasurements } from "../queries/measurements";
 import { UseRoleContext } from "./RolesContext";
-
-import { createBrowserHistory } from "history";
 
 
 interface ContextProps {
@@ -29,13 +28,7 @@ export const MeasurementsProvider = ({ children }: any) => {
 	const { selectedRole } = UseRoleContext()
 
 	useEffect( () => setSelectedMeasurements( measurements.filter(m => m.isActive)), [measurements] )
-
-	console.log("We are in MeasurementsContext and the selected role is", selectedRole.role)
-
 	useEffect( () => getMeasurements(selectedRole.role, setMeasurements), [selectedRole] )
-
-	console.log("measurements", measurements)
-
 
 	return (
 		<MeasurementsContext.Provider
