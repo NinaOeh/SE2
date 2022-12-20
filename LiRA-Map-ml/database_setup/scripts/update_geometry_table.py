@@ -70,7 +70,6 @@ def get_mapref(offset: int,
                                                             offset=offset,
                                                             limit=limit)))
     else:
-        print(tripid)
         query_mapref_data = list(map(get_geometry,lira_db_crud.get_map_ref_red_pertrip(session=db, 
                                                             offset=offset,
                                                             trip_id=tripid,

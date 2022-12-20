@@ -55,13 +55,29 @@ const Downloader: React.FC<DownloadProps> = ({maxlat,minlat,maxlon,minlon, type}
     const export_ConditionToCsv = (data:any) => {
     
     // Headers for each column
-    const headers = ['pk,way_id,way_dist,value,computed_at,type']
+    const headers = ['conditions| length| coordinates']
     
     // Convert data to a csv
-    const dataRed = data.reduce(
-        (acc: string[], d: { pk: any; way_id: any; way_dist: any; value: any; computed_at: any; type: any}) => {
-        const { pk,way_id,way_dist,value,computed_at,type } = d
-        acc.push([pk,way_id,way_dist,value,computed_at,type].join(','))
+    console.log(data)
+    const data_array = Object.keys(data).map((key) => data[key])
+    const dataRed = data_array.reduce(
+        (acc: string[], d: { conditions: any; length: any; coordinates: any}) => {
+        const { conditions, length, coordinates } = d
+        const conditions_ = Object.keys(conditions).map((key) => conditions[key])
+        const cond_red = conditions_[0].reduce(
+            (con: string[], d: {value: any; dist: any}) => {
+                const { value,dist } = d
+                con.push([value,dist].join('/'))
+                return con
+        },[])
+        const coordinates_ = Object.keys(coordinates).map((key) => coordinates[key])
+        const coords_red = coordinates_.reduce(
+            (con: string[], d: {lat: any; lon: any, way_dist: any}) => {
+                const { lat,lon, way_dist } = d
+                con.push([lat,lon, way_dist].join('/'))
+                return con
+        },[])
+        acc.push([cond_red, length, coords_red].join('|'))
         return acc
     }, [])
 

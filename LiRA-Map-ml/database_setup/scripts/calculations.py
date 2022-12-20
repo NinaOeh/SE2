@@ -118,7 +118,6 @@ def extract_node_along_way(way_id: str):
             geoList.append(point)
         return wayPointName, LineString(geoList)
     except Exception as exc:
-        print(way_id)
         return [exc]
 
 def extract_only_Wayid(message_string: str, way_info: str) -> Tuple[int,int,str]:

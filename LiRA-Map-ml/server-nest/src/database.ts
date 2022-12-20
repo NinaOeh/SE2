@@ -5,10 +5,11 @@ dotenv.config();
 
 const { 
     DB_USER, DB_PASSWORD, 
-    DB_USER_VIS, DB_PASSWORD_VIS, 
+    DB_USER_VIS, DB_PWD_VIS, 
     DB_USER_POSTGIS, DB_PWD_POSTGIS,
+    DB_USER_FRICTION, DB_PWD_FRICTION,
     LIRA_DB_SERVER,
-    LIRA_DB_USER, LIRA_DB_PASSWORD,
+    DB_USER_LIRA, DB_PWD_LIRA,
     LIRA_DB_DATABASE
 } = process.env;
 
@@ -38,10 +39,10 @@ const BASE_CONFIG = {
 export const LIRA_DB_CONFIG = {
     ...BASE_CONFIG,
     connection: {
-        host : "liradb.compute.dtu.dk", // "liradbdev.compute.dtu.dk",
-        port: 5435,
-        user : "guest",
-        password : "V2GjxQVn",
+        host : "liradbdev.compute.dtu.dk", // "liradb.compute.dtu.dk",
+        port: 5432,//5435,
+        user : DB_USER_LIRA, //"guest",
+        password : DB_PWD_LIRA, //"V2GjxQVn",
         database : "postgres"
     },
 }
@@ -53,7 +54,7 @@ export const VISUAL_DB_CONFIG = {
         host : "liravisualization.postgres.database.azure.com",
         port: 5432,
         user : DB_USER_VIS,
-        password : DB_PASSWORD_VIS,
+        password : DB_PWD_VIS,
         database : "postgres",
         ssl: true
     },
@@ -64,8 +65,8 @@ export const POSTGIS_DB_CONFIG = {
     connection: {
         host : "liradb.postgres.database.azure.com",
         port: 5432,
-        user : DB_USER_POSTGIS,
-        password : DB_PWD_POSTGIS,
+        user : DB_USER_POSTGIS, //postgres
+        password : DB_PWD_POSTGIS, //postgres
         database : "postgis",
         ssl: true
     },
@@ -77,8 +78,8 @@ export const FRICTION_DB_CONFIG = {
         host: "localhost", 
         port: 5432,
         // debug:true,
-        user: "postgres",
-        password: "postgres",
+        user: DB_USER_FRICTION,
+        password: DB_PWD_FRICTION,
         database: "postgres",
     }
 }

@@ -45,10 +45,8 @@ def merge_rl_fl(
     rpm_fl_infos = calculations.get_rpm_info_fl(fl_data)
     rpm_rl_infos = calculations.get_rpm_info_rl(rl_data)
 
-
     rpm_fl_infos_df = pd.DataFrame([vars(m) for m in rpm_fl_infos if m is not None])
     rpm_rl_infos_df = pd.DataFrame([vars(m) for m in rpm_rl_infos if m is not None])
-
 
     # concatenate the dataframes, filter by timestamp and interpolate the missing values
     # using pandas included interpolation function
@@ -58,17 +56,12 @@ def merge_rl_fl(
 
     # remove the map matched items
     merged_data = df_inter.dropna(subset = ['rpm_value_rl'])
-    print(f"Interpolated_dataframe with droped na {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
 
     #only keep every 30th item
     merged_data = merged_data.iloc[1::50, :]
-    print(f"merged dataframe, every 30th row kept {merged_data[['TS_or_Distance','rpm_value_rl', 'rpm_value_fl']]}")
-
-
 
     geos_of_df = merged_data['Way_id'].unique()
     geos_to_add = list(set(geos_of_df) - set(geos))
-
 
     return merged_data, geos_to_add
 
