@@ -1,3 +1,5 @@
+//Modified by: Cecilie Do (s185394), Michael Bendtsen (s214954)
+
 import React, { useState } from "react";
 import DropDown from "./DropDown";
 import "../../css/filter.css";

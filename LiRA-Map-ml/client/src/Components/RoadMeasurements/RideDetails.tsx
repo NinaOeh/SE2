@@ -103,10 +103,9 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 					key={`meas-checkbox-${i}`}
 					meas={m}
 					selectMeasurement={selectMeasurement(i)}
-					//Author: Nina (s213535)
+					//Author: Nina (s213535), Cecilie Do (s185394), Michael Bendtsen (s214954)
 					editMeasurement={edit_Measurement(m, i)}
 					deleteMeasurement={delete_measurement(i)}
-					//Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
 					state={m.isActive}
 					 />
 			) }

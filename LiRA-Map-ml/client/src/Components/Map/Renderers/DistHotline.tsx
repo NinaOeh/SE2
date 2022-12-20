@@ -1,7 +1,8 @@
-//ELiot Ullmo
+//Modified by: Cecilie Do (s185394), Michael Bendtsen (s214954), ELiot Ullmo
 
 import { FC, useEffect, useMemo, useState } from 'react';
 import { LeafletEvent, Polyline } from 'leaflet'
+//Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
 import { Hotline, HotlineOptions, HotPolyline, useCustomHotline } from 'react-leaflet-hotline';
 
 import { useGraph } from '../../../context/GraphContext';
@@ -13,6 +14,7 @@ import { DistData } from '../../../assets/hotline/hotline';
 import HoverHotPolyline from '../../../assets/hotline/HoverHotPolyline';
 import { HotlineEventFn, HotlineEventHandlers } from 'react-leaflet-hotline/lib/types';
 import useZoom from '../Hooks/useZoom';
+//Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
 import { geoAlbers } from 'd3';
 
 
@@ -38,7 +40,7 @@ const handler = (eventHandlers: HotlineEventHandlers | undefined, event: keyof H
             (eventHandlers[event] as HotlineEventFn)(e, i, p);
     }
 }
-
+//Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
 const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options, eventHandlers } ) => {
 
     const { dotHover,friction } = useGraph()
@@ -62,7 +64,7 @@ const DistHotline: FC<IDistHotline> = ( { way_ids, geometry, conditions, options
     }), [eventHandlers] )
 
     
-    
+    //Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
     const {renderer,hotline}  = useCustomHotline<Node, DistData>( DistRenderer, HoverHotPolyline, { data: geometry, getLat, getLng, getVal, options: opts, eventHandlers: handlers }, 
         way_ids, conditions
     );

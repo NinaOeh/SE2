@@ -1,3 +1,4 @@
+//Modified by: Cecilie Do (s185394), Michael Bendtsen (s214954) --> added loader
 import { useEffect, useState } from "react";
 import { MeasurementsProvider } from "../context/MeasurementsContext";
 import { MetasProvider } from "../context/MetasContext";
