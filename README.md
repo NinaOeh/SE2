@@ -12,7 +12,7 @@ To run the application locally in a Linux environment the following steps need t
 ## 1. Clone the LiRA-Map repo
 ```console
 git clone https://github.com/NinaOeh/SE2.git
-cd LiRA-Map
+cd SE2/LiRA-Map-ml
 ```
 
 ## 2. Start the Client 
