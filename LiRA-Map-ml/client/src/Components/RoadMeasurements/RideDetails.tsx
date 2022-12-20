@@ -1,5 +1,7 @@
 // modified by Nina Oehlckers (s213535) --> added dropdown, delete measurements, popup modification, enable measurement saving for role
 // modified by Caroline (s194570), Andreas (s194614) --> collapser
+// modified by Cecilie Do (s185394), Michael Bendtsen (s214954) --> restriction on measurement selection
+
 import React, { FC, useState } from "react";
 import addMeasPopup from "./Popup/addMeasurementPopup";
 import Checkbox from "../Checkbox";
@@ -76,7 +78,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 			{ ...RENDERER_MEAS_PROPERTIES} 
 		)
 	}
-
+	//Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
     const selectMeasurement = (i: number) => (isChecked: boolean) => {        
         const temp = [...measurements]
         temp[i].isActive = isChecked
@@ -104,6 +106,7 @@ const RideDetails: FC<RideDetailsProps> = ({isCollapsed}) => {
 					//Author: Nina (s213535)
 					editMeasurement={edit_Measurement(m, i)}
 					deleteMeasurement={delete_measurement(i)}
+					//Author: Cecilie Do (s185394), Michael Bendtsen (s214954)
 					state={m.isActive}
 					 />
 			) }
